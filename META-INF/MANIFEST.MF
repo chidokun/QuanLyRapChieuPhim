@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: QuanLyRapChieuPhim
+Bundle-SymbolicName: QuanLyRapChieuPhim;singleton:=true
+Bundle-Version: 1.0.0.0
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.runtime,
+ org.eclipse.swt;bundle-version="3.105.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
