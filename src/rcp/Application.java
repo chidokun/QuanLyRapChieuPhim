@@ -3,7 +3,7 @@ package rcp;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.swt.widgets.Display;
-
+import rcp.view.popup.*;
 import rcp.view.*;
 
 /**

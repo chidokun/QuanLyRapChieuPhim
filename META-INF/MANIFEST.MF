@@ -6,7 +6,10 @@ Bundle-Version: 1.0.0.0
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.runtime,
  org.eclipse.swt;bundle-version="3.105.1",
- org.eclipse.jface;bundle-version="3.12.0"
+ org.eclipse.jface;bundle-version="3.12.0",
+ org.eclipse.jface.databinding;bundle-version="1.8.0",
+ org.eclipse.jface.text;bundle-version="3.11.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ClassPath: .,
- swing2swt.jar
+ swing2swt.jar,
+ res/

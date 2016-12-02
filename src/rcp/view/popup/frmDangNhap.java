@@ -1,6 +1,9 @@
+/**
+ * Quản lý Rạp chiếu phim RPP
+ * Author: Nguyễn Tuấn - nguyentuanit96@gmail.com
+ */
+
 package rcp.view.popup;
-
-
 
 import java.io.IOException;
 
@@ -17,6 +20,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.wb.swt.ResourceManager;
 
 public class frmDangNhap extends Shell {
 	private Text text;
@@ -55,40 +59,23 @@ public class frmDangNhap extends Shell {
 		composite.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		composite.setLayout(null);
 		
-		Composite composite_1 = new Composite(composite, SWT.NONE);
-		composite_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		composite_1.setBackgroundImage(Images.get(getDisplay(),"res/imgDangNhap_64p.png"));
-		composite_1.setBounds(66, 37, 64, 64);
-		
-		Label lblNewLabel = new Label(composite, SWT.NONE);
-		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
-		lblNewLabel.setForeground(SWTResourceManager.getColor(34, 139, 34));
-		lblNewLabel.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblNewLabel.setBounds(145, 37, 197, 35);
-		lblNewLabel.setText("Đăng nhập");
-		
-		Label lblNewLabel_1 = new Label(composite, SWT.NONE);
-		lblNewLabel_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblNewLabel_1.setBounds(145, 70, 233, 31);
-		lblNewLabel_1.setText("Vui lòng nhập tên đăng nhập và mật khẩu");
-		
 		Label lblTnngNhp = new Label(composite, SWT.NONE);
 		lblTnngNhp.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblTnngNhp.setBounds(66, 120, 89, 15);
+		lblTnngNhp.setBounds(35, 33, 89, 15);
 		lblTnngNhp.setText("Tên đăng nhập:");
 		
 		Label lblMtKhu = new Label(composite, SWT.NONE);
 		lblMtKhu.setText("Mật khẩu:");
 		lblMtKhu.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblMtKhu.setBounds(66, 165, 81, 15);
+		lblMtKhu.setBounds(35, 78, 81, 15);
 		
 		text = new Text(composite, SWT.BORDER);
 		text.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		text.setBounds(163, 117, 203, 26);
+		text.setBounds(132, 30, 203, 26);
 		
 		text_1 = new Text(composite, SWT.BORDER | SWT.PASSWORD);
 		text_1.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		text_1.setBounds(163, 159, 203, 26);
+		text_1.setBounds(132, 72, 203, 26);
 		
 		Composite composite_2 = new Composite(composite, SWT.NONE);
 		composite_2.setBackground(SWTResourceManager.getColor(245, 245, 245));

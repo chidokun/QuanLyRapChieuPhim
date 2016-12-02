@@ -1,28 +1,19 @@
+/**
+ * Quản lý Rạp chiếu phim RPP
+ * Author: Nguyễn Tuấn - nguyentuanit96@gmail.com
+ */
+
 package rcp.view;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.*;
+import org.eclipse.swt.graphics.*;
+import org.eclipse.swt.layout.*;
+import org.eclipse.swt.widgets.*;
 import org.eclipse.wb.swt.SWTResourceManager;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.FormLayout;
-import swing2swt.layout.FlowLayout;
-import org.eclipse.swt.layout.RowLayout;
-import org.eclipse.swt.custom.StackLayout;
-import swing2swt.layout.BoxLayout;
-import swing2swt.layout.BorderLayout;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.widgets.TabFolder;
-import org.eclipse.swt.widgets.TabItem;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.ToolBar;
-import org.eclipse.swt.widgets.ToolItem;
-import org.eclipse.wb.swt.ResourceManager;
 import rcp.view.page.*;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+
 
 public class frmMain extends Shell {
 
@@ -64,6 +55,8 @@ public class frmMain extends Shell {
 		Composite composite_1 = new Composite(tabFolder, SWT.NONE);
 		tbtmDanhMc.setControl(composite_1);
 		
+		
+		
 		TabItem tbtmNghipV = new TabItem(tabFolder, SWT.NONE);
 		tbtmNghipV.setText("Nghiệp vụ");
 		
@@ -86,9 +79,6 @@ public class frmMain extends Shell {
 		gl_content.horizontalSpacing = 0;
 		content.setLayout(gl_content);
 		content.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		
-		pageNhanVien nv = new pageNhanVien(content, SWT.NONE);
-		nv.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
 	}
 
