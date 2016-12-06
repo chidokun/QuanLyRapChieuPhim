@@ -43,7 +43,7 @@ public class pageTaiKhoan extends Composite {
 		label.setBounds(44, 30, 176, 23);
 		
 		Label lblTnngNhp = new Label(composite, SWT.NONE);
-		lblTnngNhp.setText("Tên Đăng Nhập :");
+		lblTnngNhp.setText("Tên đăng nhập :");
 		lblTnngNhp.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		lblTnngNhp.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		lblTnngNhp.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
@@ -82,7 +82,7 @@ public class pageTaiKhoan extends Composite {
 		
 		Button btnRadioButton_1 = new Button(composite, SWT.RADIO);
 		btnRadioButton_1.setBounds(167, 215, 90, 16);
-		btnRadioButton_1.setText("DeActive");
+		btnRadioButton_1.setText("Deactive");
 		btnRadioButton_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		
 		Button btnLu = new Button(composite, SWT.NONE);
