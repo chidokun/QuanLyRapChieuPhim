@@ -159,7 +159,7 @@ public class frmThemSuaNhanVien extends Shell {
 		Label lblNgyVoLm = new Label(this, SWT.NONE);
 		lblNgyVoLm.setText("Ngày vào làm :");
 		lblNgyVoLm.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblNgyVoLm.setBounds(388, 289, 93, 15);
+		lblNgyVoLm.setBounds(383, 289, 93, 15);
 		
 		DateTime dateTime_1 = new DateTime(this, SWT.BORDER);
 		dateTime_1.setBounds(487, 289, 197, 24);
@@ -175,7 +175,7 @@ public class frmThemSuaNhanVien extends Shell {
 		Label lblQuyn = new Label(this, SWT.NONE);
 		lblQuyn.setText("Quyền :");
 		lblQuyn.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblQuyn.setBounds(388, 426, 55, 15);
+		lblQuyn.setBounds(383, 429, 55, 15);
 		
 		Label lblGiiTnh = new Label(this, SWT.NONE);
 		lblGiiTnh.setText("Giới tính :");
@@ -198,7 +198,7 @@ public class frmThemSuaNhanVien extends Shell {
 		
 		ComboViewer comboViewer_2 = new ComboViewer(this, SWT.NONE);
 		Combo combo_2 = comboViewer_2.getCombo();
-		combo_2.setBounds(487, 418, 197, 23);
+		combo_2.setBounds(487, 426, 197, 23);
 		
 		Label label = new Label(this, SWT.NONE);
 		label.setText("Vui lòng nhập đầy đủ thông tin");
