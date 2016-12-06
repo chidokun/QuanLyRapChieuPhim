@@ -1,3 +1,8 @@
+/**
+ * Quản lý Rạp chiếu phim RPP
+ * Author: Huỳnh Duy Anh Toàn - anhtoan441996@gmail.com
+ */
+
 package rcp.view.page;
 
 import org.eclipse.swt.widgets.Composite;

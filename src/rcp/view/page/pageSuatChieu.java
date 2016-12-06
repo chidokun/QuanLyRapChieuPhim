@@ -1,3 +1,8 @@
+/**
+ * Quản lý Rạp chiếu phim RPP
+ * Author: Huỳnh Duy Anh Toàn - anhtoan441996@gmail.com
+ */
+
 package rcp.view.page;
 
 import org.eclipse.swt.widgets.Composite;
@@ -72,15 +77,20 @@ public class pageSuatChieu extends Composite {
 		btnDatLai.setBounds(173, 311, 86, 30);
 		
 		DateTime dateTime = new DateTime(composite, SWT.BORDER);
-		dateTime.setBounds(31, 176, 90, 24);
-		
-		Label lbln = new Label(composite, SWT.NONE);
-		lbln.setText("đến");
-		lbln.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lbln.setBounds(130, 180, 21, 24);
+		dateTime.setBounds(103, 214, 156, 24);
 		
 		DateTime dateTime_1 = new DateTime(composite, SWT.BORDER);
-		dateTime_1.setBounds(159, 176, 90, 24);
+		dateTime_1.setBounds(103, 174, 156, 24);
+		
+		Label label = new Label(composite, SWT.NONE);
+		label.setText("Từ ngày");
+		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		label.setBounds(31, 180, 62, 16);
+		
+		Label label_1 = new Label(composite, SWT.NONE);
+		label_1.setText("Đến ngày");
+		label_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		label_1.setBounds(31, 219, 66, 15);
 		
 		Composite composite_1 = new Composite(this, SWT.NONE);
 		composite_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));

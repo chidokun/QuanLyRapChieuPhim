@@ -1,3 +1,8 @@
+/**
+ * Quản lý Rạp chiếu phim RPP
+ * Author: Huỳnh Duy Anh Toàn - anhtoan441996@gmail.com
+ */
+
 package rcp.view.page;
 
 import org.eclipse.swt.widgets.Composite;
@@ -66,23 +71,12 @@ public class pagePhim extends Composite {
 		Button btnTimKiem = new Button(composite, SWT.NONE);
 		btnTimKiem.setText("Tìm kiếm");
 		btnTimKiem.setImage(SWTResourceManager.getImage("D:\\Document\\PROGRAMING\\PROJECT\\QuanLyHocVien\\Source code\\QuanLyHocVien\\Resources\\zoom_16x16.png"));
-		btnTimKiem.setBounds(83, 333, 86, 30);
+		btnTimKiem.setBounds(81, 352, 86, 30);
 		
 		Button btnDatLai = new Button(composite, SWT.NONE);
 		btnDatLai.setText("Đặt lại");
 		btnDatLai.setImage(SWTResourceManager.getImage("D:\\Document\\PROGRAMING\\PROJECT\\QuanLyHocVien\\Source code\\QuanLyHocVien\\Resources\\refresh2_16x16.png"));
-		btnDatLai.setBounds(173, 333, 86, 30);
-		
-		DateTime dateTime = new DateTime(composite, SWT.BORDER);
-		dateTime.setBounds(31, 270, 90, 24);
-		
-		Label lbln = new Label(composite, SWT.NONE);
-		lbln.setText("đến");
-		lbln.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lbln.setBounds(130, 274, 21, 24);
-		
-		DateTime dateTime_1 = new DateTime(composite, SWT.BORDER);
-		dateTime_1.setBounds(159, 270, 90, 24);
+		btnDatLai.setBounds(173, 352, 86, 30);
 		
 		text_1 = new Text(composite, SWT.BORDER);
 		text_1.setBounds(31, 148, 228, 25);
@@ -99,6 +93,22 @@ public class pagePhim extends Composite {
 		button_4.setText("Theo khoảng thời gian");
 		button_4.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		button_4.setBounds(31, 188, 197, 16);
+		
+		DateTime dateTime = new DateTime(composite, SWT.BORDER);
+		dateTime.setBounds(103, 310, 156, 24);
+		
+		DateTime dateTime_1 = new DateTime(composite, SWT.BORDER);
+		dateTime_1.setBounds(103, 270, 156, 24);
+		
+		Label label = new Label(composite, SWT.NONE);
+		label.setText("Từ ngày");
+		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		label.setBounds(31, 276, 62, 16);
+		
+		Label label_1 = new Label(composite, SWT.NONE);
+		label_1.setText("Đến ngày");
+		label_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		label_1.setBounds(31, 315, 66, 15);
 		
 		Composite composite_1 = new Composite(this, SWT.NONE);
 		composite_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
