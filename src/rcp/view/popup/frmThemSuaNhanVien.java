@@ -67,7 +67,7 @@ public class frmThemSuaNhanVien extends Shell {
 		Label lblNewLabel = new Label(this, SWT.NONE);
 		lblNewLabel.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblNewLabel.setBounds(37, 89, 88, 15);
-		lblNewLabel.setText("Mã nhân viên");
+		lblNewLabel.setText("Mã nhân viên :");
 		
 		text = new Text(this, SWT.BORDER);
 		text.setBounds(131, 89, 197, 24);
@@ -88,23 +88,23 @@ public class frmThemSuaNhanVien extends Shell {
 		
 		Label lblTnNhnVin = new Label(this, SWT.NONE);
 		lblTnNhnVin.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblTnNhnVin.setText("Họ tên nhân viên");
-		lblTnNhnVin.setBounds(26, 136, 99, 15);
+		lblTnNhnVin.setText("Họ tên :");
+		lblTnNhnVin.setBounds(37, 139, 70, 15);
 		
 		text_1 = new Text(this, SWT.BORDER);
 		text_1.setBounds(131, 136, 197, 24);
 		
 		Label lblNgySinh = new Label(this, SWT.NONE);
 		lblNgySinh.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblNgySinh.setText("Ngày sinh");
-		lblNgySinh.setBounds(37, 185, 55, 15);
+		lblNgySinh.setText("Ngày sinh :");
+		lblNgySinh.setBounds(37, 185, 70, 15);
 		
 		DateTime dateTime = new DateTime(this, SWT.BORDER);
 		dateTime.setBounds(131, 185, 197, 24);
 		
 		Label lblaCh = new Label(this, SWT.NONE);
 		lblaCh.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblaCh.setText("Địa chỉ");
+		lblaCh.setText("Địa chỉ :");
 		lblaCh.setBounds(37, 238, 55, 15);
 		
 		text_2 = new Text(this, SWT.BORDER);
@@ -112,7 +112,7 @@ public class frmThemSuaNhanVien extends Shell {
 		
 		Label lblCmnd = new Label(this, SWT.NONE);
 		lblCmnd.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblCmnd.setText("CMND");
+		lblCmnd.setText("CMND :");
 		lblCmnd.setBounds(37, 289, 55, 15);
 		
 		text_3 = new Text(this, SWT.BORDER);
@@ -120,8 +120,8 @@ public class frmThemSuaNhanVien extends Shell {
 		
 		Label lblTrngThi = new Label(this, SWT.NONE);
 		lblTrngThi.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblTrngThi.setText("Trạng thái");
-		lblTrngThi.setBounds(37, 343, 55, 15);
+		lblTrngThi.setText("Trạng thái :");
+		lblTrngThi.setBounds(37, 338, 55, 15);
 		
 		Button btnNam = new Button(this, SWT.RADIO);
 		btnNam.setText("Nam");
@@ -139,12 +139,12 @@ public class frmThemSuaNhanVien extends Shell {
 		text_4.setBounds(487, 133, 197, 24);
 		
 		Label lblEmail = new Label(this, SWT.NONE);
-		lblEmail.setText("Email");
+		lblEmail.setText("Email :");
 		lblEmail.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblEmail.setBounds(383, 136, 55, 15);
 		
 		Label lblSt = new Label(this, SWT.NONE);
-		lblSt.setText("SĐT");
+		lblSt.setText("SĐT :");
 		lblSt.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblSt.setBounds(383, 185, 55, 15);
 		
@@ -152,12 +152,12 @@ public class frmThemSuaNhanVien extends Shell {
 		text_5.setBounds(487, 185, 197, 24);
 		
 		Label lblChcV = new Label(this, SWT.NONE);
-		lblChcV.setText("Chức vụ");
+		lblChcV.setText("Chức vụ :");
 		lblChcV.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblChcV.setBounds(383, 238, 55, 15);
 		
 		Label lblNgyVoLm = new Label(this, SWT.NONE);
-		lblNgyVoLm.setText("Ngày vào làm");
+		lblNgyVoLm.setText("Ngày vào làm :");
 		lblNgyVoLm.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblNgyVoLm.setBounds(388, 289, 93, 15);
 		
@@ -165,20 +165,20 @@ public class frmThemSuaNhanVien extends Shell {
 		dateTime_1.setBounds(487, 289, 197, 24);
 		
 		Label lblTnngNhp = new Label(this, SWT.NONE);
-		lblTnngNhp.setText("Tên đăng nhập");
+		lblTnngNhp.setText("Tên đăng nhập :");
 		lblTnngNhp.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblTnngNhp.setBounds(37, 426, 88, 15);
+		lblTnngNhp.setBounds(37, 429, 88, 15);
 		
 		text_6 = new Text(this, SWT.BORDER);
 		text_6.setBounds(131, 426, 197, 24);
 		
 		Label lblQuyn = new Label(this, SWT.NONE);
-		lblQuyn.setText("Quyền");
+		lblQuyn.setText("Quyền :");
 		lblQuyn.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblQuyn.setBounds(388, 426, 55, 15);
 		
 		Label lblGiiTnh = new Label(this, SWT.NONE);
-		lblGiiTnh.setText("Giới tính");
+		lblGiiTnh.setText("Giới tính :");
 		lblGiiTnh.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblGiiTnh.setBounds(383, 89, 55, 15);
 		
@@ -199,6 +199,12 @@ public class frmThemSuaNhanVien extends Shell {
 		ComboViewer comboViewer_2 = new ComboViewer(this, SWT.NONE);
 		Combo combo_2 = comboViewer_2.getCombo();
 		combo_2.setBounds(487, 418, 197, 23);
+		
+		Label label = new Label(this, SWT.NONE);
+		label.setText("Vui lòng nhập đầy đủ thông tin");
+		label.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		label.setBounds(174, 57, 201, 15);
 		createContents();
 	}
 
@@ -206,7 +212,7 @@ public class frmThemSuaNhanVien extends Shell {
 	 * Create contents of the shell.
 	 */
 	protected void createContents() {
-		setText("Thêm sửa nhân viên");
+		setText("Thêm sửa nhân viên :");
 		setSize(730, 605);
 
 	}
