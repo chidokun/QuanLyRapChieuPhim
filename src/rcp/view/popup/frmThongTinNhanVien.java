@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.swt.widgets.DateTime;
+import org.eclipse.swt.widgets.Group;
 
 public class frmThongTinNhanVien extends Shell {
 	private Text text;
@@ -161,36 +162,37 @@ public class frmThongTinNhanVien extends Shell {
 		button_1.setText("Hủy bỏ");
 		button_1.setBounds(425, 10, 94, 33);
 		
-		Label lblNewLabel_1 = new Label(this, SWT.NONE);
-		lblNewLabel_1.setBounds(0, 364, 526, 15);
-		lblNewLabel_1.setText("Thay đổi mật khẩu");
+		Group grpThayiMt = new Group(this, SWT.NONE);
+		grpThayiMt.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		grpThayiMt.setText("Thay đổi mật khẩu");
+		grpThayiMt.setBounds(30, 377, 469, 166);
 		
-		text_7 = new Text(this, SWT.BORDER);
-		text_7.setBounds(196, 402, 225, 24);
-		
-		Label lblMtKhuC = new Label(this, SWT.NONE);
+		Label lblMtKhuC = new Label(grpThayiMt, SWT.NONE);
+		lblMtKhuC.setBounds(28, 35, 75, 15);
 		lblMtKhuC.setText("Mật khẩu cũ:");
 		lblMtKhuC.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		lblMtKhuC.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblMtKhuC.setBounds(63, 405, 75, 15);
 		
-		Label lblMtKhuMi = new Label(this, SWT.NONE);
+		text_7 = new Text(grpThayiMt, SWT.BORDER);
+		text_7.setBounds(164, 35, 264, 24);
+		
+		Label lblMtKhuMi = new Label(grpThayiMt, SWT.NONE);
+		lblMtKhuMi.setBounds(28, 78, 75, 15);
 		lblMtKhuMi.setText("Mật khẩu mới:");
 		lblMtKhuMi.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		lblMtKhuMi.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblMtKhuMi.setBounds(63, 448, 75, 15);
 		
-		text_8 = new Text(this, SWT.BORDER);
-		text_8.setBounds(196, 445, 225, 24);
+		text_8 = new Text(grpThayiMt, SWT.BORDER);
+		text_8.setBounds(164, 78, 264, 24);
 		
-		Label lblNhpLiMt = new Label(this, SWT.NONE);
+		Label lblNhpLiMt = new Label(grpThayiMt, SWT.NONE);
+		lblNhpLiMt.setBounds(28, 121, 130, 15);
 		lblNhpLiMt.setText("Nhập lại mật khẩu mới:");
 		lblNhpLiMt.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		lblNhpLiMt.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblNhpLiMt.setBounds(63, 491, 130, 15);
 		
-		text_9 = new Text(this, SWT.BORDER);
-		text_9.setBounds(196, 488, 225, 24);
+		text_9 = new Text(grpThayiMt, SWT.BORDER);
+		text_9.setBounds(164, 121, 264, 24);
 		createContents();
 	}
 
