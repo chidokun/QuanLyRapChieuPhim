@@ -22,7 +22,6 @@ import org.eclipse.swt.widgets.DateTime;
 
 public class frmSuatChieu extends Shell {
 	private Text text;
-	private Text text_2;
 
 	/**
 	 * Create the shell.
@@ -67,7 +66,7 @@ public class frmSuatChieu extends Shell {
 		lblTnThcn.setBounds(30, 147, 75, 15);
 		
 		Label lblnGi = new Label(this, SWT.NONE);
-		lblnGi.setText("Mã suất phim:");
+		lblnGi.setText("Suất phim:");
 		lblnGi.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		lblnGi.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblnGi.setBounds(30, 195, 75, 15);
@@ -109,15 +108,16 @@ public class frmSuatChieu extends Shell {
 		btnHyB.setText("Hủy bỏ");
 		btnHyB.setBounds(425, 10, 94, 33);
 		
-		text_2 = new Text(this, SWT.BORDER);
-		text_2.setBounds(109, 192, 141, 24);
-		
 		ComboViewer comboViewer_3 = new ComboViewer(this, SWT.NONE);
 		Combo combo_3 = comboViewer_3.getCombo();
 		combo_3.setBounds(109, 147, 141, 23);
 		
 		DateTime dateTime = new DateTime(this, SWT.BORDER);
 		dateTime.setBounds(358, 147, 141, 24);
+		
+		ComboViewer comboViewer_1 = new ComboViewer(this, SWT.NONE);
+		Combo combo_1 = comboViewer_1.getCombo();
+		combo_1.setBounds(109, 192, 141, 23);
 		createContents();
 	}
 
