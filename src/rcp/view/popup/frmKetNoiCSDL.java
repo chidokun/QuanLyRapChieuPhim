@@ -5,26 +5,17 @@
 
 package rcp.view.popup;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.wb.swt.SWTResourceManager;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.wb.swt.ResourceManager;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Spinner;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.jface.viewers.ComboViewer;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Button;
-
 import java.sql.SQLException;
-
+import java.util.*;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.fieldassist.ControlDecoration;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import rcp.util.*;
+import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.*;
+import org.eclipse.swt.widgets.*;
+import org.eclipse.wb.swt.ResourceManager;
+import org.eclipse.wb.swt.SWTResourceManager;
+
+import rcp.util.Database;
 
 public class frmKetNoiCSDL extends Shell {
 	private Text txtServer;
@@ -117,9 +108,15 @@ public class frmKetNoiCSDL extends Shell {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				try {
-					comboViewer.add(Database.getDatabasesList("jdbc:mysql://"+ txtServer.getText(), txtUser.getText(), txtPassword.getText()));
+					comboViewer.getCombo().removeAll();
+					
+					ArrayList<String> arr = Database.getDatabasesList(Database.connectionString, "root", "root");
+					for (String i : arr)
+						comboViewer.getCombo().add(i);			
+					comboViewer.getCombo().select(0);
 				} catch (ClassNotFoundException | SQLException e1) {
-					MessageDialog.openError(getShell(), "Lỗi", "Không thể kết nối đến " + txtServer.getText()+". Vui lòng thử lại sau.");
+					e1.printStackTrace();
+					MessageDialog.openError(getShell(), "Lỗi", "Không thể kết nối đến " + txtServer.getText()+". Vui lòng thử lại sau.");			
 				}
 			}
 		});
