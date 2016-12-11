@@ -1,6 +1,6 @@
 /**
  * Quản lý Rạp chiếu phim RPP
- * Author: Nguyễn Tuấn - nguyentuanit96@gmail.com
+ * Author: Hồ Thị Kim Hoàng - hohoang.ag.96@gmail.com
  */
 
 package rcp.view.popup;
@@ -19,6 +19,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.swt.widgets.DateTime;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
 
 public class frmBanVe extends Shell {
 	private Text text;
@@ -27,12 +29,9 @@ public class frmBanVe extends Shell {
 	private Text text_4;
 	private Text text_5;
 	private Text text_6;
-	private Text text_7;
-	private Text text_8;
 	private Text text_9;
-	private Text text_10;
-	private Text text_11;
-	private Text text_12;
+	private Table table;
+	private Text text_3;
 
 	/**
 	 * Create the shell.
@@ -65,7 +64,7 @@ public class frmBanVe extends Shell {
 		lblMThcn.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		lblMThcn.setText("Mã nhân viên:");
 		lblMThcn.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblMThcn.setBounds(30, 102, 75, 15);
+		lblMThcn.setBounds(23, 102, 75, 15);
 		
 		text = new Text(this, SWT.BORDER);
 		text.setBounds(109, 99, 141, 24);
@@ -74,10 +73,10 @@ public class frmBanVe extends Shell {
 		controlDecoration.setDescriptionText("Some description");
 		
 		Label lblTnThcn = new Label(this, SWT.NONE);
-		lblTnThcn.setText("Mã vé:");
+		lblTnThcn.setText("Mã khách hàng");
 		lblTnThcn.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		lblTnThcn.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblTnThcn.setBounds(30, 147, 75, 15);
+		lblTnThcn.setBounds(23, 147, 86, 15);
 		
 		text_1 = new Text(this, SWT.BORDER);
 		text_1.setBounds(109, 144, 141, 24);
@@ -86,7 +85,7 @@ public class frmBanVe extends Shell {
 		lblnGi.setText("Tên phim:");
 		lblnGi.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		lblnGi.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblnGi.setBounds(30, 195, 75, 15);
+		lblnGi.setBounds(23, 195, 75, 15);
 		
 		Label lblLoiThcn = new Label(this, SWT.NONE);
 		lblLoiThcn.setText("Ngày bán vé:");
@@ -107,7 +106,7 @@ public class frmBanVe extends Shell {
 		lblTrngThi.setBounds(277, 196, 75, 15);
 		
 		Composite composite = new Composite(this, SWT.NONE);
-		composite.setBounds(0, 458, 529, 56);
+		composite.setBounds(0, 507, 529, 56);
 		
 		Button btnLu = new Button(composite, SWT.NONE);
 		btnLu.setText("Lưu");
@@ -130,25 +129,10 @@ public class frmBanVe extends Shell {
 		lblGiChiu.setText("Giờ chiếu:");
 		lblGiChiu.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		lblGiChiu.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblGiChiu.setBounds(30, 245, 75, 15);
+		lblGiChiu.setBounds(23, 245, 75, 15);
 		
 		text_6 = new Text(this, SWT.BORDER);
 		text_6.setBounds(109, 242, 141, 24);
-		
-		Label lblGh = new Label(this, SWT.NONE);
-		lblGh.setText("Ghế:");
-		lblGh.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		lblGh.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblGh.setBounds(30, 290, 75, 15);
-		
-		text_7 = new Text(this, SWT.BORDER);
-		text_7.setBounds(109, 287, 141, 24);
-		
-		Label lblMKhchHng = new Label(this, SWT.NONE);
-		lblMKhchHng.setText("Mã khách hàng");
-		lblMKhchHng.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		lblMKhchHng.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblMKhchHng.setBounds(25, 339, 84, 15);
 		
 		Label lblPhngChiu = new Label(this, SWT.NONE);
 		lblPhngChiu.setText("Phòng chiếu:");
@@ -156,41 +140,45 @@ public class frmBanVe extends Shell {
 		lblPhngChiu.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblPhngChiu.setBounds(277, 245, 75, 15);
 		
-		Label lblMKhuynMi = new Label(this, SWT.NONE);
-		lblMKhuynMi.setText("Khuyến mãi:");
-		lblMKhuynMi.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		lblMKhuynMi.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblMKhuynMi.setBounds(277, 293, 75, 15);
-		
-		Label lblimTchLy = new Label(this, SWT.NONE);
-		lblimTchLy.setText("Điểm tích lũy:");
-		lblimTchLy.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		lblimTchLy.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblimTchLy.setBounds(277, 339, 75, 15);
-		
-		text_8 = new Text(this, SWT.BORDER);
-		text_8.setBounds(358, 287, 141, 24);
-		
 		text_9 = new Text(this, SWT.BORDER);
 		text_9.setBounds(358, 242, 141, 24);
 		
-		text_10 = new Text(this, SWT.BORDER);
-		text_10.setBounds(109, 335, 141, 24);
-		
-		text_11 = new Text(this, SWT.BORDER);
-		text_11.setBounds(358, 338, 141, 24);
-		
-		Label lblGiV = new Label(this, SWT.NONE);
-		lblGiV.setText("Giá vé:");
-		lblGiV.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		lblGiV.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblGiV.setBounds(277, 386, 75, 15);
-		
-		text_12 = new Text(this, SWT.BORDER);
-		text_12.setBounds(358, 385, 141, 24);
-		
 		DateTime dateTime = new DateTime(this, SWT.BORDER);
 		dateTime.setBounds(358, 99, 141, 24);
+		
+		table = new Table(this, SWT.BORDER | SWT.FULL_SELECTION);
+		table.setBounds(23, 336, 476, 165);
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
+		
+		TableColumn tblclmnMV = new TableColumn(table, SWT.NONE);
+		tblclmnMV.setWidth(100);
+		tblclmnMV.setText("Mã vé");
+		
+		TableColumn tblclmnNewColumn = new TableColumn(table, SWT.NONE);
+		tblclmnNewColumn.setWidth(78);
+		tblclmnNewColumn.setText("Ghế");
+		
+		TableColumn tblclmnNewColumn_1 = new TableColumn(table, SWT.NONE);
+		tblclmnNewColumn_1.setWidth(100);
+		tblclmnNewColumn_1.setText("Giá vé");
+		
+		TableColumn tblclmnNewColumn_2 = new TableColumn(table, SWT.NONE);
+		tblclmnNewColumn_2.setWidth(100);
+		tblclmnNewColumn_2.setText("Khuyến mãi");
+		
+		TableColumn tblclmnNewColumn_3 = new TableColumn(table, SWT.NONE);
+		tblclmnNewColumn_3.setWidth(100);
+		tblclmnNewColumn_3.setText("Điểm tích lũy");
+		
+		Label lblTngTin = new Label(this, SWT.NONE);
+		lblTngTin.setText("Tổng tiền:");
+		lblTngTin.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		lblTngTin.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		lblTngTin.setBounds(277, 294, 75, 15);
+		
+		text_3 = new Text(this, SWT.BORDER);
+		text_3.setBounds(358, 289, 141, 24);
 		createContents();
 	}
 
@@ -199,7 +187,7 @@ public class frmBanVe extends Shell {
 	 */
 	protected void createContents() {
 		setText("Bán vé");
-		setSize(535, 543);
+		setSize(535, 592);
 
 	}
 
