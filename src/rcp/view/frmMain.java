@@ -13,6 +13,7 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import rcp.view.page.*;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.custom.CTabFolder;
 
 
 public class frmMain extends Shell {
@@ -22,7 +23,7 @@ public class frmMain extends Shell {
 	 * @param display
 	 */
 	public frmMain(Display display) {
-		super(display, SWT.SHELL_TRIM);
+		super(display, SWT.SHELL_TRIM | SWT.BORDER);
 		setSize(973, 529);
 		setText("Quản lý Rạp chiếu phim");
 		setMinimumSize(new Point(136, 50));
@@ -52,8 +53,14 @@ public class frmMain extends Shell {
 		TabItem tbtmDanhMc = new TabItem(tabFolder, SWT.NONE);
 		tbtmDanhMc.setText("Danh mục");
 		
-		Composite composite_1 = new Composite(tabFolder, SWT.NONE);
-		tbtmDanhMc.setControl(composite_1);
+		ToolBar toolBar = new ToolBar(tabFolder, SWT.FLAT | SWT.RIGHT);
+		tbtmDanhMc.setControl(toolBar);
+		
+		ToolItem tltmNewItem = new ToolItem(toolBar, SWT.NONE | SWT.WRAP);
+		tltmNewItem.setText("New Item");
+		
+		ToolItem tltmNewItem_1 = new ToolItem(toolBar, SWT.NONE);
+		tltmNewItem_1.setText("New Item");
 		
 		
 		
@@ -69,16 +76,9 @@ public class frmMain extends Shell {
 		Composite composite_3 = new Composite(tabFolder, SWT.NONE);
 		tbtmHThng.setControl(composite_3);
 		
-		Composite content = new Composite(this, SWT.NONE);
-		content.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
-		GridLayout gl_content = new GridLayout(1, false);
-		gl_content.marginTop = 3;
-		gl_content.verticalSpacing = 0;
-		gl_content.marginWidth = 0;
-		gl_content.marginHeight = 0;
-		gl_content.horizontalSpacing = 0;
-		content.setLayout(gl_content);
-		content.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		CTabFolder tabFolder_1 = new CTabFolder(this, SWT.BORDER);
+		tabFolder_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		tabFolder_1.setSelectionBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		
 	}
 

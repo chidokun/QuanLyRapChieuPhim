@@ -19,6 +19,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public class frmThongTinPhanMem extends Shell {
 
@@ -46,13 +48,19 @@ public class frmThongTinPhanMem extends Shell {
 		
 		Label label_1 = new Label(this, SWT.NONE);
 		label_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label_1.setImage(ResourceManager.getPluginImage("QuanLyRapChieuPhim", "res/imgRapPhim_64p.png"));
+		label_1.setImage(SWTResourceManager.getImage(frmThongTinPhanMem.class, "/rcp/view/popup/imgRapPhim_64p.png"));
 		label_1.setBounds(30, 20, 64, 64);
 		
 		Composite composite = new Composite(this, SWT.NONE);
 		composite.setBounds(0, 447, 460, 56);
 		
 		Button btnHyB = new Button(composite, SWT.NONE);
+		btnHyB.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				close();
+			}
+		});
 		btnHyB.setText("OK");
 		btnHyB.setBounds(356, 10, 94, 33);
 		

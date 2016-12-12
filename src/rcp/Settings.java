@@ -16,7 +16,7 @@ import rcp.util.XML;
  */
 public class Settings {
 	private static String fileName = System.getenv("appdata") + "\\settings.xml";
-	public static Map<String, Object> settings = new Hashtable<>();
+	private static Hashtable<String, Object> settings = new Hashtable<>();
 
 	/**
 	 * Nạp cài đặt
@@ -70,11 +70,14 @@ public class Settings {
 	 */
 	private static void loadDefaultSettings() {
 		settings.clear();
-		settings.put("hostname", "");
-		settings.put("schemaName", true);
-		settings.put("userName", 5.06);
-		settings.put("password", 5);
+		settings.put("hostName", "");
+		settings.put("schemaName", "");
+		settings.put("userName", "");
+		settings.put("password", "");
 		settings.put("connectionString", "");
+		settings.put("mySQLBin", "");
+		settings.put("saveLoginName", true);
+		settings.put("loginName", "");
 		// còn tiếp
 
 	}
@@ -105,19 +108,6 @@ public class Settings {
 	 * @throws Exception
 	 */
 	public static void save() throws Exception {
-		File f = new File(fileName);
-		if (!f.exists())
-			saveDefaultSettings();
-		else
-			saveSettings();
-	}
-
-	/**
-	 * Lưu tất cả cài đặt vào file
-	 * 
-	 * @throws Exception
-	 */
-	private static void saveSettings() throws Exception {
 		Document doc = XML.newDocument();
 		Element root = doc.createElement("Settings");
 		doc.appendChild(root);
@@ -145,15 +135,5 @@ public class Settings {
 		}
 
 		XML.writeDocument(doc, fileName);
-	}
-
-	/**
-	 * Lưu cài đặt mặc định
-	 * 
-	 * @throws Exception
-	 */
-	private static void saveDefaultSettings() throws Exception {
-		loadDefaultSettings();
-		saveSettings();
 	}
 }

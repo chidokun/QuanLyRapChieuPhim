@@ -1,60 +1,149 @@
+/**
+ * Quản lý Rạp chiếu phim RPP
+ * Author: Nguyễn Tuấn - nguyentuanit96@gmail.com
+ */
 package rcp.util;
 
 import java.sql.*;
 import java.util.*;
 
+import rcp.*;
+
 public class Database {
-	public static String hostName = "";
-	public static String schemaName = "";
-	public static String userName = "root";
-	public static String password = "root";
-	public static String connectionString ="jdbc:mysql://127.0.0.1:3306/sys?autoReconnect=true&useSSL=false";
-	
-	public static Connection connect(String jdbcString, String user, String password) throws SQLException {	
+	public static String hostName;
+	public static String schemaName;
+	public static String userName;
+	public static String password;
+	public static String connectionString;
+
+	/**
+	 * Nạp cài đặt lên Database
+	 */
+	public static void load() {
+		hostName = (String) Settings.get("hostName");
+		schemaName = (String) Settings.get("schemaName");
+		userName = (String) Settings.get("userName");
+		password = (String) Settings.get("password");
+		connectionString = ((String) Settings.get("connectionString"));
+	}
+
+	/**
+	 * Kết nối đến một CSDL cụ thể
+	 * 
+	 * @param jdbcString
+	 * @param user
+	 * @param password
+	 * @return
+	 * @throws SQLException
+	 */
+	public static Connection connect(String jdbcString, String user, String password) throws SQLException {
 		return DriverManager.getConnection(jdbcString, user, password);
 	}
-	
-	public static ArrayList<String> getDatabasesList(String jdbcString, String user, String password) throws ClassNotFoundException, SQLException {
+
+	/**
+	 * Kết nối đến CSDL trong cài đặt
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public static Connection connect() throws SQLException {
+		return DriverManager.getConnection(connectionString, userName, password);
+	}
+
+	/**
+	 * Lấy danh sách các database trong server
+	 * 
+	 * @param hostName
+	 * @param userName
+	 * @param password
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public static ArrayList<String> getDatabasesList(String hostName, String userName, String password)
+			throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		
-		Connection connect = connect(jdbcString, user, password);
-		
+
+		Connection connect = connect(String.format("jdbc:mysql://%1$s/sys?useSSL=false", hostName), userName, password);
+
 		ResultSet rs = connect.getMetaData().getCatalogs();
 		ArrayList<String> arr = new ArrayList<>();
-		
-		while(rs.next())
+
+		while (rs.next())
 			arr.add(rs.getString("TABLE_CAT"));
-		
+
 		connect.close();
-				
-		return arr; 
+
+		return arr;
 	}
-	
-	public static void backup(String fileName) {
+
+	/**
+	 * Sao lưu cơ sở dữ liệu
+	 * 
+	 * @param fileName
+	 *            File cần lưu
+	 * @return
+	 * @throws Exception
+	 */
+	public static boolean backup(String fileName) throws Exception {
+		//tạo lệnh sao lưu
+		String executeCmd = String.format("\"%1$s\" -u%2$s -p%3$s -B %4$s -r \"%5$s\"",
+				((String) Settings.get("mySQLBin")) + "\\mysqldump.exe", Database.userName, Database.password,
+				Database.schemaName, fileName);
 		
+		//thực thi và trả kết quả
+		Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
+		return runtimeProcess.waitFor() == 0 ? true : false;
+
 	}
-	
-	public static void restore(String fileName) {
+
+	/**
+	 * Phục hồi cơ sở dữ liệu
+	 * 
+	 * @param fileName
+	 *            File cần phục hồi
+	 * @return
+	 * @throws Exception
+	 */
+	public static boolean restore(String fileName) throws Exception {
+		//tạo lệnh phục hồi
+		String[] executeCmd = new String[] { ((String) Settings.get("mySQLBin")) + "\\mysql.exe", Database.schemaName,
+				"-u" + Database.userName, "-p" + Database.password, "-e", " source \"" + fileName + "\"" };
 		
+		//thực thi và trả kết quả
+		Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
+		return runtimeProcess.waitFor() == 0 ? true : false;
+
 	}
-	
+
+	/**
+	 * Gọi một stored
+	 * @param storeName
+	 * @param param
+	 * @return
+	 * @throws SQLException
+	 */
 	public static ResultSet callStored(String storeName, Object... param) throws SQLException {
+		//tạo chuỗi lời gọi
 		StringBuilder statement = new StringBuilder("{call " + storeName + "(");
-		for(int i = 1; i <= param.length; i++) {
+		for (int i = 1; i <= param.length; i++) {
 			statement.append("?");
-			if (i<param.length)
+			if (i < param.length)
 				statement.append(",");
 		}
 		statement.append(")}");
 		
+		//kết nối và truyền tham số
 		Connection connect = connect(connectionString, userName, password);
 		CallableStatement call = connect.prepareCall(statement.toString());
-		for(int i = 1; i <= param.length; i++) {
+		for (int i = 1; i <= param.length; i++) {
 			call.setObject(i, param[i]);
 		}
 		
-		return call.executeQuery();		
+		//trả về kết quả
+		ResultSet rs = call.executeQuery();
+		connect.close();
+		return rs;
 	}
-	
 
 }
