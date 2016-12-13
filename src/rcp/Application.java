@@ -49,15 +49,8 @@ public class Application {
 				result = frmDangNhap.result;
 			}
 		});
-		shell.open();
-		shell.layout();
 		
-		//vòng lặp thông diệp
-		while (!shell.isDisposed()) {
-			if (!display.readAndDispatch()) {
-				display.sleep();
-			}
-		}
+		Window.open(shell);
 		
 		//đăng nhập được thì hiển thị giao diện
 		if(result == SWT.OK)
@@ -67,14 +60,7 @@ public class Application {
 	}
 
 	public static void hienThiGiaoDien() {
-		shellMain.open();
-		shellMain.layout();
-		
-		while (!shellMain.isDisposed()) {
-			if (!display.readAndDispatch()) {
-				display.sleep();
-			}
-		}
+		Window.open(shellMain);
 	}
 	
 	public static void ketNoiLai() {
@@ -85,14 +71,8 @@ public class Application {
 				result = shell.result;
 			}
 		});
-		shell.open();
-		shell.layout();
-
-		while (!shell.isDisposed()) {
-			if (!display.readAndDispatch()) {
-				display.sleep();
-			}
-		}
+		
+		Window.open(shell);
 		
 		switch (result) {
 		case SWT.OK:

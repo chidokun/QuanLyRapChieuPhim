@@ -93,6 +93,7 @@ public class frmDangNhap extends Shell {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				result = SWT.OK;
+				close();
 			}
 		});
 		btnDangNhap.setBounds(249, 10, 94, 33);

@@ -49,7 +49,7 @@ public class frmThongTinRapPhim extends Shell {
 		
 		Label label_1 = new Label(this, SWT.NONE);
 		label_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label_1.setImage(ResourceManager.getPluginImage("QuanLyRapChieuPhim", "res/imgThucAn_64p.png"));
+		label_1.setImage(SWTResourceManager.getImage(frmThongTinRapPhim.class, "/rcp/view/popup/imgRapPhim_64p.png"));
 		label_1.setBounds(30, 20, 64, 64);
 		
 		Label lblMThcn = new Label(this, SWT.NONE);

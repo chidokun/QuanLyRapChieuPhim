@@ -70,16 +70,40 @@ public class Settings {
 	 */
 	private static void loadDefaultSettings() {
 		settings.clear();
+		
+		//cài đặt kết nối CSDL
 		settings.put("hostName", "");
 		settings.put("schemaName", "");
 		settings.put("userName", "");
 		settings.put("password", "");
 		settings.put("connectionString", "");
+		
+		//cài đặt mysql
 		settings.put("mySQLBin", "");
+		
+		//cài đặt login
 		settings.put("saveLoginName", true);
 		settings.put("loginName", "");
-		// còn tiếp
-
+		
+		//cài đặt thông tin rạp phim
+		settings.put("cinemaName", "Rạp chiếu phim RPP");
+		settings.put("cinemaAddr", "Khu phố 6, phường Linh Trung, quận Thủ Đức, TP. HCM");
+		settings.put("cinemaTel", "0123456789");
+		settings.put("cinemaEmail", "support@rpp.com");
+		
+		//cài đặt theme
+		settings.put("theme_ribbonTabBackground", 0x227447);
+		settings.put("theme_ribbonTabActive", 0xf1f1f1);
+		settings.put("theme_ribbonTabHeaderActive", 0x227447);
+		settings.put("theme_ribbonTabHeaderInactive", 0xffffff);
+		settings.put("theme_ribbonButtonText", 0xffffff);
+		settings.put("theme_ribbonButtonHoverBackground", 0x2e955d);
+		settings.put("theme_ribbonButtonClickBackground", 0x0d582f);
+		settings.put("theme_ribbonToolbarBackground", 0xf1f1f1);
+		settings.put("theme_ribbonToolbarTextColor", 0x444444);
+		settings.put("theme_ribbonToolbarButtonHoverBackground", 0xc5c5c5);
+		settings.put("theme_ribbonToolbarButtonClickBackground", 0xaeaeae);
+		
 	}
 
 	/**
