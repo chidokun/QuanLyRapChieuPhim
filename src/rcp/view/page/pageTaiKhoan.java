@@ -131,10 +131,20 @@ public class pageTaiKhoan extends Composite {
 		tblclmnNewColumn_2.setWidth(150);
 		tblclmnNewColumn_2.setText("Mã nhân viên");
 		
+		TableViewerColumn tableViewerColumn_5 = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tblclmnTnNhnVin = tableViewerColumn_5.getColumn();
+		tblclmnTnNhnVin.setWidth(150);
+		tblclmnTnNhnVin.setText("Tên nhân viên");
+		
 		TableViewerColumn tableViewerColumn_3 = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnNewColumn_3 = tableViewerColumn_3.getColumn();
 		tblclmnNewColumn_3.setWidth(150);
 		tblclmnNewColumn_3.setText("Mã quyền");
+		
+		TableViewerColumn tableViewerColumn_6 = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tblclmnTnQuyn = tableViewerColumn_6.getColumn();
+		tblclmnTnQuyn.setWidth(150);
+		tblclmnTnQuyn.setText("Tên quyền");
 		
 		TableViewerColumn tableViewerColumn_4 = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnNewColumn_4 = tableViewerColumn_4.getColumn();
