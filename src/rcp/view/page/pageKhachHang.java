@@ -157,6 +157,11 @@ public class pageKhachHang extends Composite {
 		TableColumn tblclmnNewColumn_5 = tableViewerColumn_8.getColumn();
 		tblclmnNewColumn_5.setWidth(100);
 		tblclmnNewColumn_5.setText("Loại khách hàng");
+		
+		TableViewerColumn tableViewerColumn_9 = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tblclmnNewColumn_6 = tableViewerColumn_9.getColumn();
+		tblclmnNewColumn_6.setWidth(100);
+		tblclmnNewColumn_6.setText("Ngày đăng ký");
 		new Label(composite_1, SWT.NONE);
 		new Label(composite_1, SWT.NONE);
 		new Label(composite_1, SWT.NONE);

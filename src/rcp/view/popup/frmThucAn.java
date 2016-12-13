@@ -18,10 +18,16 @@ import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.jface.fieldassist.ControlDecoration;
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.jface.viewers.TableViewerColumn;
 
 public class frmThucAn extends Shell {
 	private Text text;
 	private Text text_1;
+	private Table table;
 
 	/**
 	 * Create the shell.
@@ -50,76 +56,115 @@ public class frmThucAn extends Shell {
 		label_1.setImage(ResourceManager.getPluginImage("QuanLyRapChieuPhim", "res/imgThucAn_64p.png"));
 		label_1.setBounds(30, 20, 64, 64);
 		
-		Label lblMThcn = new Label(this, SWT.NONE);
-		lblMThcn.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		lblMThcn.setText("Mã thức ăn:");
-		lblMThcn.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblMThcn.setBounds(30, 102, 75, 15);
-		
-		text = new Text(this, SWT.BORDER);
-		text.setBounds(109, 99, 141, 24);
-		
-		ControlDecoration controlDecoration = new ControlDecoration(text, SWT.LEFT | SWT.TOP);
-		controlDecoration.setDescriptionText("Some description");
-		
-		Label lblTnThcn = new Label(this, SWT.NONE);
-		lblTnThcn.setText("Tên thức ăn:");
-		lblTnThcn.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		lblTnThcn.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblTnThcn.setBounds(30, 147, 75, 15);
-		
-		text_1 = new Text(this, SWT.BORDER);
-		text_1.setBounds(109, 144, 141, 24);
-		
-		Label lblnGi = new Label(this, SWT.NONE);
-		lblnGi.setText("Đơn giá:");
-		lblnGi.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		lblnGi.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblnGi.setBounds(30, 195, 75, 15);
-		
-		Spinner spinner = new Spinner(this, SWT.BORDER);
-		spinner.setBounds(109, 192, 141, 24);
-		
-		Label lblLoiThcn = new Label(this, SWT.NONE);
-		lblLoiThcn.setText("Loại thức ăn:");
-		lblLoiThcn.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		lblLoiThcn.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblLoiThcn.setBounds(277, 102, 75, 15);
-		
-		ComboViewer comboViewer = new ComboViewer(this, SWT.NONE);
-		Combo combo = comboViewer.getCombo();
-		combo.setBounds(358, 99, 141, 23);
-		
-		ComboViewer comboViewer_1 = new ComboViewer(this, SWT.NONE);
-		Combo combo_1 = comboViewer_1.getCombo();
-		combo_1.setBounds(358, 147, 141, 23);
-		
-		Label lblKchC = new Label(this, SWT.NONE);
-		lblKchC.setText("Kích cỡ:");
-		lblKchC.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		lblKchC.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblKchC.setBounds(277, 150, 75, 15);
-		
-		ComboViewer comboViewer_2 = new ComboViewer(this, SWT.NONE);
-		Combo combo_2 = comboViewer_2.getCombo();
-		combo_2.setBounds(358, 193, 141, 23);
-		
-		Label lblTrngThi = new Label(this, SWT.NONE);
-		lblTrngThi.setText("Trạng thái:");
-		lblTrngThi.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		lblTrngThi.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblTrngThi.setBounds(277, 196, 75, 15);
-		
 		Composite composite = new Composite(this, SWT.NONE);
-		composite.setBounds(0, 258, 529, 56);
+		composite.setBounds(0, 447, 540, 56);
 		
 		Button btnLu = new Button(composite, SWT.NONE);
 		btnLu.setText("Lưu");
-		btnLu.setBounds(325, 10, 94, 33);
+		btnLu.setBounds(336, 10, 94, 33);
 		
 		Button btnHyB = new Button(composite, SWT.NONE);
 		btnHyB.setText("Hủy bỏ");
-		btnHyB.setBounds(425, 10, 94, 33);
+		btnHyB.setBounds(436, 10, 94, 33);
+		
+		Group group = new Group(this, SWT.NONE);
+		group.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		group.setBounds(24, 90, 495, 104);
+		
+		Label lblMThcn = new Label(group, SWT.NONE);
+		lblMThcn.setBounds(10, 25, 75, 15);
+		lblMThcn.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		lblMThcn.setText("Mã thức ăn:");
+		lblMThcn.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		
+		text = new Text(group, SWT.BORDER);
+		text.setBounds(89, 22, 141, 24);
+		
+		Label lblLoiThcn = new Label(group, SWT.NONE);
+		lblLoiThcn.setBounds(257, 25, 75, 15);
+		lblLoiThcn.setText("Loại thức ăn:");
+		lblLoiThcn.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		lblLoiThcn.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		
+		ComboViewer comboViewer = new ComboViewer(group, SWT.NONE);
+		Combo combo = comboViewer.getCombo();
+		combo.setBounds(338, 22, 141, 23);
+		
+		Label lblTnThcn = new Label(group, SWT.NONE);
+		lblTnThcn.setBounds(10, 69, 75, 15);
+		lblTnThcn.setText("Tên thức ăn:");
+		lblTnThcn.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		lblTnThcn.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		
+		text_1 = new Text(group, SWT.BORDER);
+		text_1.setBounds(89, 66, 141, 24);
+		
+		Group group_1 = new Group(this, SWT.NONE);
+		group_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		group_1.setBounds(24, 200, 495, 112);
+		
+		Label lblKchC = new Label(group_1, SWT.NONE);
+		lblKchC.setBounds(10, 25, 75, 15);
+		lblKchC.setText("Kích cỡ:");
+		lblKchC.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		lblKchC.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		
+		ComboViewer comboViewer_1 = new ComboViewer(group_1, SWT.NONE);
+		Combo combo_1 = comboViewer_1.getCombo();
+		combo_1.setBounds(91, 22, 141, 23);
+		
+		Label lblTrngThi = new Label(group_1, SWT.NONE);
+		lblTrngThi.setBounds(10, 65, 75, 15);
+		lblTrngThi.setText("Trạng thái:");
+		lblTrngThi.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		lblTrngThi.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		
+		ComboViewer comboViewer_2 = new ComboViewer(group_1, SWT.NONE);
+		Combo combo_2 = comboViewer_2.getCombo();
+		combo_2.setBounds(91, 62, 141, 23);
+		
+		Label lblnGi = new Label(group_1, SWT.NONE);
+		lblnGi.setBounds(257, 25, 75, 15);
+		lblnGi.setText("Đơn giá:");
+		lblnGi.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		lblnGi.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		
+		Spinner spinner = new Spinner(group_1, SWT.BORDER);
+		spinner.setBounds(338, 22, 141, 24);
+		
+		Button btnThm = new Button(group_1, SWT.NONE);
+		btnThm.setText("Thêm");
+		btnThm.setBounds(323, 65, 75, 33);
+		
+		Button btnXa = new Button(group_1, SWT.NONE);
+		btnXa.setText("Xóa");
+		btnXa.setBounds(404, 65, 75, 33);
+		
+		TableViewer tableViewer = new TableViewer(this, SWT.BORDER | SWT.FULL_SELECTION);
+		table = tableViewer.getTable();
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
+		table.setBounds(24, 325, 495, 116);
+		
+		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tblclmnStt = tableViewerColumn.getColumn();
+		tblclmnStt.setWidth(90);
+		tblclmnStt.setText("STT");
+		
+		TableViewerColumn tableViewerColumn_1 = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tblclmnKchC = tableViewerColumn_1.getColumn();
+		tblclmnKchC.setWidth(131);
+		tblclmnKchC.setText("Kích cỡ");
+		
+		TableViewerColumn tableViewerColumn_2 = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tblclmnnGi = tableViewerColumn_2.getColumn();
+		tblclmnnGi.setWidth(140);
+		tblclmnnGi.setText("Đơn giá");
+		
+		TableViewerColumn tableViewerColumn_3 = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tblclmnTrngThi = tableViewerColumn_3.getColumn();
+		tblclmnTrngThi.setWidth(130);
+		tblclmnTrngThi.setText("Trạng thái");
 		createContents();
 	}
 
@@ -128,7 +173,7 @@ public class frmThucAn extends Shell {
 	 */
 	protected void createContents() {
 		setText("Thêm sửa thức ăn");
-		setSize(535, 341);
+		setSize(546, 532);
 
 	}
 
