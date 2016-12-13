@@ -6,24 +6,21 @@
 package rcp.view.popup;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.wb.swt.SWTResourceManager;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.wb.swt.ResourceManager;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Spinner;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.jface.viewers.ComboViewer;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.jface.fieldassist.ControlDecoration;
+import rcp.*;
+import rcp.util.*;
+import org.eclipse.swt.widgets.*;
+import org.eclipse.core.commands.*;
+import org.eclipse.swt.events.*;
+
 
 public class frmThongTinRapPhim extends Shell {
-	private Text text;
-	private Text text_1;
-	private Text text_2;
-	private Text text_3;
+	private Text txtTenRapPhim;
+	private Text txtDiaChi;
+	private Text txtSDT;
+	private Text txtEmail;
+	private Button btnLuu;
+	private Button btnHuyBo;
 
 	/**
 	 * Create the shell.
@@ -58,19 +55,48 @@ public class frmThongTinRapPhim extends Shell {
 		lblMThcn.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblMThcn.setBounds(39, 103, 75, 15);
 		
-		text = new Text(this, SWT.BORDER);
-		text.setBounds(130, 100, 241, 24);
+		txtTenRapPhim = new Text(this, SWT.BORDER);
+		txtTenRapPhim.setBounds(130, 100, 241, 24);
 		
 		Composite composite = new Composite(this, SWT.NONE);
 		composite.setBounds(0, 287, 409, 56);
 		
-		Button btnLu = new Button(composite, SWT.NONE);
-		btnLu.setText("Lưu");
-		btnLu.setBounds(205, 10, 94, 33);
+		btnLuu = new Button(composite, SWT.NONE);
+		btnLuu.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					kiemTraGiaoDien();
+					
+					Settings.set("cinemaName", txtTenRapPhim.getText());
+					Settings.set("cinemaAddr", txtDiaChi.getText());
+					Settings.set("cinemaTel", txtSDT.getText());
+					Settings.set("cinemaEmail", txtEmail.getText());
+
+					Settings.save();
+
+					Message.show(
+							"Thay đổi thông tin rạp phim thành công",
+							"Thành công", SWT.ICON_INFORMATION | SWT.OK, getShell());
+
+					close();
+				} catch (Exception e1) {
+					Message.show(e1.getMessage(), "Cảnh báo", SWT.ICON_WARNING | SWT.OK, getShell());
+				}
+			}
+		});
+		btnLuu.setText("Lưu");
+		btnLuu.setBounds(205, 10, 94, 33);
 		
-		Button btnHyB = new Button(composite, SWT.NONE);
-		btnHyB.setText("Hủy bỏ");
-		btnHyB.setBounds(305, 10, 94, 33);
+		btnHuyBo = new Button(composite, SWT.NONE);
+		btnHuyBo.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				close();
+			}
+		});
+		btnHuyBo.setText("Hủy bỏ");
+		btnHuyBo.setBounds(305, 10, 94, 33);
 		
 		Label lblaCh = new Label(this, SWT.NONE);
 		lblaCh.setText("Địa chỉ:");
@@ -78,8 +104,8 @@ public class frmThongTinRapPhim extends Shell {
 		lblaCh.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblaCh.setBounds(39, 145, 75, 15);
 		
-		text_1 = new Text(this, SWT.BORDER);
-		text_1.setBounds(130, 142, 241, 24);
+		txtDiaChi = new Text(this, SWT.BORDER);
+		txtDiaChi.setBounds(130, 142, 241, 24);
 		
 		Label lblSinThoi = new Label(this, SWT.NONE);
 		lblSinThoi.setText("Số điện thoại:");
@@ -87,8 +113,8 @@ public class frmThongTinRapPhim extends Shell {
 		lblSinThoi.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblSinThoi.setBounds(39, 188, 75, 15);
 		
-		text_2 = new Text(this, SWT.BORDER);
-		text_2.setBounds(130, 185, 241, 24);
+		txtSDT = new Text(this, SWT.BORDER);
+		txtSDT.setBounds(130, 185, 241, 24);
 		
 		Label lblEmailHTr = new Label(this, SWT.NONE);
 		lblEmailHTr.setText("Email hỗ trợ:");
@@ -96,8 +122,8 @@ public class frmThongTinRapPhim extends Shell {
 		lblEmailHTr.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblEmailHTr.setBounds(39, 233, 75, 15);
 		
-		text_3 = new Text(this, SWT.BORDER);
-		text_3.setBounds(130, 230, 241, 24);
+		txtEmail = new Text(this, SWT.BORDER);
+		txtEmail.setBounds(130, 230, 241, 24);
 		createContents();
 	}
 
@@ -107,11 +133,30 @@ public class frmThongTinRapPhim extends Shell {
 	protected void createContents() {
 		setText("Chỉnh sửa thông tin rạp phim");
 		setSize(415, 372);
-
+		
+		hienThi();
 	}
 
 	@Override
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
+	}
+	
+	public void hienThi() {
+		txtTenRapPhim.setText((String) Settings.get("cinemaName"));
+		txtDiaChi.setText((String) Settings.get("cinemaAddr"));
+		txtSDT.setText((String) Settings.get("cinemaTel"));
+		txtEmail.setText((String) Settings.get("cinemaEmail"));
+	}
+	
+	public void kiemTraGiaoDien() throws ParameterValuesException {
+		if (txtTenRapPhim.getText().isEmpty() || txtTenRapPhim.getText() == null)
+			throw new ParameterValuesException("Vui lòng nhập đủ tên rạp phim", null);
+		if (txtDiaChi.getText().isEmpty() || txtDiaChi.getText() == null)
+			throw new ParameterValuesException("Vui lòng nhập đủ địa chỉ", null);
+		if (txtSDT.getText().isEmpty() || txtSDT.getText() == null)
+			throw new ParameterValuesException("Vui lòng nhập đủ số điện thoại", null);
+		if (txtEmail.getText().isEmpty() || txtEmail.getText() == null)
+			throw new ParameterValuesException("Vui lòng nhập đủ email", null);
 	}
 }

@@ -11,7 +11,7 @@ import rcp.view.*;
 
 public class Application {
 	private static Display display = Display.getDefault();
-	private static frmMain shellMain = new frmMain(display);
+	private static frmMain shellMain;
 	private static int result;
 
 	/**
@@ -21,6 +21,9 @@ public class Application {
 	 */
 	public static void main(String args[]) {
 		try {
+			Settings.load();
+			shellMain = new frmMain(display);
+			
 			if (ketNoiCSDL())
 				dangNhap();
 			else 
@@ -32,7 +35,6 @@ public class Application {
 
 	public static boolean ketNoiCSDL() {
 		try {
-			Settings.load();
 			Database.load();
 			Database.connect();
 		} catch (Exception e) {
@@ -42,6 +44,8 @@ public class Application {
 	}
 
 	public static void dangNhap() throws IOException {
+		 
+		 
 		//hiện form đăng nhập
 		frmDangNhap shell = new frmDangNhap(display);
 		shell.addDisposeListener(new DisposeListener() {
@@ -60,6 +64,7 @@ public class Application {
 	}
 
 	public static void hienThiGiaoDien() {
+		//lỗi ảnh hưởng tính năng đăng xuất
 		Window.open(shellMain);
 	}
 	

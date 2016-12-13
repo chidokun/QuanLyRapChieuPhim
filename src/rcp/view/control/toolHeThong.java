@@ -28,7 +28,7 @@ public class toolHeThong extends Composite {
 	public toolHeThong(Composite parent, int style, CTabFolder controlled) {
 		super(parent, style);
 		setBackground(SWTResourceManager.getColor(240, 240, 240));
-		GridLayout gridLayout = new GridLayout(5, false);
+		GridLayout gridLayout = new GridLayout(6, false);
 		gridLayout.marginHeight = 7;
 		gridLayout.marginWidth = 7;
 		setLayout(gridLayout);
@@ -65,6 +65,38 @@ public class toolHeThong extends Composite {
 		lblSaoLuuPhucHoi.setLayoutData(gd_lblSaoLuuPhucHoi);
 		lblSaoLuuPhucHoi.setBackground(SWTResourceManager.getColor(240, 240, 240));
 		lblSaoLuuPhucHoi.setText("Sao lưu phục hồi");
+		
+		CLabel lblKtNiCsdl = new CLabel(this, SWT.NONE);
+		lblKtNiCsdl.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDown(MouseEvent e) {
+				mouseDownColor(lblKtNiCsdl);
+			}
+
+			@Override
+			public void mouseUp(MouseEvent e) {
+				mouseEnterColor(lblKtNiCsdl);
+				Window.open(new frmKetNoiCSDL(getDisplay()));
+				
+			}
+		});
+		lblKtNiCsdl.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				mouseEnterColor(lblKtNiCsdl);
+			}
+
+			@Override
+			public void mouseExit(MouseEvent e) {
+				mouseExitColor(lblKtNiCsdl);
+			}
+		});
+		GridData gd_lblKtNiCsdl = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		gd_lblKtNiCsdl.widthHint = 120;
+		lblKtNiCsdl.setLayoutData(gd_lblKtNiCsdl);
+		lblKtNiCsdl.setText("Kết nối CSDL");
+		lblKtNiCsdl.setImage(SWTResourceManager.getImage(toolHeThong.class, "/rcp/view/control/imgketNoiCSDL_32p.png"));
+		lblKtNiCsdl.setBackground(SWTResourceManager.getColor(240, 240, 240));
 
 		CLabel lblTaiKhoan = new CLabel(this, SWT.NONE);
 		lblTaiKhoan.addMouseListener(new MouseAdapter() {
