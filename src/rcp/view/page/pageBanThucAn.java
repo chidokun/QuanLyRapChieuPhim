@@ -21,6 +21,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.swt.widgets.Spinner;
 
 public class pageBanThucAn extends Composite {
 	private Table table_1;
@@ -66,12 +67,12 @@ public class pageBanThucAn extends Composite {
 		Button btnTimKiem = new Button(composite, SWT.NONE);
 		btnTimKiem.setText("Tìm kiếm");
 		btnTimKiem.setImage(SWTResourceManager.getImage("D:\\Document\\PROGRAMING\\PROJECT\\QuanLyHocVien\\Source code\\QuanLyHocVien\\Resources\\zoom_16x16.png"));
-		btnTimKiem.setBounds(81, 311, 86, 30);
+		btnTimKiem.setBounds(92, 324, 86, 30);
 		
 		Button btnDatLai = new Button(composite, SWT.NONE);
-		btnDatLai.setText("Đặt lại");
+		btnDatLai.setText("Chọn");
 		btnDatLai.setImage(SWTResourceManager.getImage("D:\\Document\\PROGRAMING\\PROJECT\\QuanLyHocVien\\Source code\\QuanLyHocVien\\Resources\\refresh2_16x16.png"));
-		btnDatLai.setBounds(173, 311, 86, 30);
+		btnDatLai.setBounds(184, 324, 86, 30);
 		
 		Button btnNcUng = new Button(composite, SWT.CHECK);
 		btnNcUng.addSelectionListener(new SelectionAdapter() {
@@ -87,7 +88,7 @@ public class pageBanThucAn extends Composite {
 		table_1 = tableViewer.getTable();
 		table_1.setLinesVisible(true);
 		table_1.setHeaderVisible(true);
-		table_1.setBounds(10, 61, 260, 244);
+		table_1.setBounds(10, 61, 260, 229);
 		
 		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnMThcn = tableViewerColumn.getColumn();
@@ -108,6 +109,14 @@ public class pageBanThucAn extends Composite {
 		TableColumn tblclmnnGi_1 = tableViewerColumn_3.getColumn();
 		tblclmnnGi_1.setWidth(80);
 		tblclmnnGi_1.setText("Đơn giá");
+		
+		Label lblSLng = new Label(composite, SWT.NONE);
+		lblSLng.setText("Số lượng: ");
+		lblSLng.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		lblSLng.setBounds(157, 296, 60, 15);
+		
+		Spinner spinner = new Spinner(composite, SWT.BORDER);
+		spinner.setBounds(223, 296, 47, 23);
 		
 		Composite composite_1 = new Composite(this, SWT.NONE);
 		composite_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));

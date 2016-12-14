@@ -19,9 +19,14 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.swt.widgets.DateTime;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.jface.viewers.TableViewerColumn;
 
 public class frmSuatChieu extends Shell {
 	private Text text;
+	private Table table;
 
 	/**
 	 * Create the shell.
@@ -66,7 +71,7 @@ public class frmSuatChieu extends Shell {
 		lblTnThcn.setBounds(30, 147, 75, 15);
 		
 		Label lblnGi = new Label(this, SWT.NONE);
-		lblnGi.setText("Suất phim:");
+		lblnGi.setText("Giờ: ");
 		lblnGi.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		lblnGi.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblnGi.setBounds(30, 195, 75, 15);
@@ -98,7 +103,7 @@ public class frmSuatChieu extends Shell {
 		lblTrngThi.setBounds(277, 196, 75, 15);
 		
 		Composite composite = new Composite(this, SWT.NONE);
-		composite.setBounds(0, 258, 529, 56);
+		composite.setBounds(0, 373, 529, 56);
 		
 		Button btnLu = new Button(composite, SWT.NONE);
 		btnLu.setText("Lưu");
@@ -115,9 +120,34 @@ public class frmSuatChieu extends Shell {
 		DateTime dateTime = new DateTime(this, SWT.BORDER);
 		dateTime.setBounds(358, 147, 141, 24);
 		
-		ComboViewer comboViewer_1 = new ComboViewer(this, SWT.NONE);
-		Combo combo_1 = comboViewer_1.getCombo();
-		combo_1.setBounds(109, 192, 141, 23);
+		TableViewer tableViewer = new TableViewer(this, SWT.BORDER | SWT.FULL_SELECTION);
+		table = tableViewer.getTable();
+		table.setLinesVisible(true);
+		table.setHeaderVisible(true);
+		table.setBounds(32, 226, 467, 141);
+		
+		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tblclmnMSutPhim = tableViewerColumn.getColumn();
+		tblclmnMSutPhim.setWidth(105);
+		tblclmnMSutPhim.setText("Mã suất phim");
+		
+		TableViewerColumn tableViewerColumn_1 = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tblclmnnhDng = tableViewerColumn_1.getColumn();
+		tblclmnnhDng.setWidth(118);
+		tblclmnnhDng.setText("Định dạng");
+		
+		TableViewerColumn tableViewerColumn_2 = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tblclmnHnhThc = tableViewerColumn_2.getColumn();
+		tblclmnHnhThc.setWidth(120);
+		tblclmnHnhThc.setText("Hình thức");
+		
+		TableViewerColumn tableViewerColumn_3 = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tblclmnNgnNg = tableViewerColumn_3.getColumn();
+		tblclmnNgnNg.setWidth(120);
+		tblclmnNgnNg.setText("Ngôn ngữ");
+		
+		DateTime dateTime_1 = new DateTime(this, SWT.BORDER| SWT.TIME );
+		dateTime_1.setBounds(109, 192, 141, 24);
 		createContents();
 	}
 
@@ -126,7 +156,7 @@ public class frmSuatChieu extends Shell {
 	 */
 	protected void createContents() {
 		setText("Thêm sửa suất chiếu");
-		setSize(535, 341);
+		setSize(535, 458);
 
 	}
 
