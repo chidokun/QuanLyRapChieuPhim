@@ -26,6 +26,7 @@ import org.eclipse.swt.widgets.Spinner;
 public class pageBanThucAn extends Composite {
 	private Table table_1;
 	private Table table;
+	private Text text;
 
 	/**
 	 * Create the composite.
@@ -204,13 +205,14 @@ public class pageBanThucAn extends Composite {
 		TableColumn tblclmnNewColumn_1 = tableViewerColumn_10.getColumn();
 		tblclmnNewColumn_1.setWidth(80);
 		tblclmnNewColumn_1.setText("Thành tiền");
-		new Label(composite_1, SWT.NONE);
-		new Label(composite_1, SWT.NONE);
-		new Label(composite_1, SWT.NONE);
-		new Label(composite_1, SWT.NONE);
-		new Label(composite_1, SWT.NONE);
-		new Label(composite_1, SWT.NONE);
-		new Label(composite_1, SWT.NONE);
+		
+		Label lblMHan = new Label(composite_1, SWT.NONE);
+		lblMHan.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblMHan.setText("Mã hóa đơn:");
+		lblMHan.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		
+		text = new Text(composite_1, SWT.BORDER);
+		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		new Label(composite_1, SWT.NONE);
 		new Label(composite_1, SWT.NONE);
 		new Label(composite_1, SWT.NONE);
