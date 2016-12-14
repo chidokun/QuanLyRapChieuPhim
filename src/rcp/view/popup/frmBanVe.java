@@ -151,11 +151,7 @@ public class frmBanVe extends Shell {
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		
-		TableColumn tblclmnMV = new TableColumn(table, SWT.NONE);
-		tblclmnMV.setWidth(100);
-		tblclmnMV.setText("Mã vé");
-		
-		TableColumn tblclmnNewColumn = new TableColumn(table, SWT.NONE);
+		TableColumn tblclmnNewColumn = new TableColumn(table, SWT.NONE|SWT.CHECK);
 		tblclmnNewColumn.setWidth(78);
 		tblclmnNewColumn.setText("Ghế");
 		
