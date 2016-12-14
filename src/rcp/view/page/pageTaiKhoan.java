@@ -1,4 +1,5 @@
-/* Quản lý Rạp chiếu phim RPP 
+/** 
+ * Quản lý Rạp chiếu phim RPP 
  * Author: Võ Xuân Vương – vuongvo1809@gmail.com
  */
 

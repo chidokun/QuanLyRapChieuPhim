@@ -1,3 +1,7 @@
+/**
+ * Quản lý Rạp chiếu phim RPP 
+ * Author: Võ Xuân Vương – vuongvo1809@gmail.com
+ */
 package rcp.view.popup;
 
 import org.eclipse.swt.SWT;
