@@ -32,6 +32,7 @@ public class frmBanVe extends Shell {
 	private Text text_9;
 	private Table table;
 	private Text text_3;
+	private Text text_7;
 
 	/**
 	 * Create the shell.
@@ -66,7 +67,7 @@ public class frmBanVe extends Shell {
 		lblMThcn.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblMThcn.setBounds(23, 102, 75, 15);
 		
-		text = new Text(this, SWT.BORDER);
+		text = new Text(this, SWT.BORDER| SWT.READ_ONLY);
 		text.setBounds(109, 99, 141, 24);
 		
 		ControlDecoration controlDecoration = new ControlDecoration(text, SWT.LEFT | SWT.TOP);
@@ -116,14 +117,14 @@ public class frmBanVe extends Shell {
 		btnHyB.setText("Hủy bỏ");
 		btnHyB.setBounds(425, 10, 94, 33);
 		
-		text_2 = new Text(this, SWT.BORDER);
+		text_2 = new Text(this, SWT.BORDER| SWT.READ_ONLY);
 		text_2.setBounds(358, 144, 141, 24);
 		
-		text_4 = new Text(this, SWT.BORDER);
+		text_4 = new Text(this, SWT.BORDER| SWT.READ_ONLY);
 		text_4.setBounds(109, 192, 141, 24);
 		
-		text_5 = new Text(this, SWT.BORDER);
-		text_5.setBounds(358, 195, 141, 24);
+		text_5 = new Text(this, SWT.BORDER| SWT.READ_ONLY);
+		text_5.setBounds(358, 192, 141, 24);
 		
 		Label lblGiChiu = new Label(this, SWT.NONE);
 		lblGiChiu.setText("Giờ chiếu:");
@@ -131,7 +132,7 @@ public class frmBanVe extends Shell {
 		lblGiChiu.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblGiChiu.setBounds(23, 245, 75, 15);
 		
-		text_6 = new Text(this, SWT.BORDER);
+		text_6 = new Text(this, SWT.BORDER| SWT.READ_ONLY);
 		text_6.setBounds(109, 242, 141, 24);
 		
 		Label lblPhngChiu = new Label(this, SWT.NONE);
@@ -140,10 +141,10 @@ public class frmBanVe extends Shell {
 		lblPhngChiu.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblPhngChiu.setBounds(277, 245, 75, 15);
 		
-		text_9 = new Text(this, SWT.BORDER);
+		text_9 = new Text(this, SWT.BORDER| SWT.READ_ONLY);
 		text_9.setBounds(358, 242, 141, 24);
 		
-		DateTime dateTime = new DateTime(this, SWT.BORDER);
+		DateTime dateTime = new DateTime(this, SWT.BORDER| SWT.READ_ONLY);
 		dateTime.setBounds(358, 99, 141, 24);
 		
 		table = new Table(this, SWT.BORDER | SWT.FULL_SELECTION);
@@ -152,29 +153,34 @@ public class frmBanVe extends Shell {
 		table.setLinesVisible(true);
 		
 		TableColumn tblclmnNewColumn = new TableColumn(table, SWT.NONE|SWT.CHECK);
-		tblclmnNewColumn.setWidth(78);
+		tblclmnNewColumn.setWidth(123);
 		tblclmnNewColumn.setText("Ghế");
 		
 		TableColumn tblclmnNewColumn_1 = new TableColumn(table, SWT.NONE);
-		tblclmnNewColumn_1.setWidth(100);
+		tblclmnNewColumn_1.setWidth(124);
 		tblclmnNewColumn_1.setText("Giá vé");
 		
-		TableColumn tblclmnNewColumn_2 = new TableColumn(table, SWT.NONE);
-		tblclmnNewColumn_2.setWidth(100);
-		tblclmnNewColumn_2.setText("Khuyến mãi");
-		
 		TableColumn tblclmnNewColumn_3 = new TableColumn(table, SWT.NONE);
-		tblclmnNewColumn_3.setWidth(100);
+		tblclmnNewColumn_3.setWidth(158);
 		tblclmnNewColumn_3.setText("Điểm tích lũy");
 		
 		Label lblTngTin = new Label(this, SWT.NONE);
 		lblTngTin.setText("Tổng tiền:");
 		lblTngTin.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		lblTngTin.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblTngTin.setBounds(277, 294, 75, 15);
+		lblTngTin.setBounds(277, 295, 75, 15);
 		
-		text_3 = new Text(this, SWT.BORDER);
-		text_3.setBounds(358, 289, 141, 24);
+		text_3 = new Text(this, SWT.BORDER| SWT.READ_ONLY);
+		text_3.setBounds(358, 292, 141, 24);
+		
+		text_7 = new Text(this, SWT.BORDER | SWT.READ_ONLY);
+		text_7.setBounds(109, 292, 141, 24);
+		
+		Label lblKhuynMi = new Label(this, SWT.NONE);
+		lblKhuynMi.setText("Khuyến mãi:");
+		lblKhuynMi.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		lblKhuynMi.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		lblKhuynMi.setBounds(23, 295, 75, 15);
 		createContents();
 	}
 
