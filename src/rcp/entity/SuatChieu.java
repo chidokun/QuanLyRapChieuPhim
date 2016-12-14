@@ -13,7 +13,7 @@ import java.util.*;
  */
 public class SuatChieu {
 	private String	 maSuatChieu;
-	private Calendar thoiGianChieu;
+	private Date	 thoiGianChieu;
 	private String	 maSuatPhim;
 	private String	 maPhong;
 	private int 	 trangThai;
@@ -22,7 +22,7 @@ public class SuatChieu {
 		// do nothing
 	}
 
-	public SuatChieu(String maSuatChieu,Calendar thoiGianChieu, String maSuatPhim, String maPhong, int trangThai){
+	public SuatChieu(String maSuatChieu,Date thoiGianChieu, String maSuatPhim, String maPhong, int trangThai){
 		setMaSuatChieu(maSuatChieu);
 		setThoiGianChieu(thoiGianChieu);
 		setMaSuatPhim(maSuatPhim);
@@ -38,11 +38,11 @@ public class SuatChieu {
 		this.maSuatChieu = maSuatChieu;
 	}
 
-	public Calendar getThoiGianChieu() {
+	public Date getThoiGianChieu() {
 		return thoiGianChieu;
 	}
 
-	public void setThoiGianChieu(Calendar thoiGianChieu) {
+	public void setThoiGianChieu(Date thoiGianChieu) {
 		this.thoiGianChieu = thoiGianChieu;
 	}
 
