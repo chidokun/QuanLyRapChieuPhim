@@ -130,7 +130,7 @@ public class pageHoaDon extends Composite {
 		tblclmnNewColumn_3.setText("Tổng tiền");
 		
 		TableColumn tblclmnNewColumn_4 = new TableColumn(table, SWT.NONE);
-		tblclmnNewColumn_4.setWidth(100);
+		tblclmnNewColumn_4.setWidth(102);
 		tblclmnNewColumn_4.setText("Mã nhân viên");
 		
 		table_1 = new Table(composite_1, SWT.BORDER | SWT.FULL_SELECTION);
@@ -145,19 +145,19 @@ public class pageHoaDon extends Composite {
 		tblclmnStt.setText("STT");
 		
 		TableColumn tblclmnNewColumn_5 = new TableColumn(table_1, SWT.NONE);
-		tblclmnNewColumn_5.setWidth(85);
+		tblclmnNewColumn_5.setWidth(95);
 		tblclmnNewColumn_5.setText("Mã thức ăn");
 		
 		TableColumn tblclmnTnThcn = new TableColumn(table_1, SWT.NONE);
-		tblclmnTnThcn.setWidth(100);
+		tblclmnTnThcn.setWidth(152);
 		tblclmnTnThcn.setText("Tên thức ăn");
 		
 		TableColumn tblclmnKchC = new TableColumn(table_1, SWT.NONE);
-		tblclmnKchC.setWidth(100);
+		tblclmnKchC.setWidth(120);
 		tblclmnKchC.setText("Kích cỡ");
 		
 		TableColumn tblclmnnGi = new TableColumn(table_1, SWT.NONE);
-		tblclmnnGi.setWidth(100);
+		tblclmnnGi.setWidth(120);
 		tblclmnnGi.setText("Đơn giá");
 		
 		TableColumn tblclmnSLng = new TableColumn(table_1, SWT.NONE);

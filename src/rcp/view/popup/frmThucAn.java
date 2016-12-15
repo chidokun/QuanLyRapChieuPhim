@@ -99,6 +99,16 @@ public class frmThucAn extends Shell {
 		text_1 = new Text(group, SWT.BORDER);
 		text_1.setBounds(89, 66, 141, 24);
 		
+		Label lblTrngThi = new Label(group, SWT.NONE);
+		lblTrngThi.setBounds(257, 70, 75, 15);
+		lblTrngThi.setText("Trạng thái:");
+		lblTrngThi.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		lblTrngThi.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		
+		ComboViewer comboViewer_2 = new ComboViewer(group, SWT.NONE);
+		Combo combo_2 = comboViewer_2.getCombo();
+		combo_2.setBounds(338, 67, 141, 23);
+		
 		Group group_1 = new Group(this, SWT.NONE);
 		group_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		group_1.setBounds(24, 200, 495, 112);
@@ -112,16 +122,6 @@ public class frmThucAn extends Shell {
 		ComboViewer comboViewer_1 = new ComboViewer(group_1, SWT.NONE);
 		Combo combo_1 = comboViewer_1.getCombo();
 		combo_1.setBounds(91, 22, 141, 23);
-		
-		Label lblTrngThi = new Label(group_1, SWT.NONE);
-		lblTrngThi.setBounds(10, 65, 75, 15);
-		lblTrngThi.setText("Trạng thái:");
-		lblTrngThi.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		lblTrngThi.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		
-		ComboViewer comboViewer_2 = new ComboViewer(group_1, SWT.NONE);
-		Combo combo_2 = comboViewer_2.getCombo();
-		combo_2.setBounds(91, 62, 141, 23);
 		
 		Label lblnGi = new Label(group_1, SWT.NONE);
 		lblnGi.setBounds(257, 25, 75, 15);
@@ -148,23 +148,18 @@ public class frmThucAn extends Shell {
 		
 		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnStt = tableViewerColumn.getColumn();
-		tblclmnStt.setWidth(90);
+		tblclmnStt.setWidth(44);
 		tblclmnStt.setText("STT");
 		
 		TableViewerColumn tableViewerColumn_1 = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnKchC = tableViewerColumn_1.getColumn();
-		tblclmnKchC.setWidth(131);
+		tblclmnKchC.setWidth(191);
 		tblclmnKchC.setText("Kích cỡ");
 		
 		TableViewerColumn tableViewerColumn_2 = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnnGi = tableViewerColumn_2.getColumn();
-		tblclmnnGi.setWidth(140);
+		tblclmnnGi.setWidth(255);
 		tblclmnnGi.setText("Đơn giá");
-		
-		TableViewerColumn tableViewerColumn_3 = new TableViewerColumn(tableViewer, SWT.NONE);
-		TableColumn tblclmnTrngThi = tableViewerColumn_3.getColumn();
-		tblclmnTrngThi.setWidth(130);
-		tblclmnTrngThi.setText("Trạng thái");
 		createContents();
 	}
 
