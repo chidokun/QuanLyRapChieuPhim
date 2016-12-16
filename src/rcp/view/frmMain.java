@@ -62,7 +62,6 @@ public class frmMain extends Shell {
 		setMinimumSize(new Point(136, 50));
 		setBackground(SWTResourceManager.getColor(230, 230, 230));
 		GridLayout gridLayout = new GridLayout(1, false);
-		gridLayout.verticalSpacing = 10;
 		gridLayout.marginWidth = 0;
 		gridLayout.marginHeight = 0;
 		gridLayout.horizontalSpacing = 0;
@@ -212,6 +211,7 @@ public class frmMain extends Shell {
 
 		toolToolbar = new Composite(ribbon, SWT.NONE);
 		GridLayout gl_toolToolbar = new GridLayout(1, false);
+		gl_toolToolbar.marginBottom = 5;
 		gl_toolToolbar.verticalSpacing = 0;
 		gl_toolToolbar.marginWidth = 0;
 		gl_toolToolbar.marginHeight = 0;
@@ -220,7 +220,7 @@ public class frmMain extends Shell {
 		GridData gd_toolToolbar = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
 		gd_toolToolbar.heightHint = 72;
 		toolToolbar.setLayoutData(gd_toolToolbar);
-		toolToolbar.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		toolToolbar.setBackground(SWTResourceManager.getColor(220,220,220));
 
 		tabFolder = new CTabFolder(this, SWT.CLOSE | SWT.FLAT);
 		tabFolder.setSelectionBackground(SWTResourceManager.getColor(241, 241, 241));

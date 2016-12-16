@@ -10,19 +10,36 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.wb.swt.SWTResourceManager;
+
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.wb.swt.ResourceManager;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import rcp.util.Window;
+import rcp.view.popup.frmThemSuaNhanVien;
+import rcp.controller.ChucVuController;
+import rcp.controller.NhanVienController;
+import rcp.entity.*;
+
+import java.sql.SQLException;
+import java.util.*;
 
 public class pageNhanVien extends Composite {
-	private Text text;
-	private Text text_1;
-	private Table table;
+	private Text txtTenNhanVien;
+	private Text txtCMND;
+	private Table gridNhanVien;
+	private Button chkTenNhanVien;
+	private Button chkChucVu;
+	private Combo cboChucVu;
+	private Button chkCMND;
+	private Button btnTimKiem;
+	private Button btnDatLai;
 
 	/**
 	 * Create the composite.
@@ -41,50 +58,75 @@ public class pageNhanVien extends Composite {
 		GridData gd_searchPan = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
 		gd_searchPan.widthHint = 280;
 		searchPan.setLayoutData(gd_searchPan);
-		searchPan.setBackground(SWTResourceManager.getColor(240,240,240));
+		searchPan.setBackground(SWTResourceManager.getColor(240, 240, 240));
 
 		Label lblNewLabel = new Label(searchPan, SWT.NONE);
-		lblNewLabel.setForeground(SWTResourceManager.getColor(31,116,71));
-		lblNewLabel.setBackground(SWTResourceManager.getColor(240,240,240));
+		lblNewLabel.setForeground(SWTResourceManager.getColor(31, 116, 71));
+		lblNewLabel.setBackground(SWTResourceManager.getColor(240, 240, 240));
 		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.NORMAL));
 		lblNewLabel.setBounds(29, 17, 176, 23);
 		lblNewLabel.setText("Tra cứu nhân viên");
 
-		Button btnCheckButton = new Button(searchPan, SWT.CHECK);
-		btnCheckButton.setSelection(true);
-		btnCheckButton.setBounds(29, 54, 197, 16);
-		btnCheckButton.setBackground(SWTResourceManager.getColor(240,240,240));
-		btnCheckButton.setText("Theo tên nhân viên");
+		chkTenNhanVien = new Button(searchPan, SWT.CHECK);
+		chkTenNhanVien.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				txtTenNhanVien.setEnabled(chkTenNhanVien.getSelection());
+			}
+		});
+		chkTenNhanVien.setSelection(true);
+		chkTenNhanVien.setBounds(29, 54, 197, 16);
+		chkTenNhanVien.setBackground(SWTResourceManager.getColor(240, 240, 240));
+		chkTenNhanVien.setText("Theo tên nhân viên");
 
-		text = new Text(searchPan, SWT.BORDER);
-		text.setBounds(29, 85, 228, 25);
+		txtTenNhanVien = new Text(searchPan, SWT.BORDER);
+		txtTenNhanVien.setBounds(29, 85, 228, 25);
 
-		Button btnTheoChcV = new Button(searchPan, SWT.CHECK);
-		btnTheoChcV.setText("Theo chức vụ");
-		btnTheoChcV.setBackground(SWTResourceManager.getColor(240,240,240));
-		btnTheoChcV.setBounds(29, 131, 197, 16);
+		chkChucVu = new Button(searchPan, SWT.CHECK);
+		chkChucVu.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				cboChucVu.setEnabled(chkChucVu.getSelection());
+			}
+		});
+		chkChucVu.setText("Theo chức vụ");
+		chkChucVu.setBackground(SWTResourceManager.getColor(240, 240, 240));
+		chkChucVu.setBounds(29, 131, 197, 16);
 
-		Combo combo = new Combo(searchPan, SWT.NONE);
-		combo.setBounds(29, 164, 228, 23);
+		cboChucVu = new Combo(searchPan, SWT.NONE);
+		cboChucVu.setEnabled(false);
+		cboChucVu.setBounds(29, 164, 228, 23);
 
-		Button btnTheoCmnd = new Button(searchPan, SWT.CHECK);
-		btnTheoCmnd.setText("Theo CMND");
-		btnTheoCmnd.setBackground(SWTResourceManager.getColor(240,240,240));
-		btnTheoCmnd.setBounds(29, 212, 197, 16);
+		chkCMND = new Button(searchPan, SWT.CHECK);
+		chkCMND.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				txtCMND.setEnabled(chkCMND.getSelection());
+			}
+		});
+		chkCMND.setText("Theo CMND");
+		chkCMND.setBackground(SWTResourceManager.getColor(240, 240, 240));
+		chkCMND.setBounds(29, 212, 197, 16);
 
-		text_1 = new Text(searchPan, SWT.BORDER);
-		text_1.setBounds(29, 246, 228, 25);
+		txtCMND = new Text(searchPan, SWT.BORDER);
+		txtCMND.setEnabled(false);
+		txtCMND.setBounds(29, 246, 228, 25);
 
-		Button btnNewButton = new Button(searchPan, SWT.NONE);
-		btnNewButton.setImage(ResourceManager.getPluginImage("QuanLyRapChieuPhim", "res/zoom_16x16.png"));
-		btnNewButton.setBounds(81, 301, 86, 30);
-		btnNewButton.setText("Tìm kiếm");
+		btnTimKiem = new Button(searchPan, SWT.NONE);
+		btnTimKiem.setImage(SWTResourceManager.getImage(pageNhanVien.class, "/rcp/view/page/zoom_16x16.png"));
+		btnTimKiem.setBounds(81, 301, 86, 30);
+		btnTimKiem.setText("Tìm kiếm");
 
-		Button btntLi = new Button(searchPan, SWT.NONE);
-		btntLi.setImage(SWTResourceManager.getImage(
-				"D:\\Document\\PROGRAMING\\PROJECT\\QuanLyHocVien\\Source code\\QuanLyHocVien\\Resources\\refresh2_16x16.png"));
-		btntLi.setText("Đặt lại");
-		btntLi.setBounds(171, 301, 86, 30);
+		btnDatLai = new Button(searchPan, SWT.NONE);
+		btnDatLai.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				datLai();
+			}
+		});
+		btnDatLai.setImage(SWTResourceManager.getImage(pageNhanVien.class, "/rcp/view/page/refresh2_16x16.png"));
+		btnDatLai.setText("Đặt lại");
+		btnDatLai.setBounds(171, 301, 86, 30);
 
 		Composite composite_2 = new Composite(this, SWT.NONE);
 		GridLayout gl_composite_2 = new GridLayout(3, false);
@@ -98,91 +140,157 @@ public class pageNhanVien extends Composite {
 		composite_2.setLayoutData(gd_composite_2);
 		composite_2.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 
-		Button btnThm = new Button(composite_2, SWT.NONE);
-		btnThm.setImage(ResourceManager.getPluginImage("QuanLyRapChieuPhim", "res/additem_16x16.png"));
-		GridData gd_btnThm = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-		gd_btnThm.widthHint = 86;
-		gd_btnThm.heightHint = 30;
-		btnThm.setLayoutData(gd_btnThm);
-		btnThm.setText("Thêm");
+		Button btnThem = new Button(composite_2, SWT.NONE);
+		btnThem.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				Window.open(new frmThemSuaNhanVien(getDisplay(), "Thêm nhân viên", null));
+			}
+		});
+		btnThem.setImage(SWTResourceManager.getImage(pageNhanVien.class, "/rcp/view/page/additem_16x16.png"));
+		GridData gd_btnThem = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gd_btnThem.widthHint = 86;
+		gd_btnThem.heightHint = 30;
+		btnThem.setLayoutData(gd_btnThem);
+		btnThem.setText("Thêm");
 
-		Button btnSa = new Button(composite_2, SWT.NONE);
-		btnSa.setImage(SWTResourceManager.getImage(
-				"D:\\Document\\PROGRAMING\\PROJECT\\QuanLyHocVien\\Source code\\QuanLyHocVien\\Resources\\edit_16x16.png"));
-		GridData gd_btnSa = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-		gd_btnSa.widthHint = 86;
-		gd_btnSa.heightHint = 30;
-		btnSa.setLayoutData(gd_btnSa);
-		btnSa.setText("Sửa");
+		Button btnSua = new Button(composite_2, SWT.NONE);
+		btnSua.setImage(SWTResourceManager.getImage(pageNhanVien.class, "/rcp/view/page/edit_16x16.png"));
+		GridData gd_btnSua = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gd_btnSua.widthHint = 86;
+		gd_btnSua.heightHint = 30;
+		btnSua.setLayoutData(gd_btnSua);
+		btnSua.setText("Sửa");
 
-		Button btnHinTtC = new Button(composite_2, SWT.NONE);
-		btnHinTtC.setImage(SWTResourceManager.getImage(
-				"D:\\Document\\PROGRAMING\\PROJECT\\QuanLyHocVien\\Source code\\QuanLyHocVien\\Resources\\show_16x16.png"));
-		GridData gd_btnHinTtC = new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1);
-		gd_btnHinTtC.widthHint = 100;
-		gd_btnHinTtC.heightHint = 30;
-		btnHinTtC.setLayoutData(gd_btnHinTtC);
-		btnHinTtC.setText("Hiện tất cả");
+		Button btnHienTatCa = new Button(composite_2, SWT.NONE);
+		btnHienTatCa.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				hienTatCa();
+			}
+		});
+		btnHienTatCa.setImage(SWTResourceManager.getImage(pageNhanVien.class, "/rcp/view/page/show_16x16.png"));
+		GridData gd_btnHienTatCa = new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1);
+		gd_btnHienTatCa.widthHint = 100;
+		gd_btnHienTatCa.heightHint = 30;
+		btnHienTatCa.setLayoutData(gd_btnHienTatCa);
+		btnHienTatCa.setText("Hiện tất cả");
 
 		TableViewer tableViewer = new TableViewer(composite_2, SWT.BORDER | SWT.FULL_SELECTION);
 		tableViewer.setColumnProperties(new String[] { "Mã nhân viên", "Tên nhân viên", "Ngày sinh", "Giới tính",
 				"Địa chỉ", "CMND", "Email", "SĐT", "Chức vụ", "Ngày vào làm", "Trạng thái" });
-		table = tableViewer.getTable();
-		table.setLinesVisible(true);
-		table.setHeaderVisible(true);
-		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1));
+		gridNhanVien = tableViewer.getTable();
+		gridNhanVien.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		gridNhanVien.setLinesVisible(true);
+		gridNhanVien.setHeaderVisible(true);
+		gridNhanVien.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1));
 
-		TableColumn tblclmnMNhnVin = new TableColumn(table, SWT.NONE);
-		tblclmnMNhnVin.setWidth(100);
+		TableColumn tblclmnMNhnVin = new TableColumn(gridNhanVien, SWT.NONE);
+		tblclmnMNhnVin.setWidth(91);
 		tblclmnMNhnVin.setText("Mã nhân viên");
 
-		TableColumn tblclmnHVTn_1 = new TableColumn(table, SWT.NONE);
-		tblclmnHVTn_1.setWidth(100);
+		TableColumn tblclmnHVTn_1 = new TableColumn(gridNhanVien, SWT.NONE);
+		tblclmnHVTn_1.setWidth(167);
 		tblclmnHVTn_1.setText("Họ và tên");
 
-		TableColumn tblclmnHVTn = new TableColumn(table, SWT.NONE);
+		TableColumn tblclmnHVTn = new TableColumn(gridNhanVien, SWT.NONE);
 		tblclmnHVTn.setWidth(100);
 		tblclmnHVTn.setText("Ngày sinh");
 
-		TableColumn tblclmnGiiTnh = new TableColumn(table, SWT.NONE);
-		tblclmnGiiTnh.setWidth(100);
+		TableColumn tblclmnGiiTnh = new TableColumn(gridNhanVien, SWT.NONE);
+		tblclmnGiiTnh.setWidth(69);
 		tblclmnGiiTnh.setText("Giới tính");
 
-		TableColumn tblclmnaCh = new TableColumn(table, SWT.NONE);
-		tblclmnaCh.setWidth(100);
+		TableColumn tblclmnaCh = new TableColumn(gridNhanVien, SWT.NONE);
+		tblclmnaCh.setWidth(167);
 		tblclmnaCh.setText("Địa chỉ");
 
-		TableColumn tblclmnCmnd = new TableColumn(table, SWT.NONE);
+		TableColumn tblclmnCmnd = new TableColumn(gridNhanVien, SWT.NONE);
 		tblclmnCmnd.setWidth(100);
 		tblclmnCmnd.setText("CMND");
 
-		TableColumn tblclmnEmail = new TableColumn(table, SWT.NONE);
+		TableColumn tblclmnEmail = new TableColumn(gridNhanVien, SWT.NONE);
 		tblclmnEmail.setWidth(100);
 		tblclmnEmail.setText("Email");
 
-		TableColumn tblclmnSt = new TableColumn(table, SWT.NONE);
+		TableColumn tblclmnSt = new TableColumn(gridNhanVien, SWT.NONE);
 		tblclmnSt.setWidth(100);
 		tblclmnSt.setText("SĐT");
 
-		TableColumn tblclmnChcV = new TableColumn(table, SWT.NONE);
+		TableColumn tblclmnChcV = new TableColumn(gridNhanVien, SWT.NONE);
 		tblclmnChcV.setWidth(100);
 		tblclmnChcV.setText("Chức vụ");
 
-		TableColumn tblclmnNgyVoLm = new TableColumn(table, SWT.NONE);
+		TableColumn tblclmnNgyVoLm = new TableColumn(gridNhanVien, SWT.NONE);
 		tblclmnNgyVoLm.setWidth(100);
 		tblclmnNgyVoLm.setText("Ngày vào làm");
 
-		TableColumn tblclmnTrngThi = new TableColumn(table, SWT.NONE);
+		TableColumn tblclmnTrngThi = new TableColumn(gridNhanVien, SWT.NONE);
 		tblclmnTrngThi.setWidth(100);
 		tblclmnTrngThi.setText("Trạng thái");
 		new Label(composite_2, SWT.NONE);
 		new Label(composite_2, SWT.NONE);
 		new Label(composite_2, SWT.NONE);
 
+		hienThiGiaoDien();
 	}
 
 	@Override
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
+	}
+
+	public void hienThiGiaoDien() {
+		hienChucVu();
+		hienTatCa();
+		datLai();
+	}
+
+	public void datLai() {
+		chkTenNhanVien.setSelection(true);
+		txtTenNhanVien.setText("");
+		txtTenNhanVien.setEnabled(chkTenNhanVien.getSelection());
+
+		chkChucVu.setSelection(false);
+		cboChucVu.select(0);
+		cboChucVu.setEnabled(chkChucVu.getSelection());
+
+		chkCMND.setSelection(false);
+		txtCMND.setText("");
+		txtCMND.setEnabled(chkCMND.getSelection());
+	}
+
+	public void hienChucVu() {
+		try {
+			ArrayList<ChucVu> arr = ChucVuController.taiTatCa();
+
+			cboChucVu.removeAll();
+			for (ChucVu i : arr) {
+				cboChucVu.add(i.getTenChucVu());
+				cboChucVu.setData(i.getTenChucVu(), i.getMaChucVu());
+			}
+
+			cboChucVu.select(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void hienTatCa() {
+		try {
+			ArrayList<NhanVien> arr = NhanVienController.taiTatCa();
+
+			gridNhanVien.removeAll();
+			for (NhanVien i : arr) {
+				TableItem item = new TableItem(gridNhanVien, SWT.NONE);
+				item.setText(new String[] { i.getMaNhanVien(), i.getTenNhanVien(), i.getNgaySinh().toString(),
+						i.getGioiTinh(), i.getDiaChi(), i.getCMND(), i.getEmail(), i.getSDT(), i.getMaChucVu(),
+						i.getNgayVaoLam().toString(), String.valueOf((i.getTrangThai())) });
+			}
+
+			gridNhanVien.select(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

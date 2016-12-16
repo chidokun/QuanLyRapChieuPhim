@@ -43,9 +43,7 @@ public class Application {
 		return true;
 	}
 
-	public static void dangNhap() throws IOException {
-		 
-		 
+	public static void dangNhap() throws IOException {	 
 		//hiện form đăng nhập
 		frmDangNhap shell = new frmDangNhap(display);
 		shell.addDisposeListener(new DisposeListener() {
@@ -59,8 +57,6 @@ public class Application {
 		//đăng nhập được thì hiển thị giao diện
 		if(result == SWT.OK)
 			hienThiGiaoDien();
-		else
-			shellMain.close();
 	}
 
 	public static void hienThiGiaoDien() {

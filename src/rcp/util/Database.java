@@ -86,12 +86,12 @@ public class Database {
 	 * @throws Exception
 	 */
 	public static boolean backup(String fileName) throws Exception {
-		//tạo lệnh sao lưu
+		// tạo lệnh sao lưu
 		String executeCmd = String.format("\"%1$s\" -u%2$s -p%3$s -B %4$s -r \"%5$s\"",
 				((String) Settings.get("mySQLBin")) + "\\mysqldump.exe", Database.userName, Database.password,
 				Database.schemaName, fileName);
-		
-		//thực thi và trả kết quả
+
+		// thực thi và trả kết quả
 		Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
 		return runtimeProcess.waitFor() == 0 ? true : false;
 
@@ -106,11 +106,11 @@ public class Database {
 	 * @throws Exception
 	 */
 	public static boolean restore(String fileName) throws Exception {
-		//tạo lệnh phục hồi
+		// tạo lệnh phục hồi
 		String[] executeCmd = new String[] { ((String) Settings.get("mySQLBin")) + "\\mysql.exe", Database.schemaName,
 				"-u" + Database.userName, "-p" + Database.password, "-e", " source \"" + fileName + "\"" };
-		
-		//thực thi và trả kết quả
+
+		// thực thi và trả kết quả
 		Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
 		return runtimeProcess.waitFor() == 0 ? true : false;
 
@@ -118,32 +118,37 @@ public class Database {
 
 	/**
 	 * Gọi một stored
+	 * 
 	 * @param storeName
 	 * @param param
 	 * @return
 	 * @throws SQLException
 	 */
 	public static ResultSet callStored(String storeName, Object... param) throws SQLException {
-		//tạo chuỗi lời gọi
-		StringBuilder statement = new StringBuilder("{call " + storeName + "(");
-		for (int i = 1; i <= param.length; i++) {
-			statement.append("?");
-			if (i < param.length)
-				statement.append(",");
+		// tạo chuỗi lời gọi
+		StringBuilder statement = new StringBuilder("{call " + storeName + " ");
+		if (param != null) {
+			statement.append("(");
+			for (int i = 1; i <= param.length; i++) {
+				statement.append("?");
+				if (i < param.length)
+					statement.append(",");
+			}
+			statement.append(")");
 		}
-		statement.append(")}");
-		
-		//kết nối và truyền tham số
-		Connection connect = connect(connectionString, userName, password);
+		statement.append("}");
+
+		// kết nối và truyền tham số
+		Connection connect = connect();
 		CallableStatement call = connect.prepareCall(statement.toString());
-		for (int i = 1; i <= param.length; i++) {
-			call.setObject(i, param[i]);
+		if (param != null) {
+			for (int i = 1; i <= param.length; i++) {
+				call.setObject(i, param[i]);
+			}
 		}
-		
-		//trả về kết quả
-		ResultSet rs = call.executeQuery();
-		connect.close();
-		return rs;
+
+		// trả về kết quả
+		return call.executeQuery();
 	}
 
 }
