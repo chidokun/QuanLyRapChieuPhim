@@ -18,7 +18,7 @@ public class Phim {
 	private String	 maNhaSX;
 	private int 	 namSX;
 	private String	 maNgonNgu;
-	private Calendar ngayKhoiChieu ;
+	private Date ngayKhoiChieu ;
 	private String	 tomTat;
 	private String	 maNuocSX;
 	private int 	 gioiHanTuoi;
@@ -31,7 +31,7 @@ public class Phim {
 		// do nothing
 	}
 
-	public Phim(String maPhim,String tenPhim, int thoiLuong, String maNhaSX, int namSX,String maNgonNgu,Calendar ngayKhoiChieu
+	public Phim(String maPhim,String tenPhim, int thoiLuong, String maNhaSX, int namSX,String maNgonNgu,Date ngayKhoiChieu
 			,String	 tomTat,String maNuocSX,int gioiHanTuoi,double doanhThu,String cacDienVien,int trangThai){
 		setMaPhim(maPhim);
 		setTenPhim(tenPhim);
@@ -98,11 +98,11 @@ public class Phim {
 	}
 
 
-	public Calendar getNgayKhoiChieu() {
+	public Date getNgayKhoiChieu() {
 		return ngayKhoiChieu;
 	}
 
-	public void setNgayKhoiChieu(Calendar ngayKhoiChieu) {
+	public void setNgayKhoiChieu(Date ngayKhoiChieu) {
 		this.ngayKhoiChieu = ngayKhoiChieu;
 	}
 
