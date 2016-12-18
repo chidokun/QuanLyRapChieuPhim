@@ -27,7 +27,7 @@ public class toolDanhMuc extends Composite {
 	public toolDanhMuc(Composite parent, int style, CTabFolder controlled) {
 		super(parent, style);
 		setBackground(SWTResourceManager.getColor(240, 240, 240));
-		GridLayout gridLayout = new GridLayout(6, false);
+		GridLayout gridLayout = new GridLayout(7, false);
 		gridLayout.marginHeight = 7;
 		gridLayout.marginWidth = 7;
 		setLayout(gridLayout);
@@ -219,6 +219,37 @@ public class toolDanhMuc extends Composite {
 		lblHoaDon.setLayoutData(gd_lblHoaDon);
 		lblHoaDon.setText("Hóa đơn");
 		lblHoaDon.setBackground(SWTResourceManager.getColor(240, 240, 240));
+		
+		CLabel lblV = new CLabel(this, SWT.NONE);
+		lblV.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDown(MouseEvent e) {
+				mouseDownColor(lblV);
+			}
+
+			@Override
+			public void mouseUp(MouseEvent e) {
+				mouseEnterColor(lblV);
+				Window.openPageInTab(controlled, new pageVe(controlled, SWT.NONE), "Tra cứu vé");
+			}
+		});
+		lblV.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				mouseEnterColor(lblV);
+			}
+
+			@Override
+			public void mouseExit(MouseEvent e) {
+				mouseExitColor(lblV);
+			}
+		});
+		GridData gd_lblV = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		gd_lblV.widthHint = 80;
+		lblV.setLayoutData(gd_lblV);
+		lblV.setText("Vé");
+		lblV.setImage(SWTResourceManager.getImage(toolDanhMuc.class, "/rcp/view/control/imgVe_32p.png"));
+		lblV.setBackground(SWTResourceManager.getColor(240, 240, 240));
 
 	}
 

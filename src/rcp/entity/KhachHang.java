@@ -16,18 +16,18 @@ public class KhachHang {
 	private String gioiTinh;
 	private String hoTen;
 	private String cMND;
-	private Calendar ngaySinh;
+	private Date ngaySinh;
 	private String email;
 	private String sDT;
 	private String maLoaiKH;
-	private Calendar ngayDangKy;
+	private Date ngayDangKy;
 
 	public KhachHang() {
 		// do nothing
 	}
 
-	public KhachHang(String maKhachHang, String hoTen, String gioiTinh, String cMND, Calendar ngaySinh, String email,
-			String sDT, String maLoaiKH, Calendar ngayDangKy) {
+	public KhachHang(String maKhachHang, String hoTen, String gioiTinh, String cMND, Date ngaySinh, String email,
+			String sDT, String maLoaiKH, Date ngayDangKy) {
 		setMaKhachHang(maKhachHang);
 		setHoTen(hoTen);
 		setGioiTinh(gioiTinh);
@@ -71,11 +71,11 @@ public class KhachHang {
 		this.cMND = cMND;
 	}
 
-	public Calendar getNgaySinh() {
+	public Date getNgaySinh() {
 		return ngaySinh;
 	}
 
-	public void setNgaySinh(Calendar ngaySinh) {
+	public void setNgaySinh(Date ngaySinh) {
 		this.ngaySinh = ngaySinh;
 	}
 
@@ -103,11 +103,11 @@ public class KhachHang {
 		this.maLoaiKH = maLoaiKH;
 	}
 
-	public Calendar getNgayDangKy() {
+	public Date getNgayDangKy() {
 		return ngayDangKy;
 	}
 
-	public void setNgayDangKy(Calendar ngayDangKy) {
+	public void setNgayDangKy(Date ngayDangKy) {
 		this.ngayDangKy = ngayDangKy;
 	}
 
