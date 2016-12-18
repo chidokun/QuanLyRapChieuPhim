@@ -28,7 +28,7 @@ public class toolNghiepVu extends Composite {
 	public toolNghiepVu(Composite parent, int style, CTabFolder controlled) {
 		super(parent, style);
 		setBackground(SWTResourceManager.getColor(240, 240, 240));
-		GridLayout gridLayout = new GridLayout(3, false);
+		GridLayout gridLayout = new GridLayout(5, false);
 		gridLayout.marginHeight = 7;
 		gridLayout.marginWidth = 7;
 		setLayout(gridLayout);
@@ -97,36 +97,99 @@ public class toolNghiepVu extends Composite {
 		lblBanThucAn.setBackground(SWTResourceManager.getColor(240, 240, 240));
 		lblBanThucAn.setText("Bán thức ăn");
 
-		CLabel lblBaoCaoThongKe = new CLabel(this, SWT.NONE);
-		lblBaoCaoThongKe.setImage(SWTResourceManager.getImage(toolNghiepVu.class, "/rcp/view/control/imgBaoCao_32p.png"));
-		lblBaoCaoThongKe.addMouseListener(new MouseAdapter() {
+		CLabel lblBCPhimTG = new CLabel(this, SWT.WRAP | SWT.CENTER);
+		lblBCPhimTG.setImage(SWTResourceManager.getImage(toolNghiepVu.class, "/rcp/view/control/imgBaoCaoPhim_32p.png"));
+		lblBCPhimTG.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
-				mouseDownColor(lblBaoCaoThongKe);
+				mouseDownColor(lblBCPhimTG);
 			}
 
 			@Override
 			public void mouseUp(MouseEvent e) {
-				mouseEnterColor(lblBaoCaoThongKe);
-				Window.openPageInTab(controlled, new pageBaoCao(controlled, SWT.NONE), "Báo cáo thống kê");
+				mouseEnterColor(lblBCPhimTG);
+				Window.openPageInTab(controlled, new pageBaoCaoDoanhThuPhimKhoangThoiGian(controlled, SWT.NONE), "Báo cáo thống kê");
 			}
 		});
-		lblBaoCaoThongKe.addMouseTrackListener(new MouseTrackAdapter() {
+		lblBCPhimTG.addMouseTrackListener(new MouseTrackAdapter() {
 			@Override
 			public void mouseEnter(MouseEvent e) {
-				mouseEnterColor(lblBaoCaoThongKe);
+				mouseEnterColor(lblBCPhimTG);
 			}
 
 			@Override
 			public void mouseExit(MouseEvent e) {
-				mouseExitColor(lblBaoCaoThongKe);
+				mouseExitColor(lblBCPhimTG);
 			}
 		});
-		GridData gd_lblBaoCaoThongKe = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
-		gd_lblBaoCaoThongKe.widthHint = 150;
-		lblBaoCaoThongKe.setLayoutData(gd_lblBaoCaoThongKe);
-		lblBaoCaoThongKe.setText("Báo cáo thống kê");
-		lblBaoCaoThongKe.setBackground(SWTResourceManager.getColor(240, 240, 240));
+		GridData gd_lblBCPhimTG = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		gd_lblBCPhimTG.widthHint = 197;
+		lblBCPhimTG.setLayoutData(gd_lblBCPhimTG);
+		lblBCPhimTG.setText("Báo cáo doanh thu phim\r\ntheo khoảng thời gian");
+		lblBCPhimTG.setBackground(SWTResourceManager.getColor(240, 240, 240));
+		
+		
+		CLabel lblBCKhachHang = new CLabel(this, SWT.WRAP | SWT.CENTER);
+		GridData gd_lblBCKhachHang = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		gd_lblBCKhachHang.widthHint = 168;
+		lblBCKhachHang.setLayoutData(gd_lblBCKhachHang);
+		lblBCKhachHang.setText("Báo cáo doanh thu\r\nkhách hàng");
+		lblBCKhachHang.setImage(SWTResourceManager.getImage(toolNghiepVu.class, "/rcp/view/control/imgBaoCaoKhachHang_32p.png"));
+		lblBCKhachHang.setBackground(SWTResourceManager.getColor(240, 240, 240));
+		lblBCKhachHang.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDown(MouseEvent e) {
+				mouseDownColor(lblBCKhachHang);
+			}
+
+			@Override
+			public void mouseUp(MouseEvent e) {
+				mouseEnterColor(lblBCKhachHang);
+				Window.openPageInTab(controlled, new pageBaoCaoDoanhThuKhachHang(controlled, SWT.NONE), "Báo cáo thống kê");
+			}
+		});
+		lblBCKhachHang.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				mouseEnterColor(lblBCKhachHang);
+			}
+
+			@Override
+			public void mouseExit(MouseEvent e) {
+				mouseExitColor(lblBCKhachHang);
+			}
+		});
+		
+		CLabel lblBCThucAn = new CLabel(this, SWT.NONE);
+		GridData gd_lblBCThucAn = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		gd_lblBCThucAn.widthHint = 165;
+		lblBCThucAn.setLayoutData(gd_lblBCThucAn);
+		lblBCThucAn.setText("Báo cáo doanh thu\r\nthức ăn hàng tháng");
+		lblBCThucAn.setImage(SWTResourceManager.getImage(toolNghiepVu.class, "/rcp/view/control/imgBaoCaoThucAn_32p.png"));
+		lblBCThucAn.setBackground(SWTResourceManager.getColor(240, 240, 240));
+		lblBCThucAn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDown(MouseEvent e) {
+				mouseDownColor(lblBCThucAn);
+			}
+
+			@Override
+			public void mouseUp(MouseEvent e) {
+				mouseEnterColor(lblBCThucAn);
+				Window.openPageInTab(controlled, new pageBaoCaoDoanhThuThucAn(controlled, SWT.NONE), "Báo cáo thống kê");
+			}
+		});
+		lblBCThucAn.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				mouseEnterColor(lblBCThucAn);
+			}
+
+			@Override
+			public void mouseExit(MouseEvent e) {
+				mouseExitColor(lblBCThucAn);
+			}
+		});
 
 	}
 
