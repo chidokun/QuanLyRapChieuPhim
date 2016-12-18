@@ -15,6 +15,7 @@ public class Database {
 	public static String userName;
 	public static String password;
 	public static String connectionString;
+	private static Connection connection;
 
 	/**
 	 * Nạp cài đặt lên Database
@@ -47,7 +48,10 @@ public class Database {
 	 * @throws SQLException
 	 */
 	public static Connection connect() throws SQLException {
-		return DriverManager.getConnection(connectionString, userName, password);
+		if (connection != null)
+			return connection;
+		else
+			return DriverManager.getConnection(connectionString, userName, password);
 	}
 
 	/**
@@ -94,7 +98,6 @@ public class Database {
 		// thực thi và trả kết quả
 		Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
 		return runtimeProcess.waitFor() == 0 ? true : false;
-
 	}
 
 	/**
@@ -143,12 +146,53 @@ public class Database {
 		CallableStatement call = connect.prepareCall(statement.toString());
 		if (param != null) {
 			for (int i = 1; i <= param.length; i++) {
-				call.setObject(i, param[i]);
+				if (param[i - 1] != null)
+					call.setObject(i, param[i - 1]);
+				else
+					call.setNull(i, Types.NULL);
 			}
 		}
 
 		// trả về kết quả
 		return call.executeQuery();
+	}
+
+	/**
+	 * Gọi một stored để INSERT, UPDATE, DELETE
+	 * 
+	 * @param storeName
+	 * @param param
+	 * @return
+	 * @throws SQLException
+	 */
+	public static int callStoredUpdate(String storeName, Object... param) throws SQLException {
+		// tạo chuỗi lời gọi
+		StringBuilder statement = new StringBuilder("{call " + storeName + " ");
+		if (param != null) {
+			statement.append("(");
+			for (int i = 1; i <= param.length; i++) {
+				statement.append("?");
+				if (i < param.length)
+					statement.append(",");
+			}
+			statement.append(")");
+		}
+		statement.append("}");
+
+		// kết nối và truyền tham số
+		Connection connect = connect();
+		CallableStatement call = connect.prepareCall(statement.toString());
+		if (param != null) {
+			for (int i = 1; i <= param.length; i++) {
+				if (param[i - 1] != null)
+					call.setObject(i, param[i - 1]);
+				else
+					call.setNull(i, Types.NULL);
+			}
+		}
+
+		// trả về kết quả
+		return call.executeUpdate();
 	}
 
 }

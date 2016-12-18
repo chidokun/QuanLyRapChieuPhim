@@ -16,11 +16,14 @@ import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.core.commands.ParameterValuesException;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.wb.swt.ResourceManager;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+
+import rcp.util.Message;
 import rcp.util.Window;
 import rcp.view.popup.frmThemSuaNhanVien;
 import rcp.controller.ChucVuController;
@@ -113,6 +116,12 @@ public class pageNhanVien extends Composite {
 		txtCMND.setBounds(29, 246, 228, 25);
 
 		btnTimKiem = new Button(searchPan, SWT.NONE);
+		btnTimKiem.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				timKiem();
+			}
+		});
 		btnTimKiem.setImage(SWTResourceManager.getImage(pageNhanVien.class, "/rcp/view/page/zoom_16x16.png"));
 		btnTimKiem.setBounds(81, 301, 86, 30);
 		btnTimKiem.setText("Tìm kiếm");
@@ -145,6 +154,7 @@ public class pageNhanVien extends Composite {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				Window.open(new frmThemSuaNhanVien(getDisplay(), "Thêm nhân viên", null));
+				hienTatCa();
 			}
 		});
 		btnThem.setImage(SWTResourceManager.getImage(pageNhanVien.class, "/rcp/view/page/additem_16x16.png"));
@@ -155,6 +165,18 @@ public class pageNhanVien extends Composite {
 		btnThem.setText("Thêm");
 
 		Button btnSua = new Button(composite_2, SWT.NONE);
+		btnSua.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					Window.open(new frmThemSuaNhanVien(getDisplay(), "Sửa nhân viên", NhanVienController.layThongTin(gridNhanVien.getSelection()[0].getText(0))));
+					hienTatCa();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+					Message.show("Nhân viên không hợp lệ", "Lỗi", SWT.OK | SWT.ICON_ERROR, getShell());
+				}
+			}
+		});
 		btnSua.setImage(SWTResourceManager.getImage(pageNhanVien.class, "/rcp/view/page/edit_16x16.png"));
 		GridData gd_btnSua = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_btnSua.widthHint = 86;
@@ -292,5 +314,37 @@ public class pageNhanVien extends Composite {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void timKiem() {
+		try {
+			kiemTraHopLe();
+			ArrayList<NhanVien> arr = NhanVienController.traCuu(
+					chkTenNhanVien.getSelection() ? txtTenNhanVien.getText() : null, 
+					chkChucVu.getSelection() ? (String)cboChucVu.getData(cboChucVu.getText()) : null, 
+					chkCMND.getSelection() ? txtCMND.getText() : null );
+
+			gridNhanVien.removeAll();
+			for (NhanVien i : arr) {
+				TableItem item = new TableItem(gridNhanVien, SWT.NONE);
+				item.setText(new String[] { i.getMaNhanVien(), i.getTenNhanVien(), i.getNgaySinh().toString(),
+						i.getGioiTinh(), i.getDiaChi(), i.getCMND(), i.getEmail(), i.getSDT(), i.getMaChucVu(),
+						i.getNgayVaoLam().toString(), String.valueOf((i.getTrangThai())) });
+			}
+
+			gridNhanVien.select(0);
+		} catch (ParameterValuesException e) {
+			Message.show(e.getMessage(), "Cảnh báo", SWT.ICON_WARNING | SWT.OK, getShell());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void kiemTraHopLe() throws ParameterValuesException {
+		if (chkTenNhanVien.getSelection() && txtTenNhanVien.getText().isEmpty())
+			throw new ParameterValuesException("Tên nhân viên không được trống", null);
+		if(chkCMND.getSelection() && txtCMND.getText().isEmpty())
+			throw new ParameterValuesException("CMND không được trống", null);
 	}
 }

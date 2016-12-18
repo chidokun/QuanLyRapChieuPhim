@@ -5,12 +5,9 @@
 
 package rcp.controller;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import rcp.entity.NhanVien;
-import rcp.util.Database;
+import java.sql.*;
+import java.util.*;
+import rcp.entity.*;
 import rcp.model.*;
 
 /**
@@ -26,16 +23,31 @@ public class NhanVienController {
 		return NhanVienModel.layThongTin(maNhanVien);
 	}
 	
-	public static boolean them(NhanVien nv) {
+	public static boolean them(NhanVien nv) throws SQLException {
 		return NhanVienModel.them(nv);
 	}
 	
-	public static boolean sua(NhanVien nv) {
-		return NhanVienModel.sua(nv);
+	public static boolean them(NhanVien nv, TaiKhoan tk) throws SQLException {
+		return NhanVienModel.them(nv,tk);
 	}
 	
-	public static String taoMa() {
-		return taoMa();
+	public static boolean sua(NhanVien nv, boolean xoaTaiKhoan) throws SQLException {
+		return NhanVienModel.sua(nv,xoaTaiKhoan);
 	}
-
+	
+	public static boolean sua(NhanVien nv, TaiKhoan tk, boolean themTaiKhoan) throws SQLException {
+		return NhanVienModel.sua(nv, tk, themTaiKhoan);
+	}
+	
+	public static ArrayList<NhanVien> traCuu(String tenNhanVien, String maChucVu, String CMND) throws SQLException {
+		return NhanVienModel.traCuu(tenNhanVien, maChucVu, CMND);
+	}
+	
+	public static String taoMa() throws SQLException {
+		return NhanVienModel.taoMa();
+	}
+	
+	public static boolean coTaiKhoan(String maNhanVien) throws SQLException {
+		return NhanVienModel.coTaiKhoan(maNhanVien);
+	}
 }
