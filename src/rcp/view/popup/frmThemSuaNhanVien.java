@@ -47,6 +47,7 @@ public class frmThemSuaNhanVien extends Shell {
 	 */
 	public frmThemSuaNhanVien(Display display, String title, NhanVien nv) {
 		super(display, SWT.CLOSE | SWT.MIN | SWT.TITLE);
+		setText(title);
 		setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		setLayout(null);
 
@@ -84,7 +85,7 @@ public class frmThemSuaNhanVien extends Shell {
 		txtMaNhanVien.setBounds(131, 109, 197, 24);
 
 		Label lblThmSaNhn = new Label(this, SWT.NONE);
-		lblThmSaNhn.setText("Thêm sửa nhân viên");
+		lblThmSaNhn.setText(title);
 		lblThmSaNhn.setForeground(SWTResourceManager.getColor(34, 139, 34));
 		lblThmSaNhn.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.NORMAL));
 		lblThmSaNhn.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
@@ -232,7 +233,6 @@ public class frmThemSuaNhanVien extends Shell {
 	 * Create contents of the shell.
 	 */
 	protected void createContents() {
-		setText("Thêm sửa nhân viên");
 		setSize(723, 566);
 		hienThiGiaoDien();
 	}
