@@ -6,8 +6,6 @@ package rcp.view.popup;
 
 import java.sql.*;
 import java.util.*;
-import java.util.Date;
-
 import org.eclipse.core.commands.ParameterValuesException;
 import org.eclipse.swt.SWT;
 import org.eclipse.wb.swt.SWTResourceManager;
@@ -112,7 +110,7 @@ public class frmThemSuaNhanVien extends Shell {
 		lblNgySinh.setText("Ngày sinh :");
 		lblNgySinh.setBounds(37, 204, 70, 15);
 
-		dateNgaySinh = new DateTime(this, SWT.BORDER);
+		dateNgaySinh = new DateTime(this, SWT.BORDER | SWT.DROP_DOWN);
 		dateNgaySinh.setBounds(131, 200, 197, 24);
 
 		Label lblaCh = new Label(this, SWT.NONE);
@@ -260,8 +258,8 @@ public class frmThemSuaNhanVien extends Shell {
 				txtMaNhanVien.setText(nv.getMaNhanVien());
 				txtHoTen.setText(nv.getTenNhanVien());
 				// còn lỗi ngày chưa fix
-				dateNgaySinh.setDate(nv.getNgaySinh().getYear(), nv.getNgaySinh().getMonth(),
-						nv.getNgaySinh().getDay());
+				dateNgaySinh.setDate(DateF.getYear(nv.getNgaySinh()), DateF.getMonth(nv.getNgaySinh()),
+						DateF.getDay(nv.getNgaySinh()));
 				if (nv.getGioiTinh().equals("Nam")) {
 					btnNam.setSelection(true);
 					btnNu.setSelection(false);
@@ -275,8 +273,8 @@ public class frmThemSuaNhanVien extends Shell {
 				txtSDT.setText(nv.getSDT());
 				cboChucVu.setText(nv.getMaChucVu());
 				// còn lỗi ngày chưa fix
-				dateNgayVaoLam.setDate(nv.getNgayVaoLam().getYear(), nv.getNgayVaoLam().getMonth(),
-						nv.getNgayVaoLam().getDay());
+				dateNgayVaoLam.setDate(DateF.getYear(nv.getNgayVaoLam()), DateF.getMonth(nv.getNgayVaoLam()),
+						DateF.getDay(nv.getNgayVaoLam()));
 				cboTrangThai.select(nv.getTrangThai());
 
 				// có tài khoản ko
@@ -305,10 +303,10 @@ public class frmThemSuaNhanVien extends Shell {
 	@SuppressWarnings("deprecation")
 	public NhanVien layNhanVien() {
 		return new NhanVien(txtMaNhanVien.getText(), txtHoTen.getText(),
-				new Date(dateNgaySinh.getYear(), dateNgaySinh.getMonth(), dateNgaySinh.getDay()),
+				DateF.toDate(dateNgaySinh.getYear(), dateNgaySinh.getMonth(), dateNgaySinh.getDay()),
 				btnNam.getSelection() ? "Nam" : "Nữ", txtDiaChi.getText(), txtCMND.getText(), txtEmail.getText(),
 				txtSDT.getText(), (String) cboChucVu.getData(cboChucVu.getText()),
-				new Date(dateNgaySinh.getYear(), dateNgaySinh.getMonth(), dateNgaySinh.getDay()),
+				DateF.toDate(dateNgayVaoLam.getYear(), dateNgayVaoLam.getMonth(), dateNgayVaoLam.getDay()),
 				cboTrangThai.getSelectionIndex());
 	}
 

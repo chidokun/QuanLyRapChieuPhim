@@ -169,7 +169,8 @@ public class pageNhanVien extends Composite {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				try {
-					Window.open(new frmThemSuaNhanVien(getDisplay(), "Sửa nhân viên", NhanVienController.layThongTin(gridNhanVien.getSelection()[0].getText(0))));
+					Window.open(new frmThemSuaNhanVien(getDisplay(), "Sửa nhân viên",
+							NhanVienController.layThongTin(gridNhanVien.getSelection()[0].getText(1))));
 					hienTatCa();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -206,6 +207,10 @@ public class pageNhanVien extends Composite {
 		gridNhanVien.setLinesVisible(true);
 		gridNhanVien.setHeaderVisible(true);
 		gridNhanVien.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1));
+
+		TableColumn tblclmnStt = new TableColumn(gridNhanVien, SWT.NONE);
+		tblclmnStt.setWidth(37);
+		tblclmnStt.setText("STT");
 
 		TableColumn tblclmnMNhnVin = new TableColumn(gridNhanVien, SWT.NONE);
 		tblclmnMNhnVin.setWidth(91);
@@ -262,12 +267,18 @@ public class pageNhanVien extends Composite {
 		// Disable the check that prevents subclassing of SWT components
 	}
 
+	/**
+	 * Hiển thị giao diện ban đầu
+	 */
 	public void hienThiGiaoDien() {
 		hienChucVu();
 		hienTatCa();
 		datLai();
 	}
 
+	/**
+	 * Đặt lại điều kiện tìm kiếm
+	 */
 	public void datLai() {
 		chkTenNhanVien.setSelection(true);
 		txtTenNhanVien.setText("");
@@ -282,6 +293,9 @@ public class pageNhanVien extends Composite {
 		txtCMND.setEnabled(chkCMND.getSelection());
 	}
 
+	/**
+	 * Hiển thị chức vụ lên comboBox
+	 */
 	public void hienChucVu() {
 		try {
 			ArrayList<ChucVu> arr = ChucVuController.taiTatCa();
@@ -298,16 +312,22 @@ public class pageNhanVien extends Composite {
 		}
 	}
 
+	/**
+	 * Hiện tất cả nhân viên
+	 */
 	public void hienTatCa() {
 		try {
 			ArrayList<NhanVien> arr = NhanVienController.taiTatCa();
 
 			gridNhanVien.removeAll();
+			int stt = 1;
 			for (NhanVien i : arr) {
 				TableItem item = new TableItem(gridNhanVien, SWT.NONE);
-				item.setText(new String[] { i.getMaNhanVien(), i.getTenNhanVien(), i.getNgaySinh().toString(),
-						i.getGioiTinh(), i.getDiaChi(), i.getCMND(), i.getEmail(), i.getSDT(), i.getMaChucVu(),
-						i.getNgayVaoLam().toString(), String.valueOf((i.getTrangThai())) });
+				item.setText(new String[] { String.valueOf(stt), i.getMaNhanVien(), i.getTenNhanVien(),
+						i.getNgaySinh().toString(), i.getGioiTinh(), i.getDiaChi(), i.getCMND(), i.getEmail(),
+						i.getSDT(), i.getMaChucVu(), i.getNgayVaoLam().toString(),
+						String.valueOf((i.getTrangThai())) });
+				stt++;
 			}
 
 			gridNhanVien.select(0);
@@ -315,36 +335,46 @@ public class pageNhanVien extends Composite {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * Tìm kiếm nhân viên
+	 */
 	public void timKiem() {
 		try {
 			kiemTraHopLe();
 			ArrayList<NhanVien> arr = NhanVienController.traCuu(
-					chkTenNhanVien.getSelection() ? txtTenNhanVien.getText() : null, 
-					chkChucVu.getSelection() ? (String)cboChucVu.getData(cboChucVu.getText()) : null, 
-					chkCMND.getSelection() ? txtCMND.getText() : null );
+					chkTenNhanVien.getSelection() ? txtTenNhanVien.getText() : null,
+					chkChucVu.getSelection() ? (String) cboChucVu.getData(cboChucVu.getText()) : null,
+					chkCMND.getSelection() ? txtCMND.getText() : null);
 
 			gridNhanVien.removeAll();
+			int stt = 1;
 			for (NhanVien i : arr) {
 				TableItem item = new TableItem(gridNhanVien, SWT.NONE);
-				item.setText(new String[] { i.getMaNhanVien(), i.getTenNhanVien(), i.getNgaySinh().toString(),
-						i.getGioiTinh(), i.getDiaChi(), i.getCMND(), i.getEmail(), i.getSDT(), i.getMaChucVu(),
-						i.getNgayVaoLam().toString(), String.valueOf((i.getTrangThai())) });
+				item.setText(new String[] { String.valueOf(stt), i.getMaNhanVien(), i.getTenNhanVien(),
+						i.getNgaySinh().toString(), i.getGioiTinh(), i.getDiaChi(), i.getCMND(), i.getEmail(),
+						i.getSDT(), i.getMaChucVu(), i.getNgayVaoLam().toString(),
+						String.valueOf((i.getTrangThai())) });
+				stt++;
 			}
 
 			gridNhanVien.select(0);
 		} catch (ParameterValuesException e) {
 			Message.show(e.getMessage(), "Cảnh báo", SWT.ICON_WARNING | SWT.OK, getShell());
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * Kiểm tra các điều kiện nhập có đầy đủ
+	 * 
+	 * @throws ParameterValuesException
+	 */
 	public void kiemTraHopLe() throws ParameterValuesException {
 		if (chkTenNhanVien.getSelection() && txtTenNhanVien.getText().isEmpty())
 			throw new ParameterValuesException("Tên nhân viên không được trống", null);
-		if(chkCMND.getSelection() && txtCMND.getText().isEmpty())
+		if (chkCMND.getSelection() && txtCMND.getText().isEmpty())
 			throw new ParameterValuesException("CMND không được trống", null);
 	}
 }
