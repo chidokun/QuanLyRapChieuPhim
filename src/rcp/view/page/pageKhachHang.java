@@ -7,6 +7,10 @@ package rcp.view.page;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.SWT;
 import org.eclipse.wb.swt.SWTResourceManager;
+
+import rcp.view.popup.frmThemSuaKhachHang;
+import rcp.view.popup.frmThemSuaNhanVien;
+
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Label;
@@ -15,64 +19,109 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import org.eclipse.core.commands.ParameterValuesException;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+
+import rcp.controller.KhachHangController;
+import rcp.controller.NhanVienController;
+import rcp.entity.*;
+import rcp.util.Message;
+import rcp.util.Window;
 
 public class pageKhachHang extends Composite {
-	private Text text;
-	private Table table;
+	private Text txtTenKhachHang;
+	private Text txtCMND;
+	private Button chkTenKhachHang;
+	private Button chkCMND;
+	private Button btnDatLai;
+	private Button btnTimKiem;
+	private Table gridKhachHang;
 
 	/**
 	 * Create the composite.
+	 * 
 	 * @param parent
 	 * @param style
 	 */
 	public pageKhachHang(Composite parent, int style) {
 		super(parent, style);
 		setLayout(new GridLayout(2, false));
-		
+
 		Composite composite = new Composite(this, SWT.NONE);
 		composite.setLayout(null);
 		GridData gd_composite = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
 		gd_composite.widthHint = 280;
 		composite.setLayoutData(gd_composite);
-		composite.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		composite.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
 		composite.setForeground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		
+
 		Label lblTraCuuKH = new Label(composite, SWT.NONE);
 		lblTraCuuKH.setText("Tra cứu khách hàng");
 		lblTraCuuKH.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
 		lblTraCuuKH.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.NORMAL));
-		lblTraCuuKH.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		lblTraCuuKH.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
 		lblTraCuuKH.setBounds(22, 32, 176, 23);
-		
-		Button btnTheoTnKhch = new Button(composite, SWT.CHECK);
-		btnTheoTnKhch.setText("Theo tên khách hàng");
-		btnTheoTnKhch.setSelection(true);
-		btnTheoTnKhch.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		btnTheoTnKhch.setBounds(22, 69, 197, 16);
-		
-		text = new Text(composite, SWT.BORDER);
-		text.setBounds(22, 100, 228, 25);
-		
-		Button btnTheoCmnd = new Button(composite, SWT.CHECK);
-		btnTheoCmnd.setText("Theo CMND");
-		btnTheoCmnd.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		btnTheoCmnd.setBounds(22, 146, 197, 16);
-		
-		Combo combo = new Combo(composite, SWT.NONE);
-		combo.setBounds(22, 179, 228, 23);
-		
-		Button button_2 = new Button(composite, SWT.NONE);
-		button_2.setText("Tìm kiếm");
-		button_2.setImage(SWTResourceManager.getImage("D:\\Document\\PROGRAMING\\PROJECT\\QuanLyHocVien\\Source code\\QuanLyHocVien\\Resources\\zoom_16x16.png"));
-		button_2.setBounds(70, 316, 86, 30);
-		
-		Button button_3 = new Button(composite, SWT.NONE);
-		button_3.setText("Đặt lại");
-		button_3.setImage(SWTResourceManager.getImage("D:\\Document\\PROGRAMING\\PROJECT\\QuanLyHocVien\\Source code\\QuanLyHocVien\\Resources\\refresh2_16x16.png"));
-		button_3.setBounds(162, 316, 86, 30);
-		
+
+		chkTenKhachHang = new Button(composite, SWT.CHECK);
+		chkTenKhachHang.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				txtTenKhachHang.setEnabled(chkTenKhachHang.getSelection());
+			}
+		});
+		chkTenKhachHang.setText("Theo tên khách hàng");
+		chkTenKhachHang.setSelection(true);
+		chkTenKhachHang.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
+		chkTenKhachHang.setBounds(22, 69, 197, 16);
+
+		txtTenKhachHang = new Text(composite, SWT.BORDER);
+		txtTenKhachHang.setBounds(22, 100, 228, 25);
+
+		chkCMND = new Button(composite, SWT.CHECK);
+		chkCMND.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				txtCMND.setEnabled(chkCMND.getSelection());
+			}
+		});
+		chkCMND.setText("Theo CMND");
+		chkCMND.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
+		chkCMND.setBounds(22, 146, 197, 16);
+
+		btnTimKiem = new Button(composite, SWT.NONE);
+		btnTimKiem.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				timKiem();
+			}
+		});
+		btnTimKiem.setText("Tìm kiếm");
+		btnTimKiem.setImage(SWTResourceManager.getImage(pageKhachHang.class, "/rcp/view/page/zoom_16x16.png"));
+		btnTimKiem.setBounds(70, 316, 86, 30);
+
+		btnDatLai = new Button(composite, SWT.NONE);
+		btnDatLai.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				datLai();
+			}
+		});
+		btnDatLai.setText("Đặt lại");
+		btnDatLai.setImage(SWTResourceManager.getImage(pageKhachHang.class, "/rcp/view/page/refresh2_16x16.png"));
+		btnDatLai.setBounds(162, 316, 86, 30);
+
+		txtCMND = new Text(composite, SWT.BORDER);
+		txtCMND.setEnabled(false);
+		txtCMND.setBounds(22, 183, 228, 25);
+
 		Composite composite_1 = new Composite(this, SWT.NONE);
 		GridLayout gl_composite_1 = new GridLayout(3, false);
 		gl_composite_1.marginTop = 10;
@@ -81,84 +130,110 @@ public class pageKhachHang extends Composite {
 		composite_1.setLayout(gl_composite_1);
 		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		composite_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		
-		Button button_4 = new Button(composite_1, SWT.NONE);
-		GridData gd_button_4 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-		gd_button_4.widthHint = 86;
-		gd_button_4.heightHint = 30;
-		button_4.setLayoutData(gd_button_4);
-		button_4.setText("Thêm");
-		button_4.setImage(SWTResourceManager.getImage("D:\\Document\\PROGRAMING\\PROJECT\\QuanLyHocVien\\Source code\\QuanLyHocVien\\Resources\\additem_16x16.png"));
-		
-		Button btnSa = new Button(composite_1, SWT.NONE);
-		GridData gd_btnSa = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-		gd_btnSa.heightHint = 30;
-		gd_btnSa.widthHint = 86;
-		btnSa.setLayoutData(gd_btnSa);
-		btnSa.setText("Sửa");
-		btnSa.setImage(SWTResourceManager.getImage("D:\\Document\\PROGRAMING\\PROJECT\\QuanLyHocVien\\Source code\\QuanLyHocVien\\Resources\\additem_16x16.png"));
-		
-		Button btnHinTtC = new Button(composite_1, SWT.NONE);
-		GridData gd_btnHinTtC = new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1);
-		gd_btnHinTtC.heightHint = 30;
-		gd_btnHinTtC.widthHint = 86;
-		btnHinTtC.setLayoutData(gd_btnHinTtC);
-		btnHinTtC.setText("Hiện tất cả");
-		btnHinTtC.setImage(SWTResourceManager.getImage("D:\\Document\\PROGRAMING\\PROJECT\\QuanLyHocVien\\Source code\\QuanLyHocVien\\Resources\\additem_16x16.png"));
-		
+
+		Button btnThem = new Button(composite_1, SWT.NONE);
+		btnThem.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				Window.open(new frmThemSuaKhachHang(getDisplay(), "Thêm khách hàng", null));
+				hienTatCa();
+			}
+		});
+		GridData gd_btnThem = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gd_btnThem.widthHint = 86;
+		gd_btnThem.heightHint = 30;
+		btnThem.setLayoutData(gd_btnThem);
+		btnThem.setText("Thêm");
+		btnThem.setImage(SWTResourceManager.getImage(pageKhachHang.class, "/rcp/view/page/additem_16x16.png"));
+
+		Button btnSua = new Button(composite_1, SWT.NONE);
+		btnSua.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					Window.open(new frmThemSuaKhachHang(getDisplay(), "Sửa khách hàng",
+							KhachHangController.layThongTin(gridKhachHang.getSelection()[0].getText(1))));
+					hienTatCa();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+					Message.show("Nhân viên không hợp lệ", "Lỗi", SWT.OK | SWT.ICON_ERROR, getShell());
+				}
+			}
+		});
+		GridData gd_btnSua = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gd_btnSua.heightHint = 30;
+		gd_btnSua.widthHint = 86;
+		btnSua.setLayoutData(gd_btnSua);
+		btnSua.setText("Sửa");
+		btnSua.setImage(SWTResourceManager.getImage(pageKhachHang.class, "/rcp/view/page/edit_16x16.png"));
+
+		Button btnHienTatCa = new Button(composite_1, SWT.NONE);
+		btnHienTatCa.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				hienTatCa();
+			}
+		});
+		GridData gd_btnHienTatCa = new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1);
+		gd_btnHienTatCa.heightHint = 30;
+		gd_btnHienTatCa.widthHint = 86;
+		btnHienTatCa.setLayoutData(gd_btnHienTatCa);
+		btnHienTatCa.setText("Hiện tất cả");
+		btnHienTatCa.setImage(SWTResourceManager.getImage(pageKhachHang.class, "/rcp/view/page/show_16x16.png"));
+
 		TableViewer tableViewer = new TableViewer(composite_1, SWT.BORDER | SWT.FULL_SELECTION);
-		table = tableViewer.getTable();
-		table.setHeaderVisible(true);
-		GridData gd_table = new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1);
-		gd_table.minimumWidth = 5;
-		gd_table.minimumHeight = 5;
-		table.setLayoutData(gd_table);
-		
+		gridKhachHang = tableViewer.getTable();
+		gridKhachHang.setHeaderVisible(true);
+		GridData gd_gridKhachHang = new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1);
+		gd_gridKhachHang.minimumWidth = 5;
+		gd_gridKhachHang.minimumHeight = 5;
+		gridKhachHang.setLayoutData(gd_gridKhachHang);
+
 		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnFff = tableViewerColumn.getColumn();
 		tblclmnFff.setWidth(50);
 		tblclmnFff.setText("STT");
-		
+
 		TableViewerColumn tableViewerColumn_1 = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnHhhh = tableViewerColumn_1.getColumn();
 		tblclmnHhhh.setWidth(100);
 		tblclmnHhhh.setText("Mã khách hàng");
-		
+
 		TableViewerColumn tableViewerColumn_2 = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnNewColumn = tableViewerColumn_2.getColumn();
 		tblclmnNewColumn.setWidth(150);
 		tblclmnNewColumn.setText("Họ tên");
-		
+
 		TableViewerColumn tableViewerColumn_3 = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnNewColumn_1 = tableViewerColumn_3.getColumn();
 		tblclmnNewColumn_1.setWidth(100);
-		tblclmnNewColumn_1.setText("Ngày sinh");
-		
+		tblclmnNewColumn_1.setText("Giới tính");
+
 		TableViewerColumn tableViewerColumn_4 = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnNewColumn_2 = tableViewerColumn_4.getColumn();
 		tblclmnNewColumn_2.setWidth(100);
-		tblclmnNewColumn_2.setText("Giới tính");
-		
+		tblclmnNewColumn_2.setText("CMND");
+
 		TableViewerColumn tableViewerColumn_5 = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnCmnd = tableViewerColumn_5.getColumn();
 		tblclmnCmnd.setWidth(100);
-		tblclmnCmnd.setText("CMND");
-		
+		tblclmnCmnd.setText("Ngày sinh");
+
 		TableViewerColumn tableViewerColumn_6 = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnNewColumn_3 = tableViewerColumn_6.getColumn();
 		tblclmnNewColumn_3.setWidth(150);
 		tblclmnNewColumn_3.setText("Email");
-		
+
 		TableViewerColumn tableViewerColumn_7 = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnNewColumn_4 = tableViewerColumn_7.getColumn();
 		tblclmnNewColumn_4.setWidth(100);
 		tblclmnNewColumn_4.setText("SĐT");
-		
+
 		TableViewerColumn tableViewerColumn_8 = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnNewColumn_5 = tableViewerColumn_8.getColumn();
 		tblclmnNewColumn_5.setWidth(100);
 		tblclmnNewColumn_5.setText("Loại khách hàng");
-		
+
 		TableViewerColumn tableViewerColumn_9 = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnNewColumn_6 = tableViewerColumn_9.getColumn();
 		tblclmnNewColumn_6.setWidth(100);
@@ -167,10 +242,95 @@ public class pageKhachHang extends Composite {
 		new Label(composite_1, SWT.NONE);
 		new Label(composite_1, SWT.NONE);
 
+		hienThiGiaoDien();
 	}
 
 	@Override
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
+	}
+
+	/**
+	 * Hàm hiển thị giao diện ban đầu
+	 */
+	public void hienThiGiaoDien() {
+		hienTatCa();
+		datLai();
+	}
+
+	/**
+	 * Hàm đặt lại điều kiện tìm kiếm
+	 */
+	public void datLai() {
+		chkTenKhachHang.setSelection(true);
+		txtTenKhachHang.setText("");
+		txtTenKhachHang.setEnabled(chkTenKhachHang.getSelection());
+
+		chkCMND.setSelection(false);
+		txtCMND.setText("");
+		txtCMND.setEnabled(chkCMND.getSelection());
+
+	}
+
+	/**
+	 * Hàm hiện thông tin của tất cả khách hàng
+	 */
+	public void hienTatCa() {
+		try {
+			ArrayList<KhachHang> arr = KhachHangController.taiTatCa();
+
+			gridKhachHang.removeAll();
+			int stt = 1;
+			for (KhachHang i : arr) {
+				TableItem item = new TableItem(gridKhachHang, SWT.NONE);
+				item.setText(new String[] { String.valueOf(stt), i.getMaKhachHang(), i.getHoTen(), i.getGioiTinh(),
+						i.getCMND(), i.getNgaySinh().toString(), i.getEmail(), i.getSDT(), i.getMaLoaiKH(),
+						i.getNgayDangKy().toString() });
+				stt++;
+			}
+
+			gridKhachHang.select(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Hàm tìm kiếm khách hàng
+	 */
+	public void timKiem() {
+		try {
+			kiemTraHopLe();
+			ArrayList<KhachHang> arr = KhachHangController.traCuu(
+					chkTenKhachHang.getSelection() ? txtTenKhachHang.getText() : null,
+					chkCMND.getSelection() ? txtCMND.getText() : null);
+
+			gridKhachHang.removeAll();
+			int stt=1;
+			for (KhachHang i : arr) {
+				TableItem item = new TableItem(gridKhachHang, SWT.NONE);
+				item.setText(new String[] {String.valueOf(stt), i.getMaKhachHang(), i.getHoTen(), i.getGioiTinh(), i.getCMND(),
+						i.getNgaySinh().toString(), i.getEmail(), i.getSDT(), i.getMaLoaiKH(),
+						i.getNgayDangKy().toString() });
+				stt++;
+			}
+
+			gridKhachHang.select(0);
+		} catch (ParameterValuesException e) {
+			Message.show(e.getMessage(), "Cảnh báo", SWT.ICON_WARNING | SWT.OK, getShell());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 
+	 * Kiểm tra các trường trong điều kiện có nhập đầy đủ hay không
+	 */
+	public void kiemTraHopLe() throws ParameterValuesException {
+		if (chkTenKhachHang.getSelection() && txtTenKhachHang.getText().isEmpty())
+			throw new ParameterValuesException("Tên khách hàng không được trống", null);
+		if (chkCMND.getSelection() && txtCMND.getText().isEmpty())
+			throw new ParameterValuesException("CMND không được trống", null);
 	}
 }
