@@ -19,10 +19,13 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public class pageVe extends Composite {
-	private Text text;
+	private Text txtMaVe;
 	private Table table;
+	private Text text;
 
 	/**
 	 * Create the composite.
@@ -39,8 +42,8 @@ public class pageVe extends Composite {
 		composite.setLayoutData(gd_composite);
 		composite.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		
-		text = new Text(composite, SWT.BORDER);
-		text.setBounds(31, 78, 228, 25);
+		txtMaVe = new Text(composite, SWT.BORDER);
+		txtMaVe.setBounds(31, 84, 228, 25);
 		
 		Label lblTraCuV = new Label(composite, SWT.NONE);
 		lblTraCuV.setText("Tra cứu vé");
@@ -49,19 +52,27 @@ public class pageVe extends Composite {
 		lblTraCuV.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblTraCuV.setBounds(31, 10, 176, 23);
 		
-		Button btnTheoMV = new Button(composite, SWT.CHECK);
-		btnTheoMV.setText("Theo mã vé");
-		btnTheoMV.setSelection(true);
-		btnTheoMV.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		btnTheoMV.setBounds(31, 47, 197, 16);
+		Button chkMaVe = new Button(composite, SWT.CHECK);
+		chkMaVe.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				txtMaVe.setEnabled(chkMaVe.getSelection());
+			}
+		});
+		chkMaVe.setText("Theo mã vé");
+		chkMaVe.setSelection(true);
+		chkMaVe.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		chkMaVe.setBounds(31, 47, 197, 16);
 		
 		Button btnTheoTnKhch = new Button(composite, SWT.CHECK);
+		btnTheoTnKhch.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+			}
+		});
 		btnTheoTnKhch.setText("Theo tên khách hàng");
 		btnTheoTnKhch.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		btnTheoTnKhch.setBounds(31, 124, 197, 16);
-		
-		Combo combo = new Combo(composite, SWT.NONE);
-		combo.setBounds(31, 157, 228, 23);
 		
 		Button btnTheoKhongThi = new Button(composite, SWT.CHECK);
 		btnTheoKhongThi.setText("Theo khoảng thời gian bán vé");
@@ -88,6 +99,9 @@ public class pageVe extends Composite {
 		lblNewLabel.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblNewLabel.setBounds(135, 258, 31, 15);
 		lblNewLabel.setText("Đến");
+		
+		text = new Text(composite, SWT.BORDER);
+		text.setBounds(31, 161, 228, 25);
 		
 		Composite composite_1 = new Composite(this, SWT.NONE);
 		GridLayout gl_composite_1 = new GridLayout(2, false);
