@@ -1,11 +1,12 @@
 /**
  * Quản lý Rạp chiếu phim RPP 
- * Author: Võ Xuân Vương – vuongvo1809@gmail.com
+ * Author: Nguyễn Tuấn – nguyentuanit96@gmail.com
  */
 package rcp.view.popup;
 
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.*;
+import java.util.Date;
 
 import org.eclipse.core.commands.ParameterValuesException;
 import org.eclipse.swt.SWT;
@@ -13,7 +14,7 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.*;
 import rcp.controller.*;
 import rcp.entity.*;
-import rcp.util.Message;
+import rcp.util.*;
 
 import org.eclipse.swt.events.*;
 
@@ -242,6 +243,9 @@ public class frmThemSuaNhanVien extends Shell {
 		// Disable the check that prevents subclassing of SWT components
 	}
 
+	/**
+	 * Hiển thị giao diện
+	 */
 	@SuppressWarnings("deprecation")
 	public void hienThiGiaoDien() {
 		hienChucVu();
@@ -293,6 +297,11 @@ public class frmThemSuaNhanVien extends Shell {
 		}
 	}
 
+	/**
+	 * Chuyển các thông tin trên giao diện thành đối tượng Nhân viên
+	 * 
+	 * @return
+	 */
 	@SuppressWarnings("deprecation")
 	public NhanVien layNhanVien() {
 		return new NhanVien(txtMaNhanVien.getText(), txtHoTen.getText(),
@@ -303,6 +312,9 @@ public class frmThemSuaNhanVien extends Shell {
 				cboTrangThai.getSelectionIndex());
 	}
 
+	/**
+	 * Hiển thị chức vụ lên combobox Chức vụ
+	 */
 	public void hienChucVu() {
 		try {
 			ArrayList<ChucVu> arr = ChucVuController.taiTatCa();
@@ -319,12 +331,18 @@ public class frmThemSuaNhanVien extends Shell {
 		}
 	}
 
+	/**
+	 * Hiển thị trạng thái lên combobox Trạng Thái
+	 */
 	public void hienTrangThai() {
 		cboTrangThai.add("Nghỉ việc", 0);
 		cboTrangThai.add("Đang làm", 1);
 		cboTrangThai.select(1);
 	}
 
+	/**
+	 * Hiển thị Quyền lên combobox Quyền
+	 */
 	public void hienQuyen() {
 		try {
 			ArrayList<QuyenHan> arr = QuyenHanController.taiTatCa();
@@ -340,13 +358,19 @@ public class frmThemSuaNhanVien extends Shell {
 		}
 	}
 
+	/**
+	 * Thực hiện hành động lưu thông tin
+	 * 
+	 * @return
+	 */
 	public boolean luu() {
 		try {
 			kiemTraDieuKien();
 			if (isInsert) {
 				if (chkTaoTaiKhoan.getSelection()) {
-					if (!NhanVienController.them(layNhanVien(), new TaiKhoan(txtTenDangNhap.getText(), null,
-							txtMaNhanVien.getText(), (String) cboQuyen.getData(cboQuyen.getText()), 1)))
+					if (!NhanVienController.them(layNhanVien(),
+							new TaiKhoan(txtTenDangNhap.getText(), null, txtMaNhanVien.getText(),
+									(String) cboQuyen.getData(cboQuyen.getText()), cboTrangThai.getSelectionIndex())))
 						throw new SQLException();
 				} else {
 					if (!NhanVienController.them(layNhanVien()))
@@ -355,15 +379,21 @@ public class frmThemSuaNhanVien extends Shell {
 			} else {
 				if (coTaiKhoan) {
 					if (chkTaoTaiKhoan.getSelection()) {
-						if (!NhanVienController.sua(layNhanVien(), new TaiKhoan(txtTenDangNhap.getText(), null,
-								txtMaNhanVien.getText(), (String) cboQuyen.getData(cboQuyen.getText()), 1), false))
+						if (!NhanVienController.sua(layNhanVien(),
+								new TaiKhoan(txtTenDangNhap.getText(), null, txtMaNhanVien.getText(),
+										(String) cboQuyen.getData(cboQuyen.getText()),
+										cboTrangThai.getSelectionIndex()),
+								false))
 							throw new SQLException();
 					} else if (!NhanVienController.sua(layNhanVien(), true))
 						throw new SQLException();
 				} else {
 					if (chkTaoTaiKhoan.getSelection()) {
-						if (!NhanVienController.sua(layNhanVien(), new TaiKhoan(txtTenDangNhap.getText(), null,
-								txtMaNhanVien.getText(), (String) cboQuyen.getData(cboQuyen.getText()), 1), true))
+						if (!NhanVienController.sua(layNhanVien(),
+								new TaiKhoan(txtTenDangNhap.getText(), null, txtMaNhanVien.getText(),
+										(String) cboQuyen.getData(cboQuyen.getText()),
+										cboTrangThai.getSelectionIndex()),
+								true))
 							throw new SQLException();
 					} else if (!NhanVienController.sua(layNhanVien(), false))
 						throw new SQLException();
@@ -380,6 +410,11 @@ public class frmThemSuaNhanVien extends Shell {
 		return false;
 	}
 
+	/**
+	 * Kiểm tra các trường có được nhập đầy đủ
+	 * 
+	 * @throws ParameterValuesException
+	 */
 	public void kiemTraDieuKien() throws ParameterValuesException {
 		if (txtHoTen.getText() == null || txtHoTen.getText().isEmpty())
 			throw new ParameterValuesException("Tên nhân viên không được trống", null);

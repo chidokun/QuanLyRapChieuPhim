@@ -34,17 +34,19 @@ public class TaiKhoanModel {
 		rs.next();
 		return new TaiKhoan(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5));
 	}
-	
-	public static boolean them(TaiKhoan tk) {
-		return false;
+
+	public static boolean them(TaiKhoan tk) throws SQLException {
+		return Database.callStoredUpdate("sp_ThemTaiKhoan", tk.getTenDangNhap(), tk.getMaNhanVien(),
+				tk.getMaQuyen()) > 0;
 	}
-	
-	public static boolean sua(TaiKhoan tk) {
-		return false;
+
+	public static boolean sua(TaiKhoan tk) throws SQLException {
+		return Database.callStoredUpdate("sp_SuaTaiKhoan", tk.getTenDangNhap(), tk.getMaQuyen(),
+				tk.getTrangThai()) > 0;
 	}
-	
+
 	public static boolean xoa(TaiKhoan tk) throws SQLException {
-		return Database.callStoredUpdate("sp_XoaTaiKhoan", tk.getTenDangNhap()) > 0;			
+		return Database.callStoredUpdate("sp_XoaTaiKhoan", tk.getTenDangNhap()) > 0;
 	}
 
 }
