@@ -5,33 +5,30 @@
 
 package rcp.view.page;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.wb.swt.SWTResourceManager;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.*;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.Table;
 import org.eclipse.core.commands.ParameterValuesException;
 import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.wb.swt.ResourceManager;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.wb.swt.SWTResourceManager;
 
-import rcp.util.Message;
-import rcp.util.Window;
-import rcp.view.popup.frmThemSuaNhanVien;
-import rcp.controller.ChucVuController;
-import rcp.controller.NhanVienController;
+import rcp.controller.*;
 import rcp.entity.*;
-
-import java.sql.SQLException;
-import java.util.*;
+import rcp.util.*;
+import rcp.view.popup.*;
 
 public class pageNhanVien extends Composite {
 	private Text txtTenNhanVien;

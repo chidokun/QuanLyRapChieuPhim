@@ -106,7 +106,7 @@ public class frmDangNhap extends Shell {
 		
 		Label lblChoMng = new Label(composite, SWT.NONE);
 		lblChoMng.setText("Đăng nhập");
-		lblChoMng.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
+		lblChoMng.setForeground(SWTResourceManager.getColor(31, 116, 71));
 		lblChoMng.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.NORMAL));
 		lblChoMng.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblChoMng.setBounds(127, 27, 176, 23);

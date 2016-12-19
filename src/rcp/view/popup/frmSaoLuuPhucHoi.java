@@ -36,7 +36,7 @@ public class frmSaoLuuPhucHoi extends Shell {
 
 		Label lblThmSaNhn = new Label(this, SWT.NONE);
 		lblThmSaNhn.setText("Sao lưu và phục hồi");
-		lblThmSaNhn.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
+		lblThmSaNhn.setForeground(SWTResourceManager.getColor(31, 116, 71));
 		lblThmSaNhn.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.NORMAL));
 		lblThmSaNhn.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblThmSaNhn.setBounds(101, 18, 176, 23);

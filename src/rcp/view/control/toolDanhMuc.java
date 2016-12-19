@@ -1,3 +1,8 @@
+/**
+ * Quản lý Rạp chiếu phim RPP
+ * Author: Nguyễn Tuấn - nguyentuanit96@gmail.com
+ */
+
 package rcp.view.control;
 
 import org.eclipse.swt.widgets.Composite;
@@ -6,16 +11,13 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.custom.CTabFolder;
-import org.eclipse.swt.custom.CTabItem;
-import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.events.MouseTrackAdapter;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.*;
 import rcp.view.page.*;
 import rcp.util.*;
 
 public class toolDanhMuc extends Composite {
+	@SuppressWarnings("unused")
 	private CTabFolder controlled;
 
 	/**

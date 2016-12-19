@@ -24,6 +24,12 @@ public class DateF {
 		return cal.getTime();
 	}
 	
+	public static Date toDate(int year, int month, int day, int hour, int minute) {
+		Calendar cal = Calendar.getInstance();
+		cal.set(year, month, day, hour, minute);
+		return cal.getTime();
+	}
+	
 	public static String toString(Date date) {
 		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
 		return f.format(date);
@@ -45,5 +51,17 @@ public class DateF {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		return cal.get(Calendar.DATE);
+	}
+	
+	public static int getHour(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		return cal.get(Calendar.HOUR);
+	}
+	
+	public static int getMinute(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		return cal.get(Calendar.MINUTE);
 	}
 }

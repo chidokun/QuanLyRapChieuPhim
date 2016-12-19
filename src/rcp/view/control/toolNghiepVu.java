@@ -1,3 +1,8 @@
+/**
+ * Quản lý Rạp chiếu phim RPP
+ * Author: Nguyễn Tuấn - nguyentuanit96@gmail.com
+ */
+
 package rcp.view.control;
 
 import org.eclipse.swt.widgets.Composite;
@@ -6,8 +11,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.custom.CTabFolder;
-import org.eclipse.swt.custom.CTabItem;
-import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.events.MouseTrackAdapter;
 import org.eclipse.swt.events.MouseEvent;
@@ -17,6 +20,7 @@ import rcp.util.Window;
 import rcp.view.page.*;
 
 public class toolNghiepVu extends Composite {
+	@SuppressWarnings("unused")
 	private CTabFolder controlled;
 
 	/**
@@ -108,7 +112,7 @@ public class toolNghiepVu extends Composite {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				mouseEnterColor(lblBCPhimTG);
-				Window.openPageInTab(controlled, new pageBaoCaoDoanhThuPhimKhoangThoiGian(controlled, SWT.NONE), "Báo cáo thống kê");
+				Window.openPageInTab(controlled, new pageBaoCaoDoanhThuPhimKhoangThoiGian(controlled, SWT.NONE), "Doanh thu phim theo khoảng thời gian");
 			}
 		});
 		lblBCPhimTG.addMouseTrackListener(new MouseTrackAdapter() {
@@ -145,7 +149,7 @@ public class toolNghiepVu extends Composite {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				mouseEnterColor(lblBCKhachHang);
-				Window.openPageInTab(controlled, new pageBaoCaoDoanhThuKhachHang(controlled, SWT.NONE), "Báo cáo thống kê");
+				Window.openPageInTab(controlled, new pageBaoCaoDoanhThuKhachHang(controlled, SWT.NONE), "Doanh thu theo khách hàng");
 			}
 		});
 		lblBCKhachHang.addMouseTrackListener(new MouseTrackAdapter() {
@@ -176,7 +180,7 @@ public class toolNghiepVu extends Composite {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				mouseEnterColor(lblBCThucAn);
-				Window.openPageInTab(controlled, new pageBaoCaoDoanhThuThucAn(controlled, SWT.NONE), "Báo cáo thống kê");
+				Window.openPageInTab(controlled, new pageBaoCaoDoanhThuThucAn(controlled, SWT.NONE), "Doanh thu thức ăn");
 			}
 		});
 		lblBCThucAn.addMouseTrackListener(new MouseTrackAdapter() {

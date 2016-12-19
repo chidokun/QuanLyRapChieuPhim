@@ -85,7 +85,7 @@ public class frmThemSuaNhanVien extends Shell {
 
 		Label lblThmSaNhn = new Label(this, SWT.NONE);
 		lblThmSaNhn.setText(title);
-		lblThmSaNhn.setForeground(SWTResourceManager.getColor(34, 139, 34));
+		lblThmSaNhn.setForeground(SWTResourceManager.getColor(31, 116, 71));
 		lblThmSaNhn.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.NORMAL));
 		lblThmSaNhn.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblThmSaNhn.setBounds(118, 21, 197, 24);
@@ -173,7 +173,7 @@ public class frmThemSuaNhanVien extends Shell {
 		lblNgyVoLm.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblNgyVoLm.setBounds(383, 296, 93, 15);
 
-		dateNgayVaoLam = new DateTime(this, SWT.BORDER);
+		dateNgayVaoLam = new DateTime(this, SWT.BORDER | SWT.DROP_DOWN);
 		dateNgayVaoLam.setBounds(487, 293, 197, 24);
 
 		Label lblGiiTnh = new Label(this, SWT.NONE);
@@ -244,7 +244,7 @@ public class frmThemSuaNhanVien extends Shell {
 	/**
 	 * Hiển thị giao diện
 	 */
-	@SuppressWarnings("deprecation")
+	
 	public void hienThiGiaoDien() {
 		hienChucVu();
 		hienTrangThai();
@@ -300,7 +300,6 @@ public class frmThemSuaNhanVien extends Shell {
 	 * 
 	 * @return
 	 */
-	@SuppressWarnings("deprecation")
 	public NhanVien layNhanVien() {
 		return new NhanVien(txtMaNhanVien.getText(), txtHoTen.getText(),
 				DateF.toDate(dateNgaySinh.getYear(), dateNgaySinh.getMonth(), dateNgaySinh.getDay()),

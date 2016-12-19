@@ -5,134 +5,198 @@
 
 package rcp.view.page;
 
+import java.text.*;
+import java.util.*;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.*;
 import org.eclipse.swt.widgets.*;
 import org.eclipse.wb.swt.SWTResourceManager;
 
-public class pageBaoCaoDoanhThuPhimKhungGio extends Composite {
-	private Table table;
+import rcp.controller.NhanVienController;
+import rcp.entity.*;
+import rcp.model.*;
+import rcp.util.DateF;
+
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+
+public class pageBaoCaoDoanhThuKhachHang extends Composite {
+	private Table gridBaoCao;
+	private DateTime dateTuNgay;
+	private DateTime dateDenNgay;
+	private Button btnXem;
+	private Button btnIn;
+	private Label lblTongDoanhThu;
 
 	/**
 	 * Create the composite.
-	 * 
 	 * @param parent
 	 * @param style
 	 */
-	public pageBaoCaoDoanhThuPhimKhungGio(Composite parent, int style) {
+	public pageBaoCaoDoanhThuKhachHang(Composite parent, int style) {
 		super(parent, style);
 		setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		GridLayout gridLayout = new GridLayout(10, false);
-		gridLayout.marginTop = 7;
-		gridLayout.marginHeight = 7;
-		gridLayout.marginRight = 15;
-		gridLayout.marginLeft = 15;
+		GridLayout gridLayout = new GridLayout(1, false);
+		gridLayout.marginWidth = 0;
+		gridLayout.marginHeight = 0;
+		gridLayout.verticalSpacing = 0;
+		gridLayout.horizontalSpacing = 0;
 		setLayout(gridLayout);
-
-		Label lblThng = new Label(this, SWT.NONE);
-		lblThng.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblThng.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblThng.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1));
-		lblThng.setText("Tháng");
-
-		Combo combo = new Combo(this, SWT.NONE);
-		combo.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		GridData gd_combo = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
-		gd_combo.widthHint = 30;
-		combo.setLayoutData(gd_combo);
-
-		Label lblNm = new Label(this, SWT.NONE);
-		lblNm.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblNm.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblNm.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblNm.setText("Năm");
-
-		Combo combo_1 = new Combo(this, SWT.NONE);
-		combo_1.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		GridData gd_combo_1 = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
-		gd_combo_1.widthHint = 40;
-		combo_1.setLayoutData(gd_combo_1);
-
-		Label lblKhungGi = new Label(this, SWT.NONE);
-		lblKhungGi.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblKhungGi.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblKhungGi.setText("Khung giờ:");
-
-		Button btnhh = new Button(this, SWT.RADIO);
-		btnhh.setSelection(true);
-		btnhh.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		btnhh.setText("9h - 13h");
-		btnhh.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-
-		Button btnhh_1 = new Button(this, SWT.RADIO);
-		btnhh_1.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		btnhh_1.setText("13h - 17h");
-		btnhh_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-
-		Button btnhh_2 = new Button(this, SWT.RADIO);
-		btnhh_2.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		btnhh_2.setText("17h - 21h");
-		btnhh_2.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-
-		Button btnNewButton = new Button(this, SWT.NONE);
-		GridData gd_btnNewButton = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-		gd_btnNewButton.heightHint = 30;
-		gd_btnNewButton.widthHint = 86;
-		btnNewButton.setLayoutData(gd_btnNewButton);
-		btnNewButton.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		btnNewButton.setText("Xem");
-
-		Button btnNewButton_1 = new Button(this, SWT.NONE);
-		btnNewButton_1.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		GridData gd_btnNewButton_1 = new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1);
-		gd_btnNewButton_1.widthHint = 86;
-		gd_btnNewButton_1.heightHint = 30;
-		btnNewButton_1.setLayoutData(gd_btnNewButton_1);
-		btnNewButton_1.setText("In");
-
-		table = new Table(this, SWT.BORDER | SWT.FULL_SELECTION);
-		table.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 10, 1));
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-
-		TableColumn tblclmnStt = new TableColumn(table, SWT.NONE);
-		tblclmnStt.setWidth(44);
-		tblclmnStt.setText("STT");
-
-		TableColumn tblclmnMPhim = new TableColumn(table, SWT.NONE);
-		tblclmnMPhim.setWidth(118);
-		tblclmnMPhim.setText("Mã phim");
-
-		TableColumn tblclmnTnPhim = new TableColumn(table, SWT.NONE);
-		tblclmnTnPhim.setWidth(211);
-		tblclmnTnPhim.setText("Tên phim");
-
-		TableColumn tblclmnDoanhThu = new TableColumn(table, SWT.NONE);
-		tblclmnDoanhThu.setWidth(100);
-		tblclmnDoanhThu.setText("Doanh Thu");
-
-		Label lblTngDoanhThu = new Label(this, SWT.NONE);
-		lblTngDoanhThu.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblTngDoanhThu.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblTngDoanhThu.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 10, 1));
-		lblTngDoanhThu.setText("Tổng doanh thu: %f");
-		new Label(this, SWT.NONE);
-		new Label(this, SWT.NONE);
-		new Label(this, SWT.NONE);
-		new Label(this, SWT.NONE);
-		new Label(this, SWT.NONE);
-		new Label(this, SWT.NONE);
-		new Label(this, SWT.NONE);
-		new Label(this, SWT.NONE);
-		new Label(this, SWT.NONE);
-		new Label(this, SWT.NONE);
+		
+		Composite composite = new Composite(this, SWT.NONE);
+		GridLayout gl_composite = new GridLayout(9, false);
+		gl_composite.marginTop = 7;
+		gl_composite.marginRight = 15;
+		gl_composite.marginLeft = 15;
+		composite.setLayout(gl_composite);
+		GridData gd_composite = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1);
+		gd_composite.heightHint = 49;
+		composite.setLayoutData(gd_composite);
+		
+		Label label = new Label(composite, SWT.NONE);
+		label.setText("Từ ngày");
+		label.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		label.setBackground(SWTResourceManager.getColor(240,240,240));
+		
+		dateTuNgay = new DateTime(composite, SWT.BORDER | SWT.DROP_DOWN);
+		GridData gd_dateTuNgay = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gd_dateTuNgay.heightHint = 27;
+		gd_dateTuNgay.widthHint = 125;
+		dateTuNgay.setLayoutData(gd_dateTuNgay);
+		dateTuNgay.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		
+		Label label_1 = new Label(composite, SWT.NONE);
+		label_1.setText("Đến ngày");
+		label_1.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		label_1.setBackground(SWTResourceManager.getColor(240,240,240));
+		
+		dateDenNgay = new DateTime(composite, SWT.BORDER | SWT.DROP_DOWN);
+		GridData gd_dateDenNgay = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gd_dateDenNgay.heightHint = 27;
+		gd_dateDenNgay.widthHint = 125;
+		dateDenNgay.setLayoutData(gd_dateDenNgay);
+		dateDenNgay.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		
+		Label lblLoiKhchHng = new Label(composite, SWT.NONE);
+		lblLoiKhchHng.setText("Loại khách hàng:");
+		lblLoiKhchHng.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		lblLoiKhchHng.setBackground(SWTResourceManager.getColor(240, 240, 240));
+		
+		Button chkVip = new Button(composite, SWT.CHECK);
+		chkVip.setSelection(true);
+		chkVip.setText("VIP");
+		
+		Button chkThuong = new Button(composite, SWT.CHECK);
+		chkThuong.setText("Thường");
+		
+		btnXem = new Button(composite, SWT.NONE);
+		btnXem.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				xemBaoCao();
+			}
+		});
+		GridData gd_btnXem = new GridData(SWT.RIGHT, SWT.FILL, true, false, 1, 1);
+		gd_btnXem.widthHint = 120;
+		gd_btnXem.heightHint = 27;
+		btnXem.setLayoutData(gd_btnXem);
+		btnXem.setText("Xem báo cáo");
+		btnXem.setImage(SWTResourceManager.getImage(pageBaoCaoDoanhThuKhachHang.class, "/rcp/view/page/show_16x16.png"));
+		btnXem.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		
+		btnIn = new Button(composite, SWT.NONE);
+		GridData gd_btnIn = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		gd_btnIn.widthHint = 106;
+		gd_btnIn.heightHint = 27;
+		btnIn.setLayoutData(gd_btnIn);
+		btnIn.setText("In báo cáo");
+		btnIn.setImage(SWTResourceManager.getImage(pageBaoCaoDoanhThuKhachHang.class, "/rcp/view/page/print_16x16.png"));
+		btnIn.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		
+		Composite composite_1 = new Composite(this, SWT.NONE);
+		GridLayout gl_composite_1 = new GridLayout(1, false);
+		gl_composite_1.marginRight = 15;
+		gl_composite_1.marginLeft = 15;
+		gl_composite_1.marginTop = 10;
+		gl_composite_1.marginBottom = 15;
+		composite_1.setLayout(gl_composite_1);
+		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		composite_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		
+		gridBaoCao = new Table(composite_1, SWT.BORDER | SWT.FULL_SELECTION);
+		gridBaoCao.setLinesVisible(true);
+		gridBaoCao.setHeaderVisible(true);
+		gridBaoCao.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
+		gridBaoCao.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		
+		TableColumn tableColumn = new TableColumn(gridBaoCao, SWT.NONE);
+		tableColumn.setWidth(41);
+		tableColumn.setText("STT");
+		
+		TableColumn tblclmnMKhchHng = new TableColumn(gridBaoCao, SWT.NONE);
+		tblclmnMKhchHng.setWidth(130);
+		tblclmnMKhchHng.setText("Mã khách hàng");
+		
+		TableColumn tblclmnHVTn = new TableColumn(gridBaoCao, SWT.NONE);
+		tblclmnHVTn.setWidth(202);
+		tblclmnHVTn.setText("Họ và tên");
+		
+		TableColumn tblclmnNgyngK = new TableColumn(gridBaoCao, SWT.NONE);
+		tblclmnNgyngK.setWidth(139);
+		tblclmnNgyngK.setText("Ngày đăng ký");
+		
+		TableColumn tblclmnLoiKhchHng = new TableColumn(gridBaoCao, SWT.NONE);
+		tblclmnLoiKhchHng.setWidth(114);
+		tblclmnLoiKhchHng.setText("Loại khách hàng");
+		
+		TableColumn tableColumn_3 = new TableColumn(gridBaoCao, SWT.NONE);
+		tableColumn_3.setWidth(198);
+		tableColumn_3.setText("Doanh thu");
+		
+		lblTongDoanhThu = new Label(composite_1, SWT.NONE);
+		lblTongDoanhThu.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblTongDoanhThu.setText("Tổng doanh thu: 0");
+		lblTongDoanhThu.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		lblTongDoanhThu.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 
 	}
 
 	@Override
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
+	}
+	
+	public void xemBaoCao() {
+		NumberFormat c = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+		try {
+			Date tuNgay = DateF.toDate(dateTuNgay.getYear(),dateTuNgay.getMonth(),dateTuNgay.getDay());
+			Date denNgay = DateF.toDate(dateDenNgay.getYear(),dateDenNgay.getMonth(),dateDenNgay.getDay());
+			ArrayList<BaoCaoPhim> arr = PhimController.baoCaoPhim(tuNgay, denNgay);
+
+			gridBaoCao.removeAll();
+			int stt = 1;
+			for (BaoCaoPhim i : arr) {
+				TableItem item = new TableItem(gridBaoCao, SWT.NONE);
+				item.setText(new String[] { String.valueOf(stt), i.getMaPhim(), i.getTenPhim(),
+						c.format(i.getDoanhThu())});
+				stt++;
+			}
+
+			gridBaoCao.select(0);
+			lblTongDoanhThu.setText("Tổng doanh thu: " + c.format(tongDoanhThu(arr)));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public double tongDoanhThu(ArrayList<BaoCaoPhim> arr) {
+		double tong = 0;
+		for(BaoCaoPhim i : arr) {
+			tong += i.getDoanhThu();
+		}
+		
+		return tong;
 	}
 
 }

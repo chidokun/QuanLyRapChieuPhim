@@ -39,7 +39,7 @@ public class frmThongTinRapPhim extends Shell {
 		
 		Label lblThmSaNhn = new Label(this, SWT.NONE);
 		lblThmSaNhn.setText("Chỉnh sửa thông tin rạp phim");
-		lblThmSaNhn.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
+		lblThmSaNhn.setForeground(SWTResourceManager.getColor(31, 116, 71));
 		lblThmSaNhn.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.NORMAL));
 		lblThmSaNhn.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblThmSaNhn.setBounds(101, 26, 245, 23);
