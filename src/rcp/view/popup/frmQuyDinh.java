@@ -136,7 +136,7 @@ public class frmQuyDinh extends Shell {
 
 		TableViewerColumn tableViewerColumn_1 = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnTnQuynh = tableViewerColumn_1.getColumn();
-		tblclmnTnQuynh.setWidth(306);
+		tblclmnTnQuynh.setWidth(288);
 		tblclmnTnQuynh.setText("Tên quy định");
 
 		TableViewerColumn tableViewerColumn_2 = new TableViewerColumn(tableViewer, SWT.NONE);

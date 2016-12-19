@@ -4,37 +4,31 @@
  */
 package rcp.view.page;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.SWT;
-import org.eclipse.wb.swt.SWTResourceManager;
-
-import rcp.view.popup.frmThemSuaKhachHang;
-import rcp.view.popup.frmThemSuaNhanVien;
-
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.eclipse.core.commands.ParameterValuesException;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 import rcp.controller.KhachHangController;
-import rcp.controller.NhanVienController;
-import rcp.entity.*;
+import rcp.entity.KhachHang;
 import rcp.util.Message;
 import rcp.util.Window;
+import rcp.view.popup.frmThemSuaKhachHang;
 
 public class pageKhachHang extends Composite {
 	private Text txtTenKhachHang;
@@ -53,7 +47,10 @@ public class pageKhachHang extends Composite {
 	 */
 	public pageKhachHang(Composite parent, int style) {
 		super(parent, style);
-		setLayout(new GridLayout(2, false));
+		GridLayout gridLayout = new GridLayout(2, false);
+		gridLayout.marginWidth = 0;
+		gridLayout.marginHeight = 0;
+		setLayout(gridLayout);
 
 		Composite composite = new Composite(this, SWT.NONE);
 		composite.setLayout(null);
@@ -65,10 +62,10 @@ public class pageKhachHang extends Composite {
 
 		Label lblTraCuuKH = new Label(composite, SWT.NONE);
 		lblTraCuuKH.setText("Tra cứu khách hàng");
-		lblTraCuuKH.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
+		lblTraCuuKH.setForeground(SWTResourceManager.getColor(31, 116, 71));
 		lblTraCuuKH.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.NORMAL));
 		lblTraCuuKH.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
-		lblTraCuuKH.setBounds(22, 32, 176, 23);
+		lblTraCuuKH.setBounds(29, 17, 176, 23);
 
 		chkTenKhachHang = new Button(composite, SWT.CHECK);
 		chkTenKhachHang.addSelectionListener(new SelectionAdapter() {
@@ -80,10 +77,10 @@ public class pageKhachHang extends Composite {
 		chkTenKhachHang.setText("Theo tên khách hàng");
 		chkTenKhachHang.setSelection(true);
 		chkTenKhachHang.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
-		chkTenKhachHang.setBounds(22, 69, 197, 16);
+		chkTenKhachHang.setBounds(29, 54, 197, 16);
 
 		txtTenKhachHang = new Text(composite, SWT.BORDER);
-		txtTenKhachHang.setBounds(22, 100, 228, 25);
+		txtTenKhachHang.setBounds(29, 85, 228, 25);
 
 		chkCMND = new Button(composite, SWT.CHECK);
 		chkCMND.addSelectionListener(new SelectionAdapter() {
@@ -94,7 +91,7 @@ public class pageKhachHang extends Composite {
 		});
 		chkCMND.setText("Theo CMND");
 		chkCMND.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
-		chkCMND.setBounds(22, 146, 197, 16);
+		chkCMND.setBounds(29, 131, 197, 16);
 
 		btnTimKiem = new Button(composite, SWT.NONE);
 		btnTimKiem.addSelectionListener(new SelectionAdapter() {
@@ -105,7 +102,7 @@ public class pageKhachHang extends Composite {
 		});
 		btnTimKiem.setText("Tìm kiếm");
 		btnTimKiem.setImage(SWTResourceManager.getImage(pageKhachHang.class, "/rcp/view/page/zoom_16x16.png"));
-		btnTimKiem.setBounds(70, 316, 86, 30);
+		btnTimKiem.setBounds(81, 217, 86, 30);
 
 		btnDatLai = new Button(composite, SWT.NONE);
 		btnDatLai.addSelectionListener(new SelectionAdapter() {
@@ -116,17 +113,17 @@ public class pageKhachHang extends Composite {
 		});
 		btnDatLai.setText("Đặt lại");
 		btnDatLai.setImage(SWTResourceManager.getImage(pageKhachHang.class, "/rcp/view/page/refresh2_16x16.png"));
-		btnDatLai.setBounds(162, 316, 86, 30);
+		btnDatLai.setBounds(171, 217, 86, 30);
 
 		txtCMND = new Text(composite, SWT.BORDER);
 		txtCMND.setEnabled(false);
-		txtCMND.setBounds(22, 183, 228, 25);
+		txtCMND.setBounds(29, 164, 228, 25);
 
 		Composite composite_1 = new Composite(this, SWT.NONE);
 		GridLayout gl_composite_1 = new GridLayout(3, false);
+		gl_composite_1.marginWidth = 15;
+		gl_composite_1.horizontalSpacing = 4;
 		gl_composite_1.marginTop = 10;
-		gl_composite_1.marginRight = 5;
-		gl_composite_1.marginLeft = 5;
 		composite_1.setLayout(gl_composite_1);
 		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		composite_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
@@ -176,7 +173,7 @@ public class pageKhachHang extends Composite {
 		});
 		GridData gd_btnHienTatCa = new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1);
 		gd_btnHienTatCa.heightHint = 30;
-		gd_btnHienTatCa.widthHint = 86;
+		gd_btnHienTatCa.widthHint = 100;
 		btnHienTatCa.setLayoutData(gd_btnHienTatCa);
 		btnHienTatCa.setText("Hiện tất cả");
 		btnHienTatCa.setImage(SWTResourceManager.getImage(pageKhachHang.class, "/rcp/view/page/show_16x16.png"));
@@ -306,11 +303,11 @@ public class pageKhachHang extends Composite {
 					chkCMND.getSelection() ? txtCMND.getText() : null);
 
 			gridKhachHang.removeAll();
-			int stt=1;
+			int stt = 1;
 			for (KhachHang i : arr) {
 				TableItem item = new TableItem(gridKhachHang, SWT.NONE);
-				item.setText(new String[] {String.valueOf(stt), i.getMaKhachHang(), i.getHoTen(), i.getGioiTinh(), i.getCMND(),
-						i.getNgaySinh().toString(), i.getEmail(), i.getSDT(), i.getMaLoaiKH(),
+				item.setText(new String[] { String.valueOf(stt), i.getMaKhachHang(), i.getHoTen(), i.getGioiTinh(),
+						i.getCMND(), i.getNgaySinh().toString(), i.getEmail(), i.getSDT(), i.getMaLoaiKH(),
 						i.getNgayDangKy().toString() });
 				stt++;
 			}
@@ -324,7 +321,6 @@ public class pageKhachHang extends Composite {
 	}
 
 	/**
-	 * 
 	 * Kiểm tra các trường trong điều kiện có nhập đầy đủ hay không
 	 */
 	public void kiemTraHopLe() throws ParameterValuesException {

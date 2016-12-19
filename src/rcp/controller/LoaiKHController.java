@@ -9,13 +9,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import rcp.entity.LoaiKhachHang;
-import rcp.model.ChucVuModel;
 import rcp.model.LoaiKhachHangModel;
 
+/**
+ * @author Vuong
+ *
+ */
 public class LoaiKHController {
+
+	/**
+	 * Lấy danh sách loại khách hàng
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
 	public static ArrayList<LoaiKhachHang> taiTatCa() throws SQLException {
 		return LoaiKhachHangModel.taiTatCa();
-		
 	}
 
 }

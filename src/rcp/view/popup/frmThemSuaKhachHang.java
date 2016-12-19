@@ -5,34 +5,30 @@
 
 package rcp.view.popup;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import org.eclipse.core.commands.ParameterValuesException;
+import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 import rcp.controller.KhachHangController;
 import rcp.controller.LoaiKHController;
-import rcp.controller.NhanVienController;
-import rcp.controller.TaiKhoanController;
-import rcp.entity.*;
+import rcp.entity.KhachHang;
+import rcp.entity.LoaiKhachHang;
 import rcp.util.DateF;
 import rcp.util.Message;
-
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.DateTime;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.widgets.Combo;
-
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-
-import org.eclipse.core.commands.ParameterValuesException;
-import org.eclipse.jface.viewers.ComboViewer;
 
 public class frmThemSuaKhachHang extends Shell {
 	private boolean isInsert = false;
@@ -50,12 +46,6 @@ public class frmThemSuaKhachHang extends Shell {
 	private DateTime dateNgayDangKy;
 
 	/**
-	 * Launch the application.
-	 * 
-	 * @param args
-	 */
-
-	/**
 	 * Create the shell.
 	 * 
 	 * @param display
@@ -63,7 +53,7 @@ public class frmThemSuaKhachHang extends Shell {
 	 * @param title
 	 */
 	public frmThemSuaKhachHang(Display display, String title, KhachHang kh) {
-		super(display, SWT.SHELL_TRIM | SWT.TITLE);
+		super(display, SWT.CLOSE | SWT.MIN | SWT.TITLE);
 		setText(title);
 		setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 
@@ -72,94 +62,94 @@ public class frmThemSuaKhachHang extends Shell {
 		lblThmSaKhch.setForeground(SWTResourceManager.getColor(34, 139, 34));
 		lblThmSaKhch.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
 		lblThmSaKhch.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblThmSaKhch.setBounds(147, 10, 197, 35);
+		lblThmSaKhch.setBounds(120, 19, 197, 35);
 
 		Label label_1 = new Label(this, SWT.NONE);
-		label_1.setText("hình");
+		label_1.setImage(SWTResourceManager.getImage(frmThemSuaKhachHang.class, "/rcp/view/popup/imgKhachHang_64p.png"));
 		label_1.setForeground(SWTResourceManager.getColor(34, 139, 34));
 		label_1.setFont(SWTResourceManager.getFont("Segoe UI", 15, SWT.NORMAL));
 		label_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label_1.setBounds(79, 10, 64, 64);
+		label_1.setBounds(37, 19, 64, 64);
 
 		Label lblMKhchHng = new Label(this, SWT.NONE);
 		lblMKhchHng.setText("Mã khách hàng :");
 		lblMKhchHng.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblMKhchHng.setBounds(37, 89, 88, 15);
+		lblMKhchHng.setBounds(34, 102, 88, 15);
 
 		Label lblHTnKhch = new Label(this, SWT.NONE);
 		lblHTnKhch.setText("Họ tên :");
 		lblHTnKhch.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblHTnKhch.setBounds(37, 139, 64, 15);
+		lblHTnKhch.setBounds(34, 153, 64, 15);
 
 		txtMaKhachHang = new Text(this, SWT.BORDER);
 		txtMaKhachHang.setEnabled(false);
-		txtMaKhachHang.setBounds(131, 86, 197, 24);
+		txtMaKhachHang.setBounds(128, 100, 197, 24);
 
 		txtHoTen = new Text(this, SWT.BORDER);
-		txtHoTen.setBounds(131, 136, 197, 24);
+		txtHoTen.setBounds(128, 150, 197, 24);
 
 		txtCMND = new Text(this, SWT.BORDER);
-		txtCMND.setBounds(131, 190, 197, 24);
+		txtCMND.setBounds(128, 199, 197, 24);
 
 		Label lblCmnd = new Label(this, SWT.NONE);
 		lblCmnd.setText("CMND :");
 		lblCmnd.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblCmnd.setBounds(37, 193, 88, 15);
+		lblCmnd.setBounds(34, 205, 88, 15);
 
 		txtEmail = new Text(this, SWT.BORDER);
-		txtEmail.setBounds(131, 245, 197, 24);
+		txtEmail.setBounds(128, 247, 197, 24);
 
 		Label lblEmail = new Label(this, SWT.NONE);
 		lblEmail.setText("Email :");
 		lblEmail.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblEmail.setBounds(37, 248, 88, 15);
+		lblEmail.setBounds(34, 250, 88, 15);
 
 		btnNam = new Button(this, SWT.RADIO);
 		btnNam.setSelection(true);
 		btnNam.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		btnNam.setBounds(131, 304, 90, 16);
+		btnNam.setBounds(128, 296, 90, 16);
 		btnNam.setText("Nam");
 
 		btnNu = new Button(this, SWT.RADIO);
 		btnNu.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		btnNu.setBounds(238, 304, 90, 16);
+		btnNu.setBounds(235, 296, 90, 16);
 		btnNu.setText("Nữ");
 
 		Label lblNgyngK = new Label(this, SWT.NONE);
 		lblNgyngK.setText("Ngày đăng ký :");
 		lblNgyngK.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblNgyngK.setBounds(360, 89, 88, 15);
+		lblNgyngK.setBounds(357, 102, 88, 15);
 
 		Label lblLoi = new Label(this, SWT.NONE);
 		lblLoi.setText("Loại :");
 		lblLoi.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblLoi.setBounds(360, 142, 88, 15);
+		lblLoi.setBounds(357, 153, 88, 15);
 
 		txtSDT = new Text(this, SWT.BORDER);
-		txtSDT.setBounds(454, 245, 197, 24);
+		txtSDT.setBounds(451, 247, 197, 24);
 
 		Label lblDienThoai = new Label(this, SWT.NONE);
 		lblDienThoai.setText("Điện thoại :");
 		lblDienThoai.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblDienThoai.setBounds(360, 248, 88, 15);
+		lblDienThoai.setBounds(357, 250, 88, 15);
 
 		Label lblGioiTinh = new Label(this, SWT.NONE);
 		lblGioiTinh.setText("Giới tính :");
 		lblGioiTinh.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblGioiTinh.setBounds(37, 305, 55, 15);
+		lblGioiTinh.setBounds(34, 297, 55, 15);
 
 		dateNgaySinh = new DateTime(this, SWT.BORDER | SWT.DROP_DOWN);
-		dateNgaySinh.setBounds(454, 190, 197, 24);
+		dateNgaySinh.setBounds(451, 199, 197, 24);
 
 		Label lblNgySinh = new Label(this, SWT.NONE);
 		lblNgySinh.setText("Ngày sinh :");
 		lblNgySinh.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblNgySinh.setBounds(360, 190, 64, 15);
+		lblNgySinh.setBounds(356, 205, 64, 15);
 
 		Composite composite = new Composite(this, SWT.NONE);
 		composite.setLayout(null);
 		composite.setBackground(SWTResourceManager.getColor(245, 245, 245));
-		composite.setBounds(0, 379, 677, 53);
+		composite.setBounds(0, 336, 677, 53);
 
 		Button btnHuy = new Button(composite, SWT.NONE);
 		btnHuy.addSelectionListener(new SelectionAdapter() {
@@ -169,7 +159,7 @@ public class frmThemSuaKhachHang extends Shell {
 			}
 		});
 		btnHuy.setText("Hủy");
-		btnHuy.setBounds(579, 11, 94, 33);
+		btnHuy.setBounds(573, 11, 94, 33);
 
 		Button btnLuu = new Button(composite, SWT.NONE);
 		btnLuu.addSelectionListener(new SelectionAdapter() {
@@ -180,21 +170,22 @@ public class frmThemSuaKhachHang extends Shell {
 			}
 		});
 		btnLuu.setText("Lưu");
-		btnLuu.setBounds(457, 11, 94, 33);
+		btnLuu.setBounds(473, 11, 94, 33);
 
 		ComboViewer comboViewer = new ComboViewer(this, SWT.NONE);
 		cboLoaiKH = comboViewer.getCombo();
-		cboLoaiKH.setBounds(454, 137, 197, 23);
+		cboLoaiKH.setEnabled(false);
+		cboLoaiKH.setBounds(451, 150, 197, 24);
 
 		Label label = new Label(this, SWT.NONE);
 		label.setText("Vui lòng nhập đầy đủ thông tin");
 		label.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label.setBounds(147, 51, 201, 15);
+		label.setBounds(120, 60, 201, 15);
 
-		dateNgayDangKy = new DateTime(this, SWT.BORDER);
+		dateNgayDangKy = new DateTime(this, SWT.BORDER | SWT.DROP_DOWN);
 		dateNgayDangKy.setEnabled(false);
-		dateNgayDangKy.setBounds(454, 89, 197, 24);
+		dateNgayDangKy.setBounds(451, 100, 197, 24);
 
 		isInsert = kh == null;
 		this.kh = kh;
@@ -205,7 +196,7 @@ public class frmThemSuaKhachHang extends Shell {
 	 * Create contents of the shell.
 	 */
 	protected void createContents() {
-		setSize(699, 481);
+		setSize(682, 418);
 		hienThiGiaoDien();
 
 	}
@@ -213,14 +204,12 @@ public class frmThemSuaKhachHang extends Shell {
 	/**
 	 * Hàm hiển thị giao diện ban đầu
 	 */
-	@SuppressWarnings("deprecation")
 	public void hienThiGiaoDien() {
 		hienLoaiKH();
 
 		try {
 			if (isInsert) {
 				txtMaKhachHang.setText(KhachHangController.taoMa());
-				cboLoaiKH.setEnabled(false);
 			} else {
 				txtMaKhachHang.setText(kh.getMaKhachHang());
 				txtHoTen.setText(kh.getHoTen());
@@ -274,7 +263,6 @@ public class frmThemSuaKhachHang extends Shell {
 	/**
 	 * Chuyển các thông tin trên giao diện thành đối tượng khách hàng
 	 */
-	@SuppressWarnings("deprecation")
 	public KhachHang layKhachHang() {
 		return new KhachHang(txtMaKhachHang.getText(), txtHoTen.getText(), btnNam.getSelection() ? "Nam" : "Nữ",
 				txtCMND.getText(), DateF.toDate(dateNgaySinh.getYear(), dateNgaySinh.getMonth(), dateNgaySinh.getDay()),
@@ -298,7 +286,6 @@ public class frmThemSuaKhachHang extends Shell {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	/**
@@ -309,11 +296,11 @@ public class frmThemSuaKhachHang extends Shell {
 		if (txtHoTen.getText() == null || txtHoTen.getText().isEmpty())
 			throw new ParameterValuesException("Tên khách hàng không được trống", null);
 		if (txtCMND.getText() == null || txtCMND.getText().isEmpty())
-			new ParameterValuesException("CMND không được trống", null);
+			throw new ParameterValuesException("CMND không được trống", null);
 		if (txtEmail.getText() == null || txtEmail.getText().isEmpty())
-			new ParameterValuesException("Email không được trống", null);
+			throw new ParameterValuesException("Email không được trống", null);
 		if (txtSDT.getText() == null || txtSDT.getText().isEmpty())
-			new ParameterValuesException("Số điện thoại không được trống", null);
+			throw new ParameterValuesException("Số điện thoại không được trống", null);
 	}
 
 	@Override
