@@ -9,7 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import rcp.entity.TaiKhoan;
+import rcp.entity.TaiKhoan1;
 import rcp.model.TaiKhoanModel;
+import rcp.util.Database;
 
 /**
  * @author Tuan
@@ -26,7 +28,7 @@ public class TaiKhoanController {
 	public static ArrayList<TaiKhoan> taiTatCa() throws SQLException {
 		return TaiKhoanModel.taiTatCa();
 	}
-
+	
 	/**
 	 * Lấy tài khoản từ mã nhân viên
 	 * 
@@ -69,5 +71,22 @@ public class TaiKhoanController {
 	 */
 	public static boolean xoa(TaiKhoan tk) throws SQLException {
 		return TaiKhoanModel.xoa(tk);
+	}
+	
+	/**
+	 * Lấy danh sách tài khoản trên table
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public static ArrayList<TaiKhoan1> taiTatCaDS() throws SQLException {
+		return TaiKhoanModel.taiTatCaDS();
+	}
+	
+	/**
+	 * Đặt lại mật khẩu một tài khoản
+	 */
+	public static boolean datLaiMatKhau(TaiKhoan tk) throws SQLException{
+		return TaiKhoanModel.datLaiMatKhau(tk);
 	}
 }

@@ -33,6 +33,8 @@ public class TaiKhoanModel {
 
 		return arr;
 	}
+	
+	
 
 	/**
 	 * Lấy tài khoản từ mã nhân viên
@@ -80,6 +82,30 @@ public class TaiKhoanModel {
 	 */
 	public static boolean xoa(TaiKhoan tk) throws SQLException {
 		return Database.callStoredUpdate("sp_XoaTaiKhoan", tk.getTenDangNhap()) > 0;
+	}
+	
+	/**
+	 * Lấy danh sách tài khoản
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public static ArrayList<TaiKhoan1> taiTatCaDS() throws SQLException {
+		ResultSet rs = Database.callStored("sp_LayDanhSach_TaiKhoan", (Object[]) null);
+
+		ArrayList<TaiKhoan1> arr = new ArrayList<>();
+		while (rs.next()) {
+			arr.add(new TaiKhoan1(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5), rs.getInt(6)));
+		}
+
+		return arr;
+	}
+	
+	/**
+	 * Đặt lại mật khẩu cho một tài khoản
+	 */
+	public static boolean datLaiMatKhau(TaiKhoan tk) throws SQLException{
+		return Database.callStoredUpdate("sp_DatLaiMatKhau", tk.getTenDangNhap()) > 0;
 	}
 
 }
