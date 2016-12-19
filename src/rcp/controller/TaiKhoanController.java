@@ -28,7 +28,7 @@ public class TaiKhoanController {
 	public static ArrayList<TaiKhoan> taiTatCa() throws SQLException {
 		return TaiKhoanModel.taiTatCa();
 	}
-	
+
 	/**
 	 * Lấy tài khoản từ mã nhân viên
 	 * 
@@ -72,7 +72,7 @@ public class TaiKhoanController {
 	public static boolean xoa(TaiKhoan tk) throws SQLException {
 		return TaiKhoanModel.xoa(tk);
 	}
-	
+
 	/**
 	 * Lấy danh sách tài khoản trên table
 	 * 
@@ -82,11 +82,11 @@ public class TaiKhoanController {
 	public static ArrayList<TaiKhoan1> taiTatCaDS() throws SQLException {
 		return TaiKhoanModel.taiTatCaDS();
 	}
-	
+
 	/**
 	 * Đặt lại mật khẩu một tài khoản
 	 */
-	public static boolean datLaiMatKhau(TaiKhoan tk) throws SQLException{
+	public static boolean datLaiMatKhau(TaiKhoan tk) throws SQLException {
 		return TaiKhoanModel.datLaiMatKhau(tk);
 	}
 }

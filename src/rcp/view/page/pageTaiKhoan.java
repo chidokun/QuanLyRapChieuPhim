@@ -220,13 +220,19 @@ public class pageTaiKhoan extends Composite {
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
 	}
-
+	
+	/**
+	 * Hàm hiển thị giao diện ban đầu
+	 */
 	public void hienThiGiaoDien() {
 		hienTatCa();
 		hienQuyen();
 		chon();
 	}
-
+	
+	/**
+	 * Hàm hiện thông tin của tất cả tài khoản
+	 */
 	public void hienTatCa() {
 		try {
 			ArrayList<TaiKhoan1> arr = TaiKhoanController.taiTatCaDS();
@@ -234,10 +240,11 @@ public class pageTaiKhoan extends Composite {
 			gridTaiKhoan.removeAll();
 			int stt = 1;
 			for (TaiKhoan1 i : arr) {
-				//String a=(i.getTrangThai()==1 ? "Active" : "Deactive");
+				// String a=(i.getTrangThai()==1 ? "Active" : "Deactive");
 				TableItem item = new TableItem(gridTaiKhoan, SWT.NONE);
-				item.setText(new String[] { String.valueOf(stt), i.getTenDangNhap(), i.getMaNhanVien(),
-						i.getTenNhanVien(), i.getMaQuyen(), i.getTenQuyen(), i.getTrangThai()==1 ? "Active" : "Deactive" });
+				item.setText(
+						new String[] { String.valueOf(stt), i.getTenDangNhap(), i.getMaNhanVien(), i.getTenNhanVien(),
+								i.getMaQuyen(), i.getTenQuyen(), i.getTrangThai() == 1 ? "Active" : "Deactive" });
 				stt++;
 			}
 
@@ -246,7 +253,10 @@ public class pageTaiKhoan extends Composite {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * Hàm thực hiện hiện quyền
+	 */
 	public void hienQuyen() {
 		try {
 			ArrayList<QuyenHan> arr = QuyenHanController.taiTatCa();
@@ -296,8 +306,7 @@ public class pageTaiKhoan extends Composite {
 			if (!TaiKhoanController.sua(layTaiKhoan()))
 				throw new SQLException();
 
-			Message.show("Lưu thông tin tài khoản thành công", "Thành công", SWT.OK | SWT.ICON_INFORMATION,
-					getShell());
+			Message.show("Lưu thông tin tài khoản thành công", "Thành công", SWT.OK | SWT.ICON_INFORMATION, getShell());
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -328,9 +337,8 @@ public class pageTaiKhoan extends Composite {
 	public void datLaiMatKhau() {
 		try {
 			if (!TaiKhoanController.datLaiMatKhau(layTaiKhoan()))
-			throw new SQLException();
-			Message.show("Đặt lại mật khẩu thành công", "Thành công", SWT.OK | SWT.ICON_INFORMATION,
-					getShell());
+				throw new SQLException();
+			Message.show("Đặt lại mật khẩu thành công", "Thành công", SWT.OK | SWT.ICON_INFORMATION, getShell());
 
 		} catch (Exception e) {
 			Message.show("Không thể đặt lại mật khẩu", "Lỗi", SWT.OK | SWT.ICON_ERROR, getShell());
