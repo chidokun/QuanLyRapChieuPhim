@@ -17,6 +17,12 @@ import rcp.util.*;
  */
 public class TaiKhoanModel {
 
+	/**
+	 * Lấy danh sách tài khoản
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
 	public static ArrayList<TaiKhoan> taiTatCa() throws SQLException {
 		ResultSet rs = Database.callStored("sp_LayDanhSach_TaiKhoan", (Object[]) null);
 
@@ -28,6 +34,13 @@ public class TaiKhoanModel {
 		return arr;
 	}
 
+	/**
+	 * Lấy tài khoản từ mã nhân viên
+	 * 
+	 * @param maNhanVien
+	 * @return
+	 * @throws SQLException
+	 */
 	public static TaiKhoan layThongTinTuMaNhanVien(String maNhanVien) throws SQLException {
 		ResultSet rs = Database.callStored("sp_LayThongTin_TaiKhoanTuMaNV", maNhanVien);
 
@@ -35,16 +48,36 @@ public class TaiKhoanModel {
 		return new TaiKhoan(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5));
 	}
 
+	/**
+	 * Thêm một tài khoản
+	 * 
+	 * @param tk
+	 * @return
+	 * @throws SQLException
+	 */
 	public static boolean them(TaiKhoan tk) throws SQLException {
 		return Database.callStoredUpdate("sp_ThemTaiKhoan", tk.getTenDangNhap(), tk.getMaNhanVien(),
 				tk.getMaQuyen()) > 0;
 	}
 
+	/**
+	 * Sửa một tài khoản
+	 * 
+	 * @param tk
+	 * @return
+	 * @throws SQLException
+	 */
 	public static boolean sua(TaiKhoan tk) throws SQLException {
-		return Database.callStoredUpdate("sp_SuaTaiKhoan", tk.getTenDangNhap(), tk.getMaQuyen(),
-				tk.getTrangThai()) > 0;
+		return Database.callStoredUpdate("sp_SuaTaiKhoan", tk.getTenDangNhap(), tk.getMaQuyen(), tk.getTrangThai()) > 0;
 	}
 
+	/**
+	 * Xóa một tài khoản
+	 * 
+	 * @param tk
+	 * @return
+	 * @throws SQLException
+	 */
 	public static boolean xoa(TaiKhoan tk) throws SQLException {
 		return Database.callStoredUpdate("sp_XoaTaiKhoan", tk.getTenDangNhap()) > 0;
 	}

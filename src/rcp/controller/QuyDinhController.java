@@ -24,4 +24,15 @@ public class QuyDinhController {
 	public static ArrayList<QuyDinh> taiTatCa() throws SQLException {
 		return QuyDinhModel.taiTatCa();
 	}
+	
+	/**
+	 * Thay đổi quy định
+	 * 
+	 * @param qd
+	 * @return
+	 * @throws SQLException
+	 */
+	public static boolean sua(QuyDinh qd) throws SQLException {
+		return QuyDinhModel.sua(qd);
+	}
 }
