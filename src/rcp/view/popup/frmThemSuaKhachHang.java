@@ -225,8 +225,8 @@ public class frmThemSuaKhachHang extends Shell {
 				txtMaKhachHang.setText(kh.getMaKhachHang());
 				txtHoTen.setText(kh.getHoTen());
 				// còn lỗi ngày chưa fix
-				dateNgaySinh.setDate(kh.getNgaySinh().getYear(), kh.getNgaySinh().getMonth(),
-						kh.getNgaySinh().getDay());
+				dateNgaySinh.setDate(DateF.getYear(kh.getNgaySinh()), DateF.getMonth(kh.getNgaySinh()),
+						DateF.getDay(kh.getNgaySinh()));
 				if (kh.getGioiTinh().equals("Nam")) {
 					btnNam.setSelection(true);
 					btnNu.setSelection(false);
@@ -238,6 +238,7 @@ public class frmThemSuaKhachHang extends Shell {
 				txtEmail.setText(kh.getEmail());
 				txtSDT.setText(kh.getSDT());
 				cboLoaiKH.setText(kh.getMaLoaiKH());
+				dateNgayDangKy.setDate(DateF.getYear(kh.getNgayDangKy()), DateF.getMonth(kh.getNgayDangKy()), DateF.getDay(kh.getNgayDangKy()));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
