@@ -1,6 +1,7 @@
 /**
  * Quản lý Rạp chiếu phim RPP
- * Author: Nguyễn Tuấn - nguyentuanit96@gmail.com
+ * Author_giaodien: Nguyễn Tuấn - nguyentuanit96@gmail.com
+ * Author_suly: Huỳnh Duy Anh Toàn - anhtoan441996@gmail.com
  */
 
 package rcp.view.popup;
