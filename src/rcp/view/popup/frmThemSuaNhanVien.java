@@ -257,7 +257,6 @@ public class frmThemSuaNhanVien extends Shell {
 			} else {
 				txtMaNhanVien.setText(nv.getMaNhanVien());
 				txtHoTen.setText(nv.getTenNhanVien());
-				// còn lỗi ngày chưa fix
 				dateNgaySinh.setDate(DateF.getYear(nv.getNgaySinh()), DateF.getMonth(nv.getNgaySinh()),
 						DateF.getDay(nv.getNgaySinh()));
 				if (nv.getGioiTinh().equals("Nam")) {
@@ -272,7 +271,6 @@ public class frmThemSuaNhanVien extends Shell {
 				txtEmail.setText(nv.getEmail());
 				txtSDT.setText(nv.getSDT());
 				cboChucVu.setText(nv.getMaChucVu());
-				// còn lỗi ngày chưa fix
 				dateNgayVaoLam.setDate(DateF.getYear(nv.getNgayVaoLam()), DateF.getMonth(nv.getNgayVaoLam()),
 						DateF.getDay(nv.getNgayVaoLam()));
 				cboTrangThai.select(nv.getTrangThai());
