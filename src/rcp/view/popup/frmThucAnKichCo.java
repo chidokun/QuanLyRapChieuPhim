@@ -1,7 +1,6 @@
 /**
  * Quản lý Rạp chiếu phim RPP
- * Author_giaodien: Nguyễn Tuấn - nguyentuanit96@gmail.com
- * Author_suly: Huỳnh Duy Anh Toàn - anhtoan441996@gmail.com
+ * Author: Huỳnh Duy Anh Toàn - anhtoan441996@gamil.com
  */
 
 package rcp.view.popup;
@@ -37,13 +36,12 @@ import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
-public class frmThucAn extends Shell {
-	private boolean isInsert = false;
+public class frmThucAnKichCo extends Shell {
 	private ThucAn ta = null;
-	private Text txtMaThucAn;
+	private Combo cbKichCo;
+	private Text txtGia;
 	private Text txtTenThucAn;
-	private Combo cbLoaiThucAn;
-	private Combo cbTrangThai;
+	private Text txtMaThucAn;
 
 	/**
 	 * Create the shell.
@@ -51,8 +49,9 @@ public class frmThucAn extends Shell {
 	 * @param ta
 	 * @param title
 	 */
-	public frmThucAn(Display display, String title, ThucAn ta) {
+	public frmThucAnKichCo(Display display, String title, ThucAn ta) {
 		super(display, SWT.CLOSE | SWT.MIN | SWT.TITLE);
+		setText("Thêm kích cỡ thức ăn");
 		setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		setLayout(null);
 		
@@ -63,16 +62,11 @@ public class frmThucAn extends Shell {
 		lblNewLabel.setText("Vui lòng nhập đầy đủ thông tin");
 		
 		Label lblThmSaNhn = new Label(this, SWT.NONE);
-		lblThmSaNhn.setText("Thêm sửa thức ăn");
+		lblThmSaNhn.setText("Thêm kích cỡ thức ăn");
 		lblThmSaNhn.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
 		lblThmSaNhn.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.NORMAL));
 		lblThmSaNhn.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblThmSaNhn.setBounds(101, 26, 176, 23);
-		
-		Label label_1 = new Label(this, SWT.NONE);
-		label_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label_1.setImage(ResourceManager.getPluginImage("QuanLyRapChieuPhim", "res/imgThucAn_64p.png"));
-		label_1.setBounds(30, 20, 64, 64);
+		lblThmSaNhn.setBounds(101, 26, 244, 23);
 		
 		Composite composite = new Composite(this, SWT.NONE);
 		composite.setBounds(0, 313, 550, 56);
@@ -97,43 +91,30 @@ public class frmThucAn extends Shell {
 		});
 		btnHyB.setText("Hủy bỏ");
 		btnHyB.setBounds(436, 10, 94, 33);
-		isInsert = ta == null;
 		this.ta = ta;
 		
 		ComboViewer comboViewer = new ComboViewer(this, SWT.NONE);
-		cbLoaiThucAn = comboViewer.getCombo();
-		cbLoaiThucAn.setBounds(370, 122, 141, 23);
-		cbLoaiThucAn.select(0);
+		cbKichCo = comboViewer.getCombo();
+		cbKichCo.setBounds(123, 178, 141, 23);
+		cbKichCo.select(0);
 		
-		ComboViewer comboViewer_1 = new ComboViewer(this, SWT.NONE);
-		cbTrangThai = comboViewer_1.getCombo();
-		cbTrangThai.setEnabled(false);
-		cbTrangThai.setBounds(370, 175, 141, 23);
+		Label lblGi = new Label(this, SWT.NONE);
+		lblGi.setText("Giá bán:");
+		lblGi.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		lblGi.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		lblGi.setBounds(289, 182, 75, 15);
 		
-		Label label = new Label(this, SWT.NONE);
-		label.setText("Trạng thái:");
-		label.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label.setBounds(289, 178, 75, 15);
-		
-		Label label_2 = new Label(this, SWT.NONE);
-		label_2.setText("Loại thức ăn:");
-		label_2.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		label_2.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label_2.setBounds(289, 125, 75, 15);
-		
-		txtMaThucAn = new Text(this, SWT.BORDER);
-		txtMaThucAn.setEnabled(false);
-		txtMaThucAn.setBounds(121, 122, 141, 24);
-		
-		txtTenThucAn = new Text(this, SWT.BORDER);
-		txtTenThucAn.setBounds(121, 174, 141, 24);
+		Label lblKchC = new Label(this, SWT.NONE);
+		lblKchC.setText("Kích cỡ:");
+		lblKchC.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		lblKchC.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		lblKchC.setBounds(42, 181, 75, 15);
 		
 		Label label_3 = new Label(this, SWT.NONE);
 		label_3.setText("Tên thức ăn:");
 		label_3.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		label_3.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label_3.setBounds(42, 177, 75, 15);
+		label_3.setBounds(289, 125, 75, 15);
 		
 		Label label_4 = new Label(this, SWT.NONE);
 		label_4.setText("Mã thức ăn:");
@@ -141,9 +122,20 @@ public class frmThucAn extends Shell {
 		label_4.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		label_4.setBounds(42, 125, 75, 15);
 
-		isInsert = ta == null;
 		this.ta = ta;
 		
+		txtGia = new Text(this, SWT.BORDER);
+		txtGia.setBounds(370, 178, 141, 24);
+		
+		txtTenThucAn = new Text(this, SWT.BORDER);
+		txtTenThucAn.setEnabled(false);
+		txtTenThucAn.setBounds(370, 122, 141, 24);
+		
+		txtMaThucAn = new Text(this, SWT.BORDER);
+		txtMaThucAn.setEnabled(false);
+		txtMaThucAn.setBounds(123, 122, 141, 24);
+		
+		this.ta = ta;
 		createContents();
 	}
 
@@ -161,23 +153,17 @@ public class frmThucAn extends Shell {
 	 */
 	@SuppressWarnings("deprecation")
 	public void hienThiGiaoDien() {
-		hienLoaiThucAn();
-		hienTrangThai();
+		hienKichCo();
 
 		try {
-			if (isInsert) {
-				txtMaThucAn.setText(ThucAnController.taoMa());
-			} else {
-				cbTrangThai.setEnabled(true);
-				txtMaThucAn.setText(ta.getMaThucAn());
-				cbLoaiThucAn.setText(ta.getLoaiThucAn());
-				txtTenThucAn.setText(ta.getTenThucAn());
-				cbTrangThai.select(ta.getTrangThai());
+			txtMaThucAn.setText(ta.getMaThucAn());
+			txtTenThucAn.setText(ta.getTenThucAn());
 			}
-		} catch (Exception e) {
+		 catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 	
 	/**
 	 * 
@@ -186,13 +172,8 @@ public class frmThucAn extends Shell {
 	public boolean luu() {
 		try {
 			kiemTraDieuKien();
-			if (isInsert) {
-				if (!ThucAnController.them(layThucAn_them()))
+			if (!ThucAnController.them(layThucAnKichCo()))
 					throw new SQLException();
-			} else {
-				if (!ThucAnController.sua(layThucAn_sua()))
-					throw new SQLException();
-			}
 			Message.show("Lưu thông tin thức ăn thành công", "Thành công", SWT.OK | SWT.ICON_INFORMATION,
 					getShell());
 			return true;
@@ -200,59 +181,38 @@ public class frmThucAn extends Shell {
 			Message.show(e0.getMessage(), "Cảnh báo", SWT.OK | SWT.ICON_WARNING, getShell());
 		} catch (Exception e1) {
 			e1.printStackTrace();
-			Message.show("Không thể lưu thông tin thức ăn", "Lỗi", SWT.OK | SWT.ICON_ERROR, getShell());
+			Message.show("Không thể lưu thông tin kích cỡ của thức ăn", "Lỗi", SWT.OK | SWT.ICON_ERROR, getShell());
 		}
 		return false;
 	}
 
 	/**
-	 * Chuyển các thông tin trên giao diện thành đối tượng thức ăn để sửa
+	 * Chuyển các thông tin trên giao diện thành đối tượng thức ăn kích cỡ
 	 */
-	public ThucAn layThucAn_sua() {
-		return new ThucAn(txtMaThucAn.getText(), txtTenThucAn.getText(),
-				(String) cbLoaiThucAn.getData(cbLoaiThucAn.getText()), cbTrangThai.getSelectionIndex());
+	public ThucAnKichCo layThucAnKichCo() {
+		return new ThucAnKichCo(txtMaThucAn.getText(), Double.parseDouble(txtGia.getText()),cbKichCo.getText());
 	}
 
+
+
 	/**
-	 * Chuyển các thông tin trên giao diện thành đối tượng thức ăn để thêm
+	 * Hiển thị kích cỡ lên comboBox
 	 */
-	public ThucAn layThucAn_them() {
-		return new ThucAn(txtMaThucAn.getText(), txtTenThucAn.getText(),
-				(String) cbLoaiThucAn.getData(cbLoaiThucAn.getText()));
-	}
-	/**
-	 * Hiển thị loại thức ăn lên comboBox
-	 */
-	public void hienLoaiThucAn() {
-		try {
-			ArrayList<LoaiThucAn> arr = LoaiThucAnController.taiTatCa();
-			for (LoaiThucAn i : arr) {
-				cbLoaiThucAn.add(i.getTenLoaiThucAn());
-				cbLoaiThucAn.setData(i.getTenLoaiThucAn(), i.getMaLoaiThucAn());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void hienKichCo() {
+		cbKichCo.add("Nhỏ");
+		cbKichCo.add("Vừa");
+		cbKichCo.add("Lớn");	
 	}
 	
 
-
-	/**
-	 * Hiển thị trạng thái lên comboBox
-	 */
-	public void hienTrangThai() {
-		cbTrangThai.add("Không còn bán", 0);
-		cbTrangThai.add("Đang được bán", 1);
-		cbTrangThai.select(1);
-	}
 	
 	/**
 	 * 
 	 * Kiểm tra các trường có được nhập đầy đủ hay không
 	 */
 	public void kiemTraDieuKien() throws ParameterValuesException {
-		if (txtTenThucAn.getText() == null || txtTenThucAn.getText().isEmpty())
-			throw new ParameterValuesException("Tên thức ăn không được trống", null);
+		if (txtGia.getText() == null || txtGia.getText().isEmpty())
+			throw new ParameterValuesException("Giá bán không được trống", null);
 	}
 
 	

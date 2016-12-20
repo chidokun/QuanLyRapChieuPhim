@@ -130,11 +130,6 @@ public class pageTaiKhoan extends Composite {
 		groupTrangThai.setBounds(32, 215, 219, 30);
 
 		btnActive = new Button(groupTrangThai, SWT.RADIO);
-		btnActive.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
 		btnActive.setSelection(true);
 		btnActive.setBounds(0, 0, 109, 30);
 		btnActive.setText("Active");
@@ -284,7 +279,7 @@ public class pageTaiKhoan extends Composite {
 			lbTenNhanVien.setText(gridTaiKhoan.getSelection()[0].getText(3));
 			lbTenDangNhap.setText(gridTaiKhoan.getSelection()[0].getText(1));
 			cboQuyen.setText(gridTaiKhoan.getSelection()[0].getText(5));
-			if (gridTaiKhoan.getSelection()[0].getText(6).equals("1")) {
+			if (gridTaiKhoan.getSelection()[0].getText(6).equals("Active")) {
 				btnActive.setSelection(true);
 				btnDeactive.setSelection(false);
 			} else {
@@ -307,6 +302,8 @@ public class pageTaiKhoan extends Composite {
 				throw new SQLException();
 
 			Message.show("Lưu thông tin tài khoản thành công", "Thành công", SWT.OK | SWT.ICON_INFORMATION, getShell());
+			btnLuu.setEnabled(false);
+			btnDatLaiMatKhau.setEnabled(false);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -322,7 +319,7 @@ public class pageTaiKhoan extends Composite {
 		lbTenNhanVien.setText(gridTaiKhoan.getSelection()[0].getText(3));
 		lbTenDangNhap.setText(gridTaiKhoan.getSelection()[0].getText(1));
 		cboQuyen.setText(gridTaiKhoan.getSelection()[0].getText(5));
-		if (gridTaiKhoan.getSelection()[0].getText(6).equals("1")) {
+		if (gridTaiKhoan.getSelection()[0].getText(6).equals("Active")) {
 			btnActive.setSelection(true);
 			btnDeactive.setSelection(false);
 		} else {
