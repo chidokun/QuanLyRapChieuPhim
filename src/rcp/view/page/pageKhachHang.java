@@ -26,6 +26,7 @@ import org.eclipse.wb.swt.SWTResourceManager;
 
 import rcp.controller.KhachHangController;
 import rcp.entity.KhachHang;
+import rcp.util.DateF;
 import rcp.util.Message;
 import rcp.util.Window;
 import rcp.view.popup.frmThemSuaKhachHang;
@@ -281,8 +282,8 @@ public class pageKhachHang extends Composite {
 			for (KhachHang i : arr) {
 				TableItem item = new TableItem(gridKhachHang, SWT.NONE);
 				item.setText(new String[] { String.valueOf(stt), i.getMaKhachHang(), i.getHoTen(), i.getGioiTinh(),
-						i.getCMND(), i.getNgaySinh().toString(), i.getEmail(), i.getSDT(), i.getMaLoaiKH(),
-						i.getNgayDangKy().toString() });
+						i.getCMND(), DateF.toString(i.getNgaySinh()), i.getEmail(), i.getSDT(), i.getMaLoaiKH(),
+						DateF.toString(i.getNgayDangKy()) });
 				stt++;
 			}
 
@@ -307,8 +308,8 @@ public class pageKhachHang extends Composite {
 			for (KhachHang i : arr) {
 				TableItem item = new TableItem(gridKhachHang, SWT.NONE);
 				item.setText(new String[] { String.valueOf(stt), i.getMaKhachHang(), i.getHoTen(), i.getGioiTinh(),
-						i.getCMND(), i.getNgaySinh().toString(), i.getEmail(), i.getSDT(), i.getMaLoaiKH(),
-						i.getNgayDangKy().toString() });
+						i.getCMND(), DateF.toString(i.getNgaySinh()), i.getEmail(), i.getSDT(), i.getMaLoaiKH(),
+						DateF.toString(i.getNgayDangKy()) });
 				stt++;
 			}
 

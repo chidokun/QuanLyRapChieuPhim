@@ -293,7 +293,7 @@ public class pageVe extends Composite {
 			for (Ve i : arr) {
 				TableItem item = new TableItem(gridVe, SWT.NONE);
 				item.setText(new String[] { String.valueOf(stt), i.getMaVe(), i.getMaSuatChieu(), i.getMaGhe(),
-						i.getNgayBanVe().toString(), i.getMaNhanVien(), String.valueOf(i.getGiaVe()), i.getMaKM(),
+						DateF.toString(i.getNgayBanVe()), i.getMaNhanVien(), String.valueOf(i.getGiaVe()), i.getMaKM(),
 						i.getMaKhachHang(), String.valueOf(i.getDiemTichLuy()) });
 				stt++;
 			}
