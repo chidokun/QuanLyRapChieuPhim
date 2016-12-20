@@ -7,7 +7,9 @@ package rcp.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
+import rcp.entity.BaoCaoKhachHang;
 import rcp.entity.KhachHang;
 import rcp.model.KhachHangModel;
 
@@ -74,5 +76,20 @@ public class KhachHangController {
 	 */
 	public static boolean sua(KhachHang kh) throws SQLException {
 		return KhachHangModel.sua(kh);
+	}
+	
+	/**
+	 * Báo cáo khách hàng
+	 * 
+	 * @param loaiKH
+	 *            0: cả hai loại. 1: VIP. 2: Thường
+	 * @param tuNgay
+	 * @param denNgay
+	 * @return
+	 * @throws SQLException
+	 */
+	public static ArrayList<BaoCaoKhachHang> baoCaoKhachHang(int loaiKH, Date tuNgay, Date denNgay)
+			throws SQLException {
+		return KhachHangModel.baoCaoKhachHang(loaiKH, tuNgay, denNgay);
 	}
 }

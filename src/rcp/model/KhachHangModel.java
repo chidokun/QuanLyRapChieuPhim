@@ -11,7 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Date;
 
+import rcp.entity.BaoCaoKhachHang;
 import rcp.entity.KhachHang;
 import rcp.util.Database;
 
@@ -20,7 +22,7 @@ import rcp.util.Database;
  *
  */
 public class KhachHangModel {
-	
+
 	/**
 	 * Lấy tất cả khách hàng
 	 * 
@@ -125,5 +127,29 @@ public class KhachHangModel {
 
 		st.execute();
 		return st.getString(1);
+	}
+
+	/**
+	 * Báo cáo khách hàng
+	 * 
+	 * @param loaiKH
+	 *            0: cả hai loại. 1: VIP. 2: Thường
+	 * @param tuNgay
+	 * @param denNgay
+	 * @return
+	 * @throws SQLException
+	 */
+	public static ArrayList<BaoCaoKhachHang> baoCaoKhachHang(int loaiKH, Date tuNgay, Date denNgay)
+			throws SQLException {
+		ResultSet rs = Database.callStored("sp_BaoCao_DoanhThuKhachHang", loaiKH, tuNgay, denNgay);
+
+		ArrayList<BaoCaoKhachHang> arr = new ArrayList<>();
+		while (rs.next()) {
+			arr.add(new BaoCaoKhachHang(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getString(4),
+					rs.getDouble(5)));
+		}
+
+		Database.connect().close();
+		return arr;
 	}
 }
