@@ -233,7 +233,8 @@ public class pageThucAn extends Composite {
 		});
 		gridThucAn.setLinesVisible(true);
 		gridThucAn.setHeaderVisible(true);
-		GridData gd_gridThucAn = new GridData(SWT.FILL, SWT.FILL, true, true, 3, 3);
+		GridData gd_gridThucAn = new GridData(SWT.FILL, SWT.FILL, true, true, 3, 2);
+		gd_gridThucAn.heightHint = 259;
 		gd_gridThucAn.widthHint = 630;
 		gridThucAn.setLayoutData(gd_gridThucAn);
 
@@ -268,7 +269,7 @@ public class pageThucAn extends Composite {
 		gridTAKC.setEnabled(false);
 		gridTAKC.setLinesVisible(true);
 		gridTAKC.setHeaderVisible(true);
-		GridData gd_gridTAKC = new GridData(SWT.FILL, SWT.FILL, true, true, 2, 3);
+		GridData gd_gridTAKC = new GridData(SWT.FILL, SWT.FILL, true, true, 2, 2);
 		gd_gridTAKC.widthHint = 21;
 		gridTAKC.setLayoutData(gd_gridTAKC);
 		
@@ -281,6 +282,11 @@ public class pageThucAn extends Composite {
 		TableColumn tblclmnnGi = tableViewerColumn_4.getColumn();
 		tblclmnnGi.setWidth(100);
 		tblclmnnGi.setText("Đơn giá");
+		new Label(composite_1, SWT.NONE);
+		new Label(composite_1, SWT.NONE);
+		new Label(composite_1, SWT.NONE);
+		new Label(composite_1, SWT.NONE);
+		new Label(composite_1, SWT.NONE);
 
 		hienThiGiaoDien();
 

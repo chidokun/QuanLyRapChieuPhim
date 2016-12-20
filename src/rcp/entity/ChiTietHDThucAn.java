@@ -10,7 +10,12 @@ import java.util.*;
 public class ChiTietHDThucAn {
 	private String maHoaDon;
 	private String maThucAnKichCo;
+	private String maThucAn;
+	private String tenThucAn;
+	private String kichCo;
+	private Double donGia;
 	private int soLuong;
+	
 	
 	public ChiTietHDThucAn(){
 		//nothing
@@ -20,6 +25,49 @@ public class ChiTietHDThucAn {
 		setMaHoaDon(maHoaDon);
 		setMaThucAnKichCo(maThucAnKichCo);
 		setSoLuong(soLuong);
+	}
+	
+	public ChiTietHDThucAn(String maThucAn, String tenThucAn,String kichCo,double donGia, int soLuong){
+		setMaThucAn(maThucAn);
+		setTenThucAn(tenThucAn);
+		setKichCo(kichCo);
+		setDonGia(donGia);
+		setSoLuong(soLuong);
+	}
+	
+	public String getMaThucAn() {
+		return maThucAn;
+	}
+
+	public void setMaThucAn(String maThucAn) {
+		this.maThucAn = maThucAn;
+	}
+	
+	
+	
+	public String getTenThucAn() {
+		return tenThucAn;
+	}
+
+	public void setTenThucAn(String tenThucAn) {
+		this.tenThucAn = tenThucAn;
+	}
+	
+	
+	public String getKichCo() {
+		return kichCo;
+	}
+
+	public void setKichCo(String kichCo) {
+		this.kichCo = kichCo;
+	}
+	
+	public double getDonGia() {
+		return donGia;
+	}
+
+	public void setDonGia(double donGia) {
+		this.donGia = donGia;
 	}
 	
 	public String getMaHoaDon() {
