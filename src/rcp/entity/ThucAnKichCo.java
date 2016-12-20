@@ -27,7 +27,21 @@ public class ThucAnKichCo {
 		setMaThucAn(maThucAn);
 		setDonGia(donGia);
 		setKichCo(kichCo);
-
+	}
+	public ThucAnKichCo(String maThucAn,double donGia,String kichCo){
+		setMaThucAn(maThucAn);
+		setDonGia(donGia);
+		setKichCo(kichCo);
+	}
+	
+	public ThucAnKichCo(String maThucAn,String kichCo){
+		setMaThucAn(maThucAn);
+		setKichCo(kichCo);
+	}
+	
+		public ThucAnKichCo(String kichCo,double donGia){
+			setKichCo(kichCo);
+			setDonGia(donGia);
 	}
 
 	public String getMaThucAnKichCo() {

@@ -14,20 +14,63 @@ import java.util.*;
 public class ThucAn {
 	private String maThucAn;
 	private String tenThucAn;
-	private String maLoaiThucAn;
+	private String loaiThucAn;
 	private int trangThai;
+	private String kichCo;
+	private double donGia;
+	private String tenLoaiThucAn;
 
 	public ThucAn() {
 		// do nothing
 	}
 
-	public ThucAn(String maThucAn, String tenThucAn, String maLoaiThucAn, int trangThai){
+	public ThucAn(String maThucAn, String tenThucAn, String loaiThucAn, int trangThai){
 		setMaThucAn(maThucAn);
 		setTenThucAn(tenThucAn);
-		setMaLoaiThucAn(maLoaiThucAn);
+		setLoaiThucAn(loaiThucAn);
 		setTrangThai(trangThai);
 	}
+	
+	public ThucAn(String maThucAn, String tenThucAn, String loaiThucAn){
+		setMaThucAn(maThucAn);
+		setTenThucAn(tenThucAn);
+		setLoaiThucAn(loaiThucAn);
+	}
+	
+	
+	public ThucAn(String maThucAn, String tenThucAn, String kichCo, double donGia, String tenLoaiThucAn){
+		setMaThucAn(maThucAn);
+		setTenThucAn(tenThucAn);
+		setKichCo(kichCo);
+		setDonGia(donGia);
+		setTenLoaiThucAn(tenLoaiThucAn);
+	}
 
+	public String getTenLoaiThucAn() {
+		return tenLoaiThucAn;
+	}
+
+	public void setTenLoaiThucAn(String tenLoaiThucAn) {
+		this.tenLoaiThucAn = tenLoaiThucAn;
+	}
+	
+	public double getDonGia() {
+		return donGia;
+	}
+
+	public void setDonGia(double donGia) {
+		this.donGia = donGia;
+	}
+	
+	public String getKichCo() {
+		return kichCo;
+	}
+
+	public void setKichCo(String kichCo) {
+		this.kichCo = kichCo;
+	}
+
+	
 	public String getMaThucAn() {
 		return maThucAn;
 	}
@@ -44,12 +87,12 @@ public class ThucAn {
 		this.tenThucAn = tenThucAn;
 	}
 
-	public String getMaLoaiThucAn() {
-		return maLoaiThucAn;
+	public String getLoaiThucAn() {
+		return loaiThucAn;
 	}
 
-	public void setMaLoaiThucAn(String maLoaiThucAn) {
-		this.maLoaiThucAn = maLoaiThucAn;
+	public void setLoaiThucAn(String loaiThucAn) {
+		this.loaiThucAn = loaiThucAn;
 	}
 
 	public int getTrangThai() {
