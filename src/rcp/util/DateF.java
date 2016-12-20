@@ -18,6 +18,7 @@ public class DateF {
 		return f.parse(date);
 	}
 	
+	
 	public static Date toDate(int year, int month, int day) {
 		Calendar cal = Calendar.getInstance();
 		cal.set(year, month, day);
@@ -30,8 +31,19 @@ public class DateF {
 		return cal.getTime();
 	}
 	
+	public static Date toDate(int year, int month, int day, int hour, int minute,int second) {
+		Calendar cal = Calendar.getInstance();
+		cal.set(year, month, day, hour, minute,second);
+		return cal.getTime();
+	}
+	
 	public static String toString(Date date) {
 		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+		return f.format(date);
+	}
+	
+	public static String toString_full(Date date) {
+		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 		return f.format(date);
 	}
 	
@@ -63,5 +75,11 @@ public class DateF {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		return cal.get(Calendar.MINUTE);
+	}
+
+	public static int getSecond(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		return cal.get(Calendar.SECOND);
 	}
 }
