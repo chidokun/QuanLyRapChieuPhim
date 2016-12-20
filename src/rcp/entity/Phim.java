@@ -48,6 +48,12 @@ public class Phim {
 		setTrangThai(trangThai);
 	}
 	
+	public Phim(String maPhim,String tenPhim){
+		setMaPhim(maPhim);
+		setTenPhim(tenPhim);
+
+	}
+	
 	public String getMaPhim() {
 		return maPhim;
 	}

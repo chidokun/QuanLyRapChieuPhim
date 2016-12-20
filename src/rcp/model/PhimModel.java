@@ -99,4 +99,16 @@ public class PhimModel {
 
 		return arr;
 	}
+	
+	public static ArrayList<Phim> taiTatCa_phimdangchieu() throws SQLException {
+		ResultSet rs = Database.callStored("sp_LayDanhSach_Phim", (Object[]) null);
+		
+		ArrayList<Phim> arr = new ArrayList<>();
+		while (rs.next()) {
+			arr.add(new Phim(rs.getString(1),rs.getString(2)));
+		}
+
+		return arr;
+	}
+	
 }

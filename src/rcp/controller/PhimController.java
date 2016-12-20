@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.*;
 import rcp.entity.*;
 import rcp.model.*;
+import rcp.util.Database;
 public class PhimController {
 	public static ArrayList<Phim> traCuu(String TenPhim, Date TuNgay, Date DenNgay) throws SQLException{
 		return PhimModel.traCuu(TenPhim, TuNgay, DenNgay);
@@ -25,5 +26,8 @@ public class PhimController {
 	}
 	public static Phim layThongTin(String MaPhim) throws SQLException {
 		return PhimModel.layThongTin(MaPhim);
+	}
+	public static ArrayList<Phim> taiTatCa_phimdangchieu() throws SQLException {
+		return PhimModel.taiTatCa_phimdangchieu();
 	}
 }

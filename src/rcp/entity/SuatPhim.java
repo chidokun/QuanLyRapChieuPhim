@@ -29,6 +29,13 @@ public class SuatPhim {
 		setMaHinhThuc(maHinhThuc);
 		setMaNgonNgu(maNgonNgu);
 	}
+	
+	public SuatPhim(String maSuatPhim, String maDinhDang, String maHinhThuc, String maNgonNgu){
+		setMaSuatPhim(maSuatPhim);
+		setMaDinhDang(maDinhDang);
+		setMaHinhThuc(maHinhThuc);
+		setMaNgonNgu(maNgonNgu);
+	}
 
 	public String getMaSuatPhim() {
 		return maSuatPhim;
