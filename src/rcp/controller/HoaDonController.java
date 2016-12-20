@@ -55,5 +55,13 @@ public class HoaDonController {
 	public static ArrayList<ChiTietHDThucAn> layCTHoaDon(String maHoaDon) throws SQLException {
 		return HoaDonModel.layCTHoaDon(maHoaDon);
 	}
-	
+	public static String hienMa() throws SQLException
+	{
+		return HoaDonModel.hienMa();
+	}
+	public static boolean them(HoaDonThucAn hd, ArrayList<ChiTietHDThucAn> arr) throws SQLException
+	{
+		return HoaDonModel.them(hd, arr);
+	}
+
 }

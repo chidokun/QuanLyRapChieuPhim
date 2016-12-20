@@ -72,5 +72,28 @@ public class HoaDonModel {
 		Database.connect().close();
 		return arr;
 	}
-	
+	public static String hienMa() throws SQLException {
+		CallableStatement st = Database.connect().prepareCall("{call sp_TaoMa_HoaDon (?)}");
+		st.registerOutParameter(1, Types.VARCHAR);
+		st.execute();
+		return st.getString(1);
+	}
+	public static boolean them(HoaDonThucAn hd, ArrayList<ChiTietHDThucAn> arr ) throws SQLException {
+		Connection con = Database.connect();
+		try {
+			con.setAutoCommit(false);
+			Database.callStoredUpdate("sp_ThemHoaDonThucAn",hd.getMaHoaDon(),hd.getMaNhanVien());
+			for (ChiTietHDThucAn ct:arr) {
+				Database.callStoredUpdate("sp_ThemChiTietHoaDonTA", ct.getMaHoaDon(),ct.getMaThucAnKichCo(),ct.getSoLuong());
+			}
+			con.commit();
+			return true;
+		} catch (Exception e) {
+			con.rollback();
+			return false;
+		} finally {
+			con.close();
+		}
+	}
+
 }
