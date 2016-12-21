@@ -5,15 +5,14 @@
 
 package rcp.controller;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
+import rcp.entity.BaoCaoThucAn;
 import rcp.entity.ThucAn;
 import rcp.entity.ThucAnKichCo;
 import rcp.model.ThucAnModel;
-import rcp.util.Database;
 
 /**
  * @author Toàn
@@ -99,5 +98,19 @@ public class ThucAnController {
 	 */
 	public static boolean xoaKichCo(ThucAnKichCo takc) throws SQLException {
 		return ThucAnModel.xoaKichCo(takc);		
+	}
+	
+	/**
+	 * Báo cáo thức ăn
+	 * 
+	 * @param loaiTA
+	 *            0: cả hai loại. 1: Thức ăn. 2: Đồ uống
+	 * @param tuNgay
+	 * @param denNgay
+	 * @return
+	 * @throws SQLException
+	 */
+	public static ArrayList<BaoCaoThucAn> baoCaoThucAn(int loaiTA, Date tuNgay, Date denNgay) throws SQLException {
+		return ThucAnModel.baoCaoThucAn(loaiTA, tuNgay, denNgay);
 	}
 }

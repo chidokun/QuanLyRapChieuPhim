@@ -185,6 +185,7 @@ public class frmQuyDinh extends Shell {
 		composite.setBounds(0, 509, 639, 56);
 
 		btnLuu = new Button(composite, SWT.NONE);
+		btnLuu.setImage(SWTResourceManager.getImage(frmQuyDinh.class, "/rcp/view/page/save_16x16.png"));
 		btnLuu.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -196,6 +197,7 @@ public class frmQuyDinh extends Shell {
 		btnLuu.setBounds(435, 10, 94, 33);
 
 		btnHuy = new Button(composite, SWT.NONE);
+		btnHuy.setImage(SWTResourceManager.getImage(frmQuyDinh.class, "/rcp/view/page/cancel_16x16.png"));
 		btnHuy.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {

@@ -54,6 +54,7 @@ public class frmThemSuaNhanVien extends Shell {
 		composite.setBounds(0, 484, 720, 54);
 
 		btnLuu = new Button(composite, SWT.NONE);
+		btnLuu.setImage(SWTResourceManager.getImage(frmThemSuaNhanVien.class, "/rcp/view/page/save_16x16.png"));
 		btnLuu.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -65,6 +66,7 @@ public class frmThemSuaNhanVien extends Shell {
 		btnLuu.setText("Lưu");
 
 		btnHuy = new Button(composite, SWT.NONE);
+		btnHuy.setImage(SWTResourceManager.getImage(frmThemSuaNhanVien.class, "/rcp/view/page/cancel_16x16.png"));
 		btnHuy.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -72,7 +74,7 @@ public class frmThemSuaNhanVien extends Shell {
 			}
 		});
 		btnHuy.setBounds(610, 10, 94, 33);
-		btnHuy.setText("Hủy");
+		btnHuy.setText("Hủy bỏ");
 
 		Label lblNewLabel = new Label(this, SWT.NONE);
 		lblNewLabel.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));

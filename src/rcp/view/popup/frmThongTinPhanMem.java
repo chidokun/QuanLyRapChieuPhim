@@ -43,13 +43,14 @@ public class frmThongTinPhanMem extends Shell {
 		composite.setBounds(0, 447, 460, 56);
 		
 		Button btnHyB = new Button(composite, SWT.NONE);
+		btnHyB.setImage(SWTResourceManager.getImage(frmThongTinPhanMem.class, "/rcp/view/popup/yes_16x16.png"));
 		btnHyB.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				close();
 			}
 		});
-		btnHyB.setText("OK");
+		btnHyB.setText("Đóng");
 		btnHyB.setBounds(356, 10, 94, 33);
 		
 		Group grpThngTinPhn = new Group(this, SWT.NONE);

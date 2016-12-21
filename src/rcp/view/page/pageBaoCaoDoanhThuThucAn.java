@@ -25,6 +25,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import rcp.controller.ThucAnController;
 import rcp.entity.BaoCaoThucAn;
 import rcp.util.DateF;
 import rcp.util.Message;
@@ -186,11 +187,10 @@ public class pageBaoCaoDoanhThuThucAn extends Composite {
 
 			Date tuNgay = DateF.toDate(dateTuNgay.getYear(), dateTuNgay.getMonth(), dateTuNgay.getDay());
 			Date denNgay = DateF.toDate(dateDenNgay.getYear(), dateDenNgay.getMonth(), dateDenNgay.getDay());
-			int loaiKH = (chkThucAn.getSelection() ? 1 : 3) & (chkDoUong.getSelection() ? 2 : 1);
+			int loaiTA = (chkThucAn.getSelection() ? 1 : 3) & (chkDoUong.getSelection() ? 2 : 1);
 			
 			//chờ thức ăn
-			ArrayList<BaoCaoThucAn> arr = null; /// KhachHangController.baoCaoKhachHang(loaiKH,
-												/// tuNgay, denNgay);
+			ArrayList<BaoCaoThucAn> arr =ThucAnController.baoCaoThucAn(loaiTA, tuNgay, denNgay);
 
 			gridBaoCao.removeAll();
 			int stt = 1;

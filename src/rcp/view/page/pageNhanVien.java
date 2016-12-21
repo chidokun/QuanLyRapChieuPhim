@@ -136,7 +136,7 @@ public class pageNhanVien extends Composite {
 
 		Composite composite_2 = new Composite(this, SWT.NONE);
 		GridLayout gl_composite_2 = new GridLayout(3, false);
-		gl_composite_2.horizontalSpacing = 4;
+		gl_composite_2.marginBottom = 15;
 		gl_composite_2.marginTop = 10;
 		gl_composite_2.marginWidth = 15;
 		composite_2.setLayout(gl_composite_2);
@@ -252,9 +252,6 @@ public class pageNhanVien extends Composite {
 		TableColumn tblclmnTrngThi = new TableColumn(gridNhanVien, SWT.NONE);
 		tblclmnTrngThi.setWidth(100);
 		tblclmnTrngThi.setText("Trạng thái");
-		new Label(composite_2, SWT.NONE);
-		new Label(composite_2, SWT.NONE);
-		new Label(composite_2, SWT.NONE);
 
 		hienThiGiaoDien();
 	}

@@ -1,43 +1,39 @@
 /**
- *  Quản lý Rạp chiếu phim RPP 
+ * Quản lý Rạp chiếu phim RPP 
  * Author: Võ Xuân Vương – vuongvo1809@gmail.com
  */
 
 package rcp.view.page;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.wb.swt.SWTResourceManager;
-
-import rcp.entity.NhanVien;
-import rcp.entity.Ve;
-import rcp.util.DateF;
-import rcp.util.Message;
-import rcp.controller.*;
-
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.DateTime;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
-
+import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Locale;
 
 import org.eclipse.core.commands.ParameterValuesException;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DateTime;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.wb.swt.SWTResourceManager;
+
+import rcp.controller.VeController;
+import rcp.entity.Ve;
+import rcp.util.DateF;
+import rcp.util.Message;
 
 public class pageVe extends Composite {
 
-	private Ve v = null;
 	private Text txtMaVe;
 	private Text txtTenKhachHang;
 	private Button btnDatLai;
@@ -58,7 +54,11 @@ public class pageVe extends Composite {
 	 */
 	public pageVe(Composite parent, int style) {
 		super(parent, style);
-		setLayout(new GridLayout(2, false));
+		GridLayout gridLayout = new GridLayout(2, false);
+		gridLayout.verticalSpacing = 0;
+		gridLayout.marginWidth = 0;
+		gridLayout.marginHeight = 0;
+		setLayout(gridLayout);
 
 		Composite composite = new Composite(this, SWT.NONE);
 		GridData gd_composite = new GridData(SWT.LEFT, SWT.FILL, false, true, 1, 1);
@@ -67,14 +67,14 @@ public class pageVe extends Composite {
 		composite.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
 
 		txtMaVe = new Text(composite, SWT.BORDER);
-		txtMaVe.setBounds(31, 84, 228, 25);
+		txtMaVe.setBounds(29, 85, 228, 25);
 
 		Label lblTraCuV = new Label(composite, SWT.NONE);
 		lblTraCuV.setText("Tra cứu vé");
-		lblTraCuV.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
+		lblTraCuV.setForeground(SWTResourceManager.getColor(31, 116, 71));
 		lblTraCuV.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.NORMAL));
 		lblTraCuV.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
-		lblTraCuV.setBounds(31, 10, 176, 23);
+		lblTraCuV.setBounds(29, 17, 176, 23);
 
 		chkMaVe = new Button(composite, SWT.CHECK);
 		chkMaVe.addSelectionListener(new SelectionAdapter() {
@@ -86,7 +86,7 @@ public class pageVe extends Composite {
 		chkMaVe.setText("Theo mã vé");
 		chkMaVe.setSelection(true);
 		chkMaVe.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
-		chkMaVe.setBounds(31, 47, 197, 16);
+		chkMaVe.setBounds(29, 54, 197, 16);
 
 		chkTenKhachHang = new Button(composite, SWT.CHECK);
 		chkTenKhachHang.addSelectionListener(new SelectionAdapter() {
@@ -97,7 +97,7 @@ public class pageVe extends Composite {
 		});
 		chkTenKhachHang.setText("Theo tên khách hàng");
 		chkTenKhachHang.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
-		chkTenKhachHang.setBounds(31, 124, 197, 16);
+		chkTenKhachHang.setBounds(29, 124, 197, 16);
 
 		chkTheoKhoangThoiGian = new Button(composite, SWT.CHECK);
 		chkTheoKhoangThoiGian.addSelectionListener(new SelectionAdapter() {
@@ -109,7 +109,7 @@ public class pageVe extends Composite {
 		});
 		chkTheoKhoangThoiGian.setText("Theo khoảng thời gian bán vé");
 		chkTheoKhoangThoiGian.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
-		chkTheoKhoangThoiGian.setBounds(31, 205, 197, 16);
+		chkTheoKhoangThoiGian.setBounds(29, 205, 197, 16);
 
 		Button btnTimKiem = new Button(composite, SWT.NONE);
 		btnTimKiem.addSelectionListener(new SelectionAdapter() {
@@ -119,9 +119,8 @@ public class pageVe extends Composite {
 			}
 		});
 		btnTimKiem.setText("Tìm kiếm");
-		btnTimKiem.setImage(SWTResourceManager.getImage(
-				"D:\\Document\\PROGRAMING\\PROJECT\\QuanLyHocVien\\Source code\\QuanLyHocVien\\Resources\\zoom_16x16.png"));
-		btnTimKiem.setBounds(83, 352, 86, 30);
+		btnTimKiem.setImage(SWTResourceManager.getImage(pageVe.class, "/rcp/view/page/zoom_16x16.png"));
+		btnTimKiem.setBounds(81, 327, 86, 30);
 
 		btnDatLai = new Button(composite, SWT.NONE);
 		btnDatLai.addSelectionListener(new SelectionAdapter() {
@@ -131,35 +130,35 @@ public class pageVe extends Composite {
 			}
 		});
 		btnDatLai.setText("Đặt lại");
-		btnDatLai.setImage(SWTResourceManager.getImage(
-				"D:\\Document\\PROGRAMING\\PROJECT\\QuanLyHocVien\\Source code\\QuanLyHocVien\\Resources\\refresh2_16x16.png"));
-		btnDatLai.setBounds(173, 352, 86, 30);
+		btnDatLai.setImage(SWTResourceManager.getImage(pageVe.class, "/rcp/view/page/refresh2_16x16.png"));
+		btnDatLai.setBounds(171, 327, 86, 30);
 
 		dateTuNgay = new DateTime(composite, SWT.BORDER | SWT.DROP_DOWN);
 		dateTuNgay.setEnabled(false);
-		dateTuNgay.setBounds(104, 241, 155, 24);
+		dateTuNgay.setBounds(102, 235, 155, 24);
 
 		dateDenNgay = new DateTime(composite, SWT.BORDER | SWT.DROP_DOWN);
 		dateDenNgay.setEnabled(false);
-		dateDenNgay.setBounds(104, 296, 155, 24);
+		dateDenNgay.setBounds(102, 272, 155, 24);
 
 		Label lblNewLabel = new Label(composite, SWT.NONE);
 		lblNewLabel.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
-		lblNewLabel.setBounds(31, 305, 67, 15);
+		lblNewLabel.setBounds(29, 275, 67, 15);
 		lblNewLabel.setText("Đến ngày:");
 
 		txtTenKhachHang = new Text(composite, SWT.BORDER);
 		txtTenKhachHang.setEnabled(false);
-		txtTenKhachHang.setBounds(31, 161, 228, 25);
+		txtTenKhachHang.setBounds(29, 161, 228, 25);
 
 		Label lblNewLabel_1 = new Label(composite, SWT.NONE);
-		lblNewLabel_1.setBounds(30, 250, 55, 15);
+		lblNewLabel_1.setBounds(29, 241, 55, 15);
 		lblNewLabel_1.setText("Từ ngày:");
 
 		Composite composite_1 = new Composite(this, SWT.NONE);
 		GridLayout gl_composite_1 = new GridLayout(2, false);
-		gl_composite_1.marginRight = 5;
-		gl_composite_1.marginLeft = 5;
+		gl_composite_1.marginWidth = 15;
+		gl_composite_1.marginTop = 10;
+		gl_composite_1.marginBottom = 15;
 		composite_1.setLayout(gl_composite_1);
 		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		composite_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
@@ -169,9 +168,8 @@ public class pageVe extends Composite {
 		gd_btnIn.heightHint = 30;
 		gd_btnIn.widthHint = 86;
 		btnIn.setLayoutData(gd_btnIn);
-		btnIn.setText("In");
-		btnIn.setImage(SWTResourceManager.getImage(
-				"D:\\Document\\PROGRAMING\\PROJECT\\QuanLyHocVien\\Source code\\QuanLyHocVien\\Resources\\additem_16x16.png"));
+		btnIn.setText("In vé");
+		btnIn.setImage(SWTResourceManager.getImage(pageVe.class, "/rcp/view/page/print_16x16.png"));
 
 		btnHienTatCa = new Button(composite_1, SWT.NONE);
 		btnHienTatCa.addSelectionListener(new SelectionAdapter() {
@@ -181,12 +179,11 @@ public class pageVe extends Composite {
 			}
 		});
 		GridData gd_btnHienTatCa = new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1);
-		gd_btnHienTatCa.widthHint = 86;
+		gd_btnHienTatCa.widthHint = 100;
 		gd_btnHienTatCa.heightHint = 30;
 		btnHienTatCa.setLayoutData(gd_btnHienTatCa);
 		btnHienTatCa.setText("Hiện tất cả");
-		btnHienTatCa.setImage(SWTResourceManager.getImage(
-				"D:\\Document\\PROGRAMING\\PROJECT\\QuanLyHocVien\\Source code\\QuanLyHocVien\\Resources\\additem_16x16.png"));
+		btnHienTatCa.setImage(SWTResourceManager.getImage(pageVe.class, "/rcp/view/page/show_16x16.png"));
 
 		TableViewer tableViewer = new TableViewer(composite_1, SWT.BORDER | SWT.FULL_SELECTION);
 		gridVe = tableViewer.getTable();
@@ -196,7 +193,7 @@ public class pageVe extends Composite {
 
 		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnNewColumn = tableViewerColumn.getColumn();
-		tblclmnNewColumn.setWidth(50);
+		tblclmnNewColumn.setWidth(40);
 		tblclmnNewColumn.setText("STT");
 
 		TableViewerColumn tableViewerColumn_1 = new TableViewerColumn(tableViewer, SWT.NONE);
@@ -243,8 +240,6 @@ public class pageVe extends Composite {
 		TableColumn tblclmnNewColumn_9 = tableViewerColumn_9.getColumn();
 		tblclmnNewColumn_9.setWidth(100);
 		tblclmnNewColumn_9.setText("Điểm tích lũy");
-		new Label(composite_1, SWT.NONE);
-		new Label(composite_1, SWT.NONE);
 
 		hienThiGiaoDien();
 
@@ -259,7 +254,6 @@ public class pageVe extends Composite {
 	 * Hàm đặt lại điều kiện tìm kiếm
 	 */
 	public void datLai() {
-		Date today = new Date();
 		chkMaVe.setSelection(true);
 		txtMaVe.setText("");
 		txtMaVe.setEnabled(chkMaVe.getSelection());
@@ -285,6 +279,7 @@ public class pageVe extends Composite {
 	 * Hiện tất cả vé
 	 */
 	public void hienTatCa() {
+		NumberFormat c = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
 		try {
 			ArrayList<Ve> arr = VeController.taiTatCa();
 
@@ -293,7 +288,7 @@ public class pageVe extends Composite {
 			for (Ve i : arr) {
 				TableItem item = new TableItem(gridVe, SWT.NONE);
 				item.setText(new String[] { String.valueOf(stt), i.getMaVe(), i.getMaSuatChieu(), i.getMaGhe(),
-						DateF.toString(i.getNgayBanVe()), i.getMaNhanVien(), String.valueOf(i.getGiaVe()), i.getMaKM(),
+						DateF.toString(i.getNgayBanVe()), i.getMaNhanVien(), c.format(i.getGiaVe()), i.getMaKM(),
 						i.getMaKhachHang(), String.valueOf(i.getDiemTichLuy()) });
 				stt++;
 			}
@@ -308,6 +303,7 @@ public class pageVe extends Composite {
 	 * Hàm tìm kiếm
 	 */
 	public void timKiem() {
+		NumberFormat c = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
 		try {
 			kiemTraHopLe();
 			ArrayList<Ve> arr = VeController.traCuu(chkMaVe.getSelection() ? txtMaVe.getText() : null,
@@ -322,7 +318,7 @@ public class pageVe extends Composite {
 			for (Ve i : arr) {
 				TableItem item = new TableItem(gridVe, SWT.NONE);
 				item.setText(new String[] { String.valueOf(stt), i.getMaVe(), i.getMaSuatChieu(), i.getMaGhe(),
-						i.getNgayBanVe().toString(), i.getMaNhanVien(), String.valueOf(i.getGiaVe()), i.getMaKM(),
+						i.getNgayBanVe().toString(), i.getMaNhanVien(), c.format(i.getGiaVe()), i.getMaKM(),
 						i.getMaKhachHang(), String.valueOf(i.getDiemTichLuy()) });
 				stt++;
 			}
@@ -348,6 +344,6 @@ public class pageVe extends Composite {
 		if (chkTheoKhoangThoiGian.getSelection()
 				&& (DateF.toDate(dateTuNgay.getYear(), dateTuNgay.getMonth(), dateTuNgay.getDay())
 						.after(DateF.toDate(dateDenNgay.getYear(), dateDenNgay.getMonth(), dateDenNgay.getDay()))))
-			throw new ParameterValuesException("Từ ngày không được sau đến ngày", null);
+			throw new ParameterValuesException("Từ ngày không được sau Đến ngày", null);
 	}
 }

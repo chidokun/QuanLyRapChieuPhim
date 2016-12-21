@@ -62,6 +62,7 @@ public class frmThongTinRapPhim extends Shell {
 		composite.setBounds(0, 287, 409, 56);
 		
 		btnLuu = new Button(composite, SWT.NONE);
+		btnLuu.setImage(SWTResourceManager.getImage(frmThongTinRapPhim.class, "/rcp/view/page/save_16x16.png"));
 		btnLuu.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -89,6 +90,7 @@ public class frmThongTinRapPhim extends Shell {
 		btnLuu.setBounds(205, 10, 94, 33);
 		
 		btnHuyBo = new Button(composite, SWT.NONE);
+		btnHuyBo.setImage(SWTResourceManager.getImage(frmThongTinRapPhim.class, "/rcp/view/page/cancel_16x16.png"));
 		btnHuyBo.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -124,6 +126,34 @@ public class frmThongTinRapPhim extends Shell {
 		
 		txtEmail = new Text(this, SWT.BORDER);
 		txtEmail.setBounds(130, 230, 241, 24);
+		
+		Label label = new Label(this, SWT.NONE);
+		label.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		label.setText("*");
+		label.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		label.setBounds(374, 103, 13, 15);
+		
+		Label label_2 = new Label(this, SWT.NONE);
+		label_2.setText("*");
+		label_2.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		label_2.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		label_2.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		label_2.setBounds(374, 145, 13, 15);
+		
+		Label label_3 = new Label(this, SWT.NONE);
+		label_3.setText("*");
+		label_3.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		label_3.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		label_3.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		label_3.setBounds(374, 188, 13, 15);
+		
+		Label label_4 = new Label(this, SWT.NONE);
+		label_4.setText("*");
+		label_4.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		label_4.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		label_4.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		label_4.setBounds(374, 233, 13, 15);
 		createContents();
 	}
 

@@ -122,6 +122,7 @@ public class pageKhachHang extends Composite {
 
 		Composite composite_1 = new Composite(this, SWT.NONE);
 		GridLayout gl_composite_1 = new GridLayout(3, false);
+		gl_composite_1.marginBottom = 15;
 		gl_composite_1.marginWidth = 15;
 		gl_composite_1.horizontalSpacing = 4;
 		gl_composite_1.marginTop = 10;
@@ -181,6 +182,7 @@ public class pageKhachHang extends Composite {
 
 		TableViewer tableViewer = new TableViewer(composite_1, SWT.BORDER | SWT.FULL_SELECTION);
 		gridKhachHang = tableViewer.getTable();
+		gridKhachHang.setLinesVisible(true);
 		gridKhachHang.setHeaderVisible(true);
 		GridData gd_gridKhachHang = new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1);
 		gd_gridKhachHang.minimumWidth = 5;
@@ -236,9 +238,6 @@ public class pageKhachHang extends Composite {
 		TableColumn tblclmnNewColumn_6 = tableViewerColumn_9.getColumn();
 		tblclmnNewColumn_6.setWidth(100);
 		tblclmnNewColumn_6.setText("Ngày đăng ký");
-		new Label(composite_1, SWT.NONE);
-		new Label(composite_1, SWT.NONE);
-		new Label(composite_1, SWT.NONE);
 
 		hienThiGiaoDien();
 	}

@@ -69,6 +69,7 @@ public class frmKetNoiCSDL extends Shell {
 				txtPassword.setBounds(131, 189, 241, 24);
 		
 				Button btnKetNoi = new Button(this, SWT.NONE);
+				btnKetNoi.setImage(SWTResourceManager.getImage(frmKetNoiCSDL.class, "/rcp/view/popup/moveright_16x16.png"));
 				btnKetNoi.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
@@ -100,6 +101,7 @@ public class frmKetNoiCSDL extends Shell {
 		composite.setBounds(0, 345, 409, 56);
 
 		Button btnLuu = new Button(composite, SWT.NONE);
+		btnLuu.setImage(SWTResourceManager.getImage(frmKetNoiCSDL.class, "/rcp/view/page/save_16x16.png"));
 		btnLuu.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -131,6 +133,7 @@ public class frmKetNoiCSDL extends Shell {
 		btnLuu.setBounds(205, 10, 94, 33);
 
 		Button btnHuyBo = new Button(composite, SWT.NONE);
+		btnHuyBo.setImage(SWTResourceManager.getImage(frmKetNoiCSDL.class, "/rcp/view/page/cancel_16x16.png"));
 		btnHuyBo.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {

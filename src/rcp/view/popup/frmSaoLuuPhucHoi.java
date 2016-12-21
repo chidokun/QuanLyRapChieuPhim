@@ -51,6 +51,7 @@ public class frmSaoLuuPhucHoi extends Shell {
 		composite.setBounds(0, 455, 510, 56);
 
 		Button btnDong = new Button(composite, SWT.NONE);
+		btnDong.setImage(SWTResourceManager.getImage(frmSaoLuuPhucHoi.class, "/rcp/view/popup/yes_16x16.png"));
 		btnDong.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -91,6 +92,7 @@ public class frmSaoLuuPhucHoi extends Shell {
 		btnDuyetSaoLuu.setText("Duyệt...");
 
 		Button btnSaoLuu = new Button(grpSaoLu, SWT.NONE);
+		btnSaoLuu.setImage(SWTResourceManager.getImage(frmSaoLuuPhucHoi.class, "/rcp/view/popup/backup_16x16.png"));
 		btnSaoLuu.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -142,6 +144,7 @@ public class frmSaoLuuPhucHoi extends Shell {
 		btnDuyetPhucHoi.setBounds(344, 45, 85, 26);
 
 		Button btnPhucHoi = new Button(grpPhcHi, SWT.NONE);
+		btnPhucHoi.setImage(SWTResourceManager.getImage(frmSaoLuuPhucHoi.class, "/rcp/view/popup/restore_16x16.png"));
 		btnPhucHoi.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {

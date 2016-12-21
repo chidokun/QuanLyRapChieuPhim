@@ -11,7 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Date;
 
+import rcp.entity.BaoCaoThucAn;
 import rcp.entity.ThucAn;
 import rcp.entity.ThucAnKichCo;
 import rcp.util.Database;
@@ -174,5 +176,29 @@ public class ThucAnModel {
 		} finally {
 			con.close();
 		}		
+	}
+	
+	/**
+	 * Báo cáo thức ăn
+	 * 
+	 * @param loaiTA
+	 *            0: cả hai loại. 1: Thức ăn. 2: Đồ uống
+	 * @param tuNgay
+	 * @param denNgay
+	 * @return
+	 * @throws SQLException
+	 */
+	public static ArrayList<BaoCaoThucAn> baoCaoThucAn(int loaiTA, Date tuNgay, Date denNgay)
+			throws SQLException {
+		ResultSet rs = Database.callStored("sp_BaoCao_DoanhThuThucAn", loaiTA, tuNgay, denNgay);
+
+		ArrayList<BaoCaoThucAn> arr = new ArrayList<>();
+		while (rs.next()) {
+			arr.add(new BaoCaoThucAn(rs.getString(1), rs.getString(2), rs.getString(3),
+					rs.getDouble(4)));
+		}
+
+		Database.connect().close();
+		return arr;
 	}
 }

@@ -152,16 +152,18 @@ public class frmThemSuaKhachHang extends Shell {
 		composite.setBounds(0, 336, 677, 53);
 
 		Button btnHuy = new Button(composite, SWT.NONE);
+		btnHuy.setImage(SWTResourceManager.getImage(frmThemSuaKhachHang.class, "/rcp/view/page/cancel_16x16.png"));
 		btnHuy.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				close();
 			}
 		});
-		btnHuy.setText("Hủy");
+		btnHuy.setText("Hủy bỏ");
 		btnHuy.setBounds(573, 11, 94, 33);
 
 		Button btnLuu = new Button(composite, SWT.NONE);
+		btnLuu.setImage(SWTResourceManager.getImage(frmThemSuaKhachHang.class, "/rcp/view/page/save_16x16.png"));
 		btnLuu.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {

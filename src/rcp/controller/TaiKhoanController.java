@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import rcp.entity.TaiKhoan;
 import rcp.entity.TaiKhoan1;
 import rcp.model.TaiKhoanModel;
-import rcp.util.Database;
 
 /**
  * @author Tuan
