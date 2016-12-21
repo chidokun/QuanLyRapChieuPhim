@@ -25,6 +25,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 import rcp.controller.GheController;
+import rcp.util.Message;
 import rcp.util.Window;
 
 public class frmChonGhe extends Shell {
@@ -46,9 +47,9 @@ public class frmChonGhe extends Shell {
 	 * 
 	 * @param display
 	 */
-	public frmChonGhe(Display display,String maSuatChieu) {
+	public frmChonGhe(Display display, String maSuatChieu) {
 		super(display, SWT.CLOSE | SWT.MIN | SWT.TITLE);
-		this.maSuatChieu=maSuatChieu;
+		this.maSuatChieu = maSuatChieu;
 		setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		GridLayout gridLayout = new GridLayout(1, false);
 		gridLayout.marginWidth = 0;
@@ -253,7 +254,12 @@ public class frmChonGhe extends Shell {
 		// đồng thời hủy sự kiện click của nó, ko cho người dùng chọn ghế có
 		// người
 		try {
-			ArrayList<String> dsGheCoNguoi = GheController.layDanhSach(maSuatChieu); // load danh sách đó vào đây
+			ArrayList<String> dsGheCoNguoi = GheController.layDanhSach(maSuatChieu); // load
+																						// danh
+																						// sách
+																						// đó
+																						// vào
+																						// đây
 
 			for (String i : dsGheCoNguoi) {
 				CLabel item = layGhe(i);
@@ -284,9 +290,10 @@ public class frmChonGhe extends Shell {
 		// Disable the check that prevents subclassing of SWT components
 	}
 
-	/*public static void main(String[] args) {
-		Window.open(new frmChonGhe(Display.getCurrent(),maSuatChieu));
-	}*/
+	/*
+	 * public static void main(String[] args) { Window.open(new
+	 * frmChonGhe(Display.getCurrent(),maSuatChieu)); }
+	 */
 
 	/**
 	 * Trả về đối tượng đại diện cho mã ghế đó trên giao diện
@@ -320,8 +327,13 @@ public class frmChonGhe extends Shell {
 
 		return String.format("%1$c%2$02d", p, p < 'K' ? m + 1 : m + 5);
 	}
-	
+
 	public void luu() {
-		//làm gì đó là tùy Hoàng
+		if (dsGheDaChon.size() == 0) {
+			Message.show("Bạn chưa chọn ghế", "Lỗi", SWT.OK | SWT.ICON_ERROR, getShell());
+		} else {
+			Window.open(new frmBanVe(getDisplay(), maSuatChieu, dsGheDaChon));
+			close();
+		}
 	}
 }

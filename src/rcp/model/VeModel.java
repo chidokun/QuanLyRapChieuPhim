@@ -5,13 +5,21 @@
 
 package rcp.model;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.eclipse.swt.SWT;
+
+import rcp.entity.Phim;
+import rcp.entity.SuatPhim;
 import rcp.entity.Ve;
 import rcp.util.Database;
+import rcp.util.Message;
 
 public class VeModel {
 
@@ -47,6 +55,49 @@ public class VeModel {
 		}
 
 		return arr;
+	}
+	public static String layMaKhuyenMai(String maKH) throws SQLException {
+		CallableStatement st = Database.connect().prepareCall("{call sp_ThietLapKhuyenMai_Ve (?,?)}");
+		st.setObject(1, maKH);
+		st.registerOutParameter(2, Types.VARCHAR);
+		st.execute();
+		return st.getString(2);
+	}
+	public static Double tinhGiaVe(String maSuatChieu, String maGhe, String maKhuyenMai) throws SQLException {
+		CallableStatement st = Database.connect().prepareCall("{call sp_TinhGiaVe_Ve (?,?,?,?)}");
+		st.setObject(1, maSuatChieu);
+		st.setObject(2, maGhe);
+		st.setObject(3, maKhuyenMai);
+		st.registerOutParameter(4, Types.DOUBLE);
+		st.execute();
+		return st.getDouble(4);
+	}
+	public static int tinhDiemTichLuy(Double giaVe) throws SQLException {
+		CallableStatement st = Database.connect().prepareCall("{call sp_TinhDiemTichLuy_Ve (?,?)}");
+		st.setObject(1, giaVe);
+		st.registerOutParameter(2, Types.INTEGER);
+		st.execute();
+		return st.getInt(2);
+	}
+	public static boolean them(ArrayList<Ve> aVe) throws SQLException {
+		Connection con = Database.connect();
+		try {
+			con.setAutoCommit(false);
+			
+			for(Ve v:aVe)
+			{
+				Database.callStoredUpdate("sp_ThemVe", v.getMaSuatChieu(),v.getMaGhe(),v.getMaNhanVien(),
+					v.getGiaVe(),v.getMaKM(),v.getMaKhachHang(),v.getDiemTichLuy());
+			}
+			con.commit();
+			return true;
+		} catch (Exception e) {
+			con.rollback();
+			e.printStackTrace();
+			return false;
+		} finally {
+			con.close();
+		}
 	}
 
 }
