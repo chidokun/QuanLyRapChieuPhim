@@ -5,21 +5,19 @@
 
 package rcp.view.popup;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.wb.swt.SWTResourceManager;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.wb.swt.ResourceManager;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Spinner;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.jface.viewers.ComboViewer;
-import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.jface.fieldassist.ControlDecoration;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.wb.swt.ResourceManager;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 public class frmThongTinNhanVien extends Shell {
 	private Text text;

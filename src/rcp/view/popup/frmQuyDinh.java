@@ -207,6 +207,7 @@ public class frmQuyDinh extends Shell {
 		btnHuy.setText("Hủy bỏ");
 		btnHuy.setBounds(535, 10, 94, 33);
 
+		setDefaultButton(btnLuu);
 		hienThiGiaoDien();
 	}
 

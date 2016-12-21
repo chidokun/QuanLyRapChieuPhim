@@ -5,8 +5,6 @@
 
 package rcp.entity;
 
-import java.util.*;
-
 public class QuyenHan {
 	private String maQuyen;
 	private String tenQuyen;

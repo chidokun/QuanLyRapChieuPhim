@@ -3,14 +3,12 @@ package rcp.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
-import rcp.entity.Phim;
 import rcp.util.Database;
 
 public class GheModel {
 	/**
-	 * Tra cứu tên phim theo ngafy
+	 * Tra cứu tên phim theo ngày
 	 * 
 	 * @param ngay
 	 * @return

@@ -26,7 +26,7 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 import rcp.entity.BaoCaoPhim;
-import rcp.model.PhimController;
+import rcp.controller.PhimController;
 import rcp.util.DateF;
 import rcp.util.Message;
 

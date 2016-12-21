@@ -42,16 +42,16 @@ public class frmThongTinPhanMem extends Shell {
 		Composite composite = new Composite(this, SWT.NONE);
 		composite.setBounds(0, 447, 460, 56);
 		
-		Button btnHyB = new Button(composite, SWT.NONE);
-		btnHyB.setImage(SWTResourceManager.getImage(frmThongTinPhanMem.class, "/rcp/view/popup/yes_16x16.png"));
-		btnHyB.addSelectionListener(new SelectionAdapter() {
+		Button btnDong = new Button(composite, SWT.NONE);
+		btnDong.setImage(SWTResourceManager.getImage(frmThongTinPhanMem.class, "/rcp/view/popup/yes_16x16.png"));
+		btnDong.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				close();
 			}
 		});
-		btnHyB.setText("Đóng");
-		btnHyB.setBounds(356, 10, 94, 33);
+		btnDong.setText("Đóng");
+		btnDong.setBounds(356, 10, 94, 33);
 		
 		Group grpThngTinPhn = new Group(this, SWT.NONE);
 		grpThngTinPhn.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
@@ -141,6 +141,8 @@ public class frmThongTinPhanMem extends Shell {
 		lblV.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblV.setBounds(55, 153, 253, 15);
 		createContents();
+		
+		setDefaultButton(btnDong);
 	}
 
 	/**

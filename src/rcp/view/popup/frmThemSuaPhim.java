@@ -5,56 +5,57 @@
 
 package rcp.view.popup;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.wb.swt.SWTResourceManager;
-
-import rcp.controller.PhimController;
-import rcp.util.DateF;
-import rcp.util.Message;
-
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.wb.swt.ResourceManager;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Spinner;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.jface.viewers.ComboViewer;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Button;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Iterator;
-
-import rcp.entity.*;
-import rcp.controller.*;
 
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
-import org.eclipse.swt.widgets.TabFolder;
-import org.eclipse.swt.widgets.TabItem;
+import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.widgets.DateTime;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.jface.viewers.CheckboxTableViewer;
-import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.ExpandBar;
-import org.eclipse.swt.widgets.ExpandItem;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.jface.viewers.TableViewerColumn;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.events.PaintEvent;
+import org.eclipse.swt.events.PaintListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DateTime;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Spinner;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.wb.swt.SWTResourceManager;
+
+import rcp.controller.DinhDangController;
+import rcp.controller.HinhThucController;
+import rcp.controller.NgonNguController;
+import rcp.controller.NhaSanXuatController;
+import rcp.controller.NuocSXController;
+import rcp.controller.PhimController;
+import rcp.controller.SuatPhimController;
+import rcp.entity.DinhDang;
+import rcp.entity.HinhThuc;
+import rcp.entity.NgonNgu;
+import rcp.entity.NhaSanXuat;
+import rcp.entity.NuocSX;
+import rcp.entity.Phim;
+import rcp.entity.SuatPhim;
+import rcp.util.DateF;
+import rcp.util.Message;
 
 public class frmThemSuaPhim extends Shell {
 	private Text txtMaPhim;
@@ -103,24 +104,25 @@ public class frmThemSuaPhim extends Shell {
 		Label lblNewLabel = new Label(this, SWT.NONE);
 		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		lblNewLabel.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblNewLabel.setBounds(101, 55, 201, 15);
+		lblNewLabel.setBounds(101, 45, 201, 15);
 		lblNewLabel.setText("Vui lòng nhập đầy đủ thông tin");
 
 		labTenForm = new Label(this, SWT.NONE);
-		labTenForm.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
+		labTenForm.setForeground(SWTResourceManager.getColor(31, 116, 71));
 		labTenForm.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.NORMAL));
 		labTenForm.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		labTenForm.setBounds(101, 26, 176, 23);
+		labTenForm.setBounds(101, 16, 176, 23);
 
 		Label label_1 = new Label(this, SWT.NONE);
 		label_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label_1.setImage(ResourceManager.getPluginImage("QuanLyRapChieuPhim", "res/imgThucAn_64p.png"));
-		label_1.setBounds(30, 20, 64, 64);
+		label_1.setImage(SWTResourceManager.getImage(frmThemSuaPhim.class, "/rcp/view/popup/imgPhim_64p.png"));
+		label_1.setBounds(30, 10, 64, 64);
 
 		Composite composite = new Composite(this, SWT.NONE);
-		composite.setBounds(0, 582, 561, 56);
+		composite.setBounds(0, 598, 606, 56);
 
 		btnLuu = new Button(composite, SWT.NONE);
+		btnLuu.setImage(SWTResourceManager.getImage(frmThemSuaPhim.class, "/rcp/view/page/save_16x16.png"));
 		btnLuu.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -133,9 +135,10 @@ public class frmThemSuaPhim extends Shell {
 			}
 		});
 		btnLuu.setText("Lưu");
-		btnLuu.setBounds(330, 10, 94, 33);
+		btnLuu.setBounds(402, 10, 94, 33);
 
 		btnHuy = new Button(composite, SWT.NONE);
+		btnHuy.setImage(SWTResourceManager.getImage(frmThemSuaPhim.class, "/rcp/view/page/cancel_16x16.png"));
 		btnHuy.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -143,18 +146,18 @@ public class frmThemSuaPhim extends Shell {
 			}
 		});
 		btnHuy.setText("Hủy bỏ");
-		btnHuy.setBounds(442, 10, 94, 33);
+		btnHuy.setBounds(502, 10, 94, 33);
 
 		tabFolder = new CTabFolder(this, SWT.BORDER);
 		tabFolder.marginWidth = 5;
 		tabFolder.marginHeight = 5;
 		tabFolder.setTabHeight(25);
 		tabFolder.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		tabFolder.setBounds(10, 90, 541, 486);
+		tabFolder.setBounds(20, 90, 561, 486);
 		tabFolder.setSelectionBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 
 		tabPhim = new CTabItem(tabFolder, SWT.NONE);
-		tabPhim.setText("Phim");
+		tabPhim.setText("   Phim   ");
 		tabFolder.setSelection(tabPhim);
 
 		Composite composite_1 = new Composite(tabFolder, SWT.NONE);
@@ -168,7 +171,7 @@ public class frmThemSuaPhim extends Shell {
 		lblMPhim.setBounds(23, 33, 75, 15);
 
 		txtMaPhim = new Text(composite_1, SWT.BORDER | SWT.READ_ONLY);
-		txtMaPhim.setBounds(102, 30, 141, 24);
+		txtMaPhim.setBounds(104, 30, 147, 24);
 
 		Label lblTnPhim = new Label(composite_1, SWT.NONE);
 		lblTnPhim.setText("Tên phim:");
@@ -186,7 +189,7 @@ public class frmThemSuaPhim extends Shell {
 					controlDecoration.hide();
 			}
 		});
-		txtTenPhim.setBounds(102, 75, 141, 72);
+		txtTenPhim.setBounds(104, 75, 147, 72);
 
 		Label lblTrngThi = new Label(composite_1, SWT.NONE);
 		lblTrngThi.setText("Trạng thái:");
@@ -197,24 +200,24 @@ public class frmThemSuaPhim extends Shell {
 		ComboViewer comboViewer = new ComboViewer(composite_1, SWT.NONE);
 		cobTrangThai = comboViewer.getCombo();
 		cobTrangThai.setItems(new String[] { "Công chiếu", "Không công chiếu" });
-		cobTrangThai.setBounds(351, 30, 141, 24);
+		cobTrangThai.setBounds(351, 30, 164, 23);
 
 		Label label = new Label(composite_1, SWT.NONE);
 		label.setText("Thời lượng:");
 		label.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label.setBounds(25, 172, 75, 15);
+		label.setBounds(23, 174, 75, 15);
 
 		ComboViewer comboViewer_1 = new ComboViewer(composite_1, SWT.NONE);
 		cobNgonNgu = comboViewer_1.getCombo();
-		cobNgonNgu.setBounds(353, 215, 141, 23);
+		cobNgonNgu.setBounds(351, 215, 164, 23);
 		cobNgonNgu.select(0);
 
 		Label label_3 = new Label(composite_1, SWT.NONE);
 		label_3.setText("Ngôn ngữ:");
 		label_3.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		label_3.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label_3.setBounds(272, 218, 75, 15);
+		label_3.setBounds(270, 218, 75, 15);
 
 		Label label_4 = new Label(composite_1, SWT.NONE);
 		label_4.setText("Năm sản xuất:");
@@ -232,28 +235,28 @@ public class frmThemSuaPhim extends Shell {
 		lblNhSnXut.setText("Nhà sản xuất:");
 		lblNhSnXut.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		lblNhSnXut.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblNhSnXut.setBounds(272, 263, 75, 15);
+		lblNhSnXut.setBounds(270, 263, 75, 15);
 
 		ComboViewer comboViewer_3 = new ComboViewer(composite_1, SWT.NONE);
 		cobNhaSX = comboViewer_3.getCombo();
-		cobNhaSX.setBounds(353, 260, 141, 23);
+		cobNhaSX.setBounds(351, 260, 164, 23);
 		cobNhaSX.select(0);
 
 		Label label_9 = new Label(composite_1, SWT.NONE);
 		label_9.setText("Tóm tắt:");
 		label_9.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		label_9.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label_9.setBounds(25, 353, 75, 15);
+		label_9.setBounds(23, 353, 75, 15);
 
 		txtTomTat = new StyledText(composite_1, SWT.WRAP | SWT.V_SCROLL | SWT.BORDER | SWT.WRAP);
-		txtTomTat.setBounds(107, 353, 385, 81);
+		txtTomTat.setBounds(104, 353, 411, 81);
 
 		spnNamSX = new Spinner(composite_1, SWT.BORDER);
-		spnNamSX.setBounds(104, 215, 141, 24);
+		spnNamSX.setBounds(104, 215, 147, 24);
 		spnNamSX.setMaximum(3000);
 
 		spnThoiLuong = new Spinner(composite_1, SWT.BORDER);
-		spnThoiLuong.setBounds(104, 171, 141, 24);
+		spnThoiLuong.setBounds(104, 171, 147, 24);
 		spnThoiLuong.setMaximum(1000);
 
 		Label label_8 = new Label(composite_1, SWT.NONE);
@@ -263,30 +266,30 @@ public class frmThemSuaPhim extends Shell {
 		label_8.setBounds(270, 80, 75, 15);
 
 		txtDienVien = new Text(composite_1, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
-		txtDienVien.setBounds(351, 78, 141, 69);
+		txtDienVien.setBounds(351, 78, 164, 69);
 
 		Label label_10 = new Label(composite_1, SWT.NONE);
 		label_10.setText("Doanh thu:");
 		label_10.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		label_10.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label_10.setBounds(272, 308, 75, 15);
+		label_10.setBounds(270, 308, 75, 15);
 
 		txtDoanhThu = new Text(composite_1, SWT.BORDER | SWT.READ_ONLY);
-		txtDoanhThu.setBounds(353, 305, 141, 24);
+		txtDoanhThu.setBounds(351, 305, 164, 24);
 
 		Label label_2 = new Label(composite_1, SWT.NONE);
 		label_2.setText("Nước sản xuất:");
 		label_2.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		label_2.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label_2.setBounds(270, 175, 75, 15);
+		label_2.setBounds(270, 174, 75, 15);
 
 		ComboViewer comboViewer_2 = new ComboViewer(composite_1, SWT.NONE);
 		cobNuocSX = comboViewer_2.getCombo();
-		cobNuocSX.setBounds(351, 172, 141, 23);
+		cobNuocSX.setBounds(351, 172, 164, 23);
 		cobNuocSX.select(0);
 
 		dateTimeNgayChieu = new DateTime(composite_1, SWT.BORDER);
-		dateTimeNgayChieu.setBounds(102, 305, 141, 24);
+		dateTimeNgayChieu.setBounds(104, 305, 147, 24);
 
 		Label lblNgyChiu = new Label(composite_1, SWT.NONE);
 		lblNgyChiu.setText("Ngày chiếu");
@@ -297,11 +300,11 @@ public class frmThemSuaPhim extends Shell {
 		ComboViewer comboViewer_7 = new ComboViewer(composite_1, SWT.NONE);
 		cobGioiHanTuoi = comboViewer_7.getCombo();
 		cobGioiHanTuoi.setItems(new String[] { "0", "16", "18", "21" });
-		cobGioiHanTuoi.setBounds(102, 260, 141, 23);
+		cobGioiHanTuoi.setBounds(104, 260, 147, 23);
 		cobGioiHanTuoi.select(0);
 
 		tabSuatPhim = new CTabItem(tabFolder, SWT.NONE);
-		tabSuatPhim.setText("Suất phim");
+		tabSuatPhim.setText("   Suất phim   ");
 
 		Composite composite_2 = new Composite(tabFolder, SWT.NONE);
 		composite_2.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
@@ -314,7 +317,7 @@ public class frmThemSuaPhim extends Shell {
 			}
 		});
 		tableSuatPhim.setHeaderVisible(true);
-		tableSuatPhim.setBounds(10, 134, 505, 300);
+		tableSuatPhim.setBounds(20, 134, 505, 300);
 
 		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnNewColumn = tableViewerColumn.getColumn();
@@ -338,10 +341,10 @@ public class frmThemSuaPhim extends Shell {
 
 		Group group = new Group(composite_2, SWT.NONE);
 		group.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		group.setBounds(10, 10, 505, 105);
+		group.setBounds(20, 10, 505, 105);
 
 		Label lblnhDng = new Label(group, SWT.NONE);
-		lblnhDng.setText("Định dạng");
+		lblnhDng.setText("Định dạng:");
 		lblnhDng.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		lblnhDng.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblnhDng.setBounds(24, 24, 75, 15);
@@ -351,7 +354,7 @@ public class frmThemSuaPhim extends Shell {
 		cobDinhDang.setBounds(105, 21, 141, 23);
 
 		Label lblNgnNg = new Label(group, SWT.NONE);
-		lblNgnNg.setText("Ngôn ngữ");
+		lblNgnNg.setText("Ngôn ngữ:");
 		lblNgnNg.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		lblNgnNg.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblNgnNg.setBounds(24, 64, 75, 15);
@@ -361,16 +364,17 @@ public class frmThemSuaPhim extends Shell {
 		cobNgonNgu_SuatPhim.setBounds(105, 61, 141, 23);
 
 		Label lblHnhThc = new Label(group, SWT.NONE);
-		lblHnhThc.setText("Hình thức");
+		lblHnhThc.setText("Hình thức:");
 		lblHnhThc.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		lblHnhThc.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblHnhThc.setBounds(273, 27, 75, 15);
+		lblHnhThc.setBounds(266, 24, 66, 15);
 
 		ComboViewer comboViewer_6 = new ComboViewer(group, SWT.NONE);
 		cobHinhThuc = comboViewer_6.getCombo();
-		cobHinhThuc.setBounds(354, 24, 141, 23);
+		cobHinhThuc.setBounds(340, 21, 141, 23);
 
 		btnThem = new Button(group, SWT.NONE);
+		btnThem.setImage(SWTResourceManager.getImage(frmThemSuaPhim.class, "/rcp/view/popup/add_16x16.png"));
 		btnThem.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -378,9 +382,10 @@ public class frmThemSuaPhim extends Shell {
 			}
 		});
 		btnThem.setText("Thêm");
-		btnThem.setBounds(339, 61, 75, 25);
+		btnThem.setBounds(325, 58, 75, 26);
 
 		btnXoa = new Button(group, SWT.NONE);
+		btnXoa.setImage(SWTResourceManager.getImage(frmThemSuaPhim.class, "/rcp/view/popup/remove_16x16.png"));
 		btnXoa.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -388,7 +393,7 @@ public class frmThemSuaPhim extends Shell {
 			}
 		});
 		btnXoa.setText("Xóa");
-		btnXoa.setBounds(420, 61, 75, 25);
+		btnXoa.setBounds(406, 58, 75, 26);
 		createContents();
 		controlDecoration = new ControlDecoration(txtTenPhim, SWT.LEFT | SWT.TOP);
 		controlDecoration.setDescriptionText("Tên phim là bắt buộc");
@@ -404,7 +409,7 @@ public class frmThemSuaPhim extends Shell {
 	 */
 	protected void createContents() {
 		setText("Thêm sửa phim");
-		setSize(570, 667);
+		setSize(612, 683);
 
 	}
 
@@ -474,7 +479,6 @@ public class frmThemSuaPhim extends Shell {
 				i++;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -489,7 +493,6 @@ public class frmThemSuaPhim extends Shell {
 				i++;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -504,7 +507,6 @@ public class frmThemSuaPhim extends Shell {
 				i++;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -519,7 +521,6 @@ public class frmThemSuaPhim extends Shell {
 				i++;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -535,7 +536,6 @@ public class frmThemSuaPhim extends Shell {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -557,7 +557,6 @@ public class frmThemSuaPhim extends Shell {
 						return;
 					}
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			} else {
@@ -602,7 +601,6 @@ public class frmThemSuaPhim extends Shell {
 								return;
 							}
 						} catch (SQLException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
@@ -641,7 +639,6 @@ public class frmThemSuaPhim extends Shell {
 				else
 					Message.show("Thêm phim không thành công", "Thông báo", SWT.OK | SWT.ICON_INFORMATION, getShell());
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -686,7 +683,6 @@ public class frmThemSuaPhim extends Shell {
 			}
 			tableSuatPhim.select(0);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -709,7 +705,6 @@ public class frmThemSuaPhim extends Shell {
 			dateTimeNgayChieu.setDate(DateF.getYear(phim.getNgayKhoiChieu()), DateF.getMonth(phim.getNgayKhoiChieu()),
 					DateF.getDay(phim.getNgayKhoiChieu()));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -724,7 +719,6 @@ public class frmThemSuaPhim extends Shell {
 					Message.show("Cập nhât phim không thành công", "Thông báo", SWT.OK | SWT.ICON_INFORMATION,
 							getShell());
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

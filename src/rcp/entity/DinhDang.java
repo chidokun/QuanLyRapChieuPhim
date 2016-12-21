@@ -5,8 +5,6 @@
 
 package rcp.entity;
 
-import java.util.*;
-
 /**
  * @author Toàn
  *

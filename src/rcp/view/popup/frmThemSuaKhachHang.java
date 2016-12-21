@@ -192,6 +192,8 @@ public class frmThemSuaKhachHang extends Shell {
 		isInsert = kh == null;
 		this.kh = kh;
 		createContents();
+		
+		setDefaultButton(btnLuu);
 	}
 
 	/**

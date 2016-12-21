@@ -33,7 +33,7 @@ import rcp.util.DateF;
 import rcp.util.Message;
 
 public class pageHoaDon extends Composite {
-	NumberFormat c = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+	private NumberFormat c = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
 	
 	private Table gridCTHD;
 	private Button chkMaHoaDon;
@@ -69,7 +69,7 @@ public class pageHoaDon extends Composite {
 
 		Label lblTraCuKha = new Label(composite, SWT.NONE);
 		lblTraCuKha.setText("Tra cứu hóa đơn");
-		lblTraCuKha.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
+		lblTraCuKha.setForeground(SWTResourceManager.getColor(31, 116, 71));
 		lblTraCuKha.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.NORMAL));
 		lblTraCuKha.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
 		lblTraCuKha.setBounds(29, 17, 176, 23);
@@ -146,8 +146,6 @@ public class pageHoaDon extends Composite {
 		gl_composite_1.marginWidth = 15;
 		gl_composite_1.marginTop = 10;
 		gl_composite_1.marginBottom = 15;
-		gl_composite_1.marginRight = 5;
-		gl_composite_1.marginLeft = 5;
 		composite_1.setLayout(gl_composite_1);
 		GridData gd_composite_1 = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
 		gd_composite_1.widthHint = 999;

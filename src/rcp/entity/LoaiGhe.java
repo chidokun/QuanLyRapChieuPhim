@@ -5,8 +5,6 @@
 
 package rcp.entity;
 
-import java.util.*;
-
 public class LoaiGhe {
 	private String maLoaiGhe;
 	private String tenLoaiGhe;

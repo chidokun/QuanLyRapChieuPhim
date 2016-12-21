@@ -228,6 +228,8 @@ public class frmThemSuaNhanVien extends Shell {
 		isInsert = nv == null;
 		this.nv = nv;
 		createContents();
+		
+		setDefaultButton(btnLuu);
 	}
 
 	/**

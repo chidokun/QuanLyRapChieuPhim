@@ -5,19 +5,13 @@
 
 package rcp.controller;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
 import rcp.entity.ChiTietHDThucAn;
 import rcp.entity.HoaDonThucAn;
-import rcp.entity.ThucAn;
-import rcp.entity.ThucAnKichCo;
 import rcp.model.HoaDonModel;
-import rcp.model.ThucAnModel;
-import rcp.util.Database;
 
 /**
  * @author Toàn
@@ -49,18 +43,17 @@ public class HoaDonController {
 
 	/**
 	 * @param maHoaDon
-	 * @return
-	 *  Lấy thông tin chi tiết hóa đơn
+	 * @return Lấy thông tin chi tiết hóa đơn
 	 */
 	public static ArrayList<ChiTietHDThucAn> layCTHoaDon(String maHoaDon) throws SQLException {
 		return HoaDonModel.layCTHoaDon(maHoaDon);
 	}
-	public static String hienMa() throws SQLException
-	{
+
+	public static String hienMa() throws SQLException {
 		return HoaDonModel.hienMa();
 	}
-	public static boolean them(HoaDonThucAn hd, ArrayList<ChiTietHDThucAn> arr) throws SQLException
-	{
+
+	public static boolean them(HoaDonThucAn hd, ArrayList<ChiTietHDThucAn> arr) throws SQLException {
 		return HoaDonModel.them(hd, arr);
 	}
 

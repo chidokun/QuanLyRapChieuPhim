@@ -203,6 +203,8 @@ public class frmSaoLuuPhucHoi extends Shell {
 		btnDuyetBin.setText("Duyệt...");
 		btnDuyetBin.setBounds(344, 45, 85, 26);
 		createContents();
+		
+		setDefaultButton(btnDong);
 	}
 
 	/**

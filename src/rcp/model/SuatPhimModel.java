@@ -4,12 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
-import rcp.entity.NhanVien;
-import rcp.entity.Phim;
 import rcp.entity.SuatPhim;
-import rcp.entity.TaiKhoan;
 import rcp.util.Database;
 
 public class SuatPhimModel {

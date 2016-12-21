@@ -5,12 +5,14 @@
 
 package rcp.controller;
 
-import java.sql.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.*;
-import rcp.entity.*;
-import rcp.model.*;
-import rcp.util.Database;
+
+import rcp.entity.Phim;
+import rcp.entity.SuatChieu;
+import rcp.entity.SuatPhim;
+import rcp.model.SuatChieuModel;
 
 /**
  * @author Toàn

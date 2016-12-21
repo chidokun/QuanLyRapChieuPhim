@@ -107,4 +107,22 @@ public class TaiKhoanModel {
 		return Database.callStoredUpdate("sp_DatLaiMatKhau", tk.getTenDangNhap()) > 0;
 	}
 
+	/**
+	 * Lấy một tài khoản
+	 * 
+	 * @param tenDangNhap
+	 * @return
+	 * @throws SQLException
+	 */
+	public static String layMatKhau(String tenDangNhap) throws SQLException {
+		ResultSet rs = Database.callStored("sp_LayMatKhau", tenDangNhap);
+
+		rs.next();
+		String pass = rs.getString(1);
+		Database.connect().close();
+
+		if (pass == null)
+			throw new SQLException();
+		return pass;
+	}
 }

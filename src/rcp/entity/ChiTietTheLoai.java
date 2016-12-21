@@ -5,8 +5,6 @@
 
 package rcp.entity;
 
-import java.util.*;
-
 public class ChiTietTheLoai {
 	private String maPhim;
 	private String maTheLoai;

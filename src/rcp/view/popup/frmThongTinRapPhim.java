@@ -155,6 +155,8 @@ public class frmThongTinRapPhim extends Shell {
 		label_4.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		label_4.setBounds(374, 233, 13, 15);
 		createContents();
+		
+		setDefaultButton(btnLuu);
 	}
 
 	/**

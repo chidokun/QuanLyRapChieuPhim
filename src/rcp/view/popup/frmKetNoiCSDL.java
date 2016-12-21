@@ -162,6 +162,8 @@ public class frmKetNoiCSDL extends Shell {
 		lblEmailHTr.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblEmailHTr.setBounds(40, 290, 75, 15);
 		createContents();
+		
+		setDefaultButton(btnLuu);
 	}
 
 	/**

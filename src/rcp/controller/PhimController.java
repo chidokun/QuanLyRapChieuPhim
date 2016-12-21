@@ -30,4 +30,7 @@ public class PhimController {
 	public static ArrayList<Phim> taiTatCa_phimdangchieu() throws SQLException {
 		return PhimModel.taiTatCa_phimdangchieu();
 	}
+	public static ArrayList<BaoCaoPhim> baoCaoPhim(Date tuNgay, Date denNgay) throws SQLException {
+		return PhimModel.baoCaoPhim(tuNgay, denNgay);
+	}
 }

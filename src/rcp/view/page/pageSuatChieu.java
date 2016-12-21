@@ -5,34 +5,33 @@
 
 package rcp.view.page;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.wb.swt.SWTResourceManager;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.*;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.Table;
 import org.eclipse.core.commands.ParameterValuesException;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.wb.swt.ResourceManager;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DateTime;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.wb.swt.SWTResourceManager;
 
+import rcp.controller.SuatChieuController;
+import rcp.entity.SuatChieu;
+import rcp.util.DateF;
 import rcp.util.Message;
 import rcp.util.Window;
 import rcp.view.popup.frmSuatChieu;
-import rcp.controller.SuatChieuController;
-import rcp.entity.*;
-import rcp.util.*;
-
-import java.sql.SQLException;
-import java.util.*;
 
 public class pageSuatChieu extends Composite {
 	private Text txtTenPhim;
@@ -52,8 +51,9 @@ public class pageSuatChieu extends Composite {
 	 */
 	public pageSuatChieu(Composite parent, int style) {
 		super(parent, style);
-		setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
 		GridLayout gridLayout = new GridLayout(2, false);
+		gridLayout.marginHeight = 0;
 		gridLayout.marginWidth = 0;
 		setLayout(gridLayout);
 
@@ -62,14 +62,14 @@ public class pageSuatChieu extends Composite {
 		gd_composite.heightHint = 385;
 		gd_composite.widthHint = 280;
 		composite.setLayoutData(gd_composite);
-		composite.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		composite.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
 
 		Label lblTraCuPhim = new Label(composite, SWT.NONE);
 		lblTraCuPhim.setText("Tra cứu");
-		lblTraCuPhim.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
+		lblTraCuPhim.setForeground(SWTResourceManager.getColor(31, 116, 71));
 		lblTraCuPhim.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.NORMAL));
-		lblTraCuPhim.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblTraCuPhim.setBounds(31, 27, 176, 23);
+		lblTraCuPhim.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
+		lblTraCuPhim.setBounds(29, 17, 176, 23);
 
 		chkTheoTenPhim = new Button(composite, SWT.CHECK);
 		chkTheoTenPhim.addSelectionListener(new SelectionAdapter() {
@@ -80,11 +80,11 @@ public class pageSuatChieu extends Composite {
 		});
 		chkTheoTenPhim.setText("Theo tên phim");
 		chkTheoTenPhim.setSelection(true);
-		chkTheoTenPhim.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		chkTheoTenPhim.setBounds(31, 64, 197, 16);
+		chkTheoTenPhim.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
+		chkTheoTenPhim.setBounds(29, 54, 197, 16);
 
 		txtTenPhim = new Text(composite, SWT.BORDER);
-		txtTenPhim.setBounds(31, 95, 228, 25);
+		txtTenPhim.setBounds(29, 85, 228, 25);
 
 		chkTheoKhoangThoiGian = new Button(composite, SWT.CHECK);
 		chkTheoKhoangThoiGian.addSelectionListener(new SelectionAdapter() {
@@ -95,8 +95,8 @@ public class pageSuatChieu extends Composite {
 			}
 		});
 		chkTheoKhoangThoiGian.setText("Theo khoảng thời gian");
-		chkTheoKhoangThoiGian.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		chkTheoKhoangThoiGian.setBounds(31, 141, 197, 16);
+		chkTheoKhoangThoiGian.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
+		chkTheoKhoangThoiGian.setBounds(29, 131, 197, 16);
 
 		btnTimKiem = new Button(composite, SWT.NONE);
 		btnTimKiem.addSelectionListener(new SelectionAdapter() {
@@ -106,8 +106,8 @@ public class pageSuatChieu extends Composite {
 			}
 		});
 		btnTimKiem.setText("Tìm kiếm");
-		btnTimKiem.setImage(ResourceManager.getPluginImage("QuanLyRapChieuPhim", "src/rcp/view/page/zoom_16x16.png"));
-		btnTimKiem.setBounds(83, 311, 86, 30);
+		btnTimKiem.setImage(SWTResourceManager.getImage(pageSuatChieu.class, "/rcp/view/page/zoom_16x16.png"));
+		btnTimKiem.setBounds(81, 261, 86, 30);
 
 		btnDatLai = new Button(composite, SWT.NONE);
 		btnDatLai.addSelectionListener(new SelectionAdapter() {
@@ -117,30 +117,32 @@ public class pageSuatChieu extends Composite {
 			}
 		});
 		btnDatLai.setText("Đặt lại");
-		btnDatLai.setImage(ResourceManager.getPluginImage("QuanLyRapChieuPhim", "src/rcp/view/page/refresh2_16x16.png"));
-		btnDatLai.setBounds(173, 311, 86, 30);
+		btnDatLai
+				.setImage(SWTResourceManager.getImage(pageSuatChieu.class, "/rcp/view/page/refresh2_16x16.png"));
+		btnDatLai.setBounds(171, 261, 86, 30);
 
 		dateTime_DenNgay = new DateTime(composite, SWT.BORDER | SWT.DROP_DOWN);
 		dateTime_DenNgay.setEnabled(false);
-		dateTime_DenNgay.setBounds(103, 214, 156, 24);
+		dateTime_DenNgay.setBounds(103, 210, 156, 24);
 
 		dateTime_TuNgay = new DateTime(composite, SWT.BORDER | SWT.DROP_DOWN);
 		dateTime_TuNgay.setEnabled(false);
-		dateTime_TuNgay.setBounds(103, 174, 156, 24);
+		dateTime_TuNgay.setBounds(103, 166, 156, 24);
 
 		Label label = new Label(composite, SWT.NONE);
 		label.setText("Từ ngày");
-		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label.setBounds(31, 180, 62, 16);
+		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
+		label.setBounds(29, 170, 62, 16);
 
 		Label label_1 = new Label(composite, SWT.NONE);
 		label_1.setText("Đến ngày");
-		label_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label_1.setBounds(31, 219, 66, 15);
+		label_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
+		label_1.setBounds(29, 213, 66, 15);
 
 		Composite composite_1 = new Composite(this, SWT.NONE);
 		composite_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		GridLayout gl_composite_1 = new GridLayout(3, false);
+		gl_composite_1.marginBottom = 15;
 		gl_composite_1.marginTop = 10;
 		gl_composite_1.marginWidth = 15;
 		composite_1.setLayout(gl_composite_1);
@@ -162,7 +164,7 @@ public class pageSuatChieu extends Composite {
 		gd_btnThem.widthHint = 86;
 		btnThem.setLayoutData(gd_btnThem);
 		btnThem.setText("Thêm");
-		btnThem.setImage(ResourceManager.getPluginImage("QuanLyRapChieuPhim", "src/rcp/view/page/additem_16x16.png"));
+		btnThem.setImage(SWTResourceManager.getImage(pageSuatChieu.class, "/rcp/view/page/additem_16x16.png"));
 
 		Button btnSua = new Button(composite_1, SWT.NONE);
 		btnSua.addSelectionListener(new SelectionAdapter() {
@@ -183,7 +185,7 @@ public class pageSuatChieu extends Composite {
 		gd_btnSua.widthHint = 86;
 		btnSua.setLayoutData(gd_btnSua);
 		btnSua.setText("Sửa");
-		btnSua.setImage(ResourceManager.getPluginImage("QuanLyRapChieuPhim", "src/rcp/view/page/edit_16x16.png"));
+		btnSua.setImage(SWTResourceManager.getImage(pageSuatChieu.class, "/rcp/view/page/edit_16x16.png"));
 
 		Button btnHienTatCa = new Button(composite_1, SWT.NONE);
 		GridData gd_btnHienTatCa = new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1);
@@ -197,7 +199,7 @@ public class pageSuatChieu extends Composite {
 			}
 		});
 		btnHienTatCa.setText("Hiện tất cả");
-		btnHienTatCa.setImage(ResourceManager.getPluginImage("QuanLyRapChieuPhim", "src/rcp/view/page/show_16x16.png"));
+		btnHienTatCa.setImage(SWTResourceManager.getImage(pageSuatChieu.class, "/rcp/view/page/show_16x16.png"));
 
 		TableViewer tableViewer = new TableViewer(composite_1, SWT.BORDER | SWT.FULL_SELECTION);
 		tableViewer.setColumnProperties(new String[] { "Mã suất chiếu", "Mã phim", "Tên phim", "Giờ", "Định dạng",
@@ -257,10 +259,7 @@ public class pageSuatChieu extends Composite {
 		TableColumn tblclmnTrngThi = tableViewerColumn_9.getColumn();
 		tblclmnTrngThi.setWidth(73);
 		tblclmnTrngThi.setText("Trạng thái");
-		new Label(composite_1, SWT.NONE);
-		new Label(composite_1, SWT.NONE);
-		new Label(composite_1, SWT.NONE);
-		
+
 		hienThiGiaoDien();
 	}
 
@@ -304,9 +303,10 @@ public class pageSuatChieu extends Composite {
 			int stt = 1;
 			for (SuatChieu i : arr) {
 				TableItem item = new TableItem(gridSuatChieu, SWT.NONE);
-				item.setText(new String[] { String.valueOf(stt), i.getMaSuatChieu(), i.getMaPhim(),i.getTenPhim(), DateF.toString_full(i.getThoiGianChieu()),
-						i.getDinhDang(),i.getHinhThuc(), i.getNgonNgu(), i.getPhong(),String.valueOf((i.getTrangThai())) });
-				
+				item.setText(new String[] { String.valueOf(stt), i.getMaSuatChieu(), i.getMaPhim(), i.getTenPhim(),
+						DateF.toString_full(i.getThoiGianChieu()), i.getDinhDang(), i.getHinhThuc(), i.getNgonNgu(),
+						i.getPhong(), String.valueOf((i.getTrangThai())) });
+
 				stt++;
 			}
 
@@ -324,15 +324,18 @@ public class pageSuatChieu extends Composite {
 			kiemTraHopLe();
 			ArrayList<SuatChieu> arr = SuatChieuController.traCuu(
 					chkTheoTenPhim.getSelection() ? txtTenPhim.getText() : null,
-					chkTheoKhoangThoiGian.getSelection() ?  DateF.toDate(dateTime_TuNgay.getYear(), dateTime_TuNgay.getMonth(), dateTime_TuNgay.getDay()) : null,
-					chkTheoKhoangThoiGian.getSelection() ?  DateF.toDate(dateTime_DenNgay.getYear(), dateTime_DenNgay.getMonth(), dateTime_DenNgay.getDay()) : null);
+					chkTheoKhoangThoiGian.getSelection() ? DateF.toDate(dateTime_TuNgay.getYear(),
+							dateTime_TuNgay.getMonth(), dateTime_TuNgay.getDay()) : null,
+					chkTheoKhoangThoiGian.getSelection() ? DateF.toDate(dateTime_DenNgay.getYear(),
+							dateTime_DenNgay.getMonth(), dateTime_DenNgay.getDay()) : null);
 
 			gridSuatChieu.removeAll();
 			int stt = 1;
 			for (SuatChieu i : arr) {
 				TableItem item = new TableItem(gridSuatChieu, SWT.NONE);
-				item.setText(new String[] { String.valueOf(stt), i.getMaSuatChieu(), i.getMaPhim(),i.getTenPhim(), i.getThoiGianChieu().toString(),
-						i.getDinhDang(),i.getHinhThuc(), i.getNgonNgu(), i.getPhong(),String.valueOf((i.getTrangThai())) });
+				item.setText(new String[] { String.valueOf(stt), i.getMaSuatChieu(), i.getMaPhim(), i.getTenPhim(),
+						i.getThoiGianChieu().toString(), i.getDinhDang(), i.getHinhThuc(), i.getNgonNgu(), i.getPhong(),
+						String.valueOf((i.getTrangThai())) });
 				stt++;
 			}
 
