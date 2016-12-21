@@ -68,7 +68,7 @@ public class DateF {
 	public static int getHour(Date date) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		return cal.get(Calendar.HOUR);
+		return cal.get(Calendar.HOUR_OF_DAY);
 	}
 	
 	public static int getMinute(Date date) {

@@ -258,7 +258,7 @@ public class frmSuatChieu extends Shell {
 				dateTime_Gio.setTime(DateF.getHour(sc.getGioChieu()), DateF.getMinute(sc.getGioChieu()),0);
 				cbTrangThai.select(sc.getTrangThai());
 				
-				layThongTinSuatPhim((String) cbTenPhim.getData(cbTenPhim.getText()));	
+				layThongTinSuatPhim((String) cbTenPhim.getData(cbTenPhim.getText()));					
 			}
 
 		} catch (Exception e) {
