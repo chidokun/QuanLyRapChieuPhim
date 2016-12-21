@@ -28,7 +28,7 @@ public class SuatChieuModel {
 
 		ArrayList<SuatChieu> arr = new ArrayList<>();
 		while (rs.next()) {
-			arr.add(new SuatChieu(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
+			arr.add(new SuatChieu(rs.getString(1), rs.getString(2), rs.getString(3), rs.getTimestamp(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
 		}
 
 		Database.connect().close();
@@ -119,12 +119,32 @@ public class SuatChieuModel {
 
 		ArrayList<SuatChieu> arr = new ArrayList<>();
 		while (rs.next()) {
-			arr.add(new SuatChieu(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
+			arr.add(new SuatChieu(rs.getString(1), rs.getString(2), rs.getString(3), rs.getTimestamp(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
 		}
 
 		return arr;
 	}
+	/**
+	 * Tra cứu tên phim theo ngafy
+	 * 
+	 * @param ngay
+	 * @return
+	 * @throws SQLException
+	 */
+	public static ArrayList<Phim> traCuuPhim_theoNgay(Date ngay) throws SQLException {
+		ResultSet rs = Database.callStored("sp_TraCuu_Phim_Ngay", ngay);
 
+		ArrayList<Phim> arr = new ArrayList<>();
+		while (rs.next()) {
+			Phim p=new Phim();
+			p.setMaPhim(rs.getString(1));
+			p.setTenPhim(rs.getString(2));
+			arr.add(p);
+		}
+
+		return arr;
+	}
+	
 	/**
 	 * Sinh mã suất chiếu mới
 	 * 

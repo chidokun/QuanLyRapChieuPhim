@@ -103,4 +103,8 @@ public class SuatChieuController {
 	public static ArrayList<SuatPhim> layDanhSachSuatPhim(String maPhim) throws SQLException {
 		return SuatChieuModel.layDanhSachSuatPhim(maPhim);
 	}
+	public static ArrayList<Phim> traCuuPhim_theoNgay(Date ngay) throws SQLException {
+		return SuatChieuModel.traCuuPhim_theoNgay(ngay);
+	}
+	
 }

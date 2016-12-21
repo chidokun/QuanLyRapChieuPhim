@@ -24,6 +24,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import rcp.controller.GheController;
 import rcp.util.Window;
 
 public class frmChonGhe extends Shell {
@@ -38,14 +39,16 @@ public class frmChonGhe extends Shell {
 															// giao diện
 	private ArrayList<String> dsGheDaChon = new ArrayList<>();
 	private Composite pnlGhe;
+	private String maSuatChieu;
 
 	/**
 	 * Create the shell.
 	 * 
 	 * @param display
 	 */
-	public frmChonGhe(Display display) {
+	public frmChonGhe(Display display,String maSuatChieu) {
 		super(display, SWT.CLOSE | SWT.MIN | SWT.TITLE);
+		this.maSuatChieu=maSuatChieu;
 		setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		GridLayout gridLayout = new GridLayout(1, false);
 		gridLayout.marginWidth = 0;
@@ -249,8 +252,8 @@ public class frmChonGhe extends Shell {
 		// sau đó với từng mã thì bóc thằng đó ra tô đỏ lên
 		// đồng thời hủy sự kiện click của nó, ko cho người dùng chọn ghế có
 		// người
-		/*try {
-			ArrayList<String> dsGheCoNguoi = null; // load danh sách đó vào đây
+		try {
+			ArrayList<String> dsGheCoNguoi = GheController.layDanhSach(maSuatChieu); // load danh sách đó vào đây
 
 			for (String i : dsGheCoNguoi) {
 				CLabel item = layGhe(i);
@@ -264,7 +267,7 @@ public class frmChonGhe extends Shell {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}*/
+		}
 	}
 
 	/**
@@ -281,9 +284,9 @@ public class frmChonGhe extends Shell {
 		// Disable the check that prevents subclassing of SWT components
 	}
 
-	public static void main(String[] args) {
-		Window.open(new frmChonGhe(Display.getCurrent()));
-	}
+	/*public static void main(String[] args) {
+		Window.open(new frmChonGhe(Display.getCurrent(),maSuatChieu));
+	}*/
 
 	/**
 	 * Trả về đối tượng đại diện cho mã ghế đó trên giao diện
