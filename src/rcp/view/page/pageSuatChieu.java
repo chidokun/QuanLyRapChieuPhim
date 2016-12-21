@@ -304,7 +304,7 @@ public class pageSuatChieu extends Composite {
 			int stt = 1;
 			for (SuatChieu i : arr) {
 				TableItem item = new TableItem(gridSuatChieu, SWT.NONE);
-				item.setText(new String[] { String.valueOf(stt), i.getMaSuatChieu(), i.getMaPhim(),i.getTenPhim(), i.getThoiGianChieu().toString(),
+				item.setText(new String[] { String.valueOf(stt), i.getMaSuatChieu(), i.getMaPhim(),i.getTenPhim(), DateF.toString_full(i.getThoiGianChieu()),
 						i.getDinhDang(),i.getHinhThuc(), i.getNgonNgu(), i.getPhong(),String.valueOf((i.getTrangThai())) });
 				stt++;
 			}

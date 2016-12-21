@@ -43,7 +43,7 @@ public class DateF {
 	}
 	
 	public static String toString_full(Date date) {
-		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		return f.format(date);
 	}
 	
