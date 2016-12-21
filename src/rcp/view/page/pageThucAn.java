@@ -210,6 +210,7 @@ public class pageThucAn extends Composite {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				xoa();
+				layThongTinTAKC(gridThucAn.getSelection()[0].getText(1));
 			}
 		});
 		btnXoaTAKC.setEnabled(false);
