@@ -39,6 +39,7 @@ public class frmChonGhe extends Shell {
 															// thằng ghế trên
 															// giao diện
 	private ArrayList<String> dsGheDaChon = new ArrayList<>();
+	private ArrayList<String> dsGheCoNguoi= new ArrayList<>(); //Danh sách ghế đã được đặt chỗ 
 	private Composite pnlGhe;
 	private String maSuatChieu;
 
@@ -188,9 +189,14 @@ public class frmChonGhe extends Shell {
 					label.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseDown(MouseEvent e) {
+							if(kiemTraHopLe(layMaGhe(label)))
+							{
 							label.setImage(imgGheChon);
 							System.out.println(layMaGhe(label));
 							dsGheDaChon.add(layMaGhe(label));
+							}
+							else
+								Message.show("Ghế này đã được đặt chỗ", "Lỗi",SWT.OK |SWT.ICON_ERROR, getShell());
 						}
 					});
 
@@ -254,7 +260,7 @@ public class frmChonGhe extends Shell {
 		// đồng thời hủy sự kiện click của nó, ko cho người dùng chọn ghế có
 		// người
 		try {
-			ArrayList<String> dsGheCoNguoi = GheController.layDanhSach(maSuatChieu); // load
+			dsGheCoNguoi = GheController.layDanhSach(maSuatChieu); // load
 																						// danh
 																						// sách
 																						// đó
@@ -264,12 +270,7 @@ public class frmChonGhe extends Shell {
 			for (String i : dsGheCoNguoi) {
 				CLabel item = layGhe(i);
 				item.setImage(imgGheDaChon); // tô đỏ lên
-				item.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseDown(MouseEvent e) {
-						// do nothing
-					}
-				});
+			
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -326,6 +327,16 @@ public class frmChonGhe extends Shell {
 		char p = (char) ('A' + index / 18);
 
 		return String.format("%1$c%2$02d", p, p < 'K' ? m + 1 : m + 5);
+	}
+	public boolean kiemTraHopLe(String maGhe)
+	{
+		for(String i:dsGheCoNguoi)
+		{
+			if(i.equals(maGhe))
+				return false;
+		}
+		return true;
+		
 	}
 
 	public void luu() {
