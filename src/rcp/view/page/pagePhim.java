@@ -8,6 +8,7 @@ package rcp.view.page;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.eclipse.core.commands.ParameterValuesException;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
@@ -30,6 +31,7 @@ import rcp.entity.Phim;
 import rcp.util.DateF;
 import rcp.util.Window;
 import rcp.view.popup.frmThemSuaPhim;
+import rcp.util.Message;;
 
 public class pagePhim extends Composite {
 	private Text txt_TenPhim;
@@ -146,6 +148,7 @@ public class pagePhim extends Composite {
 		btnTimKiem.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				if(kiemTraHopLe())
 				traCuu(chkBox_TenPhim.getSelection() ? txt_TenPhim.getText() : null,
 						chkBox_ThoiGian.getSelection() ? DateF.toDate(dateTime_TuNgay.getYear(),
 								dateTime_TuNgay.getMonth(), dateTime_TuNgay.getDay()) : null,
@@ -316,5 +319,21 @@ public class pagePhim extends Composite {
 		dateTime_TuNgay.setEnabled(false);
 		dateTime_DenNgay.setEnabled(false);
 		txt_TenPhim.setText("");
+	}
+	public boolean kiemTraHopLe(){
+		if (chkBox_TenPhim.getSelection() && txt_TenPhim.getText().isEmpty())
+		{
+			Message.show("Tên phim không được trống", "Lỗi", SWT.OK |SWT.ICON_ERROR, getShell());
+			return false;
+		}
+		
+		if (chkBox_ThoiGian.getSelection()
+				&& (DateF.toDate(dateTime_TuNgay.getYear(), dateTime_TuNgay.getMonth(), dateTime_TuNgay.getDay())
+						.after(DateF.toDate(dateTime_DenNgay.getYear(), dateTime_DenNgay.getMonth(), dateTime_DenNgay.getDay()))))
+			{
+			Message.show("Từ ngày không được sau Đến ngày", "Lỗi", SWT.OK |SWT.ICON_ERROR, getShell());
+			return false;
+			}
+		return true;
 	}
 }

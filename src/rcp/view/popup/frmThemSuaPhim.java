@@ -635,7 +635,10 @@ public class frmThemSuaPhim extends Shell {
 			taoPhim();
 			try {
 				if (PhimController.them(phim, aSuatPhim))
+				{
 					Message.show("Thêm phim thành công", "Thông báo", SWT.OK | SWT.ICON_INFORMATION, getShell());
+					close();
+				}
 				else
 					Message.show("Thêm phim không thành công", "Thông báo", SWT.OK | SWT.ICON_INFORMATION, getShell());
 			} catch (SQLException e) {
@@ -714,7 +717,10 @@ public class frmThemSuaPhim extends Shell {
 			try {
 				taoPhim();
 				if (PhimController.sua(phim))
+				{
 					Message.show("Cập nhật phim thành công", "Thông báo", SWT.OK | SWT.ICON_INFORMATION, getShell());
+					close();
+				}
 				else
 					Message.show("Cập nhât phim không thành công", "Thông báo", SWT.OK | SWT.ICON_INFORMATION,
 							getShell());
