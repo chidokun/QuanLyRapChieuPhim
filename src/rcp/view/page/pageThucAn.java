@@ -396,7 +396,7 @@ public class pageThucAn extends Composite {
 	 */
 	public void kiemTraHopLe() throws ParameterValuesException {
 		if (chkTenThucAn.getSelection() && txtTenThucAn.getText().isEmpty())
-			throw new ParameterValuesException("Tên khách hàng không được trống", null);
+			throw new ParameterValuesException("Tên thức ăn không được trống", null);
 
 	}
 
