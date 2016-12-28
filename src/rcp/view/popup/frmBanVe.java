@@ -320,7 +320,7 @@ public class frmBanVe extends Shell {
 		String maPhong = layMaPhong();
 		for (String ghe : dsGhe) {
 			Ve v = new Ve();
-			v.setMaNhanVien("NV001");
+			v.setMaNhanVien(Settings.currentEmpId);
 			v.setMaGhe(maPhong + ghe);
 			v.setMaKhachHang(txtMaKhachHang.getText().equals("") ? null : txtMaKhachHang.getText());
 			v.setMaKM(txtKhuyenMai.getText().equals("Không") ? null : txtKhuyenMai.getText());
