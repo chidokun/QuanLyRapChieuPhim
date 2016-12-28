@@ -190,6 +190,7 @@ public class frmMain extends Shell {
 		lblUserName.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 
 		lblDangXuat = new CLabel(toolHeader, SWT.NONE);
+		lblDangXuat.setImage(SWTResourceManager.getImage(frmMain.class, "/rcp/view/popup/signout_16x16.png"));
 		lblDangXuat.addMouseTrackListener(new MouseTrackAdapter() {
 			@Override
 			public void mouseEnter(MouseEvent e) {
@@ -217,7 +218,7 @@ public class frmMain extends Shell {
 		lblDangXuat.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 		lblDangXuat.setAlignment(SWT.CENTER);
 		GridData gd_lblDangXuat = new GridData(SWT.LEFT, SWT.FILL, false, true, 1, 1);
-		gd_lblDangXuat.widthHint = 80;
+		gd_lblDangXuat.widthHint = 93;
 		lblDangXuat.setLayoutData(gd_lblDangXuat);
 		lblDangXuat.setText("Đăng xuất");
 		lblDangXuat.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
@@ -253,6 +254,11 @@ public class frmMain extends Shell {
 		// Disable the check that prevents subclassing of SWT components
 	}
 
+	/**
+	 * Chọn một nút tab trên ribbon
+	 * 
+	 * @param selected
+	 */
 	private void selectButton(CLabel selected) {
 		lblDanhMuc.setBackground(tabBackground);
 		lblDanhMuc.setForeground(tabHeaderInactive);
@@ -269,11 +275,19 @@ public class frmMain extends Shell {
 		}
 	}
 
+	/**
+	 * Mở thanh công cụ
+	 * 
+	 * @param tool
+	 */
 	private void openToolbar(Composite tool) {
 		tool.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		toolToolbar.layout();
 	}
 
+	/**
+	 * Nạp chủ đề
+	 */
 	private void loadTheme() {
 		toolHeader.setBackground(tabBackground);
 		lblUserName.setBackground(tabBackground);
@@ -282,11 +296,19 @@ public class frmMain extends Shell {
 		lblDangXuat.setForeground(buttonText);
 	}
 
+	/**
+	 * Reset lại các button
+	 */
 	public void resetQuyen() {
 		((GridData) lblDanhMuc.getLayoutData()).exclude = false;
 		((GridData) lblNghiepVu.getLayoutData()).exclude = false;
 	}
 
+	/**
+	 * Hiển thị giao diện và phân quyền
+	 * 
+	 * @throws SQLException
+	 */
 	public void hienThiGiaoDien() throws SQLException {
 		loadTheme();
 		lblUserName.setText(Settings.currentUser);

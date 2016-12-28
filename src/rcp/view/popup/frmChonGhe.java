@@ -39,7 +39,9 @@ public class frmChonGhe extends Shell {
 															// thằng ghế trên
 															// giao diện
 	private ArrayList<String> dsGheDaChon = new ArrayList<>();
-	private ArrayList<String> dsGheCoNguoi= new ArrayList<>(); //Danh sách ghế đã được đặt chỗ 
+	private ArrayList<String> dsGheCoNguoi = new ArrayList<>(); // Danh sách ghế
+																// đã được đặt
+																// chỗ
 	private Composite pnlGhe;
 	private String maSuatChieu;
 
@@ -189,14 +191,12 @@ public class frmChonGhe extends Shell {
 					label.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseDown(MouseEvent e) {
-							if(kiemTraHopLe(layMaGhe(label)))
-							{
-							label.setImage(imgGheChon);
-							System.out.println(layMaGhe(label));
-							dsGheDaChon.add(layMaGhe(label));
-							}
-							else
-								Message.show("Ghế này đã được đặt chỗ", "Lỗi",SWT.OK |SWT.ICON_ERROR, getShell());
+							if (kiemTraHopLe(layMaGhe(label))) {
+								label.setImage(imgGheChon);
+								System.out.println(layMaGhe(label));
+								dsGheDaChon.add(layMaGhe(label));
+							} else
+								Message.show("Ghế này đã được đặt chỗ", "Lỗi", SWT.OK | SWT.ICON_ERROR, getShell());
 						}
 					});
 
@@ -225,6 +225,7 @@ public class frmChonGhe extends Shell {
 		composite_2.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 
 		Button btnLuu = new Button(composite_2, SWT.NONE);
+		btnLuu.setImage(SWTResourceManager.getImage(frmChonGhe.class, "/rcp/view/page/save_16x16.png"));
 		btnLuu.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -238,6 +239,7 @@ public class frmChonGhe extends Shell {
 		btnLuu.setText("Lưu");
 
 		Button btnHuyBo = new Button(composite_2, SWT.NONE);
+		btnHuyBo.setImage(SWTResourceManager.getImage(frmChonGhe.class, "/rcp/view/page/cancel_16x16.png"));
 		btnHuyBo.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -261,16 +263,16 @@ public class frmChonGhe extends Shell {
 		// người
 		try {
 			dsGheCoNguoi = GheController.layDanhSach(maSuatChieu); // load
-																						// danh
-																						// sách
-																						// đó
-																						// vào
-																						// đây
+																	// danh
+																	// sách
+																	// đó
+																	// vào
+																	// đây
 
 			for (String i : dsGheCoNguoi) {
 				CLabel item = layGhe(i);
 				item.setImage(imgGheDaChon); // tô đỏ lên
-			
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -328,15 +330,14 @@ public class frmChonGhe extends Shell {
 
 		return String.format("%1$c%2$02d", p, p < 'K' ? m + 1 : m + 5);
 	}
-	public boolean kiemTraHopLe(String maGhe)
-	{
-		for(String i:dsGheCoNguoi)
-		{
-			if(i.equals(maGhe))
+
+	public boolean kiemTraHopLe(String maGhe) {
+		for (String i : dsGheCoNguoi) {
+			if (i.equals(maGhe))
 				return false;
 		}
 		return true;
-		
+
 	}
 
 	public void luu() {

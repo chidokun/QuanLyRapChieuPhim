@@ -267,6 +267,7 @@ public class frmThongTinNhanVien extends Shell {
 		txtMatKhauMoiAgain.setBounds(164, 121, 264, 24);
 
 		Button btnDoiMatKhau = new Button(composite_2, SWT.NONE);
+		btnDoiMatKhau.setImage(SWTResourceManager.getImage(frmThongTinNhanVien.class, "/rcp/view/popup/groupfieldcollection_16x16.png"));
 		btnDoiMatKhau.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {

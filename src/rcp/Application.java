@@ -33,6 +33,11 @@ public class Application {
 		}
 	}
 
+	/**
+	 * Kiểm tra kết nối CSDL
+	 * 
+	 * @return
+	 */
 	public static boolean ketNoiCSDL() {
 		try {
 			Database.load();
@@ -43,6 +48,12 @@ public class Application {
 		return true;
 	}
 
+	/**
+	 * Đăng nhập
+	 * 
+	 * @throws IOException
+	 * @throws SQLException
+	 */
 	public static void dangNhap() throws IOException, SQLException {
 		do {
 			// hiện form đăng nhập
@@ -63,12 +74,20 @@ public class Application {
 		} while (frmMain.isLogout);
 	}
 
+	/**
+	 * Hiển thị màn hình chính
+	 * 
+	 * @throws SQLException
+	 */
 	public static void hienThiGiaoDien() throws SQLException {
 		shellMain = new frmMain(display);
 		shellMain.hienThiGiaoDien();
 		Window.open(shellMain);
 	}
 
+	/**
+	 * Hiển thị giao diện kết nối lại CSDL
+	 */
 	public static void ketNoiLai() {
 		// hiện form kết nối lại
 		frmKetNoiCSDL shell = new frmKetNoiCSDL(display);

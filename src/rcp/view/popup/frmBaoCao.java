@@ -63,7 +63,7 @@ public class frmBaoCao extends Shell {
 	 * Create contents of the shell.
 	 */
 	protected void createContents() {
-		setText("SWT Application");
+		setText("Xem trước");
 		setSize(576, 383);
 
 	}
