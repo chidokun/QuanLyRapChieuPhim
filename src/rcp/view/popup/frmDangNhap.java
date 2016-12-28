@@ -89,7 +89,8 @@ public class frmDangNhap extends Shell {
 		btnThoat.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				getDisplay().close();
+				result = SWT.CANCEL;
+				close();
 			}
 		});
 		btnThoat.setBounds(349, 10, 94, 33);

@@ -5,32 +5,38 @@
 
 package rcp.view;
 
-import java.io.IOException;
 import java.sql.SQLException;
 
-import org.eclipse.swt.*;
-import org.eclipse.swt.graphics.*;
-import org.eclipse.swt.layout.*;
-import org.eclipse.swt.widgets.*;
-import org.eclipse.wb.swt.SWTResourceManager;
-import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
-import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseTrackAdapter;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 import rcp.Settings;
 import rcp.controller.NhanVienController;
 import rcp.controller.QuyenHanController;
 import rcp.entity.QuyenHan;
 import rcp.util.Window;
-import rcp.view.control.*;
-import rcp.view.popup.frmDangNhap;
+import rcp.view.control.toolDanhMuc;
+import rcp.view.control.toolHeThong;
+import rcp.view.control.toolNghiepVu;
 import rcp.view.popup.frmThongTinNhanVien;
 
-import org.eclipse.swt.custom.CTabItem;
-import org.eclipse.swt.events.MouseTrackAdapter;
-
 public class frmMain extends Shell {
+	public static boolean isLogout = false;
+
 	private CLabel lblDanhMuc;
 	private CLabel lblNghiepVu;
 	private CLabel lblHeThong;
@@ -62,6 +68,7 @@ public class frmMain extends Shell {
 	 */
 	public frmMain(Display display) {
 		super(display, SWT.SHELL_TRIM | SWT.BORDER);
+		isLogout = false;
 		setSize(1038, 604);
 		setText("Quản lý Rạp chiếu phim");
 		setMinimumSize(new Point(136, 50));
@@ -168,7 +175,8 @@ public class frmMain extends Shell {
 			public void mouseUp(MouseEvent e) {
 				lblUserName.setBackground(buttonHover);
 				try {
-					Window.open(new frmThongTinNhanVien(getDisplay(), NhanVienController.layThongTin(Settings.currentEmpId)));
+					Window.open(new frmThongTinNhanVien(getDisplay(),
+							NhanVienController.layThongTin(Settings.currentEmpId)));
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -201,15 +209,9 @@ public class frmMain extends Shell {
 
 			@Override
 			public void mouseUp(MouseEvent e) {
-				try {
-					lblDangXuat.setBackground(buttonHover);
-					getShell().setVisible(false);
-
-					Window.open(new frmDangNhap(getDisplay()));
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				lblDangXuat.setBackground(buttonHover);
+				isLogout = true;
+				close();
 			}
 		});
 		lblDangXuat.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
@@ -281,10 +283,10 @@ public class frmMain extends Shell {
 	}
 
 	public void resetQuyen() {
-		((GridData)lblDanhMuc.getLayoutData()).exclude = false;
-		((GridData)lblNghiepVu.getLayoutData()).exclude = false;
+		((GridData) lblDanhMuc.getLayoutData()).exclude = false;
+		((GridData) lblNghiepVu.getLayoutData()).exclude = false;
 	}
-	
+
 	public void hienThiGiaoDien() throws SQLException {
 		loadTheme();
 		lblUserName.setText(Settings.currentUser);
@@ -294,17 +296,17 @@ public class frmMain extends Shell {
 		QuyenHan q = QuyenHanController.layThongTin(Settings.currentRightId);
 		switch (q.getMaQuyen()) {
 		case "Q04":
-			((GridData)lblDanhMuc.getLayoutData()).exclude = true;
+			((GridData) lblDanhMuc.getLayoutData()).exclude = true;
 			selectButton(lblNghiepVu);
 			openToolbar(new toolNghiepVu(toolToolbar, SWT.NONE, tabFolder));
 			return;
 		case "Q02":
-			((GridData)lblNghiepVu.getLayoutData()).exclude = true;			
+			((GridData) lblNghiepVu.getLayoutData()).exclude = true;
 			break;
 		default:
 			break;
 		}
-		
+
 		selectButton(lblDanhMuc);
 		openToolbar(new toolDanhMuc(toolToolbar, SWT.NONE, tabFolder));
 	}
