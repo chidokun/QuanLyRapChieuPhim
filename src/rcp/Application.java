@@ -23,10 +23,10 @@ public class Application {
 		try {
 			Settings.load();
 			shellMain = new frmMain(display);
-			
+
 			if (ketNoiCSDL())
 				dangNhap();
-			else 
+			else
 				ketNoiLai();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -43,42 +43,43 @@ public class Application {
 		return true;
 	}
 
-	public static void dangNhap() throws IOException {	 
-		//hiện form đăng nhập
+	public static void dangNhap() throws IOException {
+		// hiện form đăng nhập
 		frmDangNhap shell = new frmDangNhap(display);
 		shell.addDisposeListener(new DisposeListener() {
 			public void widgetDisposed(DisposeEvent arg0) {
 				result = frmDangNhap.result;
 			}
 		});
-		
+
 		Window.open(shell);
-		
-		//đăng nhập được thì hiển thị giao diện
-		if(result == SWT.OK)
+
+		// đăng nhập được thì hiển thị giao diện
+		if (result == SWT.OK)
 			hienThiGiaoDien();
 	}
 
 	public static void hienThiGiaoDien() {
-		//lỗi ảnh hưởng tính năng đăng xuất
-		Window.open(shellMain);
+		// lỗi ảnh hưởng tính năng đăng xuất
+		shellMain.hienThiGiaoDien();
+		Window.open(shellMain);		
 	}
-	
+
 	public static void ketNoiLai() {
-		//hiện form kết nối lại
+		// hiện form kết nối lại
 		frmKetNoiCSDL shell = new frmKetNoiCSDL(display);
 		shell.addDisposeListener(new DisposeListener() {
 			public void widgetDisposed(DisposeEvent arg0) {
 				result = shell.result;
 			}
 		});
-		
+
 		Window.open(shell);
-		
+
 		switch (result) {
 		case SWT.OK:
-			if (SWT.YES == Message.show("Bạn có muốn khởi động lại chương trình ngay?",
-					"Khởi động lại chương trình", SWT.ICON_QUESTION | SWT.YES | SWT.NO, shellMain))
+			if (SWT.YES == Message.show("Bạn có muốn khởi động lại chương trình ngay?", "Khởi động lại chương trình",
+					SWT.ICON_QUESTION | SWT.YES | SWT.NO, shellMain))
 				restart();
 			break;
 		case SWT.CANCEL:
@@ -86,7 +87,10 @@ public class Application {
 					"Kết nối cơ sở dữ liệu", SWT.ICON_INFORMATION | SWT.OK, shellMain);
 		}
 	}
-	
+
+	/**
+	 * Khởi động lại ứng dụng, chỉ hoạt động khi đã build thành file jar
+	 */
 	public static void restart() {
 		try {
 			final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";

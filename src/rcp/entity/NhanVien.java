@@ -19,6 +19,7 @@ public class NhanVien {
 	private String maChucVu;
 	private Date ngayVaoLam;
 	private int trangThai;
+	private String tenChucVu;
 
 	public NhanVien() {
 		// do nothing
@@ -125,6 +126,14 @@ public class NhanVien {
 
 	public void setTrangThai(int trangThai) {
 		this.trangThai = trangThai;
+	}
+
+	public String getTenChucVu() {
+		return tenChucVu;
+	}
+
+	public void setTenChucVu(String tenChucVu) {
+		this.tenChucVu = tenChucVu;
 	}
 
 }

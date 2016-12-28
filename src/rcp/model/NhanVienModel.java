@@ -49,6 +49,7 @@ public class NhanVienModel {
 		rs.next();
 		NhanVien n = new NhanVien(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getString(4), rs.getString(5),
 				rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getDate(10), rs.getInt(11));
+		n.setTenChucVu(rs.getString(12));
 		Database.connect().close();
 		return n;
 	}

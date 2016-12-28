@@ -274,7 +274,7 @@ public class frmThemSuaNhanVien extends Shell {
 				txtCMND.setText(nv.getCMND());
 				txtEmail.setText(nv.getEmail());
 				txtSDT.setText(nv.getSDT());
-				cboChucVu.setText(nv.getMaChucVu());
+				cboChucVu.setText(nv.getTenChucVu());
 				dateNgayVaoLam.setDate(DateF.getYear(nv.getNgayVaoLam()), DateF.getMonth(nv.getNgayVaoLam()),
 						DateF.getDay(nv.getNgayVaoLam()));
 				cboTrangThai.select(nv.getTrangThai());

@@ -155,6 +155,7 @@ public class frmDangNhap extends Shell {
 
 			result = SWT.OK;
 			Settings.currentUser = txtTenDangNhap.getText();
+			Settings.currentEmpId = TaiKhoanController.layMaNhanVien(Settings.currentUser);
 			Settings.set("loginName", chkLuu.getSelection() ? txtTenDangNhap.getText() : "");
 			Settings.save();
 

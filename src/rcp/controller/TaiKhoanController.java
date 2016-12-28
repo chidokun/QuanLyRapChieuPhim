@@ -5,6 +5,7 @@
 
 package rcp.controller;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -89,25 +90,55 @@ public class TaiKhoanController {
 	public static boolean datLaiMatKhau(TaiKhoan tk) throws SQLException {
 		return TaiKhoanModel.datLaiMatKhau(tk);
 	}
-	
+
 	/**
 	 * Kiểm tra tên đăng nhập và mật khẩu có hợp lệ
+	 * 
 	 * @param tenDangNhap
-	 * @param matKhau Mật khẩu dạng chưa mã hóa
+	 * @param matKhau
+	 *            Mật khẩu dạng chưa mã hóa
 	 * @return
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public static boolean dangNhap(String tenDangNhap, String matKhau) {
 		try {
 			String pass = TaiKhoanModel.layMatKhau(tenDangNhap);
-			
-			if(!MD5.equals(matKhau, pass))
+
+			if (!MD5.equals(matKhau, pass))
 				throw new Exception();
-			
+
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
-		} 
+		}
+	}
+
+	/**
+	 * Lấy mã nhân viên từ tên đăng nhập
+	 * 
+	 * @param tenDangNhap
+	 * @return
+	 * @throws SQLException
+	 */
+	public static String layMaNhanVien(String tenDangNhap) throws SQLException {
+		return TaiKhoanModel.layMaNhanVien(tenDangNhap);
+	}
+
+	/**
+	 * Đổi mật khẩu
+	 * 
+	 * @param tenDangNhap
+	 *            Tài khoản cần đổi
+	 * @param matKhauCu
+	 *            Bắt buộc phải khớp, cần kiểm tra lỗi không khớp bên ngoài hàm
+	 *            này
+	 * @param matKhauMoi
+	 * @throws SQLException
+	 * @throws NoSuchAlgorithmException
+	 */
+	public static void doiMatKhau(String tenDangNhap, String matKhauCu, String matKhauMoi)
+			throws SQLException, NoSuchAlgorithmException {
+		TaiKhoanModel.doiMatKhau(tenDangNhap, matKhauCu, matKhauMoi);
 	}
 }

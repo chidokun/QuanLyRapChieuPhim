@@ -6,6 +6,7 @@
 package rcp.view;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import org.eclipse.swt.*;
 import org.eclipse.swt.graphics.*;
@@ -18,9 +19,11 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseAdapter;
 
 import rcp.Settings;
+import rcp.controller.NhanVienController;
 import rcp.util.Window;
 import rcp.view.control.*;
 import rcp.view.popup.frmDangNhap;
+import rcp.view.popup.frmThongTinNhanVien;
 
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.MouseTrackAdapter;
@@ -140,6 +143,8 @@ public class frmMain extends Shell {
 		lblHeThong.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 
 		lblUserName = new CLabel(toolHeader, SWT.NONE);
+		lblUserName.setRightMargin(7);
+		lblUserName.setLeftMargin(7);
 		lblUserName.addMouseTrackListener(new MouseTrackAdapter() {
 			@Override
 			public void mouseEnter(MouseEvent e) {
@@ -160,13 +165,17 @@ public class frmMain extends Shell {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				lblUserName.setBackground(buttonHover);
+				try {
+					Window.open(new frmThongTinNhanVien(getDisplay(), NhanVienController.layThongTin(Settings.currentEmpId)));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
-		lblUserName.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
+		lblUserName.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.BOLD));
 		lblUserName.setAlignment(SWT.CENTER);
-		GridData gd_lblUserName = new GridData(SWT.RIGHT, SWT.FILL, true, true, 1, 1);
-		gd_lblUserName.widthHint = 90;
-		lblUserName.setLayoutData(gd_lblUserName);
+		lblUserName.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, true, true, 1, 1));
 		lblUserName.setText("<user name>");
 		lblUserName.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 
@@ -220,7 +229,7 @@ public class frmMain extends Shell {
 		GridData gd_toolToolbar = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
 		gd_toolToolbar.heightHint = 72;
 		toolToolbar.setLayoutData(gd_toolToolbar);
-		toolToolbar.setBackground(SWTResourceManager.getColor(220,220,220));
+		toolToolbar.setBackground(SWTResourceManager.getColor(220, 220, 220));
 
 		tabFolder = new CTabFolder(this, SWT.CLOSE | SWT.FLAT);
 		tabFolder.setSelectionBackground(SWTResourceManager.getColor(241, 241, 241));
@@ -239,7 +248,7 @@ public class frmMain extends Shell {
 		selectButton(lblDanhMuc);
 		openToolbar(new toolDanhMuc(toolToolbar, SWT.NONE, tabFolder));
 
-		loadTheme();
+		hienThiGiaoDien();
 	}
 
 	@Override
@@ -274,6 +283,11 @@ public class frmMain extends Shell {
 		lblDangXuat.setBackground(tabBackground);
 		lblUserName.setForeground(buttonText);
 		lblDangXuat.setForeground(buttonText);
+	}
 
+	public void hienThiGiaoDien() {
+		loadTheme();
+
+		lblUserName.setText(Settings.currentUser);
 	}
 }

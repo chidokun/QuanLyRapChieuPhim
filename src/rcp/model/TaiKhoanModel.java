@@ -5,6 +5,7 @@
 
 package rcp.model;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -108,7 +109,7 @@ public class TaiKhoanModel {
 	}
 
 	/**
-	 * Lấy một tài khoản
+	 * Lấy mật khẩu một tài khoản
 	 * 
 	 * @param tenDangNhap
 	 * @return
@@ -124,5 +125,47 @@ public class TaiKhoanModel {
 		if (pass == null)
 			throw new SQLException();
 		return pass;
+	}
+
+	/**
+	 * Lấy mã nhân viên từ tên đăng nhập
+	 * 
+	 * @param tenDangNhap
+	 * @return
+	 * @throws SQLException
+	 */
+	public static String layMaNhanVien(String tenDangNhap) throws SQLException {
+		ResultSet rs = Database.callStored("sp_LayThongTin_TaiKhoan", tenDangNhap);
+
+		rs.next();
+		String id = rs.getString(2);
+		Database.connect().close();
+
+		if (id == null)
+			throw new SQLException();
+		return id;
+	}
+
+	/**
+	 * Đổi mật khẩu
+	 * 
+	 * @param tenDangNhap
+	 *            Tài khoản cần đổi
+	 * @param matKhauCu
+	 *            Bắt buộc phải khớp, cần kiểm tra lỗi không khớp bên ngoài hàm
+	 *            này
+	 * @param matKhauMoi
+	 * @throws SQLException
+	 * @throws NoSuchAlgorithmException
+	 */
+	public static void doiMatKhau(String tenDangNhap, String matKhauCu, String matKhauMoi)
+			throws SQLException, NoSuchAlgorithmException {
+		String pass = TaiKhoanModel.layMatKhau(tenDangNhap);
+
+		if (!MD5.equals(matKhauCu, pass))
+			throw new SQLException("Mật khẩu cũ không khớp");
+		if (Database.callStoredUpdate("sp_DoiMatKhau", tenDangNhap, MD5.encrypt(matKhauCu),
+				MD5.encrypt(matKhauMoi)) <= 0)
+			throw new SQLException("Không thể đổi mật khẩu");
 	}
 }
