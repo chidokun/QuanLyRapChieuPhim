@@ -8,9 +8,8 @@ package rcp.controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import rcp.entity.ChucVu;
 import rcp.entity.QuyenHan;
-import rcp.model.*;
+import rcp.model.QuyenHanModel;
 
 /**
  * @author Tuan

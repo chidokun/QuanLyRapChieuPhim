@@ -8,7 +8,6 @@ package rcp.view.page;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.eclipse.core.commands.ParameterValuesException;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
@@ -29,9 +28,9 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import rcp.controller.PhimController;
 import rcp.entity.Phim;
 import rcp.util.DateF;
+import rcp.util.Message;
 import rcp.util.Window;
-import rcp.view.popup.frmThemSuaPhim;
-import rcp.util.Message;;
+import rcp.view.popup.frmThemSuaPhim;;
 
 public class pagePhim extends Composite {
 	private Text txt_TenPhim;

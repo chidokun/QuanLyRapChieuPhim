@@ -3,12 +3,14 @@
  * Author: Hồ Thị Kim Hoàng - hohoang.ag.96@gmail.com
  */
 package rcp.controller;
-import java.sql.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.*;
-import rcp.entity.*;
-import rcp.model.*;
-import rcp.util.Database;
+
+import rcp.entity.BaoCaoPhim;
+import rcp.entity.Phim;
+import rcp.entity.SuatPhim;
+import rcp.model.PhimModel;
 public class PhimController {
 	public static ArrayList<Phim> traCuu(String TenPhim, Date TuNgay, Date DenNgay) throws SQLException{
 		return PhimModel.traCuu(TenPhim, TuNgay, DenNgay);

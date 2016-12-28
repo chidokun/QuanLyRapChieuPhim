@@ -13,13 +13,8 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.eclipse.swt.SWT;
-
-import rcp.entity.Phim;
-import rcp.entity.SuatPhim;
 import rcp.entity.Ve;
 import rcp.util.Database;
-import rcp.util.Message;
 
 public class VeModel {
 

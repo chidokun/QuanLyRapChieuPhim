@@ -2,10 +2,8 @@ package rcp.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import rcp.entity.SuatPhim;
-import rcp.model.PhimModel;
 import rcp.model.SuatPhimModel;
 
 public class SuatPhimController {
