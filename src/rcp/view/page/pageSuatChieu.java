@@ -245,7 +245,7 @@ public class pageSuatChieu extends Composite {
 
 		TableViewerColumn tableViewerColumn_3 = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnTnPhim = tableViewerColumn_3.getColumn();
-		tblclmnTnPhim.setWidth(250);
+		tblclmnTnPhim.setWidth(245);
 		tblclmnTnPhim.setText("Tên phim");
 
 		TableViewerColumn tableViewerColumn_4 = new TableViewerColumn(tableViewer, SWT.NONE);
@@ -275,7 +275,7 @@ public class pageSuatChieu extends Composite {
 
 		TableViewerColumn tableViewerColumn_9 = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnTrngThi = tableViewerColumn_9.getColumn();
-		tblclmnTrngThi.setWidth(73);
+		tblclmnTrngThi.setWidth(78);
 		tblclmnTrngThi.setText("Trạng thái");
 
 		hienThiGiaoDien();
@@ -323,7 +323,7 @@ public class pageSuatChieu extends Composite {
 				TableItem item = new TableItem(gridSuatChieu, SWT.NONE);
 				item.setText(new String[] { String.valueOf(stt), i.getMaSuatChieu(), i.getMaPhim(), i.getTenPhim(),
 						DateF.toString_full(i.getThoiGianChieu()), i.getDinhDang(), i.getHinhThuc(), i.getNgonNgu(),
-						i.getPhong(), String.valueOf((i.getTrangThai())) });
+						i.getPhong(), i.getTrangThai() == 0 ? "Đã chiếu" : i.getTrangThai() == 1 ? "Đang chiếu" : "Sắp chiếu" });
 
 				stt++;
 			}
@@ -353,7 +353,7 @@ public class pageSuatChieu extends Composite {
 				TableItem item = new TableItem(gridSuatChieu, SWT.NONE);
 				item.setText(new String[] { String.valueOf(stt), i.getMaSuatChieu(), i.getMaPhim(), i.getTenPhim(),
 						i.getThoiGianChieu().toString(), i.getDinhDang(), i.getHinhThuc(), i.getNgonNgu(), i.getPhong(),
-						String.valueOf((i.getTrangThai())) });
+						i.getTrangThai() == 0 ? "Đã chiếu" : i.getTrangThai() == 1 ? "Đang chiếu" : "Sắp chiếu" });
 				stt++;
 			}
 
