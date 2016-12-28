@@ -407,7 +407,7 @@ public class pageBanThucAn extends Composite {
 
 	public void xoaCTHD() {
 		try {
-			capNhatTongTien(-(double)c.parse(tableCTHD.getSelection()[0].getText(6)));
+			capNhatTongTien(-c.parse(tableCTHD.getSelection()[0].getText(6)).doubleValue());
 			tableCTHD.remove(tableCTHD.getSelectionIndex());
 		} catch (Exception e) {
 			e.printStackTrace();

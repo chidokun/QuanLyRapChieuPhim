@@ -147,9 +147,10 @@ public class pageBaoCaoDoanhThuPhimKhoangThoiGian extends Composite {
 		tableColumn_3.setText("Doanh thu");
 
 		lblTongDoanhThu = new Label(composite_1, SWT.NONE);
-		lblTongDoanhThu.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblTongDoanhThu.setText("Tổng doanh thu: 0");
-		lblTongDoanhThu.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		lblTongDoanhThu.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		lblTongDoanhThu.setAlignment(SWT.RIGHT);
+		lblTongDoanhThu.setText("Tổng doanh thu: 0 đ");
+		lblTongDoanhThu.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 		lblTongDoanhThu.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 
 	}
