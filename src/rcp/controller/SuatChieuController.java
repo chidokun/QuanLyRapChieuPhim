@@ -13,6 +13,7 @@ import rcp.entity.Phim;
 import rcp.entity.SuatChieu;
 import rcp.entity.SuatPhim;
 import rcp.model.SuatChieuModel;
+import rcp.util.Database;
 
 /**
  * @author Toàn
@@ -107,6 +108,14 @@ public class SuatChieuController {
 	}
 	public static ArrayList<Phim> traCuuPhim_theoNgay(Date ngay) throws SQLException {
 		return SuatChieuModel.traCuuPhim_theoNgay(ngay);
+	}
+	
+	/**
+	 * Cập nhật trạng thái suất chiếu
+	 * @throws SQLException
+	 */
+	public static void capNhatTrangThaiSuatChieu() throws SQLException {
+		SuatChieuModel.capNhatTrangThaiSuatChieu();
 	}
 	
 }

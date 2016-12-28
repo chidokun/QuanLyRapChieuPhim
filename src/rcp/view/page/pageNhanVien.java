@@ -320,7 +320,7 @@ public class pageNhanVien extends Composite {
 				item.setText(new String[] { String.valueOf(stt), i.getMaNhanVien(), i.getTenNhanVien(),
 						i.getNgaySinh().toString(), i.getGioiTinh(), i.getDiaChi(), i.getCMND(), i.getEmail(),
 						i.getSDT(), i.getMaChucVu(), i.getNgayVaoLam().toString(),
-						String.valueOf((i.getTrangThai())) });
+						i.getTrangThai() == 1 ? "Đang làm" : "Nghỉ việc" });
 				stt++;
 			}
 

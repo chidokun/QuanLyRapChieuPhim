@@ -125,7 +125,7 @@ public class SuatChieuModel {
 		return arr;
 	}
 	/**
-	 * Tra cứu tên phim theo ngafy
+	 * Tra cứu tên phim theo ngày
 	 * 
 	 * @param ngay
 	 * @return
@@ -187,6 +187,15 @@ public class SuatChieuModel {
 
 		Database.connect().close();
 		return arr;
+	}
+	
+	/**
+	 * Cập nhật trạng thái suất chiếu
+	 * @throws SQLException
+	 */
+	public static void capNhatTrangThaiSuatChieu() throws SQLException {
+		Database.callStored("sp_CapNhatTrangThaiSuatChieu");
+		Database.connect().close();
 	}
 	
 }

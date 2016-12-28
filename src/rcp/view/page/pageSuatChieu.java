@@ -141,7 +141,7 @@ public class pageSuatChieu extends Composite {
 
 		Composite composite_1 = new Composite(this, SWT.NONE);
 		composite_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		GridLayout gl_composite_1 = new GridLayout(3, false);
+		GridLayout gl_composite_1 = new GridLayout(4, false);
 		gl_composite_1.marginBottom = 15;
 		gl_composite_1.marginTop = 10;
 		gl_composite_1.marginWidth = 15;
@@ -186,6 +186,24 @@ public class pageSuatChieu extends Composite {
 		btnSua.setLayoutData(gd_btnSua);
 		btnSua.setText("Sửa");
 		btnSua.setImage(SWTResourceManager.getImage(pageSuatChieu.class, "/rcp/view/page/edit_16x16.png"));
+		
+		Button btnCapNhatTrangThai = new Button(composite_1, SWT.NONE);
+		btnCapNhatTrangThai.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					SuatChieuController.capNhatTrangThaiSuatChieu();
+					hienThiGiaoDien();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}	
+		});
+		GridData gd_btnCapNhatTrangThai = new GridData(SWT.RIGHT, SWT.FILL, false, false, 1, 1);
+		gd_btnCapNhatTrangThai.widthHint = 138;
+		btnCapNhatTrangThai.setLayoutData(gd_btnCapNhatTrangThai);
+		btnCapNhatTrangThai.setText("Cập nhật trạng thái");
+		btnCapNhatTrangThai.setImage(SWTResourceManager.getImage(pageSuatChieu.class, "/rcp/view/page/show_16x16.png"));
 
 		Button btnHienTatCa = new Button(composite_1, SWT.NONE);
 		GridData gd_btnHienTatCa = new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1);
@@ -208,7 +226,7 @@ public class pageSuatChieu extends Composite {
 		gridSuatChieu.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		gridSuatChieu.setHeaderVisible(true);
 		gridSuatChieu.setLinesVisible(true);
-		gridSuatChieu.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1));
+		gridSuatChieu.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 4, 1));
 
 		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnStt = tableViewerColumn.getColumn();
