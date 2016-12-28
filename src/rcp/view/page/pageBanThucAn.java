@@ -5,12 +5,15 @@
 
 package rcp.view.page;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
+import org.eclipse.core.commands.ParameterValuesException;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
@@ -23,12 +26,15 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
+
+import com.mysql.cj.api.jdbc.Statement;
 
 import rcp.Settings;
 import rcp.controller.HoaDonController;
@@ -38,7 +44,11 @@ import rcp.entity.ChiTietHDThucAn;
 import rcp.entity.HoaDonThucAn;
 import rcp.entity.ThucAn;
 import rcp.entity.ThucAnKichCo;
+import rcp.util.Database;
+import rcp.util.DateF;
 import rcp.util.Message;
+import rcp.util.Window;
+import rcp.view.popup.frmBaoCao;
 
 public class pageBanThucAn extends Composite {
 	private NumberFormat c = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
@@ -385,10 +395,28 @@ public class pageBanThucAn extends Composite {
 			}
 			try {
 				if (HoaDonController.them(hd, arr))
-					Message.show("Thêm hóa đơn thành công", "Thông báo", SWT.OK | SWT.ICON_INFORMATION, getShell());
+				{
+					MessageBox message=new MessageBox(getShell(), SWT.CANCEL |SWT.OK| SWT.ICON_QUESTION);
+					message.setMessage("Thêm hóa đơn thành công. Bạn có muốn in hóa đơn?");
+					message.setText("Hỏi");
+					int buttonID=message.open();
+					if(buttonID==SWT.OK)
+						try {
+							inHoaDon();
+						} catch (ParameterValuesException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					
+				}
 				else
 					Message.show("Thêm hóa đơn không thành công", "Thông báo", SWT.OK | SWT.ICON_INFORMATION,
 							getShell());
+				tableCTHD.removeAll();
+				arr.clear();
+				hienMa();
+				labelTongTien.setText("0 đ");
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -413,4 +441,28 @@ public class pageBanThucAn extends Composite {
 			e.printStackTrace();
 		}
 	}
+	public void inHoaDon() throws ParameterValuesException
+	{
+		try
+		{
+		Connection connection = null;
+	    Statement statement = null;
+	        try {
+	            connection = Database.connect();
+	            statement = (Statement) connection.createStatement();
+	            HashMap parameterMap = new HashMap();
+	            parameterMap.put("MaHD", txtMaHD.getText());//sending the report title as a parameter.
+	            parameterMap.put("NgayHD", DateF.toString(DateF.toDate(dateTimeNgayBan.getYear(), dateTimeNgayBan.getMonth(), dateTimeNgayBan.getDay())));
+	            parameterMap.put("TongTien", labelTongTien.getText());
+	            parameterMap.put("MaNV",Settings.currentEmpId);
+	            Window.open(new frmBaoCao(getDisplay(),parameterMap,connection,"Invoice"));    
+	        }
+	        catch (SQLException ex) {
+	          ex.printStackTrace();
+	        }
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+}
 }

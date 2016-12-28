@@ -5,8 +5,11 @@
 
 package rcp.view.page;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 import org.eclipse.core.commands.ParameterValuesException;
@@ -27,10 +30,15 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import com.mysql.cj.api.jdbc.Statement;
+
 import rcp.controller.VeController;
 import rcp.entity.Ve;
+import rcp.util.Database;
 import rcp.util.DateF;
 import rcp.util.Message;
+import rcp.util.Window;
+import rcp.view.popup.frmBaoCao;
 
 public class pageVe extends Composite {
 
@@ -164,6 +172,17 @@ public class pageVe extends Composite {
 		composite_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 
 		btnIn = new Button(composite_1, SWT.NONE);
+		btnIn.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					inVe();
+				} catch (ParameterValuesException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		GridData gd_btnIn = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_btnIn.heightHint = 30;
 		gd_btnIn.widthHint = 86;
@@ -346,4 +365,25 @@ public class pageVe extends Composite {
 						.after(DateF.toDate(dateDenNgay.getYear(), dateDenNgay.getMonth(), dateDenNgay.getDay()))))
 			throw new ParameterValuesException("Từ ngày không được sau Đến ngày", null);
 	}
+	public void inVe() throws ParameterValuesException
+	{
+		try
+		{
+		Connection connection = null;
+	    Statement statement = null;
+	        try {
+	            connection = Database.connect();
+	            statement = (Statement) connection.createStatement();
+	            HashMap parameterMap = new HashMap();
+	            parameterMap.put("maVe", gridVe.getSelection()[0].getText(1));//sending the report title as a parameter.
+	            Window.open(new frmBaoCao(getDisplay(),parameterMap,connection,"Ticket"));    
+	        }
+	        catch (SQLException ex) {
+	          ex.printStackTrace();
+	        }
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+}
 }

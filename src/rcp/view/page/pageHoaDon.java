@@ -6,8 +6,11 @@
 
 package rcp.view.page;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 import org.eclipse.core.commands.ParameterValuesException;
@@ -26,11 +29,16 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import com.mysql.cj.api.jdbc.Statement;
+
 import rcp.controller.HoaDonController;
 import rcp.entity.ChiTietHDThucAn;
 import rcp.entity.HoaDonThucAn;
+import rcp.util.Database;
 import rcp.util.DateF;
 import rcp.util.Message;
+import rcp.util.Window;
+import rcp.view.popup.frmBaoCao;
 
 public class pageHoaDon extends Composite {
 	private NumberFormat c = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
@@ -154,6 +162,17 @@ public class pageHoaDon extends Composite {
 		composite_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 
 		btnInHoaDon = new Button(composite_1, SWT.NONE);
+		btnInHoaDon.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					inHoaDon();
+				} catch (ParameterValuesException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		GridData gd_btnInHoaDon = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_btnInHoaDon.heightHint = 30;
 		gd_btnInHoaDon.widthHint = 100;
@@ -356,5 +375,29 @@ public class pageHoaDon extends Composite {
 			e.printStackTrace();
 		}
 	}
+	public void inHoaDon() throws ParameterValuesException
+	{
+		try
+		{
+		Connection connection = null;
+	    Statement statement = null;
+	        try {
+	            connection = Database.connect();
+	            statement = (Statement) connection.createStatement();
+	            HashMap parameterMap = new HashMap();
+	            parameterMap.put("MaHD", gridHoaDon.getSelection()[0].getText(1));//sending the report title as a parameter.
+	            parameterMap.put("NgayHD", gridHoaDon.getSelection()[0].getText(2));
+	            parameterMap.put("TongTien", gridHoaDon.getSelection()[0].getText(3));
+	            parameterMap.put("MaNV",gridHoaDon.getSelection()[0].getText(4) );
+	            Window.open(new frmBaoCao(getDisplay(),parameterMap,connection,"Invoice"));    
+	        }
+	        catch (SQLException ex) {
+	          ex.printStackTrace();
+	        }
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+}
 
 }
