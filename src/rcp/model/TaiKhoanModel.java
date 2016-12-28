@@ -168,4 +168,23 @@ public class TaiKhoanModel {
 				MD5.encrypt(matKhauMoi)) <= 0)
 			throw new SQLException("Không thể đổi mật khẩu");
 	}
+	
+	/**
+	 * Lấy mã quyền từ tên đăng nhập
+	 * 
+	 * @param tenDangNhap
+	 * @return
+	 * @throws SQLException
+	 */
+	public static String layMaQuyen(String tenDangNhap) throws SQLException {
+		ResultSet rs = Database.callStored("sp_LayThongTin_TaiKhoan", tenDangNhap);
+
+		rs.next();
+		String id = rs.getString(4);
+		Database.connect().close();
+
+		if (id == null)
+			throw new SQLException();
+		return id;
+	}
 }

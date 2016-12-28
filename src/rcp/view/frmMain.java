@@ -20,6 +20,8 @@ import org.eclipse.swt.events.MouseAdapter;
 
 import rcp.Settings;
 import rcp.controller.NhanVienController;
+import rcp.controller.QuyenHanController;
+import rcp.entity.QuyenHan;
 import rcp.util.Window;
 import rcp.view.control.*;
 import rcp.view.popup.frmDangNhap;
@@ -242,13 +244,6 @@ public class frmMain extends Shell {
 
 		composite = new Composite(tabFolder, SWT.NONE);
 		tabItem.setControl(composite);
-
-		setMaximized(true);
-
-		selectButton(lblDanhMuc);
-		openToolbar(new toolDanhMuc(toolToolbar, SWT.NONE, tabFolder));
-
-		hienThiGiaoDien();
 	}
 
 	@Override
@@ -285,9 +280,32 @@ public class frmMain extends Shell {
 		lblDangXuat.setForeground(buttonText);
 	}
 
-	public void hienThiGiaoDien() {
+	public void resetQuyen() {
+		((GridData)lblDanhMuc.getLayoutData()).exclude = false;
+		((GridData)lblNghiepVu.getLayoutData()).exclude = false;
+	}
+	
+	public void hienThiGiaoDien() throws SQLException {
 		loadTheme();
-
 		lblUserName.setText(Settings.currentUser);
+		setMaximized(true);
+
+		resetQuyen();
+		QuyenHan q = QuyenHanController.layThongTin(Settings.currentRightId);
+		switch (q.getMaQuyen()) {
+		case "Q04":
+			((GridData)lblDanhMuc.getLayoutData()).exclude = true;
+			selectButton(lblNghiepVu);
+			openToolbar(new toolNghiepVu(toolToolbar, SWT.NONE, tabFolder));
+			return;
+		case "Q02":
+			((GridData)lblNghiepVu.getLayoutData()).exclude = true;			
+			break;
+		default:
+			break;
+		}
+		
+		selectButton(lblDanhMuc);
+		openToolbar(new toolDanhMuc(toolToolbar, SWT.NONE, tabFolder));
 	}
 }

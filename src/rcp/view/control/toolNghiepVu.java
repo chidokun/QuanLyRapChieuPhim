@@ -16,12 +16,20 @@ import org.eclipse.swt.events.MouseTrackAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseAdapter;
 
+import rcp.Settings;
+import rcp.controller.QuyenHanController;
+import rcp.entity.QuyenHan;
 import rcp.util.Window;
 import rcp.view.page.*;
 
 public class toolNghiepVu extends Composite {
 	@SuppressWarnings("unused")
 	private CTabFolder controlled;
+	private CLabel lblBanVe;
+	private CLabel lblBanThucAn;
+	private CLabel lblBCPhimTG;
+	private CLabel lblBCKhachHang;
+	private CLabel lblBCThucAn;
 
 	/**
 	 * Create the composite.
@@ -39,7 +47,7 @@ public class toolNghiepVu extends Composite {
 
 		this.controlled = controlled;
 
-		CLabel lblBanVe = new CLabel(this, SWT.NONE);
+		lblBanVe = new CLabel(this, SWT.NONE);
 		lblBanVe.setImage(SWTResourceManager.getImage(toolNghiepVu.class, "/rcp/view/control/imgVe_32p.png"));
 		lblBanVe.addMouseListener(new MouseAdapter() {
 			@Override
@@ -70,7 +78,7 @@ public class toolNghiepVu extends Composite {
 		lblBanVe.setBackground(SWTResourceManager.getColor(240, 240, 240));
 		lblBanVe.setText("Bán vé");
 
-		CLabel lblBanThucAn = new CLabel(this, SWT.NONE);
+		lblBanThucAn = new CLabel(this, SWT.NONE);
 		lblBanThucAn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
@@ -101,8 +109,9 @@ public class toolNghiepVu extends Composite {
 		lblBanThucAn.setBackground(SWTResourceManager.getColor(240, 240, 240));
 		lblBanThucAn.setText("Bán thức ăn");
 
-		CLabel lblBCPhimTG = new CLabel(this, SWT.WRAP | SWT.CENTER);
-		lblBCPhimTG.setImage(SWTResourceManager.getImage(toolNghiepVu.class, "/rcp/view/control/imgBaoCaoPhim_32p.png"));
+		lblBCPhimTG = new CLabel(this, SWT.WRAP | SWT.CENTER);
+		lblBCPhimTG
+				.setImage(SWTResourceManager.getImage(toolNghiepVu.class, "/rcp/view/control/imgBaoCaoPhim_32p.png"));
 		lblBCPhimTG.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
@@ -112,7 +121,8 @@ public class toolNghiepVu extends Composite {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				mouseEnterColor(lblBCPhimTG);
-				Window.openPageInTab(controlled, new pageBaoCaoDoanhThuPhimKhoangThoiGian(controlled, SWT.NONE), "Doanh thu phim theo khoảng thời gian");
+				Window.openPageInTab(controlled, new pageBaoCaoDoanhThuPhimKhoangThoiGian(controlled, SWT.NONE),
+						"Doanh thu phim theo khoảng thời gian");
 			}
 		});
 		lblBCPhimTG.addMouseTrackListener(new MouseTrackAdapter() {
@@ -131,14 +141,14 @@ public class toolNghiepVu extends Composite {
 		lblBCPhimTG.setLayoutData(gd_lblBCPhimTG);
 		lblBCPhimTG.setText("Báo cáo doanh thu phim\r\ntheo khoảng thời gian");
 		lblBCPhimTG.setBackground(SWTResourceManager.getColor(240, 240, 240));
-		
-		
-		CLabel lblBCKhachHang = new CLabel(this, SWT.WRAP | SWT.CENTER);
+
+		lblBCKhachHang = new CLabel(this, SWT.WRAP | SWT.CENTER);
 		GridData gd_lblBCKhachHang = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
 		gd_lblBCKhachHang.widthHint = 168;
 		lblBCKhachHang.setLayoutData(gd_lblBCKhachHang);
 		lblBCKhachHang.setText("Báo cáo doanh thu\r\nkhách hàng");
-		lblBCKhachHang.setImage(SWTResourceManager.getImage(toolNghiepVu.class, "/rcp/view/control/imgBaoCaoKhachHang_32p.png"));
+		lblBCKhachHang.setImage(
+				SWTResourceManager.getImage(toolNghiepVu.class, "/rcp/view/control/imgBaoCaoKhachHang_32p.png"));
 		lblBCKhachHang.setBackground(SWTResourceManager.getColor(240, 240, 240));
 		lblBCKhachHang.addMouseListener(new MouseAdapter() {
 			@Override
@@ -149,7 +159,8 @@ public class toolNghiepVu extends Composite {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				mouseEnterColor(lblBCKhachHang);
-				Window.openPageInTab(controlled, new pageBaoCaoDoanhThuKhachHang(controlled, SWT.NONE), "Doanh thu theo khách hàng");
+				Window.openPageInTab(controlled, new pageBaoCaoDoanhThuKhachHang(controlled, SWT.NONE),
+						"Doanh thu theo khách hàng");
 			}
 		});
 		lblBCKhachHang.addMouseTrackListener(new MouseTrackAdapter() {
@@ -163,13 +174,14 @@ public class toolNghiepVu extends Composite {
 				mouseExitColor(lblBCKhachHang);
 			}
 		});
-		
-		CLabel lblBCThucAn = new CLabel(this, SWT.NONE);
+
+		lblBCThucAn = new CLabel(this, SWT.NONE);
 		GridData gd_lblBCThucAn = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
 		gd_lblBCThucAn.widthHint = 165;
 		lblBCThucAn.setLayoutData(gd_lblBCThucAn);
 		lblBCThucAn.setText("Báo cáo doanh thu\r\nthức ăn hàng tháng");
-		lblBCThucAn.setImage(SWTResourceManager.getImage(toolNghiepVu.class, "/rcp/view/control/imgBaoCaoThucAn_32p.png"));
+		lblBCThucAn
+				.setImage(SWTResourceManager.getImage(toolNghiepVu.class, "/rcp/view/control/imgBaoCaoThucAn_32p.png"));
 		lblBCThucAn.setBackground(SWTResourceManager.getColor(240, 240, 240));
 		lblBCThucAn.addMouseListener(new MouseAdapter() {
 			@Override
@@ -180,7 +192,8 @@ public class toolNghiepVu extends Composite {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				mouseEnterColor(lblBCThucAn);
-				Window.openPageInTab(controlled, new pageBaoCaoDoanhThuThucAn(controlled, SWT.NONE), "Doanh thu thức ăn");
+				Window.openPageInTab(controlled, new pageBaoCaoDoanhThuThucAn(controlled, SWT.NONE),
+						"Doanh thu thức ăn");
 			}
 		});
 		lblBCThucAn.addMouseTrackListener(new MouseTrackAdapter() {
@@ -195,6 +208,7 @@ public class toolNghiepVu extends Composite {
 			}
 		});
 
+		phanQuyen();
 	}
 
 	@Override
@@ -212,5 +226,38 @@ public class toolNghiepVu extends Composite {
 
 	public void mouseDownColor(CLabel item) {
 		item.setBackground(SWTResourceManager.getColor(200, 200, 200));
+	}
+
+	public void phanQuyen() {
+		try {
+			QuyenHan q = QuyenHanController.layThongTin(Settings.currentRightId);
+
+			GridData gd_lblBanVe = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
+			gd_lblBanVe.widthHint = 100;
+			gd_lblBanVe.exclude = !q.isBanVe();
+			lblBanVe.setLayoutData(gd_lblBanVe);
+			
+			GridData gd_lblBanThucAn = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
+			gd_lblBanThucAn.widthHint = 110;
+			gd_lblBanThucAn.exclude = !q.isBanThucAn();
+			lblBanThucAn.setLayoutData(gd_lblBanThucAn);
+			
+			GridData gd_lblBCPhimTG = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
+			gd_lblBCPhimTG.widthHint = 197;
+			gd_lblBCPhimTG.exclude = !q.isThongKeBaoCao();
+			lblBCPhimTG.setLayoutData(gd_lblBCPhimTG);
+			
+			GridData gd_lblBCKhachHang = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
+			gd_lblBCKhachHang.widthHint = 168;
+			gd_lblBCKhachHang.exclude = !q.isThongKeBaoCao();
+			lblBCKhachHang.setLayoutData(gd_lblBCKhachHang);
+			
+			GridData gd_lblBCThucAn = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
+			gd_lblBCThucAn.widthHint = 165;
+			gd_lblBCThucAn.exclude =  !q.isThongKeBaoCao();
+			lblBCThucAn.setLayoutData(gd_lblBCThucAn);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

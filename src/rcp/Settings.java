@@ -19,6 +19,7 @@ public class Settings {
 	private static Hashtable<String, Object> settings = new Hashtable<>();
 	public static String currentUser;
 	public static String currentEmpId;
+	public static String currentRightId;
 
 	/**
 	 * Nạp cài đặt

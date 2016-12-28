@@ -141,4 +141,15 @@ public class TaiKhoanController {
 			throws SQLException, NoSuchAlgorithmException {
 		TaiKhoanModel.doiMatKhau(tenDangNhap, matKhauCu, matKhauMoi);
 	}
+	
+	/**
+	 * Lấy mã quyền từ tên đăng nhập
+	 * 
+	 * @param tenDangNhap
+	 * @return
+	 * @throws SQLException
+	 */
+	public static String layMaQuyen(String tenDangNhap) throws SQLException {
+		return TaiKhoanModel.layMaQuyen(tenDangNhap);
+	}
 }

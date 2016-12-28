@@ -1,6 +1,7 @@
 package rcp;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.util.*;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.*;
@@ -43,7 +44,7 @@ public class Application {
 		return true;
 	}
 
-	public static void dangNhap() throws IOException {
+	public static void dangNhap() throws IOException, SQLException {
 		// hiện form đăng nhập
 		frmDangNhap shell = new frmDangNhap(display);
 		shell.addDisposeListener(new DisposeListener() {
@@ -59,7 +60,7 @@ public class Application {
 			hienThiGiaoDien();
 	}
 
-	public static void hienThiGiaoDien() {
+	public static void hienThiGiaoDien() throws SQLException {
 		// lỗi ảnh hưởng tính năng đăng xuất
 		shellMain.hienThiGiaoDien();
 		Window.open(shellMain);		

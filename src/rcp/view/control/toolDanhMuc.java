@@ -14,11 +14,21 @@ import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.events.*;
 import rcp.view.page.*;
+import rcp.Settings;
+import rcp.controller.QuyenHanController;
+import rcp.entity.QuyenHan;
 import rcp.util.*;
 
 public class toolDanhMuc extends Composite {
 	@SuppressWarnings("unused")
 	private CTabFolder controlled;
+	private CLabel lblPhim;
+	private CLabel lblSuatChieu;
+	private CLabel lblThucAn;
+	private CLabel lblNhanVien;
+	private CLabel lblKhachHang;
+	private CLabel lblHoaDon;
+	private CLabel lblV;
 
 	/**
 	 * Create the composite.
@@ -36,7 +46,7 @@ public class toolDanhMuc extends Composite {
 
 		this.controlled = controlled;
 
-		CLabel lblPhim = new CLabel(this, SWT.NONE);
+		lblPhim = new CLabel(this, SWT.NONE);
 		lblPhim.setImage(SWTResourceManager.getImage(toolDanhMuc.class, "/rcp/view/control/imgPhim_32p.png"));
 		lblPhim.addMouseListener(new MouseAdapter() {
 			@Override
@@ -67,7 +77,7 @@ public class toolDanhMuc extends Composite {
 		lblPhim.setBackground(SWTResourceManager.getColor(240, 240, 240));
 		lblPhim.setText("Phim");
 
-		CLabel lblSuatChieu = new CLabel(this, SWT.NONE);
+		lblSuatChieu = new CLabel(this, SWT.NONE);
 		lblSuatChieu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
@@ -92,13 +102,13 @@ public class toolDanhMuc extends Composite {
 			}
 		});
 		lblSuatChieu.setImage(SWTResourceManager.getImage(toolDanhMuc.class, "/rcp/view/control/imgSuatChieu_32p.png"));
-		GridData gd_lblSuatChieu = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		GridData gd_lblSuatChieu = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
 		gd_lblSuatChieu.widthHint = 100;
 		lblSuatChieu.setLayoutData(gd_lblSuatChieu);
 		lblSuatChieu.setBackground(SWTResourceManager.getColor(240, 240, 240));
 		lblSuatChieu.setText("Suất chiếu");
 
-		CLabel lblThucAn = new CLabel(this, SWT.NONE);
+		lblThucAn = new CLabel(this, SWT.NONE);
 		lblThucAn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
@@ -123,13 +133,13 @@ public class toolDanhMuc extends Composite {
 			}
 		});
 		lblThucAn.setImage(SWTResourceManager.getImage(toolDanhMuc.class, "/rcp/view/control/imgThucAn_32p.png"));
-		GridData gd_lblThucAn = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		GridData gd_lblThucAn = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
 		gd_lblThucAn.widthHint = 100;
 		lblThucAn.setLayoutData(gd_lblThucAn);
 		lblThucAn.setBackground(SWTResourceManager.getColor(240, 240, 240));
 		lblThucAn.setText("Thức ăn");
 
-		CLabel lblNhanVien = new CLabel(this, SWT.NONE);
+		lblNhanVien = new CLabel(this, SWT.NONE);
 		lblNhanVien.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
@@ -154,13 +164,13 @@ public class toolDanhMuc extends Composite {
 			}
 		});
 		lblNhanVien.setImage(SWTResourceManager.getImage(toolDanhMuc.class, "/rcp/view/control/imgNhanVien_32p.png"));
-		GridData gd_lblNhanVien = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		GridData gd_lblNhanVien = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
 		gd_lblNhanVien.widthHint = 100;
 		lblNhanVien.setLayoutData(gd_lblNhanVien);
 		lblNhanVien.setBackground(SWTResourceManager.getColor(240, 240, 240));
 		lblNhanVien.setText("Nhân viên");
 
-		CLabel lblKhachHang = new CLabel(this, SWT.NONE);
+		lblKhachHang = new CLabel(this, SWT.NONE);
 		lblKhachHang.setImage(SWTResourceManager.getImage(toolDanhMuc.class, "/rcp/view/control/imgKhachHang_32p.png"));
 		lblKhachHang.addMouseListener(new MouseAdapter() {
 			@Override
@@ -185,13 +195,13 @@ public class toolDanhMuc extends Composite {
 				mouseExitColor(lblKhachHang);
 			}
 		});
-		GridData gd_lblKhachHang = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		GridData gd_lblKhachHang = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
 		gd_lblKhachHang.widthHint = 120;
 		lblKhachHang.setLayoutData(gd_lblKhachHang);
 		lblKhachHang.setText("Khách hàng");
 		lblKhachHang.setBackground(SWTResourceManager.getColor(240, 240, 240));
 
-		CLabel lblHoaDon = new CLabel(this, SWT.NONE);
+		lblHoaDon = new CLabel(this, SWT.NONE);
 		lblHoaDon.setImage(SWTResourceManager.getImage(toolDanhMuc.class, "/rcp/view/control/imgHoaDon_32p.png"));
 		lblHoaDon.addMouseListener(new MouseAdapter() {
 			@Override
@@ -216,13 +226,13 @@ public class toolDanhMuc extends Composite {
 				mouseExitColor(lblHoaDon);
 			}
 		});
-		GridData gd_lblHoaDon = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		GridData gd_lblHoaDon = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
 		gd_lblHoaDon.widthHint = 100;
 		lblHoaDon.setLayoutData(gd_lblHoaDon);
 		lblHoaDon.setText("Hóa đơn");
 		lblHoaDon.setBackground(SWTResourceManager.getColor(240, 240, 240));
-		
-		CLabel lblV = new CLabel(this, SWT.NONE);
+
+		lblV = new CLabel(this, SWT.NONE);
 		lblV.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
@@ -246,13 +256,15 @@ public class toolDanhMuc extends Composite {
 				mouseExitColor(lblV);
 			}
 		});
-		GridData gd_lblV = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		GridData gd_lblV = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
 		gd_lblV.widthHint = 80;
 		lblV.setLayoutData(gd_lblV);
 		lblV.setText("Vé");
 		lblV.setImage(SWTResourceManager.getImage(toolDanhMuc.class, "/rcp/view/control/imgVe_32p.png"));
 		lblV.setBackground(SWTResourceManager.getColor(240, 240, 240));
 
+
+		phanQuyen();
 	}
 
 	@Override
@@ -270,5 +282,49 @@ public class toolDanhMuc extends Composite {
 
 	public void mouseDownColor(CLabel item) {
 		item.setBackground(SWTResourceManager.getColor(200, 200, 200));
+	}
+	
+	
+	public void phanQuyen() {
+		try {
+			QuyenHan q = QuyenHanController.layThongTin(Settings.currentRightId);
+
+			GridData gd_lblPhim = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
+			gd_lblPhim.widthHint = 100;
+			gd_lblPhim.exclude=!q.isQuanLyPhim();
+			lblPhim.setLayoutData(gd_lblPhim);
+			
+			GridData gd_lblSuatChieu = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
+			gd_lblSuatChieu.widthHint = 100;
+			gd_lblSuatChieu.exclude = !q.isQuanLySuatChieu();
+			lblSuatChieu.setLayoutData(gd_lblSuatChieu);
+	
+			GridData gd_lblThucAn = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
+			gd_lblThucAn.widthHint = 100;
+			gd_lblThucAn.exclude = !q.isQuanLyThucAn();
+			lblThucAn.setLayoutData(gd_lblThucAn);
+		
+			GridData gd_lblNhanVien = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
+			gd_lblNhanVien.widthHint = 100;
+			gd_lblNhanVien.exclude = !q.isQuanLyNhanVien();
+			lblNhanVien.setLayoutData(gd_lblNhanVien);
+			
+			GridData gd_lblKhachHang = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
+			gd_lblKhachHang.widthHint = 120;
+			gd_lblKhachHang.exclude = !q.isQuanLyKhachHang();
+			lblKhachHang.setLayoutData(gd_lblKhachHang);
+			
+			GridData gd_lblHoaDon = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
+			gd_lblHoaDon.widthHint = 100;
+			gd_lblHoaDon.exclude = !q.isQuanLyThucAn();
+			lblHoaDon.setLayoutData(gd_lblHoaDon);
+			
+			GridData gd_lblV = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
+			gd_lblV.widthHint = 80;
+			gd_lblV.exclude = !q.isTraCuuVe();
+			lblV.setLayoutData(gd_lblV);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

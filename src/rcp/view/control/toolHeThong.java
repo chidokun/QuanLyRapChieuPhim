@@ -5,23 +5,37 @@
 
 package rcp.view.control;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.custom.CTabFolder;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.events.MouseTrackAdapter;
-import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseAdapter;
-import rcp.view.page.*;
-import rcp.util.*;
-import rcp.view.popup.*;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseTrackAdapter;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.wb.swt.SWTResourceManager;
+
+import rcp.Settings;
+import rcp.controller.QuyenHanController;
+import rcp.entity.QuyenHan;
+import rcp.util.Window;
+import rcp.view.page.pageTaiKhoan;
+import rcp.view.popup.frmKetNoiCSDL;
+import rcp.view.popup.frmQuyDinh;
+import rcp.view.popup.frmSaoLuuPhucHoi;
+import rcp.view.popup.frmThongTinPhanMem;
+import rcp.view.popup.frmThongTinRapPhim;
 
 public class toolHeThong extends Composite {
 	@SuppressWarnings("unused")
 	private CTabFolder controlled;
+	private CLabel lblSaoLuuPhucHoi;
+	private CLabel lblKtNiCsdl;
+	private CLabel lblTaiKhoan;
+	private CLabel lblQuyDinh;
+	private CLabel lblThongTinRapPhim;
+	private CLabel lblThongTinPhanMem;
 
 	/**
 	 * Create the composite.
@@ -39,7 +53,7 @@ public class toolHeThong extends Composite {
 
 		this.controlled = controlled;
 
-		CLabel lblSaoLuuPhucHoi = new CLabel(this, SWT.NONE);
+		lblSaoLuuPhucHoi = new CLabel(this, SWT.NONE);
 		lblSaoLuuPhucHoi.setImage(SWTResourceManager.getImage(toolHeThong.class, "/rcp/view/control/imgSaoLuuPhucHoi_32p.png"));
 		lblSaoLuuPhucHoi.addMouseListener(new MouseAdapter() {
 			@Override
@@ -70,7 +84,7 @@ public class toolHeThong extends Composite {
 		lblSaoLuuPhucHoi.setBackground(SWTResourceManager.getColor(240, 240, 240));
 		lblSaoLuuPhucHoi.setText("Sao lưu phục hồi");
 		
-		CLabel lblKtNiCsdl = new CLabel(this, SWT.NONE);
+		lblKtNiCsdl = new CLabel(this, SWT.NONE);
 		lblKtNiCsdl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
@@ -95,14 +109,14 @@ public class toolHeThong extends Composite {
 				mouseExitColor(lblKtNiCsdl);
 			}
 		});
-		GridData gd_lblKtNiCsdl = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		GridData gd_lblKtNiCsdl = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
 		gd_lblKtNiCsdl.widthHint = 120;
 		lblKtNiCsdl.setLayoutData(gd_lblKtNiCsdl);
 		lblKtNiCsdl.setText("Kết nối CSDL");
 		lblKtNiCsdl.setImage(SWTResourceManager.getImage(toolHeThong.class, "/rcp/view/control/imgketNoiCSDL_32p.png"));
 		lblKtNiCsdl.setBackground(SWTResourceManager.getColor(240, 240, 240));
 
-		CLabel lblTaiKhoan = new CLabel(this, SWT.NONE);
+		lblTaiKhoan = new CLabel(this, SWT.NONE);
 		lblTaiKhoan.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
@@ -134,7 +148,7 @@ public class toolHeThong extends Composite {
 		lblTaiKhoan.setBackground(SWTResourceManager.getColor(240, 240, 240));
 		lblTaiKhoan.setText("Tài khoản");
 
-		CLabel lblQuyDinh = new CLabel(this, SWT.NONE);
+		lblQuyDinh = new CLabel(this, SWT.NONE);
 		lblQuyDinh.setImage(SWTResourceManager.getImage(toolHeThong.class, "/rcp/view/control/imgQuyDinh_32p.png"));
 		lblQuyDinh.addMouseListener(new MouseAdapter() {
 			@Override
@@ -165,7 +179,7 @@ public class toolHeThong extends Composite {
 		lblQuyDinh.setText("Quy định");
 		lblQuyDinh.setBackground(SWTResourceManager.getColor(240, 240, 240));
 		
-		CLabel lblThongTinRapPhim = new CLabel(this, SWT.NONE);
+		lblThongTinRapPhim = new CLabel(this, SWT.NONE);
 		lblThongTinRapPhim.addMouseTrackListener(new MouseTrackAdapter() {
 			@Override
 			public void mouseEnter(MouseEvent e) {
@@ -192,7 +206,7 @@ public class toolHeThong extends Composite {
 		lblThongTinRapPhim.setImage(SWTResourceManager.getImage(toolHeThong.class, "/rcp/view/control/imgRapPhim_32p.png"));
 		lblThongTinRapPhim.setBackground(SWTResourceManager.getColor(240, 240, 240));
 		
-		CLabel lblThongTinPhanMem = new CLabel(this, SWT.NONE);
+		lblThongTinPhanMem = new CLabel(this, SWT.NONE);
 		lblThongTinPhanMem.addMouseTrackListener(new MouseTrackAdapter() {
 			@Override
 			public void mouseExit(MouseEvent e) {
@@ -218,7 +232,9 @@ public class toolHeThong extends Composite {
 		lblThongTinPhanMem.setText("Thông tin phần mềm");
 		lblThongTinPhanMem.setImage(SWTResourceManager.getImage(toolHeThong.class, "/rcp/view/control/imgThongTin_32p.png"));
 		lblThongTinPhanMem.setBackground(SWTResourceManager.getColor(240, 240, 240));
+	
 
+		phanQuyen();
 	}
 
 	@Override
@@ -236,6 +252,33 @@ public class toolHeThong extends Composite {
 
 	public void mouseDownColor(CLabel item) {
 		item.setBackground(SWTResourceManager.getColor(200, 200, 200));
+	}
+	
+	public void phanQuyen() {
+		try {
+			QuyenHan q = QuyenHanController.layThongTin(Settings.currentRightId);
+
+			GridData gd_lblSaoLuuPhucHoi = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
+			gd_lblSaoLuuPhucHoi.widthHint = 140;
+			gd_lblSaoLuuPhucHoi.exclude = !q.isSaoLuuPhucHoi();
+			lblSaoLuuPhucHoi.setLayoutData(gd_lblSaoLuuPhucHoi);
+			
+			GridData gd_lblTaiKhoan = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
+			gd_lblTaiKhoan.widthHint = 110;
+			gd_lblTaiKhoan.exclude = !q.isThayDoiQuyDinh();
+			lblTaiKhoan.setLayoutData(gd_lblTaiKhoan);
+	
+			GridData gd_lblQuyDinh = new GridData(SWT.FILL, SWT.FILL, false,true, 1, 1);
+			gd_lblQuyDinh.widthHint = 100;
+			gd_lblQuyDinh.exclude = !q.isThayDoiQuyDinh();
+			lblQuyDinh.setLayoutData(gd_lblQuyDinh);
+			
+			GridData gd_lblThongTinRapPhim = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
+			gd_lblThongTinRapPhim.exclude = !q.isThayDoiQuyDinh();
+			lblThongTinRapPhim.setLayoutData(gd_lblThongTinRapPhim);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
 
