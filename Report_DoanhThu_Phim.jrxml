@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2016-12-29T00:51:04 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Repoert_DoanhThu_Phim" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dda8ed92-2896-4dba-bca9-e7da0ca2d339">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<parameter name="tuNgay" class="java.util.Date"/>
+	<parameter name="denNgay" class="java.util.Date"/>
+	<parameter name="Sum_DoanhThu" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select p.MaPhim, p.TenPhim, sum(GiaVe)
+    from Ve v, Phim p, suatchieu sc, suatphim sp
+    where Date(v.NgayBanVe) between $P{tuNgay} and $P{denNgay} 
+     and v.MaSuatChieu= sc.MaSuatChieu
+			and sc.MaSuatPhim=sp.MaSuatPhim and sp.MaPhim=p.MaPhim
+    group by p.MaPhim, p.TenPhim]]>
+	</queryString>
+	<field name="MaPhim" class="java.lang.String"/>
+	<field name="TenPhim" class="java.lang.String"/>
+	<field name="sum(GiaVe)" class="java.math.BigDecimal"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="126">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="146" backcolor="#006699" uuid="4326dd73-4c51-4b6c-b8c8-60f45b864511"/>
+				<staticText>
+					<reportElement x="20" y="18" width="370" height="85" forecolor="#FFFFFF" uuid="70f69d15-f681-4ea5-bd99-444f7c812e37"/>
+					<textElement>
+						<font size="32" isBold="true"/>
+					</textElement>
+					<text><![CDATA[BÁO CÁO DOANH THU PHIM]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="410" y="30" width="150" height="50" forecolor="#FFFFFF" uuid="7270ea0f-b0a0-4a55-983f-7bc839b5ef00"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Rạp chiếu phim RPP Thủ Đức, TP HCM]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="140" y="110" width="100" height="30" forecolor="#FFFFFF" uuid="2146d3c5-9c11-411e-9597-b57260d15695"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($P{denNgay})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="20" y="110" width="100" height="30" forecolor="#FFFFFF" uuid="cd21d73b-a357-4d19-94d1-8e9211143286"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($P{tuNgay})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="370" y="110" width="190" height="30" forecolor="#FFFFFF" uuid="4d4634fc-43f2-4b72-8ad2-46b7c85430a4">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{Sum_DoanhThu}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="100" y="110" width="100" height="30" forecolor="#FFFFFF" uuid="72e07731-63e9-4ef6-8718-c5c4680a16a0">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<text><![CDATA[-]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="c52c807e-90a6-4d2f-b0e4-382b226353d5"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="150" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="3ec8bfd3-b7b3-40b1-a213-44bcea3dc4ec"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mã phim]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="150" y="0" width="240" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="9eddfc91-ac16-48b5-b104-fbb2473c85bf"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tên phim]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="390" y="0" width="165" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="8e1c4c47-a072-4090-a395-3bd6591a7d11"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Doanh thu]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="27b0e48d-8604-482c-af3b-39df4e833471"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="150" height="20" uuid="b76cd6fc-8259-4674-b595-ce8c876a392a"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MaPhim}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="150" y="0" width="240" height="20" uuid="8899d198-17ac-4fe7-bf8b-b62a50b85fee"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TenPhim}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="390" y="0" width="165" height="20" uuid="73df7518-9be5-45e9-a7cd-d09ea8279766"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sum(GiaVe)}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="2ed8003d-fd1f-4364-86f8-c3fbc0529d74"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="c7d2d848-1ae5-4c68-9a6b-b9f7e2cb93b0"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="54fe6abf-4dee-455c-9f5b-db5523d9a0e1"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

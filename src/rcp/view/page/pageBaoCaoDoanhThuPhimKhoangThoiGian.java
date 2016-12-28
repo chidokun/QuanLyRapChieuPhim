@@ -5,9 +5,12 @@
 
 package rcp.view.page;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 import org.eclipse.core.commands.ParameterValuesException;
@@ -25,10 +28,15 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import com.mysql.cj.api.jdbc.Statement;
+
 import rcp.entity.BaoCaoPhim;
 import rcp.controller.PhimController;
+import rcp.util.Database;
 import rcp.util.DateF;
 import rcp.util.Message;
+import rcp.util.Window;
+import rcp.view.popup.frmBaoCao;
 
 public class pageBaoCaoDoanhThuPhimKhoangThoiGian extends Composite {
 	private Table gridBaoCao;
@@ -105,6 +113,17 @@ public class pageBaoCaoDoanhThuPhimKhoangThoiGian extends Composite {
 		btnXem.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 
 		btnIn = new Button(composite, SWT.NONE);
+		btnIn.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					inBaoCao();
+				} catch (ParameterValuesException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		GridData gd_btnIn = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
 		gd_btnIn.widthHint = 106;
 		gd_btnIn.heightHint = 27;
@@ -216,5 +235,28 @@ public class pageBaoCaoDoanhThuPhimKhoangThoiGian extends Composite {
 		if (!tuNgay.before(denNgay))
 			throw new ParameterValuesException("Từ ngày phải ở thời điểm trước đến ngày", null);
 	}
+	public void inBaoCao() throws ParameterValuesException
+	{
+		if(gridBaoCao.getItemCount()==0)
+		{
+			Message.show("Mời bạn xem báo cáo trước khi in", "Thông báo",SWT.OK|SWT.ICON_INFORMATION, getShell());
+			return;
+		}
+		xemBaoCao();
+		Connection connection = null;
+	    Statement statement = null;
+	        try {
+	            connection = Database.connect();
+	            statement = (Statement) connection.createStatement();
+	            HashMap parameterMap = new HashMap();
+	            parameterMap.put("tuNgay", DateF.toDate(dateTuNgay.getYear(), dateTuNgay.getMonth(), dateTuNgay.getDay()));
+	            parameterMap.put("denNgay", DateF.toDate(dateDenNgay.getYear(), dateDenNgay.getMonth(), dateDenNgay.getDay()));
+	            parameterMap.put("Sum_DoanhThu",lblTongDoanhThu.getText() );
+	            Window.open(new frmBaoCao(getDisplay(),parameterMap,connection,"Report_DoanhThu_Phim"));    
+	        }
+	        catch (SQLException ex) {
+	          ex.printStackTrace();
+	        }
+}
 
 }

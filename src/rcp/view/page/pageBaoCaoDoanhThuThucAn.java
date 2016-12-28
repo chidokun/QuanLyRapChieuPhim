@@ -5,9 +5,12 @@
 
 package rcp.view.page;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 import org.eclipse.core.commands.ParameterValuesException;
@@ -25,10 +28,15 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import com.mysql.cj.api.jdbc.Statement;
+
 import rcp.controller.ThucAnController;
 import rcp.entity.BaoCaoThucAn;
+import rcp.util.Database;
 import rcp.util.DateF;
 import rcp.util.Message;
+import rcp.util.Window;
+import rcp.view.popup.frmBaoCao;
 
 public class pageBaoCaoDoanhThuThucAn extends Composite {
 	private Table gridBaoCao;
@@ -119,6 +127,17 @@ public class pageBaoCaoDoanhThuThucAn extends Composite {
 		btnXemBaoCao.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 
 		btnInBaoCao = new Button(composite, SWT.NONE);
+		btnInBaoCao.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					inBaoCao();
+				} catch (ParameterValuesException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		GridData gd_btnInBaoCao = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
 		gd_btnInBaoCao.widthHint = 106;
 		gd_btnInBaoCao.heightHint = 27;
@@ -241,4 +260,34 @@ public class pageBaoCaoDoanhThuThucAn extends Composite {
 		if (!chkThucAn.getSelection() && !chkDoUong.getSelection())
 			throw new ParameterValuesException("Phải chọn Thức ăn, Đồ uống hoặc cả hai", null);
 	}
+	public void inBaoCao() throws ParameterValuesException
+	{
+		if(gridBaoCao.getItemCount()==0)
+		{
+			Message.show("Mời bạn xem báo cáo trước khi in", "Thông báo",SWT.OK|SWT.ICON_INFORMATION, getShell());
+			return;
+		}
+		xemBaoCao();
+		String maLTA;
+        if(chkThucAn.getSelection() && chkDoUong.getSelection())
+        	maLTA="";
+        else if(chkThucAn.getSelection())
+        	maLTA="LTA01";
+        else maLTA="LTA02";
+		Connection connection = null;
+	    Statement statement = null;
+	        try {
+	            connection = Database.connect();
+	            statement = (Statement) connection.createStatement();
+	            HashMap parameterMap = new HashMap();
+	            parameterMap.put("maLTA", maLTA);//sending the report title as a parameter.
+	            parameterMap.put("tuNgay", DateF.toDate(dateTuNgay.getYear(), dateTuNgay.getMonth(), dateTuNgay.getDay()));
+	            parameterMap.put("denNgay", DateF.toDate(dateDenNgay.getYear(), dateDenNgay.getMonth(), dateDenNgay.getDay()));
+	            parameterMap.put("Sum_DoanhThu",lblTongDoanhThu.getText() );
+	            Window.open(new frmBaoCao(getDisplay(),parameterMap,connection,"Report_DoanhThu_ThucAn"));    
+	        }
+	        catch (SQLException ex) {
+	          ex.printStackTrace();
+	        }
+}
 }

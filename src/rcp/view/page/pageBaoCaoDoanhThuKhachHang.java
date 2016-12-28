@@ -268,6 +268,7 @@ public class pageBaoCaoDoanhThuKhachHang extends Composite {
 			Message.show("Mời bạn xem báo cáo trước khi in", "Thông báo",SWT.OK|SWT.ICON_INFORMATION, getShell());
 			return;
 		}
+		xemBaoCao();
 		String maLKH;
         if(chkVip.getSelection() && chkThuong.getSelection())
         	maLKH="";
