@@ -13,7 +13,6 @@ import rcp.entity.Phim;
 import rcp.entity.SuatChieu;
 import rcp.entity.SuatPhim;
 import rcp.model.SuatChieuModel;
-import rcp.util.Database;
 
 /**
  * @author Toàn

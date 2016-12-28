@@ -199,14 +199,14 @@ public class pageSuatChieu extends Composite {
 				}
 			}	
 		});
-		GridData gd_btnCapNhatTrangThai = new GridData(SWT.RIGHT, SWT.FILL, false, false, 1, 1);
+		GridData gd_btnCapNhatTrangThai = new GridData(SWT.RIGHT, SWT.FILL, true, false, 1, 1);
 		gd_btnCapNhatTrangThai.widthHint = 138;
 		btnCapNhatTrangThai.setLayoutData(gd_btnCapNhatTrangThai);
 		btnCapNhatTrangThai.setText("Cập nhật trạng thái");
-		btnCapNhatTrangThai.setImage(SWTResourceManager.getImage(pageSuatChieu.class, "/rcp/view/page/show_16x16.png"));
+		btnCapNhatTrangThai.setImage(SWTResourceManager.getImage(pageSuatChieu.class, "/rcp/view/page/refresh_16x16.png"));
 
 		Button btnHienTatCa = new Button(composite_1, SWT.NONE);
-		GridData gd_btnHienTatCa = new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1);
+		GridData gd_btnHienTatCa = new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1);
 		gd_btnHienTatCa.heightHint = 30;
 		gd_btnHienTatCa.widthHint = 100;
 		btnHienTatCa.setLayoutData(gd_btnHienTatCa);

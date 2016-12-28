@@ -23,7 +23,6 @@ public class Application {
 	public static void main(String args[]) {
 		try {
 			Settings.load();
-			shellMain = new frmMain(display);
 
 			if (ketNoiCSDL())
 				dangNhap();
@@ -34,6 +33,11 @@ public class Application {
 		}
 	}
 
+	/**
+	 * Kiểm tra kết nối CSDL
+	 * 
+	 * @return
+	 */
 	public static boolean ketNoiCSDL() {
 		try {
 			Database.load();
@@ -44,28 +48,46 @@ public class Application {
 		return true;
 	}
 
+	/**
+	 * Đăng nhập
+	 * 
+	 * @throws IOException
+	 * @throws SQLException
+	 */
 	public static void dangNhap() throws IOException, SQLException {
-		// hiện form đăng nhập
-		frmDangNhap shell = new frmDangNhap(display);
-		shell.addDisposeListener(new DisposeListener() {
-			public void widgetDisposed(DisposeEvent arg0) {
-				result = frmDangNhap.result;
-			}
-		});
+		do {
+			// hiện form đăng nhập
+			frmDangNhap shell = new frmDangNhap(display);
+			shell.addDisposeListener(new DisposeListener() {
+				public void widgetDisposed(DisposeEvent arg0) {
+					result = frmDangNhap.result;
+				}
+			});
 
-		Window.open(shell);
+			Window.open(shell);
 
-		// đăng nhập được thì hiển thị giao diện
-		if (result == SWT.OK)
-			hienThiGiaoDien();
+			// đăng nhập được thì hiển thị giao diện
+			if (result == SWT.OK)
+				hienThiGiaoDien();
+			else
+				return;
+		} while (frmMain.isLogout);
 	}
 
+	/**
+	 * Hiển thị màn hình chính
+	 * 
+	 * @throws SQLException
+	 */
 	public static void hienThiGiaoDien() throws SQLException {
-		// lỗi ảnh hưởng tính năng đăng xuất
+		shellMain = new frmMain(display);
 		shellMain.hienThiGiaoDien();
-		Window.open(shellMain);		
+		Window.open(shellMain);
 	}
 
+	/**
+	 * Hiển thị giao diện kết nối lại CSDL
+	 */
 	public static void ketNoiLai() {
 		// hiện form kết nối lại
 		frmKetNoiCSDL shell = new frmKetNoiCSDL(display);

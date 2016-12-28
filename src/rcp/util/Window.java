@@ -24,10 +24,10 @@ public class Window {
 		Rectangle dBound = display.getPrimaryMonitor().getBounds();
 		Rectangle sBound = shell.getBounds();
 
-		int h = dBound.y + (dBound.height - sBound.height) / 2;
-		int w = dBound.x + (dBound.width - sBound.width) / 2;
+		int y = dBound.y + (dBound.height - sBound.height) / 2;
+		int x = dBound.x + (dBound.width - sBound.width) / 2;
 
-		shell.setLocation(w, h);
+		shell.setLocation(x, y - 25);
 	}
 
 	/**
@@ -38,11 +38,6 @@ public class Window {
 	 * @param title
 	 */
 	public static void openPageInTab(CTabFolder controller, Composite page, String title) {
-		/*
-		 * for (Control i : controlled.getChildren()) { if
-		 * (i.getClass().equals(page.getClass())) { i.setFocus(); return; } }
-		 */
-
 		CTabItem tabItem = new CTabItem(controller, SWT.NONE);
 		tabItem.setText(title);
 		tabItem.setControl(page);
@@ -57,6 +52,7 @@ public class Window {
 	 * @param shell
 	 */
 	public static void open(Shell shell) {
+		center(shell.getDisplay(), shell);
 		shell.open();
 		shell.layout();
 
