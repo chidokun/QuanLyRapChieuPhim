@@ -7,6 +7,7 @@ package rcp.view.page;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
@@ -182,6 +183,7 @@ public class pageBanVe extends Composite {
 		TableColumn tableColumn_7 = new TableColumn(tableSuatChieu, SWT.NONE);
 		tableColumn_7.setWidth(117);
 		tableColumn_7.setText("Trạng thái");
+		taiPhimHienTai();
 
 	}
 
@@ -205,7 +207,21 @@ public class pageBanVe extends Composite {
 			e.printStackTrace();
 		}
 	}
+	public void taiPhimHienTai() {
+		try {
+			ArrayList<Phim> aPhim = SuatChieuController
+					.traCuuPhim_theoNgay(Calendar.getInstance().getTime());
+			tablePhim.removeAll();
+			for (Phim p : aPhim) {
+				TableItem item = new TableItem(tablePhim, SWT.NONE);
+				item.setText(new String[] { String.valueOf(tablePhim.getItemCount()), p.getMaPhim(), p.getTenPhim() });
+			}
+			tablePhim.select(0);
+		} catch (Exception e) {
 
+			e.printStackTrace();
+		}
+	}
 	public void traCuuSuatChieu() {
 		SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
 

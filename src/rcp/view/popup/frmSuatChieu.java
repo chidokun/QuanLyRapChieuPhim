@@ -7,6 +7,7 @@ package rcp.view.popup;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.TableViewer;
@@ -332,7 +333,15 @@ public class frmSuatChieu extends Shell {
 	 */
 	public boolean luu() {
 		try {
+			Calendar c=Calendar.getInstance();
+			c.set(dateTime.getYear(), dateTime.getMonth(), dateTime.getDay(), dateTime_Gio.getHours(), dateTime_Gio.getMinutes());
+			if(Calendar.getInstance().after(c))
+			{
+				Message.show("Thời điểm chiếu không hợp lệ", "Lỗi", SWT.OK, getShell());
+				return false;
+			}
 			if (isInsert) {
+				
 				if (!SuatChieuController.them(laySuatChieu_them()))
 					throw new SQLException();
 			} else {
