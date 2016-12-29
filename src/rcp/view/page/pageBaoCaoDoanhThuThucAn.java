@@ -28,8 +28,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.wb.swt.SWTResourceManager;
 
-import com.mysql.cj.api.jdbc.Statement;
-
+import rcp.Settings;
 import rcp.controller.ThucAnController;
 import rcp.entity.BaoCaoThucAn;
 import rcp.util.Database;
@@ -210,9 +209,9 @@ public class pageBaoCaoDoanhThuThucAn extends Composite {
 			Date tuNgay = DateF.toDate(dateTuNgay.getYear(), dateTuNgay.getMonth(), dateTuNgay.getDay());
 			Date denNgay = DateF.toDate(dateDenNgay.getYear(), dateDenNgay.getMonth(), dateDenNgay.getDay());
 			int loaiTA = (chkThucAn.getSelection() ? 1 : 3) & (chkDoUong.getSelection() ? 2 : 1);
-			
-			//chờ thức ăn
-			ArrayList<BaoCaoThucAn> arr =ThucAnController.baoCaoThucAn(loaiTA, tuNgay, denNgay);
+
+			// chờ thức ăn
+			ArrayList<BaoCaoThucAn> arr = ThucAnController.baoCaoThucAn(loaiTA, tuNgay, denNgay);
 
 			gridBaoCao.removeAll();
 			int stt = 1;
@@ -260,34 +259,36 @@ public class pageBaoCaoDoanhThuThucAn extends Composite {
 		if (!chkThucAn.getSelection() && !chkDoUong.getSelection())
 			throw new ParameterValuesException("Phải chọn Thức ăn, Đồ uống hoặc cả hai", null);
 	}
-	public void inBaoCao() throws ParameterValuesException
-	{
-		if(gridBaoCao.getItemCount()==0)
-		{
-			Message.show("Mời bạn xem báo cáo trước khi in", "Thông báo",SWT.OK|SWT.ICON_INFORMATION, getShell());
+
+	public void inBaoCao() throws ParameterValuesException {
+		if (gridBaoCao.getItemCount() == 0) {
+			Message.show("Mời bạn xem báo cáo trước khi in", "Thông báo", SWT.OK | SWT.ICON_INFORMATION, getShell());
 			return;
 		}
 		xemBaoCao();
 		String maLTA;
-        if(chkThucAn.getSelection() && chkDoUong.getSelection())
-        	maLTA="";
-        else if(chkThucAn.getSelection())
-        	maLTA="LTA01";
-        else maLTA="LTA02";
+		if (chkThucAn.getSelection() && chkDoUong.getSelection())
+			maLTA = "";
+		else if (chkThucAn.getSelection())
+			maLTA = "LTA01";
+		else
+			maLTA = "LTA02";
 		Connection connection = null;
-	    Statement statement = null;
-	        try {
-	            connection = Database.connect();
-	            statement = (Statement) connection.createStatement();
-	            HashMap parameterMap = new HashMap();
-	            parameterMap.put("maLTA", maLTA);//sending the report title as a parameter.
-	            parameterMap.put("tuNgay", DateF.toDate(dateTuNgay.getYear(), dateTuNgay.getMonth(), dateTuNgay.getDay()));
-	            parameterMap.put("denNgay", DateF.toDate(dateDenNgay.getYear(), dateDenNgay.getMonth(), dateDenNgay.getDay()));
-	            parameterMap.put("Sum_DoanhThu",lblTongDoanhThu.getText() );
-	            Window.open(new frmBaoCao(getDisplay(),parameterMap,connection,"Report_DoanhThu_ThucAn"));    
-	        }
-	        catch (SQLException ex) {
-	          ex.printStackTrace();
-	        }
-}
+		try {
+			connection = Database.connect();
+			HashMap<String, Object> parameterMap = new HashMap<>();
+			parameterMap.put("maLTA", maLTA);// sending the report title as a
+												// parameter.
+			parameterMap.put("tuNgay", DateF.toDate(dateTuNgay.getYear(), dateTuNgay.getMonth(), dateTuNgay.getDay()));
+			parameterMap.put("denNgay",
+					DateF.toDate(dateDenNgay.getYear(), dateDenNgay.getMonth(), dateDenNgay.getDay()));
+			parameterMap.put("Sum_DoanhThu", lblTongDoanhThu.getText());
+
+			parameterMap.put("cinemaName", Settings.get("cinemaName"));
+			parameterMap.put("cinemaAddr", Settings.get("cinemaAddr"));
+			Window.open(new frmBaoCao(getDisplay(), parameterMap, connection, "Report_DoanhThu_ThucAn"));
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+	}
 }

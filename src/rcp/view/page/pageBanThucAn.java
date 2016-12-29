@@ -34,8 +34,6 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
 
-import com.mysql.cj.api.jdbc.Statement;
-
 import rcp.Settings;
 import rcp.controller.HoaDonController;
 import rcp.controller.ThucAnController;
@@ -446,15 +444,17 @@ public class pageBanThucAn extends Composite {
 		try
 		{
 		Connection connection = null;
-	    Statement statement = null;
 	        try {
 	            connection = Database.connect();
-	            statement = (Statement) connection.createStatement();
-	            HashMap parameterMap = new HashMap();
+	            HashMap<String,Object> parameterMap = new HashMap<>();
 	            parameterMap.put("MaHD", txtMaHD.getText());//sending the report title as a parameter.
 	            parameterMap.put("NgayHD", DateF.toString(DateF.toDate(dateTimeNgayBan.getYear(), dateTimeNgayBan.getMonth(), dateTimeNgayBan.getDay())));
 	            parameterMap.put("TongTien", labelTongTien.getText());
-	            parameterMap.put("MaNV",Settings.currentEmpId);
+	            parameterMap.put("MaNV",Settings.currentEmpId);  
+	            parameterMap.put("cinemaName", Settings.get("cinemaName"));
+				parameterMap.put("cinemaAddr", Settings.get("cinemaAddr"));
+				parameterMap.put("cinemaEmail", Settings.get("cinemaEmail"));
+				parameterMap.put("cinemaTel", Settings.get("cinemaTel"));
 	            Window.open(new frmBaoCao(getDisplay(),parameterMap,connection,"Invoice"));    
 	        }
 	        catch (SQLException ex) {

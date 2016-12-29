@@ -28,10 +28,9 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.wb.swt.SWTResourceManager;
 
-import com.mysql.cj.api.jdbc.Statement;
-
-import rcp.entity.BaoCaoPhim;
+import rcp.Settings;
 import rcp.controller.PhimController;
+import rcp.entity.BaoCaoPhim;
 import rcp.util.Database;
 import rcp.util.DateF;
 import rcp.util.Message;
@@ -244,14 +243,15 @@ public class pageBaoCaoDoanhThuPhimKhoangThoiGian extends Composite {
 		}
 		xemBaoCao();
 		Connection connection = null;
-	    Statement statement = null;
 	        try {
 	            connection = Database.connect();
-	            statement = (Statement) connection.createStatement();
-	            HashMap parameterMap = new HashMap();
+	            HashMap<String,Object> parameterMap = new HashMap<>();
 	            parameterMap.put("tuNgay", DateF.toDate(dateTuNgay.getYear(), dateTuNgay.getMonth(), dateTuNgay.getDay()));
 	            parameterMap.put("denNgay", DateF.toDate(dateDenNgay.getYear(), dateDenNgay.getMonth(), dateDenNgay.getDay()));
 	            parameterMap.put("Sum_DoanhThu",lblTongDoanhThu.getText() );
+	            parameterMap.put("cinemaName", Settings.get("cinemaName"));
+				parameterMap.put("cinemaAddr", Settings.get("cinemaAddr"));
+				
 	            Window.open(new frmBaoCao(getDisplay(),parameterMap,connection,"Report_DoanhThu_Phim"));    
 	        }
 	        catch (SQLException ex) {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2016-12-29T04:01:54 -->
+<!-- 2016-12-29T11:25:10 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Invoice_1" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
@@ -63,11 +63,15 @@
 	<parameter name="MaNV" class="java.lang.String"/>
 	<parameter name="TongTien" class="java.lang.String"/>
 	<parameter name="NgayHD" class="java.lang.String"/>
+	<parameter name="cinemaName" class="java.lang.String"/>
+	<parameter name="cinemaAddr" class="java.lang.String"/>
+	<parameter name="cinemaEmail" class="java.lang.String"/>
+	<parameter name="cinemaTel" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[select TenThucAn, KichCo,DonGia,SoLuong,(DonGia*SoLuong) as 'ThanhTien'
 			from ChiTietHDThucAn CT,ThucAnKichCo TAKC, ThucAn TA
 			Where CT.MaThucAnKichCo = TAKC.MaThucAnKichCo and TAKC.MaThucAn = TA.MaThucAn
-			and CT.MaHoaDon=$P{MaHD} ]]>
+			and CT.MaHoaDon=$P{MaHD}]]>
 	</queryString>
 	<field name="TenThucAn" class="java.lang.String"/>
 	<field name="KichCo" class="java.lang.String"/>
@@ -119,7 +123,7 @@
 			</textField>
 			<image hAlign="Center">
 				<reportElement x="0" y="-3" width="80" height="70" uuid="184bfd2c-3222-4734-991b-7c2d9f0b00fd"/>
-				<imageExpression><![CDATA["E:/Git/QuanLyRapChieuPhim/Untitled-2.png"]]></imageExpression>
+				<imageExpression><![CDATA["logo.png"]]></imageExpression>
 			</image>
 			<textField pattern="EEEEE dd MMMMM yyyy">
 				<reportElement x="465" y="32" width="110" height="20" uuid="4ca44ed6-008f-4ecd-986d-24c2a33a7e22"/>
@@ -136,28 +140,6 @@
 				</textElement>
 				<text><![CDATA[Invoice:]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="95" y="0" width="210" height="25" uuid="0d62fea5-0597-4cc0-be32-66df1f25380d">
-					<property name="local_mesure_unitheight" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement>
-					<font size="19" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Rạp chiếu phim RPP]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="95" y="55" width="205" height="15" uuid="989c7633-f762-4bc1-996e-c070df183549"/>
-				<text><![CDATA[08 352267893]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="95" y="25" width="205" height="15" uuid="85ba4a80-1f2f-4f48-964f-b82f05940bb8"/>
-				<text><![CDATA[Thủ Đức, TP HCM]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="95" y="40" width="205" height="15" uuid="27022f5d-e737-4bb7-885e-39862ef97a30"/>
-				<text><![CDATA[contact@rpp.com]]></text>
-			</staticText>
 			<textField>
 				<reportElement x="44" y="117" width="78" height="21" uuid="28898993-32a2-4bd8-ba61-c52146a156ed"/>
 				<textElement textAlignment="Left">
@@ -171,6 +153,25 @@
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{TongTien}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="0" width="210" height="25" uuid="2f3d05fa-62dc-4080-9ef1-9d58a7024fb0"/>
+				<textElement>
+					<font size="19" isBold="false" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cinemaName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="25" width="205" height="15" uuid="70072a45-daea-434a-b1d6-a9b5ecfce24f"/>
+				<textFieldExpression><![CDATA[$P{cinemaAddr}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="40" width="205" height="15" uuid="e43eaa26-bb17-458e-af25-acd3bc7cfa82"/>
+				<textFieldExpression><![CDATA[$P{cinemaEmail}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="55" width="205" height="15" uuid="ee791d11-8cf2-4131-bbfb-a5da0fdfe2fa"/>
+				<textFieldExpression><![CDATA[$P{cinemaTel}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

@@ -14,3 +14,8 @@ bin/
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/Invoice.jasper
+/Ticket.jasper
+/Report_DoanhThu_KhachHang.jasper
+/Report_DoanhThu_Phim.jasper
+/Report_DoanhThu_ThucAn.jasper

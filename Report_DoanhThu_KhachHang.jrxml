@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2016-12-28T22:11:15 -->
+<!-- 2016-12-29T11:54:09 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report_KhachHang" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fe1cf264-9853-4395-899a-aa8cda63d750">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
@@ -17,10 +17,12 @@ from Ve v, KhachHang kh]]>
 	<parameter name="tuNgay" class="java.util.Date"/>
 	<parameter name="denNgay" class="java.util.Date"/>
 	<parameter name="Sum_DoanhThu" class="java.lang.String"/>
+	<parameter name="cinemaName" class="java.lang.String"/>
+	<parameter name="cinemaAddr" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[select R.MaKhachHang, kh.HoTen, kh.NgayDangKy, lkh.TenLoaiKH, R.DoanhThu
 			from
-			(select MaKhachHang, Sum(GiaVe) as 'DoanhThu'
+			(select MaKhachHang, Sum(GiaVe) as DoanhThu
 			from Ve v
 			where Date(v.NgayBanVe) between $P{tuNgay} and  $P{denNgay}
 			group by MaKhachHang) R, KhachHang kh, LoaiKH lkh
@@ -31,7 +33,7 @@ from Ve v, KhachHang kh]]>
 	<field name="HoTen" class="java.lang.String"/>
 	<field name="NgayDangKy" class="java.sql.Timestamp"/>
 	<field name="TenLoaiKH" class="java.lang.String"/>
-	<field name="DoanhThu" class="java.math.BigDecimal"/>
+	<field name="DoanhThu" class="java.lang.Double"/>
 	<background>
 		<band/>
 	</background>
@@ -45,13 +47,6 @@ from Ve v, KhachHang kh]]>
 						<font size="32" isBold="true"/>
 					</textElement>
 					<text><![CDATA[BÁO CÁO DOANH THU KHÁCH HÀNG]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="410" y="30" width="150" height="50" forecolor="#FFFFFF" uuid="a864d027-59c5-4ff1-b018-f34a51ee8a76"/>
-					<textElement textAlignment="Left">
-						<font size="14" isBold="false"/>
-					</textElement>
-					<text><![CDATA[Rạp chiếu phim RPP Thủ Đức, TP HCM]]></text>
 				</staticText>
 				<textField>
 					<reportElement x="31" y="110" width="100" height="30" forecolor="#FFFFFF" uuid="2151262c-0362-490b-9c7a-5026150ef19e">
@@ -83,7 +78,21 @@ from Ve v, KhachHang kh]]>
 					<textElement textAlignment="Center">
 						<font size="13"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{Sum_DoanhThu}.toString()]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$P{Sum_DoanhThu}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="410" y="30" width="180" height="20" forecolor="#FFFFFF" uuid="3e2bdb93-8f0b-4a2e-a110-4fa8eb3a1aed"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{cinemaName}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="410" y="50" width="180" height="20" forecolor="#FFFFFF" uuid="b93b884d-04e2-4bf0-9045-e844b3939fc5"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{cinemaAddr}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

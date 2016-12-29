@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2016-12-29T01:42:17 -->
+<!-- 2016-12-29T11:51:33 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report_DoanhThu_ThucAn" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c9aa57ce-690c-4231-92d2-39adfa439269">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
@@ -8,10 +8,12 @@
 	<parameter name="denNgay" class="java.util.Date"/>
 	<parameter name="maLTA" class="java.lang.String"/>
 	<parameter name="Sum_DoanhThu" class="java.lang.String"/>
+	<parameter name="cinemaName" class="java.lang.String"/>
+	<parameter name="cinemaAddr" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[select R.MaThucAn, ta.TenThucAn,  lta.TenLoaiThucAn, R.DoanhThu
 		from
-			(select takc.MaThucAn , sum(ct.SoLuong*takc.DonGia) as 'DoanhThu'
+			(select takc.MaThucAn , sum(ct.SoLuong*takc.DonGia) as DoanhThu
 			from hoadonthucan hd, chitiethdthucan ct, thucankichco takc
 			where hd.MaHoaDon=ct.MaHoaDon and ct.MaThucAnKichCo=takc.MaThucAnKichCo 
 					and Date(hd.NgayHoaDon) between $P{tuNgay} and $P{denNgay}
@@ -23,7 +25,7 @@
 	<field name="MaThucAn" class="java.lang.String"/>
 	<field name="TenThucAn" class="java.lang.String"/>
 	<field name="TenLoaiThucAn" class="java.lang.String"/>
-	<field name="DoanhThu" class="java.math.BigDecimal"/>
+	<field name="DoanhThu" class="java.lang.Double"/>
 	<background>
 		<band/>
 	</background>
@@ -37,13 +39,6 @@
 						<font size="32" isBold="true"/>
 					</textElement>
 					<text><![CDATA[BÁO CÁO DOANH THU THỨC ĂN]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="410" y="30" width="150" height="50" forecolor="#FFFFFF" uuid="f8382832-9158-4160-a0fb-d5e822187228"/>
-					<textElement textAlignment="Left">
-						<font size="14" isBold="false"/>
-					</textElement>
-					<text><![CDATA[Rạp chiếu phim RPP Thủ Đức, TP HCM]]></text>
 				</staticText>
 				<textField>
 					<reportElement x="20" y="110" width="100" height="30" forecolor="#FFFFFF" uuid="c5dc89c1-6bf8-4871-82f6-2be8f7b53596"/>
@@ -76,6 +71,20 @@
 						<font size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($P{denNgay})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="410" y="30" width="165" height="20" forecolor="#FFFFFF" uuid="4d189ffe-7e02-4631-b106-a318704195a5"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{cinemaName}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="410" y="50" width="165" height="20" forecolor="#FFFFFF" uuid="d5646691-2f06-44de-9b2a-3fe616ea4211"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{cinemaAddr}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

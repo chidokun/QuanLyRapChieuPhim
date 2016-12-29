@@ -30,8 +30,7 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
 
-import com.mysql.cj.api.jdbc.Statement;
-
+import rcp.Settings;
 import rcp.controller.VeController;
 import rcp.entity.Ve;
 import rcp.util.Database;
@@ -365,25 +364,30 @@ public class pageVe extends Composite {
 						.after(DateF.toDate(dateDenNgay.getYear(), dateDenNgay.getMonth(), dateDenNgay.getDay()))))
 			throw new ParameterValuesException("Từ ngày không được sau Đến ngày", null);
 	}
-	public void inVe() throws ParameterValuesException
-	{
-		try
-		{
-		Connection connection = null;
-	    Statement statement = null;
-	        try {
-	            connection = Database.connect();
-	            statement = (Statement) connection.createStatement();
-	            HashMap parameterMap = new HashMap();
-	            parameterMap.put("maVe", gridVe.getSelection()[0].getText(1));//sending the report title as a parameter.
-	            Window.open(new frmBaoCao(getDisplay(),parameterMap,connection,"Ticket"));    
-	        }
-	        catch (SQLException ex) {
-	          ex.printStackTrace();
-	        }
-		}catch(Exception e)
-		{
+
+	public void inVe() throws ParameterValuesException {
+		try {
+			Connection connection = null;
+			try {
+				connection = Database.connect();
+				HashMap<String, Object> parameterMap = new HashMap<>();
+				parameterMap.put("maVe", gridVe.getSelection()[0].getText(1));// sending
+																				// the
+																				// report
+																				// title
+																				// as
+																				// a
+																				// parameter.
+				parameterMap.put("cinemaName", Settings.get("cinemaName"));
+				parameterMap.put("cinemaAddr", Settings.get("cinemaAddr"));
+				parameterMap.put("cinemaEmail", Settings.get("cinemaEmail"));
+				parameterMap.put("cinemaTel", Settings.get("cinemaTel"));
+				Window.open(new frmBaoCao(getDisplay(), parameterMap, connection, "Ticket"));
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-}
+	}
 }

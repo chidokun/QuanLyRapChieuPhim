@@ -90,7 +90,7 @@ public class Settings {
 		
 		//cài đặt thông tin rạp phim
 		settings.put("cinemaName", "Rạp chiếu phim RPP");
-		settings.put("cinemaAddr", "Khu phố 6, phường Linh Trung, quận Thủ Đức, TP. HCM");
+		settings.put("cinemaAddr", "Linh Trung, Thủ Đức, TP. HCM");
 		settings.put("cinemaTel", "0123456789");
 		settings.put("cinemaEmail", "support@rpp.com");
 		

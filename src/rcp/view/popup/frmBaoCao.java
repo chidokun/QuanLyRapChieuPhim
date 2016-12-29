@@ -4,20 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Panel;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.HashMap;
 
 import javax.swing.JRootPane;
 
-import org.eclipse.core.commands.ParameterValuesException;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.awt.SWT_AWT;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-
-import com.mysql.cj.api.jdbc.Statement;
-import com.mysql.cj.mysqlx.protobuf.MysqlxNotice.Frame;
 
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -25,12 +21,6 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.swing.JRViewer;
 import rcp.util.Database;
-import rcp.util.DateF;
-import rcp.util.Message;
-import rcp.util.Window;
-import rcp.view.popup.frmBaoCao;
-
-import org.eclipse.swt.layout.FillLayout;
 
 public class frmBaoCao extends Shell {
 
@@ -39,7 +29,7 @@ public class frmBaoCao extends Shell {
 	 * @param args
 	 */
 
-    HashMap hm = null;
+    HashMap<String, Object> hm = null;
     Connection con = null;
     String reportName;
     
@@ -48,7 +38,7 @@ public class frmBaoCao extends Shell {
 	 * Create the shell.
 	 * @param display
 	 */
-	public frmBaoCao(Display display,HashMap map ,Connection con,String rptName) {
+	public frmBaoCao(Display display,HashMap<String, Object> map ,Connection con,String rptName) {
 		super(display, SWT.SHELL_TRIM);
 		this.hm = map;
         this.con = con;
@@ -147,7 +137,7 @@ public class frmBaoCao extends Shell {
             }
             JasperPrint jasperPrint = null;
             if (hm == null) {
-                hm = new HashMap();
+                hm = new HashMap<>();
    
             }
             try {
@@ -172,7 +162,7 @@ public class frmBaoCao extends Shell {
         try {
             JasperPrint jasperPrint = null;
             if (hm == null) {
-                hm = new HashMap();
+                hm = new HashMap<>();
                // hm.put("v_maHD", v_maHD);
                 
             }

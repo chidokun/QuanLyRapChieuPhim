@@ -28,8 +28,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.wb.swt.SWTResourceManager;
 
-import com.mysql.cj.api.jdbc.Statement;
-
+import rcp.Settings;
 import rcp.controller.KhachHangController;
 import rcp.entity.BaoCaoKhachHang;
 import rcp.util.Database;
@@ -275,16 +274,19 @@ public class pageBaoCaoDoanhThuKhachHang extends Composite {
         else if(chkThuong.getSelection())
         	maLKH="LKH2";
         else maLKH="LKH1";
+        
 		Connection connection = null;
-	    Statement statement = null;
+	  
 	        try {
 	            connection = Database.connect();
-	            statement = (Statement) connection.createStatement();
-	            HashMap parameterMap = new HashMap();
+	            HashMap<String,Object> parameterMap = new HashMap<>();
 	            parameterMap.put("maLKH", maLKH);//sending the report title as a parameter.
 	            parameterMap.put("tuNgay", DateF.toDate(dateTuNgay.getYear(), dateTuNgay.getMonth(), dateTuNgay.getDay()));
 	            parameterMap.put("denNgay", DateF.toDate(dateDenNgay.getYear(), dateDenNgay.getMonth(), dateDenNgay.getDay()));
-	            parameterMap.put("Sum_DoanhThu",lblTongDoanhThu.getText() );
+	            parameterMap.put("Sum_DoanhThu", lblTongDoanhThu.getText());
+	            parameterMap.put("cinemaName", Settings.get("cinemaName"));
+				parameterMap.put("cinemaAddr", Settings.get("cinemaAddr"));
+				
 	            Window.open(new frmBaoCao(getDisplay(),parameterMap,connection,"Report_DoanhThu_KhachHang"));    
 	        }
 	        catch (SQLException ex) {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2016-12-29T04:50:37 -->
+<!-- 2016-12-29T11:30:01 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ticket-v1" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
@@ -60,6 +60,14 @@
 		</queryString>
 	</subDataset>
 	<parameter name="maVe" class="java.lang.String"/>
+	<parameter name="cinemaName" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="cinemaAddr" class="java.lang.String"/>
+	<parameter name="cinemaEmail" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="cinemaTel" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[select MaVe, NgayBanVe, v.MaSuatChieu, MaNhanVien, GiaVe, MaKhachHang, 
 SoGhe, TenPhong, concat(TenDinhDang," ",TenHinhThuc) as 'SuatPhim', p.TenPhim, ThoiGianChieu
@@ -106,7 +114,7 @@ and v.MaVe= $P{maVe}]]>
 			</textField>
 			<image hAlign="Center">
 				<reportElement x="0" y="-3" width="80" height="70" uuid="67b1927a-00df-4f9e-ba35-f00845c0e1c8"/>
-				<imageExpression><![CDATA["E:/Git/QuanLyRapChieuPhim/Untitled-2.png"]]></imageExpression>
+				<imageExpression><![CDATA["logo.png"]]></imageExpression>
 			</image>
 			<textField pattern="EEEEE dd MMMMM yyyy">
 				<reportElement x="457" y="32" width="110" height="20" uuid="f09136f0-19d7-401f-a3ef-5af092325216"/>
@@ -124,34 +132,31 @@ and v.MaVe= $P{maVe}]]>
 				<text><![CDATA[Ticket]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="95" y="0" width="210" height="25" uuid="99447e02-8a92-4a13-a1a6-6d305c55ca3a">
-					<property name="local_mesure_unitheight" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement>
-					<font size="19" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Rạp chiếu phim RPP]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="95" y="55" width="205" height="15" uuid="50dd6b72-2bbc-44da-8663-e1971ba4069f"/>
-				<text><![CDATA[08 352267893]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="95" y="25" width="205" height="15" uuid="de6b41c0-6597-48d2-a40c-9c07b6136e0a"/>
-				<text><![CDATA[Thủ Đức, TP HCM]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="95" y="40" width="205" height="15" uuid="5a7b911a-da8f-426f-ace5-822fff4fbd50"/>
-				<text><![CDATA[contact@rpp.com]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="200" y="180" width="143" height="20" uuid="e61cec61-303f-482c-8449-b641299d6a47"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Thời gian chiếu]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="95" y="0" width="210" height="25" uuid="088afb0e-78fd-49ec-92bd-f7b5a29073cc"/>
+				<textElement>
+					<font size="19" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cinemaName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="25" width="205" height="15" uuid="df5f1ade-20c1-4d7f-8770-e0e46657a216"/>
+				<textFieldExpression><![CDATA[$P{cinemaAddr}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="40" width="205" height="15" uuid="2a3da6e6-f057-4699-99b2-6b3331c8d56e"/>
+				<textFieldExpression><![CDATA[$P{cinemaEmail}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="55" width="205" height="15" uuid="8841d30e-8716-45c3-a08d-1de64c1ef02c"/>
+				<textFieldExpression><![CDATA[$P{cinemaTel}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<columnHeader>

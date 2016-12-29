@@ -29,8 +29,7 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
 
-import com.mysql.cj.api.jdbc.Statement;
-
+import rcp.Settings;
 import rcp.controller.HoaDonController;
 import rcp.entity.ChiTietHDThucAn;
 import rcp.entity.HoaDonThucAn;
@@ -42,7 +41,7 @@ import rcp.view.popup.frmBaoCao;
 
 public class pageHoaDon extends Composite {
 	private NumberFormat c = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
-	
+
 	private Table gridCTHD;
 	private Button chkMaHoaDon;
 	private Text txtMaHoaDon;
@@ -348,9 +347,9 @@ public class pageHoaDon extends Composite {
 	public void kiemTraHopLe() throws ParameterValuesException {
 		if (chkMaHoaDon.getSelection() && txtMaHoaDon.getText().isEmpty())
 			throw new ParameterValuesException("Mã hóa đơn không được trống", null);
-		if (chkKhoangThoiGian.getSelection()
-				&& (DateF.toDate(dateTime_TuNgay.getYear(), dateTime_TuNgay.getMonth(), dateTime_TuNgay.getDay())
-						.after(DateF.toDate(dateTime_DenNgay.getYear(), dateTime_DenNgay.getMonth(), dateTime_DenNgay.getDay()))))
+		if (chkKhoangThoiGian.getSelection() && (DateF
+				.toDate(dateTime_TuNgay.getYear(), dateTime_TuNgay.getMonth(), dateTime_TuNgay.getDay()).after(DateF
+						.toDate(dateTime_DenNgay.getYear(), dateTime_DenNgay.getMonth(), dateTime_DenNgay.getDay()))))
 			throw new ParameterValuesException("Từ ngày không được sau Đến ngày", null);
 	}
 
@@ -375,29 +374,34 @@ public class pageHoaDon extends Composite {
 			e.printStackTrace();
 		}
 	}
-	public void inHoaDon() throws ParameterValuesException
-	{
-		try
-		{
-		Connection connection = null;
-	    Statement statement = null;
-	        try {
-	            connection = Database.connect();
-	            statement = (Statement) connection.createStatement();
-	            HashMap parameterMap = new HashMap();
-	            parameterMap.put("MaHD", gridHoaDon.getSelection()[0].getText(1));//sending the report title as a parameter.
-	            parameterMap.put("NgayHD", gridHoaDon.getSelection()[0].getText(2));
-	            parameterMap.put("TongTien", gridHoaDon.getSelection()[0].getText(3));
-	            parameterMap.put("MaNV",gridHoaDon.getSelection()[0].getText(4) );
-	            Window.open(new frmBaoCao(getDisplay(),parameterMap,connection,"Invoice"));    
-	        }
-	        catch (SQLException ex) {
-	          ex.printStackTrace();
-	        }
-		}catch(Exception e)
-		{
+
+	public void inHoaDon() throws ParameterValuesException {
+		try {
+			Connection connection = null;
+			try {
+				connection = Database.connect();
+				HashMap<String, Object> parameterMap = new HashMap<>();
+				parameterMap.put("MaHD", gridHoaDon.getSelection()[0].getText(1));// sending
+																					// the
+																					// report
+																					// title
+																					// as
+																					// a
+																					// parameter.
+				parameterMap.put("NgayHD", gridHoaDon.getSelection()[0].getText(2));
+				parameterMap.put("TongTien", gridHoaDon.getSelection()[0].getText(3));
+				parameterMap.put("MaNV", gridHoaDon.getSelection()[0].getText(4));
+				parameterMap.put("cinemaName", Settings.get("cinemaName"));
+				parameterMap.put("cinemaAddr", Settings.get("cinemaAddr"));
+				parameterMap.put("cinemaEmail", Settings.get("cinemaEmail"));
+				parameterMap.put("cinemaTel", Settings.get("cinemaTel"));
+				Window.open(new frmBaoCao(getDisplay(), parameterMap, connection, "Invoice"));
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-}
+	}
 
 }
