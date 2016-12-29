@@ -8,7 +8,6 @@ package rcp.view.page;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.eclipse.core.commands.ParameterValuesException;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;

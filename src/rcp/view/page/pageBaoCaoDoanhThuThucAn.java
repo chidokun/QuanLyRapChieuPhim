@@ -98,7 +98,7 @@ public class pageBaoCaoDoanhThuThucAn extends Composite {
 		dateDenNgay.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 
 		Label lblLoiKhchHng = new Label(composite, SWT.NONE);
-		lblLoiKhchHng.setText("Loại khách hàng:");
+		lblLoiKhchHng.setText("Loại thức ăn:");
 		lblLoiKhchHng.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		lblLoiKhchHng.setBackground(SWTResourceManager.getColor(240, 240, 240));
 

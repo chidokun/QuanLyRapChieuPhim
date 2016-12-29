@@ -4,7 +4,6 @@
  */
 package rcp.controller;
 import java.sql.SQLException;
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,11 +11,6 @@ import rcp.entity.BaoCaoPhim;
 import rcp.entity.Phim;
 import rcp.entity.SuatPhim;
 import rcp.model.PhimModel;
-import java.sql.*;
-import java.util.Date;
-import java.util.*;
-import rcp.util.*;
-import rcp.entity.*;
 /**
  * @author Hoang
  *
@@ -77,16 +71,17 @@ public class PhimController {
 	public static Phim layThongTin(String MaPhim) throws SQLException {
 		return PhimModel.layThongTin(MaPhim);
 	}
+	
 	/**
 	 * Tải tất cả phim đang chiếu
-	 * 
-	 
+	 * 	 
 	 * @return
 	 * @throws SQLException
 	 */
 	public static ArrayList<Phim> taiTatCa_phimdangchieu() throws SQLException {
 		return PhimModel.taiTatCa_phimdangchieu();
 	}
+	
 	/**
 	 * Báo cáo doanh thu phim
 	 * 
