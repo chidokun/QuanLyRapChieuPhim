@@ -42,17 +42,33 @@ public class HoaDonController {
 	}
 
 	/**
+	 * lấy chi tiết hóa đơn thức ăn
+	 *
 	 * @param maHoaDon
-	 * @return Lấy thông tin chi tiết hóa đơn
+	 * 			mã hóa đơn
+	 * @return
+	 * @throws SQLException
 	 */
 	public static ArrayList<ChiTietHDThucAn> layCTHoaDon(String maHoaDon) throws SQLException {
 		return HoaDonModel.layCTHoaDon(maHoaDon);
 	}
-
+	/**
+	 * lấy mã hóa đơn phát sinh tự động
+	 *
+	 * @return
+	 * @throws SQLException
+	 */
 	public static String hienMa() throws SQLException {
 		return HoaDonModel.hienMa();
 	}
-
+	/**
+	 * thêm hóa đơn thức ăn
+	 *
+	 * @param hd, arr
+	 * 			hóa đơn, danh sách chi tiết hóa đơn thức ăn
+	 * @return
+	 * @throws SQLException
+	 */
 	public static boolean them(HoaDonThucAn hd, ArrayList<ChiTietHDThucAn> arr) throws SQLException {
 		return HoaDonModel.them(hd, arr);
 	}

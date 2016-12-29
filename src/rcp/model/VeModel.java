@@ -51,6 +51,14 @@ public class VeModel {
 
 		return arr;
 	}
+	/**
+	 * thiết lập mã khuyến mãi cho vé
+	 * 
+	 * @param maKH
+	 * 			mã khách hàng
+	 * @return
+	 * @throws SQLexception
+	 */
 	public static String layMaKhuyenMai(String maKH) throws SQLException {
 		CallableStatement st = Database.connect().prepareCall("{call sp_ThietLapKhuyenMai_Ve (?,?)}");
 		st.setObject(1, maKH);
@@ -58,6 +66,14 @@ public class VeModel {
 		st.execute();
 		return st.getString(2);
 	}
+	/**
+	 * tính giá vé cho vé
+	 * 
+	 * @param maSuatChieu, maGhe, maKhuyenMai
+	 * 		mã suất chiếu, mã ghế, mã khuyến mãi
+	 * @return
+	 * @throws SQLexception
+	 */
 	public static Double tinhGiaVe(String maSuatChieu, String maGhe, String maKhuyenMai) throws SQLException {
 		CallableStatement st = Database.connect().prepareCall("{call sp_TinhGiaVe_Ve (?,?,?,?)}");
 		st.setObject(1, maSuatChieu);
@@ -67,6 +83,14 @@ public class VeModel {
 		st.execute();
 		return st.getDouble(4);
 	}
+	/**
+	 * tính điểm tích lũy
+	 * 
+	 * @param giaVe
+	 * 		giá vé
+	 * @return
+	 * @throws SQLexception
+	 */
 	public static int tinhDiemTichLuy(Double giaVe) throws SQLException {
 		CallableStatement st = Database.connect().prepareCall("{call sp_TinhDiemTichLuy_Ve (?,?)}");
 		st.setObject(1, giaVe);
@@ -74,6 +98,14 @@ public class VeModel {
 		st.execute();
 		return st.getInt(2);
 	}
+	/**
+	 * thêm vé mới
+	 * 
+	 * @param aVe
+	 * 		danh sách vé
+	 * @return
+	 * @throws SQLexception
+	 */
 	public static boolean them(ArrayList<Ve> aVe) throws SQLException {
 		Connection con = Database.connect();
 		try {

@@ -16,6 +16,12 @@ import rcp.util.*;
  *
  */
 public class PhongChieuModel {
+	/**
+	 * Tải tất cả phòng chiếu
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
 
 	public static ArrayList<PhongChieu> taiTatCa() throws SQLException {
 		ResultSet rs = Database.callStored("sp_LayDanhSach_Phong", (Object[]) null);

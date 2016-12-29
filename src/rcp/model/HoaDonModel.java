@@ -56,9 +56,12 @@ public class HoaDonModel {
 	}
 
 	/**
+	 * lấy chi tiết hóa đơn thức ăn
+	 *
 	 * @param maHoaDon
+	 * 			mã hóa đơn
 	 * @return
-	 *  Lấy thông tin chi tiết hóa đơn
+	 * @throws SQLException
 	 */
 	public static ArrayList<ChiTietHDThucAn> layCTHoaDon(String maHoaDon) throws SQLException {
 		ResultSet rs = Database.callStored("sp_TraCuuChiTietHoaDon", maHoaDon);
@@ -72,12 +75,26 @@ public class HoaDonModel {
 		Database.connect().close();
 		return arr;
 	}
+	/**
+	 * lấy mã hóa đơn phát sinh tự động
+	 *
+	 * @return
+	 * @throws SQLException
+	 */
 	public static String hienMa() throws SQLException {
 		CallableStatement st = Database.connect().prepareCall("{call sp_TaoMa_HoaDon (?)}");
 		st.registerOutParameter(1, Types.VARCHAR);
 		st.execute();
 		return st.getString(1);
 	}
+	/**
+	 * thêm hóa đơn thức ăn
+	 *
+	 * @param hd, arr
+	 * 			hóa đơn, danh sách chi tiết hóa đơn thức ăn
+	 * @return
+	 * @throws SQLException
+	 */
 	public static boolean them(HoaDonThucAn hd, ArrayList<ChiTietHDThucAn> arr ) throws SQLException {
 		Connection con = Database.connect();
 		try {

@@ -1,3 +1,7 @@
+/**
+ * Quản lý Rạp chiếu phim RPP
+ * Author: Hồ Thị Kim Hoàng - hohoang.ag.96@gmail.com
+ */
 package rcp.model;
 
 import java.sql.ResultSet;
@@ -7,8 +11,19 @@ import java.util.ArrayList;
 
 import rcp.entity.ThucAnKichCo;
 import rcp.util.Database;
-
+/**
+ * @author Hoang
+ *
+ */
 public class ThucAnKichCoModel {
+	/**
+	 * tra cứu thức ăn kích cỡ
+	 * 
+	 * @param maLoaiThucAn
+	 * 		mã loại thức ăn 
+	 * @return
+	 * @throws SQLexception
+	 */
 	public static ArrayList<ThucAnKichCo> traCuu(int maLoaiThucAn) throws SQLException {
 		ResultSet rs = Database.callStored("sp_TraCuuThucAnKichCo", maLoaiThucAn);
 

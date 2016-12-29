@@ -374,7 +374,9 @@ public class pageHoaDon extends Composite {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * in hóa đơn
+	 */
 	public void inHoaDon() throws ParameterValuesException {
 		try {
 			Connection connection = null;

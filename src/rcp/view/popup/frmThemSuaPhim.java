@@ -417,7 +417,9 @@ public class frmThemSuaPhim extends Shell {
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
 	}
-
+	/**
+	 * Xử lý khi hiển thị form
+	 */
 	public void hienThi() {
 		taiNgonNgu();
 		taiNhaSanXuat();
@@ -458,7 +460,9 @@ public class frmThemSuaPhim extends Shell {
 			Message.show(e.toString(), "Lỗi", SWT.OK | SWT.ICON_ERROR, getShell());
 		}
 	}
-
+	/**
+	 * Hiện mã phim phát sinh tự động
+	 */
 	public void hienMa() {
 		try {
 			txtMaPhim.setText(PhimController.hienMa());
@@ -466,7 +470,9 @@ public class frmThemSuaPhim extends Shell {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Tải danh sách ngôn ngữ
+	 */
 	public void taiNgonNgu() {
 		try {
 			ArrayList<NgonNgu> aNgonNgu = NgonNguController.taiTatCa();
@@ -482,7 +488,9 @@ public class frmThemSuaPhim extends Shell {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Tải danh sách nhà sản xuất
+	 */
 	public void taiNhaSanXuat() {
 		try {
 			ArrayList<NhaSanXuat> aNhaSX = NhaSanXuatController.taiTatCa();
@@ -496,7 +504,9 @@ public class frmThemSuaPhim extends Shell {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Tải danh sách nước sản xuất
+	 */
 	public void taiNuocSX() {
 		try {
 			ArrayList<NuocSX> aNuocSX = NuocSXController.taiTatCa();
@@ -510,7 +520,9 @@ public class frmThemSuaPhim extends Shell {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Tải danh sách định dạng
+	 */
 	public void taiDinhDang() {
 		try {
 			ArrayList<DinhDang> aDinhDang = DinhDangController.taiTatCa();
@@ -524,7 +536,9 @@ public class frmThemSuaPhim extends Shell {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Tải danh sách hình thức
+	 */
 	public void taiHinhThuc() {
 		try {
 			ArrayList<HinhThuc> aHinhThuc = HinhThucController.taiTatCa();
@@ -539,7 +553,9 @@ public class frmThemSuaPhim extends Shell {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Thêm suất phim
+	 */
 	public void themSuatPhim() {
 		if (themMang((String) cobDinhDang.getData(cobDinhDang.getText()),
 				(String) cobHinhThuc.getData(cobHinhThuc.getText()),
@@ -569,7 +585,9 @@ public class frmThemSuaPhim extends Shell {
 		} else
 			Message.show("Suất phim đã tồn tại", "Lỗi", SWT.OK | SWT.ICON_ERROR, getShell());
 	}
-
+	/**
+	 * Kiểm tra xem có thêm suất phim vào danh sách suất phim tạm thời được hay không?
+	 */
 	public boolean themMang(String MaDD, String MaHT, String MaNN) {
 		for (SuatPhim sp : aSuatPhim)
 			if (sp.getMaDinhDang().equals(MaDD) && sp.getMaHinhThuc().equals(MaHT) && sp.getMaNgonNgu().equals(MaNN))
@@ -577,7 +595,9 @@ public class frmThemSuaPhim extends Shell {
 		aSuatPhim.add(new SuatPhim(null, maPhim, MaDD, MaHT, MaNN));
 		return true;
 	}
-
+	/**
+	 * Xóa suất phim
+	 */
 	public void XoaSuatPhim() {
 		try {
 			String maSuatPhim = null;
@@ -613,7 +633,9 @@ public class frmThemSuaPhim extends Shell {
 		}
 
 	}
-
+	/**
+	 * Kiểm tra thông tin phim và suất phim đầy đủ chưa
+	 */
 	public boolean kiemTraDayDu() {
 
 		if (txtTenPhim.getText().isEmpty()) {
@@ -628,7 +650,9 @@ public class frmThemSuaPhim extends Shell {
 		}
 		return true;
 	}
-
+	/**
+	 * Thêm phim
+	 */
 	public void themPhim() {
 		if (kiemTraDayDu()) {
 			themMaPhim_SuatPhim();
@@ -646,13 +670,17 @@ public class frmThemSuaPhim extends Shell {
 			}
 		}
 	}
-
+	/**
+	 * Thêm mã phim vào danh sách suất phim
+	 */
 	public void themMaPhim_SuatPhim() {
 		for (SuatPhim sp : aSuatPhim) {
 			sp.setMaPhim(txtMaPhim.getText());
 		}
 	}
-
+	/**
+	 * Thiết lập đối tượng phim
+	 */
 	public void taoPhim() {
 		phim.setMaPhim(txtMaPhim.getText());
 		phim.setCacDienVien(txtDienVien.getText());
@@ -670,7 +698,9 @@ public class frmThemSuaPhim extends Shell {
 		phim.setTrangThai((cobTrangThai.getText().equals("Công chiếu")) ? 1 : 0);
 		phim.setDoanhThu(Double.parseDouble(txtDoanhThu.getText()));
 	}
-
+	/**
+	 * Tải danh sách suất phim của 1 phim cụ thể lên table
+	 */
 	public void taiSuatPhim() {
 		try {
 			aSuatPhim.clear();
@@ -689,7 +719,9 @@ public class frmThemSuaPhim extends Shell {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Tải thông tin phim
+	 */
 	public void taiPhim() {
 		try {
 			phim = PhimController.layThongTin(maPhim);
@@ -711,7 +743,9 @@ public class frmThemSuaPhim extends Shell {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Cập nhật thông tin phim
+	 */
 	public void suaPhim() {
 		if (kiemTraDayDu()) {
 			try {

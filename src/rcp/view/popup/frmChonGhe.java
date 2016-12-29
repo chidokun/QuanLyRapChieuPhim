@@ -339,7 +339,9 @@ public class frmChonGhe extends Shell {
 		return true;
 
 	}
-
+	/**
+	 * Xử lý khi Lưu
+	 */
 	public void luu() {
 		if (dsGheDaChon.size() == 0) {
 			Message.show("Bạn chưa chọn ghế", "Lỗi", SWT.OK | SWT.ICON_ERROR, getShell());

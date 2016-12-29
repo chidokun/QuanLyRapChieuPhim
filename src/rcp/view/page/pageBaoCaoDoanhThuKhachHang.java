@@ -260,6 +260,11 @@ public class pageBaoCaoDoanhThuKhachHang extends Composite {
 		if (!chkVip.getSelection() && !chkThuong.getSelection())
 			throw new ParameterValuesException("Phải chọn VIP, thường hoặc cả hai", null);
 	}
+	/**
+	 * In báo cáo
+	 * 
+	 * @throws ParameterValuesException
+	 */
 	public void inBaoCao() throws ParameterValuesException
 	{
 		if(gridBaoCao.getItemCount()==0)

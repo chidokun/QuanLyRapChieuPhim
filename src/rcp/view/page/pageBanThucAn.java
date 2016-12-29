@@ -304,7 +304,9 @@ public class pageBanThucAn extends Composite {
 	private Spinner spnSoLuong;
 	private Text txtMaHD;
 	private Table tableCTHD;
-
+	/**
+	 * Tra cứu thức ăn
+	 */
 	public void traCuu() {
 		try {
 			ArrayList<ThucAnKichCo> arr = new ArrayList<ThucAnKichCo>();
@@ -329,7 +331,9 @@ public class pageBanThucAn extends Composite {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Thêm thức ăn vào hóa đơn tạm thời
+	 */
 	public void themThucAnKichCo() {
 		try {
 			if (spnSoLuong.getSelection() == 0) {
@@ -351,7 +355,9 @@ public class pageBanThucAn extends Composite {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Kiểm tra thức ăn kích cỡ có tồn tại trong hóa đơn hay chưa?
+	 */
 	public boolean kiemTra(String maTAKC) {
 		for (TableItem i : tableCTHD.getItems()) {
 			if (i.getText(0).equals(maTAKC))
@@ -359,7 +365,9 @@ public class pageBanThucAn extends Composite {
 		}
 		return true;
 	}
-
+	/**
+	 * Cập nhật tổng tiền
+	 */
 	public void capNhatTongTien(Double thanhTien) {
 		try {
 			Double tempt = labelTongTien.getText().isEmpty() ? 0 : c.parse(labelTongTien.getText()).doubleValue();
@@ -368,7 +376,9 @@ public class pageBanThucAn extends Composite {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Hiển thị mã hóa đơn tự phát sinh
+	 */
 	public void hienMa() {
 		try {
 			txtMaHD.setText(HoaDonController.hienMa());
@@ -377,7 +387,9 @@ public class pageBanThucAn extends Composite {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Thêm hóa đơn 
+	 */
 	public void them() {
 		if (kiemtraCTHD()) {
 			HoaDonThucAn hd = new HoaDonThucAn();
@@ -421,7 +433,9 @@ public class pageBanThucAn extends Composite {
 			}
 		}
 	}
-
+	/**
+	 * Kiểm tra chi tiết hóa đơn có trống hay không
+	 */
 	public boolean kiemtraCTHD() {
 		if (tableCTHD.getItemCount() == 0) {
 			Message.show("Mời bạn chọn thức ăn", "Thông báo", SWT.OK | SWT.ICON_INFORMATION, getShell());
@@ -430,7 +444,9 @@ public class pageBanThucAn extends Composite {
 		return true;
 
 	}
-
+	/**
+	 * Xóa chi tiết hóa đơn ra khỏi hóa đơn tạm thời
+	 */
 	public void xoaCTHD() {
 		try {
 			capNhatTongTien(-c.parse(tableCTHD.getSelection()[0].getText(6)).doubleValue());
@@ -439,6 +455,9 @@ public class pageBanThucAn extends Composite {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * In hóa đơn
+	 */
 	public void inHoaDon() throws ParameterValuesException
 	{
 		try

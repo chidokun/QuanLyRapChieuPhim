@@ -1,3 +1,7 @@
+/**
+ * Quản lý Rạp chiếu phim RPP
+ * Author: Hồ Thị Kim Hoàng - hohoang.ag.96@gmail.com
+ */
 package rcp.model;
 
 import java.sql.Connection;
@@ -7,8 +11,19 @@ import java.util.ArrayList;
 
 import rcp.entity.SuatPhim;
 import rcp.util.Database;
-
+/**
+ * @author Hoang
+ *
+ */
 public class SuatPhimModel {
+	/**
+	 * lấy danh sách suất phim của một phim cụ thể
+	 * 
+	 * @param maPhim
+	 *            mã phim
+	 * @return
+	 * @throws SQLException
+	 */
 	public static ArrayList<SuatPhim> taiDanhSach(String maPhim) throws SQLException {
 		ResultSet rs = Database.callStored("sp_LayDanhSach_SuatPhim",maPhim);
 
@@ -18,6 +33,14 @@ public class SuatPhimModel {
 		}
 		return arr;
 	}
+	/**
+	 * thêm suất phim mới
+	 * 
+	 * @param sp
+	 *            suất phim
+	 * @return
+	 * @throws SQLException
+	 */
 	public static boolean them(SuatPhim sp) throws SQLException {
 		Connection con = Database.connect();
 		try {
@@ -32,6 +55,14 @@ public class SuatPhimModel {
 			con.close();
 		}
 	}
+	/**
+	 * xóa suất phim 
+	 * 
+	 * @param sp
+	 *            mã suất phim
+	 * @return
+	 * @throws SQLException
+	 */
 	public static boolean xoa(String maSP) throws SQLException {
 		Connection con = Database.connect();
 		try {

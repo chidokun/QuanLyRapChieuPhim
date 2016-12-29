@@ -234,6 +234,11 @@ public class pageBaoCaoDoanhThuPhimKhoangThoiGian extends Composite {
 		if (!tuNgay.before(denNgay))
 			throw new ParameterValuesException("Từ ngày phải ở thời điểm trước đến ngày", null);
 	}
+	/**
+	 * In báo cáo
+	 * 
+	 * @throws ParameterValuesException
+	 */
 	public void inBaoCao() throws ParameterValuesException
 	{
 		if(gridBaoCao.getItemCount()==0)

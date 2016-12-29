@@ -259,7 +259,11 @@ public class pageBaoCaoDoanhThuThucAn extends Composite {
 		if (!chkThucAn.getSelection() && !chkDoUong.getSelection())
 			throw new ParameterValuesException("Phải chọn Thức ăn, Đồ uống hoặc cả hai", null);
 	}
-
+	/**
+	 * In báo cáo
+	 * 
+	 * @throws ParameterValuesException
+	 */
 	public void inBaoCao() throws ParameterValuesException {
 		if (gridBaoCao.getItemCount() == 0) {
 			Message.show("Mời bạn xem báo cáo trước khi in", "Thông báo", SWT.OK | SWT.ICON_INFORMATION, getShell());

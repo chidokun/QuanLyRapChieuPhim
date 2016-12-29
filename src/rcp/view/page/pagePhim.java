@@ -8,6 +8,7 @@ package rcp.view.page;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.eclipse.core.commands.ParameterValuesException;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
@@ -289,7 +290,9 @@ public class pagePhim extends Composite {
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
 	}
-
+	/**
+	 * Tra cứu phim
+	 */
 	public void traCuu(String tenPhim, Date tuNgay, Date denNgay) {
 		try {
 			ArrayList<Phim> aPhim = PhimController.traCuu(tenPhim, tuNgay, denNgay);
@@ -309,7 +312,9 @@ public class pagePhim extends Composite {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Xử lý đặt lại
+	 */
 	public void datLai() {
 		traCuu(null, null, null);
 		chkBox_TenPhim.setSelection(true);
@@ -319,6 +324,9 @@ public class pagePhim extends Composite {
 		dateTime_DenNgay.setEnabled(false);
 		txt_TenPhim.setText("");
 	}
+	/**
+	 * Kiểm tra thông tin tra cứu phim hợp lệ không
+	 */
 	public boolean kiemTraHopLe(){
 		if (chkBox_TenPhim.getSelection() && txt_TenPhim.getText().isEmpty())
 		{

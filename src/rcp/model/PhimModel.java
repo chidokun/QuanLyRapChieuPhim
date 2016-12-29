@@ -9,10 +9,21 @@ import java.util.Date;
 import java.util.*;
 import rcp.util.*;
 import rcp.entity.*;
-
+/**
+ * @author Hoang
+ *
+ */
 public class PhimModel {
-	public static ArrayList<Phim> traCuu(String TenPhim, Date TuNgay, Date DenNgay) throws SQLException {
-		ResultSet rs = Database.callStored("sp_TraCuuPhim", TenPhim, TuNgay, DenNgay);
+	/**
+	 * Tra cứu phim
+	 * 
+	 * @param tenPhim, tuNgay, denNgay
+	 *            Tên phim, từ ngày, đến ngày
+	 * @return
+	 * @throws SQLException
+	 */
+	public static ArrayList<Phim> traCuu(String tenPhim, Date tuNgay, Date denNgay) throws SQLException {
+		ResultSet rs = Database.callStored("sp_TraCuuPhim", tenPhim, tuNgay, denNgay);
 
 		ArrayList<Phim> arr = new ArrayList<>();
 		while (rs.next()) {
@@ -25,6 +36,14 @@ public class PhimModel {
 
 		return arr;
 	}
+	/**
+	 * Lấy thông tin một phim cụ thể
+	 * 
+	 * @param maPhim
+	 *            mã phim
+	 * @return
+	 * @throws SQLException
+	 */
 
 	public static Phim layThongTin(String maPhim) throws SQLException {
 		ResultSet rs = Database.callStored("sp_LayThongTin_Phim", maPhim);
@@ -37,10 +56,11 @@ public class PhimModel {
 		return p;
 	}
 
-	/*
-	 * public static boolean sua(NhanVien nv) {
+	/**
+	 * Lấy mã phim tự phát sinh
 	 * 
-	 * return false; }
+	 * @return
+	 * @throws SQLException
 	 */
 
 	public static String hienMa() throws SQLException {
@@ -49,7 +69,14 @@ public class PhimModel {
 		st.execute();
 		return st.getString(1);
 	}
-
+	/**
+	 * thêm phim mới
+	 * 
+	 * @param p, aSuatPhim
+	 *            phim, danh sách suất phim
+	 * @return
+	 * @throws SQLException
+	 */
 	public static boolean them(Phim p, ArrayList<SuatPhim> aSuatPhim) throws SQLException {
 		Connection con = Database.connect();
 		try {
@@ -70,7 +97,14 @@ public class PhimModel {
 			con.close();
 		}
 	}
-
+	/**
+	 * Cập nhật thông tin phim
+	 * 
+	 * @param p
+	 *            phim
+	 * @return
+	 * @throws SQLException
+	 */
 	public static boolean sua(Phim p) throws SQLException {
 		Connection con = Database.connect();
 		try {
@@ -88,7 +122,14 @@ public class PhimModel {
 			con.close();
 		}
 	}
-
+	/**
+	 * Báo cáo doanh thu phim
+	 * 
+	 * @param tuNgay, denNgay
+	 *            từ ngày, đến ngày
+	 * @return
+	 * @throws SQLException
+	 */
 	public static ArrayList<BaoCaoPhim> baoCaoPhim(Date tuNgay, Date denNgay) throws SQLException {
 		ResultSet rs = Database.callStored("sp_BaoCao_DoanhThuPhim", tuNgay, denNgay);
 
@@ -99,7 +140,13 @@ public class PhimModel {
 
 		return arr;
 	}
-	
+	/**
+	 * Tải tất cả phim đang chiếu
+	 * 
+	 
+	 * @return
+	 * @throws SQLException
+	 */
 	public static ArrayList<Phim> taiTatCa_phimdangchieu() throws SQLException {
 		ResultSet rs = Database.callStored("sp_LayDanhSach_Phim", (Object[]) null);
 		

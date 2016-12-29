@@ -1,3 +1,7 @@
+/**
+ * Quản lý Rạp chiếu phim RPP
+ * Sưu tầm. Nguồn: Internet
+ */
 package rcp.view.popup;
 
 import java.awt.BorderLayout;
@@ -68,10 +72,10 @@ public class frmBaoCao extends Shell {
  
     public void callReport() {
         JasperPrint jasperPrint = generateReport();
-        //initialize JRViewer object 
+        
         JRViewer jasperviewer = new JRViewer(jasperPrint);
 
-        //add the SWT_AWT compposite for SWING contents of GUI              
+                     
         final Composite swtAwtComposite = new Composite(this, SWT.EMBEDDED);
         swtAwtComposite.setBounds(10, 0, 767, 600);
 
@@ -85,20 +89,19 @@ public class frmBaoCao extends Shell {
         rootPane.setSize(767, 600);
         panel.add(rootPane);
 
-        //Define a container yourself
+       
         Container c = rootPane.getContentPane();
 
-        //Add the JRViewer object onto the container to render in GUI
+        
         c.add(jasperviewer);
        
     }
  
     public void callConnectionLessReport() {
         JasperPrint jasperPrint = generateEmptyDataSourceReport();
-      //initialize JRViewer object 
-        JRViewer jasperviewer = new JRViewer(jasperPrint);
+              JRViewer jasperviewer = new JRViewer(jasperPrint);
 
-        //add the SWT_AWT compposite for SWING contents of GUI              
+                   
         final Composite swtAwtComposite = new Composite(this, SWT.EMBEDDED);
         swtAwtComposite.setBounds(10, 0, 767, 600);
 
@@ -112,10 +115,8 @@ public class frmBaoCao extends Shell {
         rootPane.setSize(767, 600);
         panel.add(rootPane);
 
-        //Define a container yourself
+       
         Container c = rootPane.getContentPane();
-
-        //Add the JRViewer object onto the container to render in GUI
         c.add(jasperviewer);
        
     }
@@ -124,7 +125,6 @@ public class frmBaoCao extends Shell {
         //jasperViewer.setVisible(false);
     }
  
-    /** this method will call the report from data source*/
     public JasperPrint generateReport() {
         try {
             if (con == null) {
@@ -141,8 +141,6 @@ public class frmBaoCao extends Shell {
    
             }
             try {
-                /**You can also test this line if you want to display 
-                 * report from any absolute path other than the project root path*/
              
                 jasperPrint = JasperFillManager.fillReport(reportName + ".jasper", hm, con);
             } catch (JRException e) {

@@ -1,3 +1,7 @@
+/**
+ * Quản lý Rạp chiếu phim RPP
+ * Author: Hồ Thị Kim Hoàng - hohoang.ag.96@gmail.com
+ */
 package rcp.model;
 
 import java.sql.ResultSet;
@@ -5,12 +9,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import rcp.util.Database;
-
+/**
+ * @author Hoang
+ *
+ */
 public class GheModel {
 	/**
-	 * Tra cứu tên phim theo ngày
+	 * Lấy danh sách ghế đã đặt của một suất chiếu
 	 * 
-	 * @param ngay
+	 * @param maSuatChieu
+	 * 			mã suất chiếu
 	 * @return
 	 * @throws SQLException
 	 */

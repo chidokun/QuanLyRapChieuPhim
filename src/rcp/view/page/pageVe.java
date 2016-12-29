@@ -364,7 +364,9 @@ public class pageVe extends Composite {
 						.after(DateF.toDate(dateDenNgay.getYear(), dateDenNgay.getMonth(), dateDenNgay.getDay()))))
 			throw new ParameterValuesException("Từ ngày không được sau Đến ngày", null);
 	}
-
+	/**
+	 * in vé
+	 */
 	public void inVe() throws ParameterValuesException {
 		try {
 			Connection connection = null;

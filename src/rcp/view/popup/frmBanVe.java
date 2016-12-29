@@ -245,7 +245,9 @@ public class frmBanVe extends Shell {
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
 	}
-
+	/**
+	 * hiển thị thông tin suất chiếu
+	 */
 	public void layThongTin() {
 		SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
 		try {
@@ -261,8 +263,11 @@ public class frmBanVe extends Shell {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Kiểm tra mã khách hàng để thiết lập khuyến mã, tính giá vé, tính điểm tích lũy?
+	 */
 	public void kiemTraMaKH() {
+		
 		if (!kiemTraTonTai(txtMaKhachHang.getText())) {
 			Message.show("Mã khách hàng không tồn tại", "Lỗi", SWT.OK | SWT.ICON_ERROR, getShell());
 			txtMaKhachHang.setText("");
@@ -279,7 +284,9 @@ public class frmBanVe extends Shell {
 				e.printStackTrace();
 			}
 	}
-
+	/**
+	 * Kiểm tra mã khách hàng có tồn tại hay không?
+	 */
 	public boolean kiemTraTonTai(String maKH) {
 		ArrayList<KhachHang> arr;
 		try {
@@ -301,7 +308,9 @@ public class frmBanVe extends Shell {
 
 	private ArrayList<Ve> arrVe = new ArrayList<Ve>();
 	private Button btnLuu;
-
+	/**
+	 * Hiển thị thông tin vé
+	 */
 	public void hienVe() {
 		taoVe();
 		tableVe.removeAll();
@@ -315,8 +324,11 @@ public class frmBanVe extends Shell {
 		tableVe.select(0);
 		txtTongTien.setText(String.valueOf(tongTien));
 	}
-
+	/**
+	 * Tạo danh sách vé
+	 */
 	public void taoVe() {
+		arrVe.clear();
 		String maPhong = layMaPhong();
 		for (String ghe : dsGhe) {
 			Ve v = new Ve();
