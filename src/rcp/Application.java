@@ -12,7 +12,7 @@ import rcp.view.*;
 
 public class Application {
 	private static Display display = Display.getDefault();
-	private static frmMain shellMain;
+	private static frmMain shellMain; 
 	private static int result;
 
 	/**
@@ -23,7 +23,8 @@ public class Application {
 	public static void main(String args[]) {
 		try {
 			Settings.load();
-
+			shellMain = new frmMain(display);
+			
 			if (ketNoiCSDL())
 				dangNhap();
 			else
@@ -81,7 +82,6 @@ public class Application {
 	 */
 	public static void hienThiGiaoDien() throws SQLException {
 		shellMain = new frmMain(display);
-		shellMain.hienThiGiaoDien();
 		Window.open(shellMain);
 	}
 
