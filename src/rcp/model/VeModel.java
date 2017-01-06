@@ -51,11 +51,12 @@ public class VeModel {
 
 		return arr;
 	}
+
 	/**
 	 * thiết lập mã khuyến mãi cho vé
 	 * 
 	 * @param maKH
-	 * 			mã khách hàng
+	 *            mã khách hàng
 	 * @return
 	 * @throws SQLexception
 	 */
@@ -66,11 +67,12 @@ public class VeModel {
 		st.execute();
 		return st.getString(2);
 	}
+
 	/**
 	 * tính giá vé cho vé
 	 * 
-	 * @param maSuatChieu, maGhe, maKhuyenMai
-	 * 		mã suất chiếu, mã ghế, mã khuyến mãi
+	 * @param maSuatChieu,
+	 *            maGhe, maKhuyenMai mã suất chiếu, mã ghế, mã khuyến mãi
 	 * @return
 	 * @throws SQLexception
 	 */
@@ -83,11 +85,12 @@ public class VeModel {
 		st.execute();
 		return st.getDouble(4);
 	}
+
 	/**
 	 * tính điểm tích lũy
 	 * 
 	 * @param giaVe
-	 * 		giá vé
+	 *            giá vé
 	 * @return
 	 * @throws SQLexception
 	 */
@@ -98,11 +101,12 @@ public class VeModel {
 		st.execute();
 		return st.getInt(2);
 	}
+
 	/**
 	 * thêm vé mới
 	 * 
 	 * @param aVe
-	 * 		danh sách vé
+	 *            danh sách vé
 	 * @return
 	 * @throws SQLexception
 	 */
@@ -110,11 +114,10 @@ public class VeModel {
 		Connection con = Database.connect();
 		try {
 			con.setAutoCommit(false);
-			
-			for(Ve v:aVe)
-			{
-				Database.callStoredUpdate("sp_ThemVe_trans", v.getMaSuatChieu(),v.getMaGhe(),v.getMaNhanVien(),
-					v.getGiaVe(),v.getMaKM(),v.getMaKhachHang(),v.getDiemTichLuy());
+
+			for (Ve v : aVe) {
+				Database.callStoredUpdate("sp_ThemVe", v.getMaSuatChieu(), v.getMaGhe(), v.getMaNhanVien(),
+						v.getGiaVe(), v.getMaKM(), v.getMaKhachHang(), v.getDiemTichLuy());
 			}
 			con.commit();
 			return true;

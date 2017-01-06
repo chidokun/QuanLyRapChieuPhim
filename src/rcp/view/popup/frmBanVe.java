@@ -379,7 +379,7 @@ public class frmBanVe extends Shell {
 				btnKiemTra.setEnabled(false);
 				close();
 			} else
-				Message.show("Thêm vé không thành công", "Thông báo", SWT.OK | SWT.ICON_INFORMATION, getShell());
+				Message.show("Thêm vé không thành công", "Lỗi", SWT.OK | SWT.ICON_ERROR, getShell());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -92,4 +92,13 @@ public class KhachHangController {
 			throws SQLException {
 		return KhachHangModel.baoCaoKhachHang(loaiKH, tuNgay, denNgay);
 	}
+	
+	/**
+	 * Cập nhật điểm tích lũy cho năm mới
+	 * 
+	 * @throws SQLException
+	 */
+	public static void capNhatDiemTichLuy() throws SQLException {
+		KhachHangModel.capNhatDiemTichLuy();
+	}
 }

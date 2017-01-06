@@ -179,7 +179,7 @@ public class toolNghiepVu extends Composite {
 		GridData gd_lblBCThucAn = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
 		gd_lblBCThucAn.widthHint = 165;
 		lblBCThucAn.setLayoutData(gd_lblBCThucAn);
-		lblBCThucAn.setText("Báo cáo doanh thu\r\nthức ăn hàng tháng");
+		lblBCThucAn.setText("Báo cáo doanh thu\r\nthức ăn");
 		lblBCThucAn
 				.setImage(SWTResourceManager.getImage(toolNghiepVu.class, "/rcp/view/control/imgBaoCaoThucAn_32p.png"));
 		lblBCThucAn.setBackground(SWTResourceManager.getColor(240, 240, 240));

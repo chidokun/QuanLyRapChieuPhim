@@ -23,7 +23,7 @@ public class GheModel {
 	 * @throws SQLException
 	 */
 	public static ArrayList<String> layDanhSach(String maSuatChieu) throws SQLException {
-		ResultSet rs = Database.callStored("sp_LayDanhSachGhe_SuatChieu_trans", maSuatChieu);
+		ResultSet rs = Database.callStored("sp_LayDanhSachGhe_SuatChieu", maSuatChieu);
 
 		ArrayList<String> arr = new ArrayList<>();
 		while (rs.next()) {

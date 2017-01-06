@@ -30,7 +30,6 @@ import org.eclipse.wb.swt.SWTResourceManager;
 
 import rcp.Settings;
 import rcp.controller.ThucAnController;
-import rcp.entity.BaoCaoKhachHang;
 import rcp.entity.BaoCaoThucAn;
 import rcp.util.Database;
 import rcp.util.DateF;

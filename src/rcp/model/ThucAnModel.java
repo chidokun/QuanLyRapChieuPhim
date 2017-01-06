@@ -13,7 +13,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
 
-import rcp.entity.BaoCaoKhachHang;
 import rcp.entity.BaoCaoThucAn;
 import rcp.entity.ThucAn;
 import rcp.entity.ThucAnKichCo;
@@ -26,23 +25,23 @@ import rcp.util.Database;
 public class ThucAnModel {
 	/**
 	 * 
-	 * @return
-	 *  Lấy tất cả thức ăn
+	 * @return Lấy tất cả thức ăn
 	 */
 	public static ArrayList<ThucAn> taiTatCa() throws SQLException {
 		ResultSet rs = Database.callStored("sp_TraCuuThucAn", null, null);
 
 		ArrayList<ThucAn> arr = new ArrayList<>();
 		while (rs.next()) {
-			arr.add(new ThucAn(rs.getString(1), rs.getString(2), rs.getString(3),rs.getInt(4)));
+			arr.add(new ThucAn(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
 		}
 
 		Database.connect().close();
 		return arr;
 	}
-	
+
 	/**
 	 * Lấy thông tin thức ăn
+	 * 
 	 * @param maThucAn
 	 * @return
 	 * @throws SQLException
@@ -51,15 +50,14 @@ public class ThucAnModel {
 		ResultSet rs = Database.callStored("sp_LayThongTin_ThucAn", maThucAn);
 
 		rs.next();
-		ThucAn n = new ThucAn(rs.getString(1), rs.getString(2), rs.getString(3),rs.getInt(4));
+		ThucAn n = new ThucAn(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4));
 		Database.connect().close();
 		return n;
 	}
-	
+
 	/**
 	 * @param maThucAn
-	 * @return
-	 *  Lấy thông tin thức ăn kích cỡ
+	 * @return Lấy thông tin thức ăn kích cỡ
 	 */
 	public static ArrayList<ThucAnKichCo> layThongTin_TAKC(String maThucAn) throws SQLException {
 		ResultSet rs = Database.callStored("sp_LayThongTin_ThucAnKichCo", maThucAn);
@@ -72,14 +70,12 @@ public class ThucAnModel {
 		Database.connect().close();
 		return arr;
 	}
-	
-	
+
 	/**
 	 * 
 	 * @param tenThucAn
 	 * @param loaiThucAn
-	 * @return
-	 * Tra cứu thông tin thức ăn theo tiêu chí nào đó
+	 * @return Tra cứu thông tin thức ăn theo tiêu chí nào đó
 	 */
 	public static ArrayList<ThucAn> traCuu(String tenThucAn, String loaiThucAn) throws SQLException {
 		ResultSet rs = Database.callStored("sp_TraCuuThucAn", tenThucAn, loaiThucAn);
@@ -91,33 +87,32 @@ public class ThucAnModel {
 
 		return arr;
 	}
-	
+
 	/**
 	 * 
 	 * @param ta
-	 * @return
-	 * Thêm thức ăn
+	 * @return Thêm thức ăn
 	 */
 	public static boolean them(ThucAn ta) throws SQLException {
-		if (Database.callStoredUpdate("sp_ThemThucAn", ta.getMaThucAn(), ta.getTenThucAn(),ta.getLoaiThucAn()) > 0) {
+		if (Database.callStoredUpdate("sp_ThemThucAn", ta.getMaThucAn(), ta.getTenThucAn(), ta.getLoaiThucAn()) > 0) {
 			Database.connect().close();
 			return true;
 		} else
 			throw new SQLException("Không thể thêm thức ăn mới");
 	}
-	
+
 	/**
 	 * 
 	 * @param ta
-	 * @return
-	 * Sửa thông tin thức ăn
+	 * @return Sửa thông tin thức ăn
 	 */
 	public static boolean sua(ThucAn ta) throws SQLException {
 		Connection con = Database.connect();
 		try {
 			con.setAutoCommit(false);
-			
-			if (Database.callStoredUpdate("sp_SuaThucAn", ta.getMaThucAn(),ta.getTenThucAn(),ta.getLoaiThucAn(),ta.getTrangThai()) ==0) 
+
+			if (Database.callStoredUpdate("sp_SuaThucAn", ta.getMaThucAn(), ta.getTenThucAn(), ta.getLoaiThucAn(),
+					ta.getTrangThai()) == 0)
 				throw new SQLException();
 			con.commit();
 			return true;
@@ -126,13 +121,12 @@ public class ThucAnModel {
 			return false;
 		} finally {
 			con.close();
-		}		
+		}
 	}
 
 	/**
 	 * 
-	 * @return
-	 * Tạo mã thức ăn
+	 * @return Tạo mã thức ăn
 	 */
 	public static String taoMa() throws SQLException {
 		CallableStatement st = Database.connect().prepareCall("{call sp_TaoMa_ThucAn (?)}");
@@ -141,33 +135,33 @@ public class ThucAnModel {
 		st.execute();
 		return st.getString(1);
 	}
-	
+
 	/**
 	 * 
 	 * @param takc
-	 * @return
-	 * Thêm thức ăn kích cỡ
+	 * @return Thêm thức ăn kích cỡ
 	 */
 	public static boolean them(ThucAnKichCo takc) throws SQLException {
-		if (Database.callStoredUpdate("sp_ThemThucAnKichCo", takc.getMaThucAn(),takc.getDonGia(),takc.getKichCo()) > 0) {
+		if (Database.callStoredUpdate("sp_ThemThucAnKichCo", takc.getMaThucAn(), takc.getDonGia(),
+				takc.getKichCo()) > 0) {
 			Database.connect().close();
 			return true;
 		} else
 			throw new SQLException("Không thể thêm kích cỡ thức ăn");
 	}
-	
+
 	/**
 	 * 
 	 * @param takc
-	 * @return
-	 * xóa kích cỡ thức ăn
+	 * @return xóa kích cỡ thức ăn
 	 */
 	public static boolean xoaKichCo(ThucAnKichCo takc) throws SQLException {
 		Connection con = Database.connect();
 		try {
 			con.setAutoCommit(false);
-			
-			if (Database.callStoredUpdate("sp_XoaThucAnKichCo_TheoMaThucAnVaKichCo", takc.getMaThucAn(),takc.getKichCo()) ==0) 
+
+			if (Database.callStoredUpdate("sp_XoaThucAnKichCo_TheoMaThucAnVaKichCo", takc.getMaThucAn(),
+					takc.getKichCo()) == 0)
 				throw new SQLException();
 			con.commit();
 			return true;
@@ -176,34 +170,32 @@ public class ThucAnModel {
 			return false;
 		} finally {
 			con.close();
-		}		
+		}
 	}
-	
+
 	/**
 	 * Báo cáo thức ăn
 	 * 
-	 * @param loaiTA
-	 *            0: cả hai loại. 1: Thức ăn. 2: Đồ uống
+	 * @param maloaiTA
 	 * @param tuNgay
 	 * @param denNgay
 	 * @return
 	 * @throws SQLException
 	 */
-	public static ArrayList<BaoCaoThucAn> baoCaoThucAn(String maLoaiTA, Date tuNgay, Date denNgay)
-			throws SQLException {
-		CallableStatement st = Database.connect().prepareCall("{call sp_BaoCao_DoanhThuThucAn_trans (?,?,?,?)}");
+	public static ArrayList<BaoCaoThucAn> baoCaoThucAn(String maLoaiTA, Date tuNgay, Date denNgay) throws SQLException {
+		CallableStatement st = Database.connect().prepareCall("{call sp_BaoCao_DoanhThuThucAn (?,?,?,?)}");
 		st.registerOutParameter(4, Types.DOUBLE);
 		st.setObject(1, maLoaiTA);
 		st.setObject(2, tuNgay);
 		st.setObject(3, denNgay);
-		
+
 		ResultSet rs = st.executeQuery();
-		
+
 		ArrayList<BaoCaoThucAn> arr = new ArrayList<>();
 		while (rs.next()) {
-			arr.add(new BaoCaoThucAn(rs.getString(1), rs.getString(2), rs.getString(3),rs.getDouble(4)));
+			arr.add(new BaoCaoThucAn(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4)));
 		}
-		arr.add(new BaoCaoThucAn(null,null,null,st.getDouble(4)));
+		arr.add(new BaoCaoThucAn(null, null, null, st.getDouble(4)));
 
 		Database.connect().close();
 		return arr;

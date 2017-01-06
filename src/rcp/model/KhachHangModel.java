@@ -33,8 +33,10 @@ public class KhachHangModel {
 
 		ArrayList<KhachHang> arr = new ArrayList<>();
 		while (rs.next()) {
-			arr.add(new KhachHang(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5),
-					rs.getString(6), rs.getString(7), rs.getString(8), rs.getDate(9)));
+			KhachHang k = new KhachHang(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+					rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getDate(9));
+			k.setDiemTichLuy(rs.getInt(10));
+			arr.add(k);
 		}
 
 		Database.connect().close();
@@ -133,7 +135,6 @@ public class KhachHangModel {
 	 * Báo cáo khách hàng
 	 * 
 	 * @param loaiKH
-	 *            0: cả hai loại. 1: VIP. 2: Thường
 	 * @param tuNgay
 	 * @param denNgay
 	 * @return
@@ -141,22 +142,31 @@ public class KhachHangModel {
 	 */
 	public static ArrayList<BaoCaoKhachHang> baoCaoKhachHang(String loaiKH, Date tuNgay, Date denNgay)
 			throws SQLException {
-		CallableStatement st = Database.connect().prepareCall("{call sp_BaoCao_DoanhThuKhachHang_trans (?,?,?,?)}");
+		CallableStatement st = Database.connect().prepareCall("{call sp_BaoCao_DoanhThuKhachHang (?,?,?,?)}");
 		st.registerOutParameter(4, Types.DOUBLE);
 		st.setObject(1, loaiKH);
 		st.setObject(2, tuNgay);
 		st.setObject(3, denNgay);
-		
+
 		ResultSet rs = st.executeQuery();
-		
+
 		ArrayList<BaoCaoKhachHang> arr = new ArrayList<>();
 		while (rs.next()) {
 			arr.add(new BaoCaoKhachHang(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getString(4),
 					rs.getDouble(5)));
 		}
-		arr.add(new BaoCaoKhachHang(null,null,null,null,st.getDouble(4)));
+		arr.add(new BaoCaoKhachHang(null, null, null, null, st.getDouble(4)));
 
 		Database.connect().close();
 		return arr;
+	}
+
+	/**
+	 * Cập nhật điểm tích lũy cho năm mới
+	 * 
+	 * @throws SQLException
+	 */
+	public static void capNhatDiemTichLuy() throws SQLException {
+		Database.callStoredUpdate("sp_CapNhatDiemTichLuy", (Object[]) null);
 	}
 }

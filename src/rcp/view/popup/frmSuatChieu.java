@@ -337,7 +337,7 @@ public class frmSuatChieu extends Shell {
 			c.set(dateTime.getYear(), dateTime.getMonth(), dateTime.getDay(), dateTime_Gio.getHours(), dateTime_Gio.getMinutes());
 			if(Calendar.getInstance().after(c))
 			{
-				Message.show("Thời điểm chiếu không hợp lệ", "Lỗi", SWT.OK, getShell());
+				Message.show("Thời điểm chiếu không hợp lệ", "Lỗi", SWT.OK | SWT.ICON_ERROR, getShell());
 				return false;
 			}
 			if (isInsert) {

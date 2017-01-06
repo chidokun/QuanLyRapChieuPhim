@@ -21,6 +21,7 @@ public class KhachHang {
 	private String sDT;
 	private String maLoaiKH;
 	private Date ngayDangKy;
+	private int diemTichLuy;
 
 	public KhachHang() {
 		// do nothing
@@ -109,6 +110,14 @@ public class KhachHang {
 
 	public void setNgayDangKy(Date ngayDangKy) {
 		this.ngayDangKy = ngayDangKy;
+	}
+
+	public int getDiemTichLuy() {
+		return diemTichLuy;
+	}
+
+	public void setDiemTichLuy(int diemTichLuy) {
+		this.diemTichLuy = diemTichLuy;
 	}
 
 }

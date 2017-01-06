@@ -39,6 +39,7 @@ public class pageKhachHang extends Composite {
 	private Button btnDatLai;
 	private Button btnTimKiem;
 	private Table gridKhachHang;
+	private Button btnTaoDiemNamMoi;
 
 	/**
 	 * Create the composite.
@@ -121,7 +122,7 @@ public class pageKhachHang extends Composite {
 		txtCMND.setBounds(29, 164, 228, 25);
 
 		Composite composite_1 = new Composite(this, SWT.NONE);
-		GridLayout gl_composite_1 = new GridLayout(3, false);
+		GridLayout gl_composite_1 = new GridLayout(4, false);
 		gl_composite_1.marginBottom = 15;
 		gl_composite_1.marginWidth = 15;
 		gl_composite_1.horizontalSpacing = 4;
@@ -166,6 +167,24 @@ public class pageKhachHang extends Composite {
 		btnSua.setText("Sửa");
 		btnSua.setImage(SWTResourceManager.getImage(pageKhachHang.class, "/rcp/view/page/edit_16x16.png"));
 
+		btnTaoDiemNamMoi = new Button(composite_1, SWT.NONE);
+		btnTaoDiemNamMoi.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					KhachHangController.capNhatDiemTichLuy();
+					Message.show("Đã tạo điểm tích lũy cho năm mới", "Thông báo", SWT.OK | SWT.ICON_INFORMATION,
+							getShell());
+				} catch (SQLException e1) {
+					Message.show("Không thể tạo điểm tích lũy cho năm mới", "Lỗi", SWT.OK | SWT.ICON_ERROR, getShell());
+				}
+			}
+		});
+		btnTaoDiemNamMoi.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, true, false, 1, 1));
+		btnTaoDiemNamMoi.setText("Tạo điểm cho năm mới");
+		btnTaoDiemNamMoi
+				.setImage(SWTResourceManager.getImage(pageKhachHang.class, "/rcp/view/page/publicfix_16x16.png"));
+
 		Button btnHienTatCa = new Button(composite_1, SWT.NONE);
 		btnHienTatCa.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -173,7 +192,7 @@ public class pageKhachHang extends Composite {
 				hienTatCa();
 			}
 		});
-		GridData gd_btnHienTatCa = new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1);
+		GridData gd_btnHienTatCa = new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1);
 		gd_btnHienTatCa.heightHint = 30;
 		gd_btnHienTatCa.widthHint = 100;
 		btnHienTatCa.setLayoutData(gd_btnHienTatCa);
@@ -184,7 +203,7 @@ public class pageKhachHang extends Composite {
 		gridKhachHang = tableViewer.getTable();
 		gridKhachHang.setLinesVisible(true);
 		gridKhachHang.setHeaderVisible(true);
-		GridData gd_gridKhachHang = new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1);
+		GridData gd_gridKhachHang = new GridData(SWT.FILL, SWT.FILL, true, true, 4, 1);
 		gd_gridKhachHang.minimumWidth = 5;
 		gd_gridKhachHang.minimumHeight = 5;
 		gridKhachHang.setLayoutData(gd_gridKhachHang);
@@ -239,6 +258,10 @@ public class pageKhachHang extends Composite {
 		tblclmnNewColumn_6.setWidth(100);
 		tblclmnNewColumn_6.setText("Ngày đăng ký");
 
+		TableColumn tblclmnimTchLy = new TableColumn(gridKhachHang, SWT.NONE);
+		tblclmnimTchLy.setWidth(125);
+		tblclmnimTchLy.setText("Điểm tích lũy hiện tại");
+
 		hienThiGiaoDien();
 	}
 
@@ -282,7 +305,7 @@ public class pageKhachHang extends Composite {
 				TableItem item = new TableItem(gridKhachHang, SWT.NONE);
 				item.setText(new String[] { String.valueOf(stt), i.getMaKhachHang(), i.getHoTen(), i.getGioiTinh(),
 						i.getCMND(), DateF.toString(i.getNgaySinh()), i.getEmail(), i.getSDT(), i.getMaLoaiKH(),
-						DateF.toString(i.getNgayDangKy()) });
+						DateF.toString(i.getNgayDangKy()), String.valueOf(i.getDiemTichLuy()) });
 				stt++;
 			}
 

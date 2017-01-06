@@ -247,12 +247,10 @@ public class frmMain extends Shell {
 
 		composite = new Composite(tabFolder, SWT.NONE);
 		tabItem.setControl(composite);
-		
+
 		try {
 			hienThiGiaoDien();
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 	}
 
