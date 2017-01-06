@@ -204,8 +204,6 @@ public class pageBanThucAn extends Composite {
 		gd_dateTimeNgayBan.heightHint = 28;
 		gd_dateTimeNgayBan.widthHint = 103;
 		dateTimeNgayBan.setLayoutData(gd_dateTimeNgayBan);
-		dateTimeNgayBan.setDate(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(),
-				LocalDateTime.now().getDayOfMonth());
 		dateTimeNgayBan.setEnabled(false);
 
 		Label lblMHan = new Label(composite_1, SWT.NONE);
