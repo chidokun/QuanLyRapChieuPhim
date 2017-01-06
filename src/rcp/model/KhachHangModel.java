@@ -139,15 +139,22 @@ public class KhachHangModel {
 	 * @return
 	 * @throws SQLException
 	 */
-	public static ArrayList<BaoCaoKhachHang> baoCaoKhachHang(int loaiKH, Date tuNgay, Date denNgay)
+	public static ArrayList<BaoCaoKhachHang> baoCaoKhachHang(String loaiKH, Date tuNgay, Date denNgay)
 			throws SQLException {
-		ResultSet rs = Database.callStored("sp_BaoCao_DoanhThuKhachHang", loaiKH, tuNgay, denNgay);
-
+		CallableStatement st = Database.connect().prepareCall("{call sp_BaoCao_DoanhThuKhachHang_trans (?,?,?,?)}");
+		st.registerOutParameter(4, Types.DOUBLE);
+		st.setObject(1, loaiKH);
+		st.setObject(2, tuNgay);
+		st.setObject(3, denNgay);
+		
+		ResultSet rs = st.executeQuery();
+		
 		ArrayList<BaoCaoKhachHang> arr = new ArrayList<>();
 		while (rs.next()) {
 			arr.add(new BaoCaoKhachHang(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getString(4),
 					rs.getDouble(5)));
 		}
+		arr.add(new BaoCaoKhachHang(null,null,null,null,st.getDouble(4)));
 
 		Database.connect().close();
 		return arr;

@@ -210,21 +210,26 @@ public class pageBaoCaoDoanhThuKhachHang extends Composite {
 
 			Date tuNgay = DateF.toDate(dateTuNgay.getYear(), dateTuNgay.getMonth(), dateTuNgay.getDay());
 			Date denNgay = DateF.toDate(dateDenNgay.getYear(), dateDenNgay.getMonth(), dateDenNgay.getDay());
-			int loaiKH = (chkVip.getSelection() ? 1 : 3) & (chkThuong.getSelection() ? 2 : 1);
-
-			ArrayList<BaoCaoKhachHang> arr = KhachHangController.baoCaoKhachHang(loaiKH, tuNgay, denNgay);
-
+			// int loaiKH = (chkVip.getSelection() ? 1 : 3) & (chkThuong.getSelection() ? 2 : 1);
+			// ArrayList<BaoCaoKhachHang> arr = KhachHangController.baoCaoKhachHang(loaiKH, tuNgay, denNgay);
+			String maLoaiKH="";
+			if(chkVip.getSelection()&!chkThuong.getSelection())
+				maLoaiKH="LKH1";
+			if(!chkVip.getSelection()&chkThuong.getSelection()) maLoaiKH="LKH2";
+			ArrayList<BaoCaoKhachHang> arr = KhachHangController.baoCaoKhachHang(maLoaiKH, tuNgay, denNgay);
 			gridBaoCao.removeAll();
 			int stt = 1;
-			for (BaoCaoKhachHang i : arr) {
+			for (int j=0;j<arr.size()-1;j++) {
+				BaoCaoKhachHang i=arr.get(j);
 				TableItem item = new TableItem(gridBaoCao, SWT.NONE);
 				item.setText(new String[] { String.valueOf(stt), i.getMaKhachHang(), i.getHoTen(),
 						DateF.toString(i.getNgayDangKy()), i.getLoaiKhachHang(), c.format(i.getDoanhThu()) });
 				stt++;
 			}
+			Double tongDoanhThu=arr.get((arr.size()-1)).getDoanhThu();
 
 			gridBaoCao.select(0);
-			lblTongDoanhThu.setText("Tổng doanh thu: " + c.format(tongDoanhThu(arr)));
+			lblTongDoanhThu.setText("Tổng doanh thu: " + c.format(tongDoanhThu));
 		} catch (ParameterValuesException e0) {
 			Message.show(e0.getMessage(), "Cảnh báo", SWT.OK | SWT.ICON_WARNING, getShell());
 		} catch (Exception e) {

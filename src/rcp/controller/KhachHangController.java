@@ -88,7 +88,7 @@ public class KhachHangController {
 	 * @return
 	 * @throws SQLException
 	 */
-	public static ArrayList<BaoCaoKhachHang> baoCaoKhachHang(int loaiKH, Date tuNgay, Date denNgay)
+	public static ArrayList<BaoCaoKhachHang> baoCaoKhachHang(String loaiKH, Date tuNgay, Date denNgay)
 			throws SQLException {
 		return KhachHangModel.baoCaoKhachHang(loaiKH, tuNgay, denNgay);
 	}

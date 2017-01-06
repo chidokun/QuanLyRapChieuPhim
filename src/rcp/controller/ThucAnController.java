@@ -110,7 +110,7 @@ public class ThucAnController {
 	 * @return
 	 * @throws SQLException
 	 */
-	public static ArrayList<BaoCaoThucAn> baoCaoThucAn(int loaiTA, Date tuNgay, Date denNgay) throws SQLException {
-		return ThucAnModel.baoCaoThucAn(loaiTA, tuNgay, denNgay);
+	public static ArrayList<BaoCaoThucAn> baoCaoThucAn(String maLoaiTA, Date tuNgay, Date denNgay) throws SQLException {
+		return ThucAnModel.baoCaoThucAn(maLoaiTA, tuNgay, denNgay);
 	}
 }

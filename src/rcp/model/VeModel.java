@@ -113,7 +113,7 @@ public class VeModel {
 			
 			for(Ve v:aVe)
 			{
-				Database.callStoredUpdate("sp_ThemVe", v.getMaSuatChieu(),v.getMaGhe(),v.getMaNhanVien(),
+				Database.callStoredUpdate("sp_ThemVe_trans", v.getMaSuatChieu(),v.getMaGhe(),v.getMaNhanVien(),
 					v.getGiaVe(),v.getMaKM(),v.getMaKhachHang(),v.getDiemTichLuy());
 			}
 			con.commit();

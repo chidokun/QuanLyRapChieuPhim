@@ -13,6 +13,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
 
+import rcp.entity.BaoCaoKhachHang;
 import rcp.entity.BaoCaoThucAn;
 import rcp.entity.ThucAn;
 import rcp.entity.ThucAnKichCo;
@@ -188,15 +189,21 @@ public class ThucAnModel {
 	 * @return
 	 * @throws SQLException
 	 */
-	public static ArrayList<BaoCaoThucAn> baoCaoThucAn(int loaiTA, Date tuNgay, Date denNgay)
+	public static ArrayList<BaoCaoThucAn> baoCaoThucAn(String maLoaiTA, Date tuNgay, Date denNgay)
 			throws SQLException {
-		ResultSet rs = Database.callStored("sp_BaoCao_DoanhThuThucAn", loaiTA, tuNgay, denNgay);
-
+		CallableStatement st = Database.connect().prepareCall("{call sp_BaoCao_DoanhThuThucAn_trans (?,?,?,?)}");
+		st.registerOutParameter(4, Types.DOUBLE);
+		st.setObject(1, maLoaiTA);
+		st.setObject(2, tuNgay);
+		st.setObject(3, denNgay);
+		
+		ResultSet rs = st.executeQuery();
+		
 		ArrayList<BaoCaoThucAn> arr = new ArrayList<>();
 		while (rs.next()) {
-			arr.add(new BaoCaoThucAn(rs.getString(1), rs.getString(2), rs.getString(3),
-					rs.getDouble(4)));
+			arr.add(new BaoCaoThucAn(rs.getString(1), rs.getString(2), rs.getString(3),rs.getDouble(4)));
 		}
+		arr.add(new BaoCaoThucAn(null,null,null,st.getDouble(4)));
 
 		Database.connect().close();
 		return arr;
